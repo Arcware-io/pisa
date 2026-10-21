@@ -1,8 +1,8 @@
 # Pisa
 
-Pisa erzeugt aus Spec-Dateien (`.dml`-Domänenmodell, `.adl`-Architektur, Formulare, Use Cases) ein lauffähiges Projekt: Spring Boot (Java) oder Hono mit Prisma (TypeScript), mit API, Seiten und Tests. Dieses Repository enthält nur die fertigen Programme; der Quellcode liegt nicht hier.
+Pisa turns spec files (a `.dml` domain model, an `.adl` architecture, forms, use cases) into a running project: Spring Boot (Java) or Hono with Prisma (TypeScript), with API, pages and tests. This repository contains only the finished programs; the source code is not here.
 
-## Installieren
+## Install
 
 macOS, Linux:
 
@@ -23,32 +23,32 @@ brew tap Arcware-io/pisa https://github.com/Arcware-io/pisa
 brew install pisa
 ```
 
-Oder die Datei `pisa-<system>-<cpu>` von Hand aus den [Releases](https://github.com/Arcware-io/pisa/releases) laden (`pisa-darwin-arm64`, `pisa-darwin-x64`, `pisa-linux-x64`, `pisa-linux-arm64`, `pisa-windows-x64.exe`, `pisa-windows-arm64.exe`) und in den `PATH` legen.
+Or download the file `pisa-<system>-<cpu>` by hand from the [releases](https://github.com/Arcware-io/pisa/releases) (`pisa-darwin-arm64`, `pisa-darwin-x64`, `pisa-linux-x64`, `pisa-linux-arm64`, `pisa-windows-x64.exe`, `pisa-windows-arm64.exe`) and put it on your `PATH`.
 
-Prüfen:
+Check:
 
 ```
 pisa --version
 ```
 
-## Ausprobieren
+## Try it
 
 ```
-mkdir mein-projekt && cd mein-projekt
-pisa init          # legt doc/ mit den Tutorials an
-pisa play          # welche Tutorials es gibt
+mkdir my-project && cd my-project
+pisa init          # creates doc/ with the tutorials
+pisa play          # lists the tutorials
 pisa play hono-typescript
 ```
 
-`pisa play` führt ein Tutorial selbst aus (Projekt anlegen, generieren, Anwendung starten). Ohne Sprachmodell schreibt es die im Tutorial gezeigten Dateien; mit `--llm` fragt es das Modell. Mit `--fast` lässt es alles Langsame weg (Tests, Start der Anwendung).
+`pisa play` runs a tutorial by itself (creates the project, generates it, starts the application). Without a language model it writes the files the tutorial shows; with `--llm` it asks the model. With `--fast` it skips everything slow (tests, starting the application).
 
-## Editor-Unterstützung
+## Editor support
 
-Die Releases enthalten auch die Erweiterungen für `.dml` und `.adl` (Syntaxfarben, Prüfung, Vervollständigung):
+The releases also contain the extensions for `.dml` and `.adl` (syntax colors, checks, completion):
 
-- VS Code: `dml-vscode-extension-<version>.vsix`, installieren mit `code --install-extension <datei>`.
+- VS Code: `dml-vscode-extension-<version>.vsix`, install with `code --install-extension <file>`.
 - IntelliJ: `dml-intellij-plugin-<version>.zip`, *Settings → Plugins → Install Plugin from Disk*.
 
-## Hinweis
+## Note
 
-Pisa ist der Prototyp einer CAS-Projektarbeit, kein Produkt.
+Pisa is the prototype not a product - use it at your own risk.
