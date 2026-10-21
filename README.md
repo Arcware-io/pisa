@@ -1,6 +1,6 @@
 # Pisa
 
-Pisa turns spec files (a `.dml` domain model, an `.adl` architecture, forms, use cases) into a running project: Spring Boot (Java) or Hono with Prisma (TypeScript), with API, pages and tests. This repository contains only the finished programs; the source code is not here.
+Pisa turns spec files (a `.dml` domain model, an `.adl` architecture, forms, use cases) into a running project: Spring Boot (Java) or Hono with Prisma (TypeScript), with API, pages and tests.
 
 ## Install
 
@@ -51,4 +51,4 @@ The releases also contain the extensions for `.dml` and `.adl` (syntax colors, c
 
 ## Note
 
-Pisa is the prototype not a product - use it at your own risk.
+Pisa is the prototype of a CAS thesis project, not a product.
