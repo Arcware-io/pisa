@@ -49,6 +49,6 @@ The releases also contain the extensions for `.dml` and `.adl` (syntax colors, c
 - VS Code: `dml-vscode-extension-<version>.vsix`, install with `code --install-extension <file>`.
 - IntelliJ: `dml-intellij-plugin-<version>.zip`, *Settings → Plugins → Install Plugin from Disk*.
 
-## Note
+## Disclaimer
 
-Pisa is the prototype of a CAS thesis project, not a product.
+Pisa is a prototype and not thought for production use.
