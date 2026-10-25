@@ -831,17 +831,6 @@
 </li>
         
           <li class="md-nav__item">
-  <a href="#pisa-extend" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        pisa extend
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#pisa-hash-password" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1646,17 +1635,6 @@
     <span class="md-ellipsis">
       
         pisa eject-templates
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#pisa-extend" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        pisa extend
       
     </span>
   </a>
@@ -3271,51 +3249,6 @@ Requirements and limits:</p>
 </code></pre></div>
 <p>Copies the built-in templates to <code>&lt;dir&gt;/.pisa/templates/&lt;target&gt;/</code> for editing. See
 <a href="#customizing-templates">Customizing templates</a>.</p>
-<h3 id="pisa-extend"><code>pisa extend</code><a class="headerlink" href="#pisa-extend" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>pisa<span class="w"> </span>extend<span class="w"> </span>--specify<span class="w"> </span><span class="s2">"&lt;wish&gt;"</span>
-pisa<span class="w"> </span>extend<span class="w"> </span>--plan<span class="w"> </span><span class="o">[</span>--feature<span class="w"> </span>&lt;NNN&gt;<span class="o">]</span><span class="w"> </span><span class="o">[</span>--state<span class="o">]</span>
-pisa<span class="w"> </span>extend<span class="w"> </span>--implement<span class="w"> </span><span class="o">[</span>--feature<span class="w"> </span>&lt;NNN&gt;<span class="o">]</span>
-pisa<span class="w"> </span>extend<span class="w"> </span>--check<span class="w"> </span><span class="o">[</span>--feature<span class="w"> </span>&lt;NNN&gt;<span class="o">]</span><span class="w"> </span><span class="o">[</span>--skip-tests<span class="o">]</span>
-</code></pre></div>
-<p>Extends <strong>Pisa itself</strong>, spec-driven in the manner of GitHub Spec Kit, in four phases. It works only in a checkout of Pisa's own
-source repository, not in the installed binary. This command is meant for people who develop Pisa; you do not need it to use Pisa.</p>
-<table>
-<thead>
-<tr>
-<th>Phase</th>
-<th>Spec Kit</th>
-<th>Pisa</th>
-<th>Model</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>--specify "&lt;wish&gt;"</code></td>
-<td>constitution, specify, clarify</td>
-<td>the model writes <code>spec.md</code> (purpose, example, acceptance, rules, layers) through a checked tool, three attempts</td>
-<td>yes</td>
-</tr>
-<tr>
-<td><code>--plan</code></td>
-<td>plan, tasks</td>
-<td><code>plan.md</code> with the tasks of the layers named in <code>spec.md</code>; <code>--state</code> appends them to the state file; an existing plan is not overwritten</td>
-<td>no</td>
-</tr>
-<tr>
-<td><code>--implement</code></td>
-<td>implement</td>
-<td>prints the assignment for the coding agent (constitution, spec, plan); Pisa writes no code</td>
-<td>no</td>
-</tr>
-<tr>
-<td><code>--check</code></td>
-<td>converge</td>
-<td>tests, type check, all tasks ticked, user guide and plan changed; "Converged" or the gaps, exit 1</td>
-<td>no</td>
-</tr>
-</tbody>
-</table>
-<p><code>--specify</code> is not a recipe step (the recipe belongs to generated projects). See <code>pisa extend --help</code>.</p>
 <h3 id="pisa-hash-password"><code>pisa hash-password</code><a class="headerlink" href="#pisa-hash-password" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code>pisa<span class="w"> </span>hash-password<span class="w"> </span><span class="o">[</span>--stdin<span class="o">]</span>
 </code></pre></div>
@@ -3669,7 +3602,6 @@ anyway); paths outside the project are used as they are, with a warning.</p>
 <li><code>docker</code>: one image per project, only Dockerfile and Compose; Testcontainers tests only with Spring and PostgreSQL (Hono: the tests run against the <code>compose</code> database, no Testcontainers); no image build in the CI file (<code>ci.yml</code>), no push to a registry, no multi-architecture images, no health check in the <code>Dockerfile</code> itself (only that of <code>db</code> in the <code>compose.yml</code>), no CD; port 8080 and <code>/data</code> are fixed.</li>
 <li><code>deploy</code>: only Render (free web service, releases only through the deploy hook); no Cloud Run, no database at Render, no domain of its own, no health check test after the deploy; not checked on a real account.</li>
 <li><code>pipeline</code> and <code>scm</code>: only GitHub (<code>ci github</code>, <code>release github</code>, <code>host github</code>), no other Git hosts (GitLab, Bitbucket, Codeberg); the workflows and templates are checked only to the extent that Pisa writes them and the files are valid YAML, not on a real GitHub run (tag, release, issue forms); no CD (deployment to the cloud); no command that creates the repository on GitHub (only the commands by hand in section 4e).</li>
-<li><code>pisa extend</code>: <code>--implement</code> prints only the assignment (a run with write access of the model to the paths of the plan is not built); <code>--check</code> does not check snapshots individually (they run in <code>bun test</code>) and no <code>replay</code>; the layer checklist is maintained by hand.</li>
 <li>Deleting orphaned files; sorting, searching and number formatting on the pages.</li>
 <li>The other side of a relation (<code>mappedBy</code>) cannot be set through the API.</li>
 <li>Tests: none for <code>composed</code> lists, no test of the effect of the layout (groups, rows) in the browser; the tests of the relations set only one row of the other side (no error cases).</li>
