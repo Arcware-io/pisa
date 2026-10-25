@@ -1,12 +1,12 @@
 
 <!doctype html>
-<html lang="de" class="no-js">
+<html lang="en" class="no-js">
   <head>
     
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Pisa erzeugt aus Specs (Domänenmodell, Architektur, Formulare, Use Cases) ein lauffähiges Spring-Boot- oder Hono-Projekt.">
+        <meta name="description" content="Pisa is spec-driven: typed DSLs for domain model and architecture, forms and use cases as Markdown, and deterministic generation of software architectures and running applications. An LLM only proposes specs.">
       
       
       
@@ -81,8 +81,8 @@
     <div data-md-component="skip">
       
         
-        <a href="#tutorial-von-der-beschreibung-zur-laufenden-anwendung" class="md-skip">
-          Zum Inhalt
+        <a href="#tutorial-from-a-description-to-a-running-application" class="md-skip">
+          Skip to content
         </a>
       
     </div>
@@ -96,7 +96,7 @@
   
 
 <header class="md-header md-header--shadow" data-md-component="header">
-  <nav class="md-header__inner md-grid" aria-label="Kopfzeile">
+  <nav class="md-header__inner md-grid" aria-label="Header">
     <a href=".." title="Pisa" class="md-header__button md-logo" aria-label="Pisa" data-md-component="logo">
       
   
@@ -130,9 +130,9 @@
     
     
     
-    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Dunkles Design"  type="radio" name="__palette" id="__palette_0">
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
     
-      <label class="md-header__button md-icon" title="Dunkles Design" for="__palette_1" hidden>
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
       </label>
     
@@ -140,9 +140,9 @@
     
     
     
-    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Helles Design"  type="radio" name="__palette" id="__palette_1">
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
     
-      <label class="md-header__button md-icon" title="Helles Design" for="__palette_0" hidden>
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
       </label>
     
@@ -165,16 +165,16 @@
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
     <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" aria-label="Suche" placeholder="Suche" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
       <label class="md-search__icon md-icon" for="__search">
         
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
         
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
       </label>
-      <nav class="md-search__options" aria-label="Suche">
+      <nav class="md-search__options" aria-label="Search">
         
-        <button type="reset" class="md-search__icon md-icon" title="Zurücksetzen" aria-label="Zurücksetzen" tabindex="-1">
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
           
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
         </button>
@@ -185,7 +185,7 @@
       <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
         <div class="md-search-result" data-md-component="search-result">
           <div class="md-search-result__meta">
-            Suche wird initialisiert
+            Initializing search
           </div>
           <ol class="md-search-result__list" role="presentation"></ol>
         </div>
@@ -197,7 +197,7 @@
     
     
       <div class="md-header__source">
-        <a href="https://github.com/Arcware-io/pisa" title="Zum Repository" class="md-source" data-md-component="source">
+        <a href="https://github.com/Arcware-io/pisa" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
@@ -243,7 +243,7 @@
   </label>
   
     <div class="md-nav__source">
-      <a href="https://github.com/Arcware-io/pisa" title="Zum Repository" class="md-source" data-md-component="source">
+      <a href="https://github.com/Arcware-io/pisa" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
@@ -417,7 +417,7 @@
       
         
 
-<nav class="md-nav md-nav--secondary" aria-label="Inhaltsverzeichnis">
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
   
   
   
@@ -426,15 +426,15 @@
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
-      Inhaltsverzeichnis
+      Table of contents
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#0-voraussetzungen" class="md-nav__link">
+  <a href="#0-requirements" class="md-nav__link">
     <span class="md-ellipsis">
       
-        0. Voraussetzungen
+        0. Requirements
       
     </span>
   </a>
@@ -442,10 +442,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#1-ordner-anlegen-und-pisa-vorbereiten" class="md-nav__link">
+  <a href="#1-create-a-folder-and-prepare-pisa" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Ordner anlegen und Pisa vorbereiten
+        1. Create a folder and prepare Pisa
       
     </span>
   </a>
@@ -453,10 +453,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-architektur-beschreiben-und-vorschlagen-lassen" class="md-nav__link">
+  <a href="#2-describe-the-architecture-and-have-it-proposed" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Architektur beschreiben und vorschlagen lassen
+        2. Describe the architecture and have it proposed
       
     </span>
   </a>
@@ -464,10 +464,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-das-projekt-anlegen" class="md-nav__link">
+  <a href="#3-create-the-project" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Das Projekt anlegen
+        3. Create the project
       
     </span>
   </a>
@@ -475,10 +475,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-das-domänenmodell-beschreiben-und-vorschlagen-lassen" class="md-nav__link">
+  <a href="#4-describe-the-domain-model-and-have-it-proposed" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4. Das Domänenmodell beschreiben und vorschlagen lassen
+        4. Describe the domain model and have it proposed
       
     </span>
   </a>
@@ -486,10 +486,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#5-formulare-und-use-cases-ableiten-ohne-llm" class="md-nav__link">
+  <a href="#5-derive-forms-and-use-cases-without-an-llm" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5. Formulare und Use Cases ableiten (ohne LLM)
+        5. Derive forms and use cases (without an LLM)
       
     </span>
   </a>
@@ -497,10 +497,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#6-code-erzeugen" class="md-nav__link">
+  <a href="#6-generate-code" class="md-nav__link">
     <span class="md-ellipsis">
       
-        6. Code erzeugen
+        6. Generate code
       
     </span>
   </a>
@@ -508,10 +508,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#7-starten-und-ausprobieren" class="md-nav__link">
+  <a href="#7-start-and-try-it-out" class="md-nav__link">
     <span class="md-ellipsis">
       
-        7. Starten und ausprobieren
+        7. Start and try it out
       
     </span>
   </a>
@@ -519,10 +519,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#7a-optional-operationen-einschränken-operations" class="md-nav__link">
+  <a href="#7a-optional-restrict-operations-operations" class="md-nav__link">
     <span class="md-ellipsis">
       
-        7a. Optional: Operationen einschränken (@operations)
+        7a. Optional: restrict operations (@operations)
       
     </span>
   </a>
@@ -530,10 +530,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#7b-rechte-und-benutzer" class="md-nav__link">
+  <a href="#7b-rights-and-users" class="md-nav__link">
     <span class="md-ellipsis">
       
-        7b. Rechte und Benutzer
+        7b. Rights and users
       
     </span>
   </a>
@@ -541,10 +541,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#8-eine-änderung-durchziehen" class="md-nav__link">
+  <a href="#8-carry-through-a-change" class="md-nav__link">
     <span class="md-ellipsis">
       
-        8. Eine Änderung durchziehen
+        8. Carry through a change
       
     </span>
   </a>
@@ -552,10 +552,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#9-reproduzieren" class="md-nav__link">
+  <a href="#9-reproduce" class="md-nav__link">
     <span class="md-ellipsis">
       
-        9. Reproduzieren
+        9. Reproduce
       
     </span>
   </a>
@@ -563,10 +563,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#10-optional-bei-jedem-push-bauen-und-testen-ci" class="md-nav__link">
+  <a href="#10-optional-build-and-test-on-every-push-ci" class="md-nav__link">
     <span class="md-ellipsis">
       
-        10. Optional: bei jedem Push bauen und testen (CI)
+        10. Optional: build and test on every push (CI)
       
     </span>
   </a>
@@ -574,10 +574,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#11-optional-mit-docker-und-der-echten-datenbank-ausprobieren" class="md-nav__link">
+  <a href="#11-optional-try-it-with-docker-and-the-real-database" class="md-nav__link">
     <span class="md-ellipsis">
       
-        11. Optional: mit Docker und der echten Datenbank ausprobieren
+        11. Optional: try it with Docker and the real database
       
     </span>
   </a>
@@ -585,10 +585,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#12-optional-in-die-cloud-render" class="md-nav__link">
+  <a href="#12-optional-into-the-cloud-render" class="md-nav__link">
     <span class="md-ellipsis">
       
-        12. Optional: in die Cloud (Render)
+        12. Optional: into the cloud (Render)
       
     </span>
   </a>
@@ -596,10 +596,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#was-du-jetzt-hast" class="md-nav__link">
+  <a href="#what-you-have-now" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Was du jetzt hast
+        What you have now
       
     </span>
   </a>
@@ -607,10 +607,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#wenn-etwas-nicht-klappt" class="md-nav__link">
+  <a href="#when-something-does-not-work" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Wenn etwas nicht klappt
+        When something does not work
       
     </span>
   </a>
@@ -654,21 +654,28 @@
 
               
             
-              
-                
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
   
   
   
   
     <li class="md-nav__item">
-      <a href="../pisa-tutorial-extend-pisa/" class="md-nav__link">
+      <a href="../comparison/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Pisa erweitern
+    Comparison
   
 
     
@@ -677,14 +684,6 @@
   
 
       </a>
-    </li>
-  
-
-              
-            
-          </ul>
-        </nav>
-      
     </li>
   
 
@@ -702,7 +701,7 @@
                   <div class="md-sidebar__inner">
                     
 
-<nav class="md-nav md-nav--secondary" aria-label="Inhaltsverzeichnis">
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
   
   
   
@@ -711,15 +710,15 @@
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
-      Inhaltsverzeichnis
+      Table of contents
     </label>
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#0-voraussetzungen" class="md-nav__link">
+  <a href="#0-requirements" class="md-nav__link">
     <span class="md-ellipsis">
       
-        0. Voraussetzungen
+        0. Requirements
       
     </span>
   </a>
@@ -727,10 +726,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#1-ordner-anlegen-und-pisa-vorbereiten" class="md-nav__link">
+  <a href="#1-create-a-folder-and-prepare-pisa" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Ordner anlegen und Pisa vorbereiten
+        1. Create a folder and prepare Pisa
       
     </span>
   </a>
@@ -738,10 +737,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-architektur-beschreiben-und-vorschlagen-lassen" class="md-nav__link">
+  <a href="#2-describe-the-architecture-and-have-it-proposed" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Architektur beschreiben und vorschlagen lassen
+        2. Describe the architecture and have it proposed
       
     </span>
   </a>
@@ -749,10 +748,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-das-projekt-anlegen" class="md-nav__link">
+  <a href="#3-create-the-project" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Das Projekt anlegen
+        3. Create the project
       
     </span>
   </a>
@@ -760,10 +759,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-das-domänenmodell-beschreiben-und-vorschlagen-lassen" class="md-nav__link">
+  <a href="#4-describe-the-domain-model-and-have-it-proposed" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4. Das Domänenmodell beschreiben und vorschlagen lassen
+        4. Describe the domain model and have it proposed
       
     </span>
   </a>
@@ -771,10 +770,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#5-formulare-und-use-cases-ableiten-ohne-llm" class="md-nav__link">
+  <a href="#5-derive-forms-and-use-cases-without-an-llm" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5. Formulare und Use Cases ableiten (ohne LLM)
+        5. Derive forms and use cases (without an LLM)
       
     </span>
   </a>
@@ -782,10 +781,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#6-code-erzeugen" class="md-nav__link">
+  <a href="#6-generate-code" class="md-nav__link">
     <span class="md-ellipsis">
       
-        6. Code erzeugen
+        6. Generate code
       
     </span>
   </a>
@@ -793,10 +792,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#7-starten-und-ausprobieren" class="md-nav__link">
+  <a href="#7-start-and-try-it-out" class="md-nav__link">
     <span class="md-ellipsis">
       
-        7. Starten und ausprobieren
+        7. Start and try it out
       
     </span>
   </a>
@@ -804,10 +803,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#7a-optional-operationen-einschränken-operations" class="md-nav__link">
+  <a href="#7a-optional-restrict-operations-operations" class="md-nav__link">
     <span class="md-ellipsis">
       
-        7a. Optional: Operationen einschränken (@operations)
+        7a. Optional: restrict operations (@operations)
       
     </span>
   </a>
@@ -815,10 +814,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#7b-rechte-und-benutzer" class="md-nav__link">
+  <a href="#7b-rights-and-users" class="md-nav__link">
     <span class="md-ellipsis">
       
-        7b. Rechte und Benutzer
+        7b. Rights and users
       
     </span>
   </a>
@@ -826,10 +825,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#8-eine-änderung-durchziehen" class="md-nav__link">
+  <a href="#8-carry-through-a-change" class="md-nav__link">
     <span class="md-ellipsis">
       
-        8. Eine Änderung durchziehen
+        8. Carry through a change
       
     </span>
   </a>
@@ -837,10 +836,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#9-reproduzieren" class="md-nav__link">
+  <a href="#9-reproduce" class="md-nav__link">
     <span class="md-ellipsis">
       
-        9. Reproduzieren
+        9. Reproduce
       
     </span>
   </a>
@@ -848,10 +847,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#10-optional-bei-jedem-push-bauen-und-testen-ci" class="md-nav__link">
+  <a href="#10-optional-build-and-test-on-every-push-ci" class="md-nav__link">
     <span class="md-ellipsis">
       
-        10. Optional: bei jedem Push bauen und testen (CI)
+        10. Optional: build and test on every push (CI)
       
     </span>
   </a>
@@ -859,10 +858,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#11-optional-mit-docker-und-der-echten-datenbank-ausprobieren" class="md-nav__link">
+  <a href="#11-optional-try-it-with-docker-and-the-real-database" class="md-nav__link">
     <span class="md-ellipsis">
       
-        11. Optional: mit Docker und der echten Datenbank ausprobieren
+        11. Optional: try it with Docker and the real database
       
     </span>
   </a>
@@ -870,10 +869,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#12-optional-in-die-cloud-render" class="md-nav__link">
+  <a href="#12-optional-into-the-cloud-render" class="md-nav__link">
     <span class="md-ellipsis">
       
-        12. Optional: in die Cloud (Render)
+        12. Optional: into the cloud (Render)
       
     </span>
   </a>
@@ -881,10 +880,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#was-du-jetzt-hast" class="md-nav__link">
+  <a href="#what-you-have-now" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Was du jetzt hast
+        What you have now
       
     </span>
   </a>
@@ -892,10 +891,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#wenn-etwas-nicht-klappt" class="md-nav__link">
+  <a href="#when-something-does-not-work" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Wenn etwas nicht klappt
+        When something does not work
       
     </span>
   </a>
@@ -922,83 +921,83 @@
   
 
 
-<h1 id="tutorial-von-der-beschreibung-zur-laufenden-anwendung">Tutorial: von der Beschreibung zur laufenden Anwendung<a class="headerlink" href="#tutorial-von-der-beschreibung-zur-laufenden-anwendung" title="Permanent link">&para;</a></h1>
-<p>Du baust eine kleine <strong>Adressverwaltung</strong> (Personen mit Adresse und Firma) von Grund auf. Du schreibst nur
-Prosa; ein LLM schlägt Architektur und Domänenmodell vor, Pisa prüft die Vorschläge und erzeugt daraus ein
-lauffähiges Spring-Boot-Projekt. Nach jedem Schritt steht, was du sehen solltest.</p>
+<h1 id="tutorial-from-a-description-to-a-running-application">Tutorial: from a description to a running application<a class="headerlink" href="#tutorial-from-a-description-to-a-running-application" title="Permanent link">&para;</a></h1>
+<p>You build a small <strong>address book</strong> (people with an address and a company) from scratch. You write only
+prose; an LLM proposes the architecture and the domain model, Pisa checks the proposals and generates a
+working Spring Boot project from them. After every step it says what you should see.</p>
 <blockquote>
-<p>Stand: <code>pisa 0.13.0</code>. Befehle im Detail: <a href="../pisa-user-guide/">User Guide</a>. Dauer: etwa eine Stunde, der
-erste Maven-Lauf lädt Abhängigkeiten.</p>
+<p>As of <code>pisa 0.13.0</code>. Commands in detail: <a href="../pisa-user-guide/">User Guide</a>. Duration: about an hour, the
+first Maven run downloads dependencies.</p>
 </blockquote>
-<p>Die Schritte 2 und 4 rufen ein LLM auf (zwei kurze Aufrufe); alle anderen Schritte laufen ohne. Ohne LLM schreibst du die
-beiden Dateien selbst, so wie sie in den Schritten gezeigt sind.
-Am Ende steht ein <strong>optionaler Schritt</strong> (10, CI mit GitHub Actions); <code>pisa play --fast</code> lässt ihn aus.</p>
-<h2 id="0-voraussetzungen">0. Voraussetzungen<a class="headerlink" href="#0-voraussetzungen" title="Permanent link">&para;</a></h2>
+<p>Steps 2 and 4 call an LLM (two short calls); all other steps run without one. Without an LLM you write the
+two files yourself, as they are shown in the steps.
+At the end there are <strong>optional steps</strong> (10, CI with GitHub Actions; 11, Docker; 12, the cloud); <code>pisa play --fast</code> leaves them out.</p>
+<h2 id="0-requirements">0. Requirements<a class="headerlink" href="#0-requirements" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
-<th>Was</th>
-<th>Prüfen</th>
+<th>What</th>
+<th>Check</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td>Pisa 0.13.0</td>
-<td><code>pisa --version</code> zeigt <code>pisa 0.13.0</code>. Sonst installieren: User Guide, Abschnitt «Pisa installieren» (<code>curl</code>, PowerShell oder <code>brew</code>, ohne Anmeldung)</td>
+<td><code>pisa --version</code> shows <code>pisa 0.13.0</code>. Otherwise install it: User Guide, section "Installing Pisa" (<code>curl</code>, PowerShell or <code>brew</code>, no login)</td>
 </tr>
 <tr>
-<td>Java 25 und Maven</td>
+<td>Java 25 and Maven</td>
 <td><code>java -version</code>, <code>mvn -v</code></td>
 </tr>
 <tr>
-<td>LLM-Zugang für <code>pi</code></td>
-<td><code>pi</code> ist mit einem Modell eingerichtet (siehe Pisa-README, «Model access»); nur für Schritt 2 und 4 nötig</td>
+<td>LLM access for <code>pi</code></td>
+<td><code>pi</code> is set up with a model (see the <code>pi</code> documentation); needed only for steps 2 and 4</td>
 </tr>
 <tr>
-<td>Optional: Pisa-Plugin</td>
-<td>IntelliJ oder VS Code färbt <code>.dml</code>/<code>.adl</code> und zeigt Fehler beim Schreiben (User Guide, «Editor und PlantUML einrichten»)</td>
+<td>Optional: Pisa plugin</td>
+<td>IntelliJ or VS Code colors <code>.dml</code>/<code>.adl</code> and shows errors while you write (User Guide, "Setting up editor and PlantUML")</td>
 </tr>
 </tbody>
 </table>
-<h2 id="1-ordner-anlegen-und-pisa-vorbereiten">1. Ordner anlegen und Pisa vorbereiten<a class="headerlink" href="#1-ordner-anlegen-und-pisa-vorbereiten" title="Permanent link">&para;</a></h2>
+<h2 id="1-create-a-folder-and-prepare-pisa">1. Create a folder and prepare Pisa<a class="headerlink" href="#1-create-a-folder-and-prepare-pisa" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code>mkdir<span class="w"> </span>adressen-spring<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>adressen-spring
 pisa<span class="w"> </span>init
 </code></pre></div>
-<p>Du solltest sehen: <code>Prepared .: doc/ (the user guide and both tutorials) and spec/.</code> und den Hinweis, welches Tutorial du lesen kannst.
-<code>pisa init</code> ohne Angaben legt noch <strong>kein Projekt</strong> an, nur das, was für jede Art von Anwendung gleich ist: den Ordner <strong><code>doc/</code></strong> mit dem User Guide und beiden
-Tutorials (Spring Boot und Hono) und einen leeren Ordner <code>spec/</code>. Welche Art von Anwendung du willst (Java mit Spring Boot oder TypeScript mit Hono), entscheidest du
-jetzt anhand der Tutorials und der Beschreibung in Schritt 2; ein Projekt entsteht erst in Schritt 3. Alle weiteren Befehle laufen in diesem Ordner.</p>
-<h2 id="2-architektur-beschreiben-und-vorschlagen-lassen">2. Architektur beschreiben und vorschlagen lassen<a class="headerlink" href="#2-architektur-beschreiben-und-vorschlagen-lassen" title="Permanent link">&para;</a></h2>
+<p>You should see: <code>Prepared .: doc/ (the user guide and both tutorials) and spec/.</code> and the hint which tutorial you can read.
+<code>pisa init</code> without arguments creates <strong>no project</strong> yet, only what is the same for every kind of application: the folder <strong><code>doc/</code></strong> with the user guide and both
+tutorials (Spring Boot and Hono) and an empty folder <code>spec/</code>. Which kind of application you want (Java with Spring Boot or TypeScript with Hono) you decide
+now, from the tutorials and the description in step 2; a project is created only in step 3. All further commands run in this folder.</p>
+<h2 id="2-describe-the-architecture-and-have-it-proposed">2. Describe the architecture and have it proposed<a class="headerlink" href="#2-describe-the-architecture-and-have-it-proposed" title="Permanent link">&para;</a></h2>
 <!-- play: llm -->
 <div class="highlight"><pre><span></span><code>pisa<span class="w"> </span>propose-architecture<span class="w"> </span>--out<span class="w"> </span>.
 </code></pre></div>
-<p>Du solltest sehen: <code>Created spec/architecture.md with a starting text - describe the architecture there, …</code>.
-Öffne <code>spec/architecture.md</code>, <strong>lösche die Zeile <code>&lt;!-- pisa:starting-text --&gt;</code></strong> und ersetze den Text durch
-etwa Folgendes:</p>
+<p>You should see: <code>Created spec/architecture.md with a starting text - describe the architecture there, …</code>.
+Open <code>spec/architecture.md</code>, <strong>delete the line <code>&lt;!-- pisa:starting-text --&gt;</code></strong> and replace the text with
+something like this:</p>
 <!-- play: write spec/architecture.md -->
 <div class="highlight"><pre><span></span><code><span class="gh"># Architecture</span>
 
-Verwaltung von Personen mit ihrer Adresse und den Firmen, bei denen sie arbeiten. Es ist ein
-Prototyp für eine Demo, die Daten müssen einen Neustart nicht überleben.
+Management of people with their address and the companies they work for. It is a
+prototype for a demo, the data does not have to survive a restart.
 
-<span class="k">-</span><span class="w"> </span>Stil: Der Code soll geschichtet sein (Controller, Service, Repository), mit DTOs zwischen
-  Controller und Service.
-<span class="k">-</span><span class="w"> </span>Datenbank: eingebettet (H2), kein separater Server.
-<span class="k">-</span><span class="w"> </span>Technik: Spring Boot, Weboberfläche mit Alpine.js, vom Backend ausgeliefert.
-<span class="k">-</span><span class="w"> </span>Docker: Die Anwendung soll sich auch als Docker-Image bauen lassen (nur das Image, mehr nicht).
-<span class="k">-</span><span class="w"> </span>Anmeldung: Benutzer melden sich mit Name und Passwort an, es gibt Rollen.
-  Admin für die Verwaltung, hat mehr Rechte, kann z.B. Firmen anlegen.
-  User für normale Benutzer, der Firmen zwar lesen oder anpassen, aber nicht anlegen oder löschen kann.
-<span class="k">-</span><span class="w"> </span>Paket: <span class="sb">`ch.example.adressen`</span>
-<span class="k">-</span><span class="w"> </span>Versionen: keine besonderen Anforderungen, es dürfen die neuesten stabilen sein.
+<span class="k">-</span><span class="w"> </span>Style: The code should be layered (controller, service, repository), with DTOs between
+  controller and service.
+<span class="k">-</span><span class="w"> </span>Database: embedded (H2), no separate server.
+<span class="k">-</span><span class="w"> </span>Technology: Spring Boot, web UI with Alpine.js, served by the backend.
+<span class="k">-</span><span class="w"> </span>Docker: The application should also be buildable as a Docker image (only the image, nothing more).
+<span class="k">-</span><span class="w"> </span>Login: Users sign in with name and password, there are roles.
+  Admin for the administration, has more rights, can e.g. create companies.
+  User for normal users, who can read or change companies, but not create or delete them.
+<span class="k">-</span><span class="w"> </span>Package: <span class="sb">`ch.example.adressen`</span>
+<span class="k">-</span><span class="w"> </span>Versions: no special requirements, the newest stable ones are fine.
 </code></pre></div>
-<p>Dann nochmals:</p>
+<p>Then once more:</p>
 <!-- play: llm -->
 <div class="highlight"><pre><span></span><code>pisa<span class="w"> </span>propose-architecture<span class="w"> </span>--out<span class="w"> </span>.
 </code></pre></div>
-<p>Du solltest sehen: den Streaming-Text des Modells, am Ende <code>Architecture proposal complete:
-spec/architecture.adl</code> und die Zeile <code>Create the project from it: pisa init --target spring-boot --out . --adl …</code>.</p>
-<p>Öffne <code>spec/architecture.adl</code> und prüfe es:</p>
+<p>You should see: the streaming text of the model, at the end <code>Architecture proposal complete:
+spec/architecture.adl</code> and the line <code>Create the project from it: pisa init --target spring-boot --out . --adl …</code>.</p>
+<p>Open <code>spec/architecture.adl</code> and check it:</p>
 <!-- play: write spec/architecture.adl unless-llm -->
 <div class="highlight"><pre><span></span><code>architecture AdressenSpring {
     container db : database { engine h2 }
@@ -1018,57 +1017,56 @@ spec/architecture.adl</code> und die Zeile <code>Create the project from it: pis
     docker { }
 }
 </code></pre></div>
-<p>(Die Datei ist auf mehrere Zeilen formatiert; Kommentare am Anfang nennen, was das Modell nicht abdecken konnte.)
-Stimmt etwas nicht, ändere die Datei von Hand: sie gehört ab jetzt dir.</p>
-<p>Die Rollen aus der Beschreibung stehen im Block <code>roles</code> der <code>.adl</code>: <code>ADMIN</code> ohne Block darf alles, <code>USER</code> darf Firmen nur lesen und ändern (<code>Company: read, update</code>), alles andere weiter. Daraus schreibt <code>init</code> die <code>security.yml</code> (Schritt 7b), und <code>generate</code> erzeugt die Tests pro Rolle. <strong>Fehlt der Block</strong> in deiner Datei (ein Modell macht nicht immer, was die Beschreibung sagt), schreibe ihn von Hand in den <code>api</code>-Container.</p>
-<p>Der leere Block <code>docker { }</code> (aus dem Satz «Docker» in deiner Beschreibung) lässt <code>init</code> ein <code>Dockerfile</code> und eine <code>.dockerignore</code> schreiben, mehr nicht. Du musst sie nicht benutzen; wie du sie ausprobierst, steht im optionalen Schritt 11. <strong>Fehlt der Block</strong> in deiner Datei, schreibe <code>docker { }</code> von Hand vor die letzte Klammer, oder lass ihn weg, wenn du kein Image brauchst.</p>
-<p>Die Zeile <code>authentication session</code> (Anmeldung mit Benutzern und Rollen, Schritt 7b) kommt aus dem Satz «Anmeldung» in deiner Beschreibung (ab Pisa 0.10.0). <strong>Fehlt sie</strong> in deiner Datei (ältere Versionen schlagen keine Anmeldung vor; auch ein Modell macht nicht immer, was die Beschreibung sagt), schreibe sie von Hand in den <code>api</code>-Container, zum Beispiel vor <code>uses db</code>.</p>
-<p><strong>Wenn es nicht klappt:</strong> «ended without an accepted architecture» heisst, das Modell hat dreimal ungültig
-geantwortet oder gar nicht über das Werkzeug; Beschreibung genauer formulieren und wiederholen. Mit einer
-vorhandenen <code>.adl</code> tut der Befehl nichts, ausser mit <code>--force</code>.</p>
-<h2 id="3-das-projekt-anlegen">3. Das Projekt anlegen<a class="headerlink" href="#3-das-projekt-anlegen" title="Permanent link">&para;</a></h2>
+<p>(The file is formatted over several lines; comments at the top name what the model could not cover.)
+If something is wrong, change the file by hand: it is yours from now on.</p>
+<p>The roles from the description are in the <code>roles</code> block of the <code>.adl</code>: <code>ADMIN</code> without a block may do everything, <code>USER</code> may only read and change companies (<code>Company: read, update</code>), everything else as before. From it <code>init</code> writes the <code>security.yml</code> (step 7b), and <code>generate</code> generates the tests per role. <strong>If the block is missing</strong> in your file (a model does not always do what the description says), write it by hand into the <code>api</code> container.</p>
+<p>The empty block <code>docker { }</code> (from the sentence "Docker" in your description) makes <code>init</code> write a <code>Dockerfile</code> and a <code>.dockerignore</code>, nothing more. You do not have to use them; how to try them is in the optional step 11. <strong>If the block is missing</strong> in your file, write <code>docker { }</code> by hand before the last bracket, or leave it out if you need no image.</p>
+<p>The line <code>authentication session</code> (login with users and roles, step 7b) comes from the sentence "Login" in your description (since Pisa 0.10.0). <strong>If it is missing</strong> in your file (older versions do not propose a login; a model does not always do what the description says either), write it by hand into the <code>api</code> container, for example before <code>uses db</code>.</p>
+<p><strong>If it does not work:</strong> "ended without an accepted architecture" means the model answered invalidly three times, or not at all through the tool; formulate the description more precisely and repeat. With an
+existing <code>.adl</code> the command does nothing, except with <code>--force</code>.</p>
+<h2 id="3-create-the-project">3. Create the project<a class="headerlink" href="#3-create-the-project" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code>pisa<span class="w"> </span>init<span class="w"> </span>--target<span class="w"> </span>spring-boot<span class="w"> </span>--out<span class="w"> </span>.<span class="w"> </span>--group<span class="w"> </span>ch.example<span class="w"> </span>--artifact<span class="w"> </span>adressen-spring<span class="w"> </span>--adl<span class="w"> </span>spec/architecture.adl
 </code></pre></div>
-<p>Du solltest sehen: <code>Architecture from spec/architecture.adl: style layered, database h2, package
-ch.example.adressen.</code> und die Liste der Dateien (<code>pom.xml</code>, <code>AdressenSpringApplication.java</code>, <code>application.yml</code>, …,
-<code>.pisa/architecture.plan.json</code>, <code>Dockerfile</code>, <code>.dockerignore</code>). Neu sind auch <code>spec/README.md</code> (Anleitung zu den Specs) und <code>README.md</code>
-mit dem Rezept des Projekts. <code>doc/</code> aus Schritt 1 bleibt, wie es ist.</p>
-<h2 id="4-das-domänenmodell-beschreiben-und-vorschlagen-lassen">4. Das Domänenmodell beschreiben und vorschlagen lassen<a class="headerlink" href="#4-das-domänenmodell-beschreiben-und-vorschlagen-lassen" title="Permanent link">&para;</a></h2>
+<p>You should see: <code>Architecture from spec/architecture.adl: style layered, database h2, package
+ch.example.adressen.</code> and the list of files (<code>pom.xml</code>, <code>AdressenSpringApplication.java</code>, <code>application.yml</code>, …,
+<code>.pisa/architecture.plan.json</code>, <code>Dockerfile</code>, <code>.dockerignore</code>). New are also <code>spec/README.md</code> (a guide to the specs) and <code>README.md</code>
+with the recipe of the project. <code>doc/</code> from step 1 stays as it is.</p>
+<h2 id="4-describe-the-domain-model-and-have-it-proposed">4. Describe the domain model and have it proposed<a class="headerlink" href="#4-describe-the-domain-model-and-have-it-proposed" title="Permanent link">&para;</a></h2>
 <!-- play: llm -->
 <div class="highlight"><pre><span></span><code>pisa<span class="w"> </span>propose-model<span class="w"> </span>--out<span class="w"> </span>.
 </code></pre></div>
-<p>Du solltest sehen: <code>Created spec/domain-spec.md with a starting text - describe the domain model there, …</code>.
-Lösche in <code>spec/domain-spec.md</code> wieder die Markerzeile und schreibe:</p>
+<p>You should see: <code>Created spec/domain-spec.md with a starting text - describe the domain model there, …</code>.
+In <code>spec/domain-spec.md</code> delete the marker line again and write:</p>
 <!-- play: write spec/domain-spec.md -->
 <div class="highlight"><pre><span></span><code><span class="gh"># Domain model</span>
 
-Eine einfache Adressverwaltung für ein kleines Büro. Sie speichert Personen mit
-ihrer Adresse und den Firmen, bei denen sie arbeiten.
+A simple address book for a small office. It stores people with
+their address and the companies they work for.
 
-<span class="k">-</span><span class="w"> </span><span class="gs">**Person:**</span> Vorname und Nachname sind Pflicht (je höchstens 80 Zeichen). Die
-  E-Mail-Adresse ist optional und darf nur einmal vorkommen. Telefon und
-  Geburtsdatum sind optional. Jede Person hat einen Status: aktiv, gesperrt
-  (Anzeige «Gesperrt») oder archiviert.
-<span class="k">-</span><span class="w"> </span><span class="gs">**Adresse:**</span> Strasse und Ort sind Pflicht, die Postleitzahl besteht aus genau
-  4 Ziffern. Die Adresse gehört fest zu einer Person (ein Bestandteil), sie hat
-  keine eigene Seite und wird mit der Person gespeichert und gelöscht.
-<span class="k">-</span><span class="w"> </span><span class="gs">**Firma:**</span> Der Name ist Pflicht und eindeutig. Eine Firma hat viele Personen,
-  eine Person arbeitet bei höchstens einer Firma.
+<span class="k">-</span><span class="w"> </span><span class="gs">**Person:**</span> First name and last name are required (at most 80 characters each). The
+  e-mail address is optional and may occur only once. Phone and
+  birthday are optional. Every person has a status: active, blocked
+  (displayed "Blocked") or archived.
+<span class="k">-</span><span class="w"> </span><span class="gs">**Address:**</span> Street and city are required, the postal code consists of exactly
+  4 digits. The address belongs firmly to one person (a part), it has
+  no page of its own and is saved and deleted with the person.
+<span class="k">-</span><span class="w"> </span><span class="gs">**Company:**</span> The name is required and unique. A company has many people,
+  a person works for at most one company.
 
-Nicht gewünscht: Verlauf der Adressen, Zugriffsrechte.
+Not wanted: history of the addresses, access rights.
 </code></pre></div>
 <!-- play: llm -->
 <div class="highlight"><pre><span></span><code>pisa<span class="w"> </span>propose-model<span class="w"> </span>--out<span class="w"> </span>.
 </code></pre></div>
-<p>Du solltest sehen: <code>Model proposal complete: spec/adressen-spring.dml</code> (der Dateiname ist der Projektname) und die
-Zeile <code>Check it, then: pisa generate --file spec/adressen-spring.dml --out .</code>.</p>
-<p><strong>Prüfe <code>spec/adressen-spring.dml</code> genau</strong>, das ist der wichtigste Schritt: Sind alle drei Entitäten da? Hat <code>Person</code>
-einen <code>status</code> als <code>enum</code>, <code>Address</code> die Regel für die Postleitzahl (<code>~ "[0-9]{4}"</code>), <code>address</code> bei der Person als
-<code>composed</code>, <code>employees</code> bei der Firma als <code>mappedBy company</code>? Wünsche, die die Sprache nicht ausdrückt (hier:
-Verlauf, Rechte), stehen als <code>// Not covered: …</code> über der ersten Zeile. Das Modell ist Vorschlag, nicht Wahrheit:
-ändere von Hand, was nicht stimmt; das Plugin zeigt Fehler beim Schreiben. Zum Vergleich, so sieht ein passendes Modell aus:</p>
+<p>You should see: <code>Model proposal complete: spec/adressen-spring.dml</code> (the file name is the project name) and the
+line <code>Check it, then: pisa generate --file spec/adressen-spring.dml --out .</code>.</p>
+<p><strong>Check <code>spec/adressen-spring.dml</code> closely</strong>, this is the most important step: Are all three entities there? Does <code>Person</code>
+have a <code>status</code> as an <code>enum</code>, <code>Address</code> the rule for the postal code (<code>~ "[0-9]{4}"</code>), <code>address</code> on the person as
+<code>composed</code>, <code>employees</code> on the company as <code>mappedBy company</code>? Wishes that the language does not express (here:
+history, rights) stand as <code>// Not covered: …</code> above the first line. The model is a proposal, not the truth:
+change by hand what is not right; the plugin shows errors while you write. For comparison, this is what a fitting model looks like:</p>
 <!-- play: write spec/adressen-spring.dml unless-llm -->
-<div class="highlight"><pre><span></span><code>enum PersonStatus { ACTIVE ("Aktiv"), BLOCKED ("Gesperrt"), ARCHIVED ("Archiviert") }
+<div class="highlight"><pre><span></span><code>enum PersonStatus { ACTIVE ("Active"), BLOCKED ("Blocked"), ARCHIVED ("Archived") }
 
 type Plz = String ~ "[0-9]{4}"
 
@@ -1097,325 +1095,325 @@ entity Company {
     oneToMany employees: Person mappedBy company
 }
 </code></pre></div>
-<h2 id="5-formulare-und-use-cases-ableiten-ohne-llm">5. Formulare und Use Cases ableiten (ohne LLM)<a class="headerlink" href="#5-formulare-und-use-cases-ableiten-ohne-llm" title="Permanent link">&para;</a></h2>
+<h2 id="5-derive-forms-and-use-cases-without-an-llm">5. Derive forms and use cases (without an LLM)<a class="headerlink" href="#5-derive-forms-and-use-cases-without-an-llm" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code>pisa<span class="w"> </span>propose-specs<span class="w"> </span>--out<span class="w"> </span>.
 </code></pre></div>
-<p>Du solltest sehen: <code>Wrote spec/person.ui.md</code>, <code>Wrote spec/company.ui.md</code>, <code>Wrote spec/use-cases.uc.md</code>.
-Die Formulare (<code>.ui.md</code>, mit einem Salt-Mockup als Layout) und die Use Cases (je ein Browser-Test) kannst du
-später anpassen; bestehende Dateien überschreibt der Befehl nie. Bei einer Anmeldung mit Rollen schreibt er als <strong>Akteur</strong> jedes Use Case die Rolle mit den
-wenigsten Rechten, die das darf (Firmen anlegen und löschen: <code>ADMIN</code>; Firmen ändern und alles bei Personen: <code>USER</code>), und <code>generate</code> lässt den Browser-Test als diese Rolle laufen.</p>
-<h2 id="6-code-erzeugen">6. Code erzeugen<a class="headerlink" href="#6-code-erzeugen" title="Permanent link">&para;</a></h2>
+<p>You should see: <code>Wrote spec/person.ui.md</code>, <code>Wrote spec/company.ui.md</code>, <code>Wrote spec/use-cases.uc.md</code>.
+You can adjust the forms (<code>.ui.md</code>, with a Salt mockup as the layout) and the use cases (one browser test each)
+later; the command never overwrites existing files. With a login with roles it writes as the <strong>actor</strong> of every use case the role with the
+fewest rights that may do it (creating and deleting companies: <code>ADMIN</code>; changing companies and everything on people: <code>USER</code>), and <code>generate</code> lets the browser test run as that role.</p>
+<h2 id="6-generate-code">6. Generate code<a class="headerlink" href="#6-generate-code" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code>pisa<span class="w"> </span>generate<span class="w"> </span>--file<span class="w"> </span>spec/adressen-spring.dml<span class="w"> </span>--out<span class="w"> </span>.
 </code></pre></div>
-<p>Du solltest sehen: die Liste der erzeugten Dateien (Entitäten, Repositories, Services, DTOs, Controller, Seiten,
-Tests) und am Ende <code>Recorded step N in .pisa/recipe.json and README.md.</code></p>
+<p>You should see: the list of generated files (entities, repositories, services, DTOs, controllers, pages,
+tests) and at the end <code>Recorded step N in .pisa/recipe.json and README.md.</code></p>
 <table>
 <thead>
 <tr>
-<th>Datei</th>
-<th>Inhalt</th>
+<th>File</th>
+<th>Content</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>src/main/java/…/model</code></td>
-<td>die Entitäten (JPA) und das <code>enum</code></td>
+<td>the entities (JPA) and the <code>enum</code></td>
 </tr>
 <tr>
 <td><code>…/repository</code>, <code>…/service</code>, <code>…/dto</code>, <code>…/mapper</code>, <code>…/controller</code></td>
-<td>Datenzugriff, Service, DTO, Mapper und REST-Schnittstelle (nur für Entitäten mit eigener Seite: <code>Address</code> ist ein Bestandteil der Person und hat keine)</td>
+<td>data access, service, DTO, mapper and REST interface (only for entities with a page of their own: <code>Address</code> is a part of the person and has none)</td>
 </tr>
 <tr>
 <td><code>…/config</code></td>
-<td>die Anmeldung (<code>SecurityStore</code>, <code>SecurityConfig</code>, <code>EntityAccess</code>)</td>
+<td>the login (<code>SecurityStore</code>, <code>SecurityConfig</code>, <code>EntityAccess</code>)</td>
 </tr>
 <tr>
 <td><code>src/main/resources/static/*.html</code>, <code>app.js</code>, <code>app.css</code></td>
-<td>die Seiten (Alpine.js)</td>
+<td>the pages (Alpine.js)</td>
 </tr>
 <tr>
 <td><code>src/test/java/…</code></td>
-<td>Repository-, Controller-, Service- und ArchUnit-Tests, Tests pro Rolle, Browser-Tests (Profil <code>ui</code>)</td>
+<td>repository, controller, service and ArchUnit tests, tests per role, browser tests (profile <code>ui</code>)</td>
 </tr>
 </tbody>
 </table>
-<h2 id="7-starten-und-ausprobieren">7. Starten und ausprobieren<a class="headerlink" href="#7-starten-und-ausprobieren" title="Permanent link">&para;</a></h2>
+<h2 id="7-start-and-try-it-out">7. Start and try it out<a class="headerlink" href="#7-start-and-try-it-out" title="Permanent link">&para;</a></h2>
 <!-- play: server /login.html -->
 <div class="highlight"><pre><span></span><code>mvn<span class="w"> </span>spring-boot:run
 </code></pre></div>
-<p>Öffne http://localhost:8080/ <strong>im Browser über den laufenden Server</strong> (nicht die <code>.html</code>-Dateien aus <code>src/main/resources/static</code> direkt: Alpine.js und die Skripte kommen vom Server, in der Datei selbst sind Buttons und Texte leer): Menü mit Personen und Firmen. Die Überschrift der Startseite ist «AdressenSpring», der Name aus <code>architecture AdressenSpring {</code> in der <code>.adl</code>; er steht als <code>app.title</code> in <code>application.yml</code> (ändern, Anwendung neu starten). Die Anwendung leitet auf die Anmeldeseite: melde dich mit <code>admin</code> / <code>admin</code> an und wähle auf der Seite «Change password» ein neues Passwort (zweimal, mindestens 8 Zeichen); wer angemeldet ist, steht im Hamburger-Menü (☰) rechts oben. Rollen und weitere Benutzer: Schritt 7b. Lege eine Firma an, dann eine Person mit Adresse
-und wähle die Firma. Ein Klick auf eine Zeile der Liste zeigt den Eintrag <strong>schreibgeschützt</strong> (Anzeigemodus); wer ändern darf, hat dort «Edit». Probiere die Regeln aus: eine Postleitzahl mit 3 Ziffern, zweimal dieselbe E-Mail, ein
-leerer Nachname; das Feld wird rot und der Server meldet 400 mit der Meldung pro Feld. Die Datenbank siehst du
-unter http://localhost:8080/h2-console (Abschnitt 4d des User Guides). Mit <code>Ctrl+C</code> beenden.</p>
+<p>Open http://localhost:8080/ <strong>in the browser, through the running server</strong> (not the <code>.html</code> files from <code>src/main/resources/static</code> directly: Alpine.js and the scripts come from the server, in the file itself buttons and texts are empty): a menu with People and Companies. The heading of the start page is "AdressenSpring", the name from <code>architecture AdressenSpring {</code> in the <code>.adl</code>; it is <code>app.title</code> in <code>application.yml</code> (change it, restart the application). The application redirects to the login page: sign in with <code>admin</code> / <code>admin</code> and choose a new password on the "Change password" page (twice, at least 8 characters); who is signed in is shown in the hamburger menu (☰) at the top right. Roles and more users: step 7b. Create a company, then a person with an address
+and choose the company. A click on a row of the list shows the entry <strong>read-only</strong> (display mode); whoever may change it has "Edit" there. Try the rules: a postal code with 3 digits, the same e-mail twice, an
+empty last name; the field turns red and the server answers 400 with the message per field. You see the database
+at http://localhost:8080/h2-console (section 4d of the User Guide). End with <code>Ctrl+C</code>.</p>
 <!-- play: tests -->
-<div class="highlight"><pre><span></span><code>mvn<span class="w"> </span><span class="nb">test</span><span class="w">            </span><span class="c1"># Repository-, Controller-, Service-, ArchUnit-Tests</span>
+<div class="highlight"><pre><span></span><code>mvn<span class="w"> </span><span class="nb">test</span><span class="w">            </span><span class="c1"># repository, controller, service, ArchUnit tests</span>
 </code></pre></div>
-<p>Und zusätzlich die Browser-Tests (sie laden beim ersten Mal Playwright, ca. 200 MB):</p>
+<p>And additionally the browser tests (the first time they download Playwright, about 200 MB):</p>
 <!-- play: slow -->
 <div class="highlight"><pre><span></span><code>mvn<span class="w"> </span><span class="nb">test</span><span class="w"> </span>-Pui
 </code></pre></div>
-<p>Du solltest sehen: <code>BUILD SUCCESS</code>. (In einem Probelauf dieses Tutorials waren es 60 Tests ohne Fehler, mit <code>-Pui</code> 82.)</p>
-<h2 id="7a-optional-operationen-einschränken-operations">7a. Optional: Operationen einschränken (<code>@operations</code>)<a class="headerlink" href="#7a-optional-operationen-einschränken-operations" title="Permanent link">&para;</a></h2>
-<p>Jede Entität erlaubt standardmässig <strong>alle vier Operationen</strong> (anlegen, lesen, ändern, löschen). Wer etwas sperren will, schreibt es ins Modell, mit <code>@operations</code> vor <code>entity</code>. Beispiel: Firmen sollen angelegt, gelesen und geändert, aber <strong>nicht gelöscht</strong> werden. Ergänze in <code>spec/adressen-spring.dml</code>:</p>
+<p>You should see: <code>BUILD SUCCESS</code>. (In a trial run of this tutorial there were 60 tests without a failure, with <code>-Pui</code> 82.)</p>
+<h2 id="7a-optional-restrict-operations-operations">7a. Optional: restrict operations (<code>@operations</code>)<a class="headerlink" href="#7a-optional-restrict-operations-operations" title="Permanent link">&para;</a></h2>
+<p>Every entity allows <strong>all four operations</strong> by default (create, read, change, delete). Whoever wants to block something writes it into the model, with <code>@operations</code> before <code>entity</code>. Example: companies should be created, read and changed, but <strong>not deleted</strong>. Add to <code>spec/adressen-spring.dml</code>:</p>
 <div class="highlight"><pre><span></span><code>@operations(create, read, update)
 entity Company {
     …
 }
 </code></pre></div>
-<p><code>read</code> muss immer dabei sein (Listen und Auswahlfelder brauchen es). Ohne die Zeile ist alles erlaubt; Pisa sperrt nie von sich aus etwas. Dann:</p>
+<p><code>read</code> must always be included (lists and selection fields need it). Without the line everything is allowed; Pisa never blocks anything by itself. Then:</p>
 <!-- play: skip -->
 <div class="highlight"><pre><span></span><code>pisa<span class="w"> </span>generate<span class="w"> </span>--file<span class="w"> </span>spec/adressen-spring.dml<span class="w"> </span>--out<span class="w"> </span>.
 </code></pre></div>
-<p>Du solltest sehen: einen <strong>Abbruch</strong>, es wird nichts geschrieben:</p>
+<p>You should see: an <strong>abort</strong>, nothing is written:</p>
 <div class="highlight"><pre><span></span><code>UC6 (spec/use-cases.uc.md): Company doesn't allow "delete" (@operations(create, read, update)) but the test line says "delete"
 Nothing was written. Allow the operation in @operations of the entity, or change the Test: line, or delete the use case.
 </code></pre></div>
-<p>Das ist gewollt: der Use Case «Firma löschen» (UC6) verlangt etwas, das die Firma jetzt nicht mehr erlaubt, ein Widerspruch zwischen zwei Specs. Drei Auswege: <code>delete</code> wieder erlauben, die <code>Test:</code>-Zeile ändern, oder (hier) den Use Case streichen. Lösche in <code>spec/use-cases.uc.md</code> den Abschnitt <code>## UC6 …</code> und im PlantUML-Diagramm die beiden Zeilen mit <code>UC6</code>, dann nochmals <code>pisa generate</code>. Pisa löscht nie Dateien: der alte Browser-Test des Use Cases bleibt liegen und würde fehlschlagen, lösche ihn von Hand (<code>generate</code> nennt ihn unter <code>Info: browser tests of use cases that are no longer in spec/*.uc.md</code>): <code>src/test/java/ch/example/adressen/ui/UC6UiTest.java</code>.</p>
-<p>Starte die Anwendung neu (<code>mvn spring-boot:run</code>) und prüfe:</p>
+<p>This is intended: the use case "Delete company" (UC6) asks for something the company no longer allows, a contradiction between two specs. Three ways out: allow <code>delete</code> again, change the <code>Test:</code> line, or (here) drop the use case. In <code>spec/use-cases.uc.md</code> delete the section <code>## UC6 …</code> and in the PlantUML diagram the two lines with <code>UC6</code>, then run <code>pisa generate</code> again. Pisa never deletes files: the old browser test of the use case stays and would fail, delete it by hand (<code>generate</code> names it under <code>Info: browser tests of use cases that are no longer in spec/*.uc.md</code>): <code>src/test/java/ch/example/adressen/ui/UC6UiTest.java</code>.</p>
+<p>Restart the application (<code>mvn spring-boot:run</code>) and check:</p>
 <ul>
-<li>Die Seite «Companies» hat keinen Delete-Button mehr; Anlegen und Ändern gehen weiter.</li>
-<li>Die Schnittstelle sperrt das Löschen ebenfalls: <code>curl -i -X DELETE http://localhost:8080/api/companies/1</code> antwortet <strong>405</strong> (Method Not Allowed) mit einem <code>Allow</code>-Header, die Firma bleibt (<code>GET</code> gibt weiter 200). Personen lassen sich weiter löschen.</li>
-<li><code>mvn test</code> prüft das für dich: der erzeugte Test <code>answers405ForADelete</code> erwartet 405, und der Test «löschen» der Firma entfällt.</li>
+<li>The "Companies" page has no delete button any more; creating and changing still work.</li>
+<li>The interface blocks deleting as well: <code>curl -i -X DELETE http://localhost:8080/api/companies/1</code> answers <strong>405</strong> (Method Not Allowed) with an <code>Allow</code> header, the company stays (<code>GET</code> still gives 200). People can still be deleted.</li>
+<li><code>mvn test</code> checks this for you: the generated test <code>answers405ForADelete</code> expects 405, and the "delete" test of the company is dropped.</li>
 </ul>
-<p>Mehr dazu (Namen, Fehlermeldungen, Wirkung in beiden Zielen, Zusammenspiel mit Rollen): User Guide, Abschnitt «Domänenmodell (<code>.dml</code>)», <code>@operations</code>. Ändere die Zeile in <code>@operations(create, read, update, delete)</code> oder lösche sie, wenn du die Beschränkung wieder aufheben willst.</p>
-<h2 id="7b-rechte-und-benutzer">7b. Rechte und Benutzer<a class="headerlink" href="#7b-rechte-und-benutzer" title="Permanent link">&para;</a></h2>
-<p>Die Anmeldung hast du mit der Zeile <code>authentication session</code> in der <code>.adl</code> schon eingeschaltet (Details: User Guide, Abschnitt 4g). <code>init</code> hat dafür <code>security.yml</code> (Rollen und Benutzer), <code>login.html</code> und <code>change-password.html</code> geschrieben, <code>generate</code> die Dateien der Anmeldung (<code>SecurityStore</code>, <code>SecurityConfig</code>, <code>EntityAccess</code>, <code>SecurityController</code>, <code>SecurityTest</code>). Die <code>.dml</code> und die Mockups kennen keine Rollen: sie stehen nicht im Domänenmodell. Schreibst du die Zeile erst später ein, braucht es danach <code>init … --force</code> und <code>generate</code>.</p>
+<p>More about this (names, error messages, effect in both targets, interplay with roles): User Guide, section "Domain model (<code>.dml</code>)", <code>@operations</code>. Change the line to <code>@operations(create, read, update, delete)</code> or delete it if you want to lift the restriction again.</p>
+<h2 id="7b-rights-and-users">7b. Rights and users<a class="headerlink" href="#7b-rights-and-users" title="Permanent link">&para;</a></h2>
+<p>You already switched the login on with the line <code>authentication session</code> in the <code>.adl</code> (details: User Guide, section 4g). For it <code>init</code> wrote <code>security.yml</code> (roles and users), <code>login.html</code> and <code>change-password.html</code>, <code>generate</code> the login files (<code>SecurityStore</code>, <code>SecurityConfig</code>, <code>EntityAccess</code>, <code>SecurityController</code>, <code>SecurityTest</code>). The <code>.dml</code> and the mockups know no roles: they are not in the domain model. If you write the line only later, <code>init … --force</code> and <code>generate</code> are needed afterwards.</p>
 <ul>
-<li>Melde dich mit <strong><code>admin</code> / <code>admin</code></strong> an (falls noch nicht geschehen): Es kommt die Seite «Change password», auf der du das neue Passwort <strong>zweimal</strong> eingibst (mindestens 8 Zeichen, nicht der Benutzername). Danach darf <code>ADMIN</code> alles, was das Modell erlaubt: Firmen löschen auch er nicht, wenn du 7a gemacht hast (Rechte einer Rolle geschnitten mit <code>@operations</code>). Wer angemeldet ist, steht im Hamburger-Menü (☰) rechts oben, mit «Change password» und «Sign out».</li>
-<li>Melde dich ab und mit <strong><code>user</code> / <code>user</code></strong> an (wieder neues Passwort wählen): <code>USER</code> darf Personen ganz bearbeiten, Firmen nur lesen und ändern (Block <code>roles</code>, siehe unten). Ein Schreibzugriff über <code>curl</code> ohne Anmeldung antwortet <strong>401</strong>; angemeldet, aber ohne Recht, <strong>403</strong>.</li>
+<li>Sign in with <strong><code>admin</code> / <code>admin</code></strong> (if you have not yet): the "Change password" page appears, where you enter the new password <strong>twice</strong> (at least 8 characters, not the user name). After that <code>ADMIN</code> may do everything the model allows: not even he deletes companies if you did 7a (the rights of a role intersected with <code>@operations</code>). Who is signed in is shown in the hamburger menu (☰) at the top right, with "Change password" and "Sign out".</li>
+<li>Sign out and sign in as <strong><code>user</code> / <code>user</code></strong> (choose a new password again): <code>USER</code> may edit people fully, companies only read and change (block <code>roles</code>, see below). A write access through <code>curl</code> without login answers <strong>401</strong>; signed in but without the right, <strong>403</strong>.</li>
 </ul>
-<p><strong>Rechte für dieses Beispiel:</strong> Sie stehen schon in der <code>.adl</code> (Block <code>roles</code>, Schritt 2) und damit in <code>security.yml</code>: <code>USER</code> bearbeitet Personen (mit ihrer Adresse) ganz, Firmen darf er nur lesen und ändern (so steht es in der Beschreibung der Architektur). <code>init</code> hat die Datei aus dem Block geschrieben:</p>
+<p><strong>Rights for this example:</strong> They are already in the <code>.adl</code> (block <code>roles</code>, step 2) and thereby in <code>security.yml</code>: <code>USER</code> edits people (with their address) fully, companies he may only read and change (so it says in the description of the architecture). <code>init</code> wrote the file from the block:</p>
 <div class="highlight"><pre><span></span><code><span class="w">  </span><span class="nt">USER</span><span class="p">:</span>
 <span class="w">    </span><span class="s">"*"</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">create</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">read</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">update</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">delete</span><span class="p p-Indicator">]</span>
-<span class="w">    </span><span class="s">"Company"</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">read</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">update</span><span class="p p-Indicator">]</span><span class="w">            </span><span class="c1"># die Liste einer Entität ersetzt "*"</span>
+<span class="w">    </span><span class="s">"Company"</span><span class="p p-Indicator">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">read</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">update</span><span class="p p-Indicator">]</span><span class="w">            </span><span class="c1"># the list of an entity replaces "*"</span>
 </code></pre></div>
-<p>Melde dich als <code>user</code> an: Die Seite «Companies» hat keine Buttons zum Anlegen und Löschen mehr (Ändern geht), und ein <code>curl</code>-<code>POST</code> oder <code>DELETE</code> auf <code>/api/companies</code> antwortet <strong>403</strong>. Personen kannst du weiter bearbeiten. Ein Klick auf eine Firma zeigt sie schreibgeschützt, mit «Edit» zum Ändern; wer nur lesen dürfte, hätte dort keinen «Edit».
-Ändern kannst du die Rechte auf zwei Wegen: von Hand in <code>security.yml</code> (Anwendung neu starten, kein <code>generate</code>), oder dauerhaft im Block <code>roles</code> der <code>.adl</code> (dann die <code>security.yml</code> löschen, <code>init … --adl … --force</code> und <code>generate</code>).
-Die Tests und die Use Cases folgen der <code>.adl</code>: <code>RolesTest</code> prüft für jede Rolle und jede Entität, was erlaubt ist (200 statt 403) und was nicht (403), und die Use Cases mit <code>**Akteur:** USER</code> oder <code>ADMIN</code> (Schritt 5) laufen im Browser als diese Rolle.</p>
-<p>Zu den Passwörtern: Das Startpasswort eines Benutzers ist sein Name (<code>admin/admin</code>, <code>user/user</code>); in <code>security.yml</code> steht kein Passwort. Das neue Passwort steht nie im Klartext, der Hash landet in der Tabelle <code>usr_password</code> der Datenbank der Anwendung; die Anwendung ändert <code>security.yml</code> nie. Mit H2 im Speicher ist die Tabelle nach jedem Neustart leer, dann gilt wieder das Startpasswort und die erzwungene Änderung; mit PostgreSQL bleibt das Passwort.</p>
-<p>Eigene Rollen und Benutzer: in <code>security.yml</code> eintragen (der Hash kommt von <code>pisa hash-password</code>, das Passwort fragt es zweimal ohne Echo ab) und die Anwendung neu starten; ein <code>generate</code> ist nicht nötig. <code>admin/admin</code> und <code>user/user</code> sind öffentlich bekannt, nur für die Entwicklung.</p>
-<p><code>mvn test</code> meldet sich in den erzeugten Tests als Testbenutzer an (stehen in <code>src/test/resources/security-test.yml</code>, nicht in deiner <code>security.yml</code>) und prüft zusätzlich 401, 403 und das Setzen des Passworts.</p>
-<h2 id="8-eine-änderung-durchziehen">8. Eine Änderung durchziehen<a class="headerlink" href="#8-eine-änderung-durchziehen" title="Permanent link">&para;</a></h2>
-<p>Ändere die Beschreibung, nicht den Code. Zwei Wege:</p>
+<p>Sign in as <code>user</code>: the "Companies" page has no buttons for creating and deleting any more (changing works), and a <code>curl</code> <code>POST</code> or <code>DELETE</code> on <code>/api/companies</code> answers <strong>403</strong>. You can still edit people. A click on a company shows it read-only, with "Edit" for changing; whoever could only read would have no "Edit" there.
+You can change the rights in two ways: by hand in <code>security.yml</code> (restart the application, no <code>generate</code>), or permanently in the <code>roles</code> block of the <code>.adl</code> (then delete <code>security.yml</code>, <code>init … --adl … --force</code> and <code>generate</code>).
+The tests and the use cases follow the <code>.adl</code>: <code>RolesTest</code> checks for every role and every entity what is allowed (200 instead of 403) and what is not (403), and the use cases with <code>**Actor:** USER</code> or <code>ADMIN</code> (step 5) run in the browser as that role.</p>
+<p>About passwords: a user's start password is his name (<code>admin/admin</code>, <code>user/user</code>); there is no password in <code>security.yml</code>. The new password is never in plain text, the hash ends up in the table <code>usr_password</code> of the application's database; the application never changes <code>security.yml</code>. With H2 in memory the table is empty after every restart, then the start password and the forced change apply again; with PostgreSQL the password stays.</p>
+<p>Your own roles and users: enter them in <code>security.yml</code> (the hash comes from <code>pisa hash-password</code>, which asks for the password twice without echo) and restart the application; no <code>generate</code> is needed. <code>admin/admin</code> and <code>user/user</code> are publicly known, for development only.</p>
+<p><code>mvn test</code> signs in in the generated tests as test users (they are in <code>src/test/resources/security-test.yml</code>, not in your <code>security.yml</code>) and additionally checks 401, 403 and setting the password.</p>
+<h2 id="8-carry-through-a-change">8. Carry through a change<a class="headerlink" href="#8-carry-through-a-change" title="Permanent link">&para;</a></h2>
+<p>Change the description, not the code. Two ways:</p>
 <ul>
-<li><strong>Von Hand im Modell:</strong> in <code>spec/adressen-spring.dml</code> ein Feld ergänzen, etwa <code>title: String(..40)?</code> bei <code>Person</code>.
-  <strong>Das Formular muss es auch kennen:</strong> <code>spec/person.ui.md</code> ist ein Layout, in dem jedes Feld genau einmal vorkommt;
-  ergänze im Mockup eine Zeile, etwa <code>Title | "title"</code> unter dem Nachnamen. Dann
-  <code>pisa generate --file spec/adressen-spring.dml --out .</code> und <code>mvn test</code>. Der Code, die Seiten und die Tests folgen.
-  Ohne die Mockup-Zeile bricht <code>generate</code> ab und schreibt nichts: <code>The Salt mockup in spec/person.ui.md can't be
-  used: … missing "title"</code>. (Alternativ <code>spec/person.ui.md</code> löschen und <code>pisa propose-specs --out .</code> neu laufen
-  lassen: das Standard-Mockup enthält alle Felder.)</li>
-<li><strong>Neu vorschlagen lassen:</strong> <code>domain-spec.md</code> ändern und <code>pisa propose-model --out . --force</code> (überschreibt
-  <code>spec/adressen-spring.dml</code>, also deine Handänderungen dort).</li>
+<li><strong>By hand in the model:</strong> add a field in <code>spec/adressen-spring.dml</code>, say <code>title: String(..40)?</code> on <code>Person</code>.
+  <strong>The form must know it too:</strong> <code>spec/person.ui.md</code> is a layout in which every field occurs exactly once;
+  add a row to the mockup, say <code>Title | "title"</code> below the last name. Then
+  <code>pisa generate --file spec/adressen-spring.dml --out .</code> and <code>mvn test</code>. The code, the pages and the tests follow.
+  Without the mockup row <code>generate</code> aborts and writes nothing: <code>The Salt mockup in spec/person.ui.md can't be
+  used: … missing "title"</code>. (Alternatively delete <code>spec/person.ui.md</code> and run <code>pisa propose-specs --out .</code> again:
+  the default mockup contains all fields.)</li>
+<li><strong>Have it proposed anew:</strong> change <code>domain-spec.md</code> and <code>pisa propose-model --out . --force</code> (overwrites
+  <code>spec/adressen-spring.dml</code>, so your manual changes there).</li>
 </ul>
-<h2 id="9-reproduzieren">9. Reproduzieren<a class="headerlink" href="#9-reproduzieren" title="Permanent link">&para;</a></h2>
+<h2 id="9-reproduce">9. Reproduce<a class="headerlink" href="#9-reproduce" title="Permanent link">&para;</a></h2>
 <!-- play: slow -->
 <div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>..
 pisa<span class="w"> </span>replay<span class="w"> </span>--from<span class="w"> </span>adressen-spring<span class="w"> </span>--out<span class="w"> </span>adressen-spring-copy
 </code></pre></div>
-<p>Du solltest sehen: <code>… All N generated file(s) match the hashes recorded in the recipe.</code> Pisa führt die
-aufgezeichneten Schritte (<code>init</code>, <code>generate</code>) in einem neuen Ordner erneut aus und vergleicht Dateien mit den
-Prüfsummen im Rezept (<code>adressen-spring/.pisa/recipe.json</code>). Die LLM-Schritte werden nicht wiederholt: deren Ergebnis
-(<code>spec/architecture.adl</code>, <code>spec/adressen-spring.dml</code>) wird aus dem Quellprojekt kopiert.</p>
-<h2 id="10-optional-bei-jedem-push-bauen-und-testen-ci">10. Optional: bei jedem Push bauen und testen (CI)<a class="headerlink" href="#10-optional-bei-jedem-push-bauen-und-testen-ci" title="Permanent link">&para;</a></h2>
-<p>Das ist ein Zusatz; für alles andere brauchst du ihn nicht. Soll GitHub das Projekt bei jedem Push bauen und die Tests ausführen
-(GitHub Actions), ergänze in <code>spec/architecture.adl</code> vor der letzten Klammer den Block <code>pipeline</code> und wende die <code>.adl</code> neu an:</p>
+<p>You should see: <code>… All N generated file(s) match the hashes recorded in the recipe.</code> Pisa runs the
+recorded steps (<code>init</code>, <code>generate</code>) again in a new folder and compares files with the
+checksums in the recipe (<code>adressen-spring/.pisa/recipe.json</code>). The LLM steps are not repeated: their result
+(<code>spec/architecture.adl</code>, <code>spec/adressen-spring.dml</code>) is copied from the source project.</p>
+<h2 id="10-optional-build-and-test-on-every-push-ci">10. Optional: build and test on every push (CI)<a class="headerlink" href="#10-optional-build-and-test-on-every-push-ci" title="Permanent link">&para;</a></h2>
+<p>This is an extra; you need it for nothing else. If GitHub should build the project on every push and run the tests
+(GitHub Actions), add the <code>pipeline</code> block to <code>spec/architecture.adl</code> before the last bracket and apply the <code>.adl</code> again:</p>
 <div class="highlight"><pre><span></span><code>    pipeline {
         ci github
     }
 </code></pre></div>
-<p>Die Befehle tun beides statt deiner (die letzte Zeile der <code>.adl</code> ersetzen, dann <code>init --force</code>). Führe den <strong>ganzen</strong> Block aus: <code>pisa init … --force</code> allein ändert nichts, solange der Block <code>pipeline</code> nicht in <code>spec/architecture.adl</code> steht, und ohne ihn legt Pisa weder ein Repository noch einen Commit an.</p>
+<p>The commands do both instead of you (replace the last line of the <code>.adl</code>, then <code>init --force</code>). Run the <strong>whole</strong> block: <code>pisa init … --force</code> alone changes nothing as long as the <code>pipeline</code> block is not in <code>spec/architecture.adl</code>, and without it Pisa creates neither a repository nor a commit.</p>
 <!-- play: optional -->
 <div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>adressen-spring
 sed<span class="w"> </span>-i.bak<span class="w"> </span><span class="s1">'$ d'</span><span class="w"> </span>spec/architecture.adl<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>rm<span class="w"> </span>spec/architecture.adl.bak
 <span class="nb">printf</span><span class="w"> </span><span class="s1">'    pipeline {\n        ci github\n    }\n}\n'</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>spec/architecture.adl
 pisa<span class="w"> </span>init<span class="w"> </span>--target<span class="w"> </span>spring-boot<span class="w"> </span>--out<span class="w"> </span>.<span class="w"> </span>--group<span class="w"> </span>ch.example<span class="w"> </span>--artifact<span class="w"> </span>adressen-spring<span class="w"> </span>--adl<span class="w"> </span>spec/architecture.adl<span class="w"> </span>--force
 </code></pre></div>
-<p>Du solltest sehen: die neue Datei <code>.github/workflows/ci.yml</code> in der Liste und <code>Git repository created, first commit made (branch main …)</code>.
-Pisa legt das Repository an und macht den ersten Commit (<code>Initial project (pisa init)</code>), nur lokal; es kennt dein GitHub-Konto nicht,
-das übernimmst du. Es gibt drei Fälle, je einen Absatz:</p>
-<p><strong>Normalfall: Pisa hat den Commit gemacht.</strong> Dann legst du das Repository auf GitHub an und lädst es hoch (braucht die
-GitHub-CLI <code>gh</code>, einmal <code>gh auth login</code>):</p>
+<p>You should see: the new file <code>.github/workflows/ci.yml</code> in the list and <code>Git repository created, first commit made (branch main …)</code>.
+Pisa creates the repository and makes the first commit (<code>Initial project (pisa init)</code>), local only; it does not know your GitHub account,
+you take care of that. There are three cases, one paragraph each:</p>
+<p><strong>Normal case: Pisa made the commit.</strong> Then you create the repository on GitHub and upload it (needs the
+GitHub CLI <code>gh</code>, once <code>gh auth login</code>):</p>
 <!-- play: skip -->
 <div class="highlight"><pre><span></span><code>gh<span class="w"> </span>repo<span class="w"> </span>create<span class="w"> </span>adressen-spring<span class="w"> </span>--private<span class="w"> </span>--source<span class="w"> </span>.<span class="w"> </span>--push
 </code></pre></div>
-<p><strong>Pisa hat kein Repository oder keinen Commit gemacht.</strong> Das sind die vier Fälle:</p>
+<p><strong>Pisa made no repository or no commit.</strong> These are the four cases:</p>
 <ul>
-<li>Der Block <code>pipeline</code> fehlt in <code>spec/architecture.adl</code> (nur die letzte Zeile ausgeführt): <strong>weder Repository noch Commit</strong>.</li>
-<li><code>pisa play --fast</code> hat den ganzen Schritt ausgelassen: <strong>weder Repository noch Commit</strong>.</li>
-<li>Der Ordner liegt schon in einem Git-Repository: Pisa fasst es nicht an, es macht <strong>keinen</strong> Commit.</li>
-<li>In deiner Git-Konfiguration fehlen Name und E-Mail: das Repository ist da, aber <strong>kein Commit</strong>.</li>
+<li>The <code>pipeline</code> block is missing in <code>spec/architecture.adl</code> (only the last line was run): <strong>neither repository nor commit</strong>.</li>
+<li><code>pisa play --fast</code> left out the whole step: <strong>neither repository nor commit</strong>.</li>
+<li>The folder is already in a Git repository: Pisa does not touch it, it makes <strong>no</strong> commit.</li>
+<li>Name and e-mail are missing in your Git configuration: the repository is there, but <strong>no commit</strong>.</li>
 </ul>
-<p><code>git status</code> im Projektordner zeigt es: «not a git repository» heisst, es gibt keines. Dann machst du das Repository und den Commit selbst
-und gehst danach weiter wie im Normalfall (<code>git init</code> schadet nicht, wenn das Repository schon da ist):</p>
+<p><code>git status</code> in the project folder shows it: "not a git repository" means there is none. Then you make the repository and the commit yourself
+and go on afterwards as in the normal case (<code>git init</code> does no harm if the repository is already there):</p>
 <!-- play: skip -->
 <div class="highlight"><pre><span></span><code>git<span class="w"> </span>init<span class="w"> </span>-b<span class="w"> </span>main
 git<span class="w"> </span>add<span class="w"> </span>-A
 git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">"Initial project"</span>
 </code></pre></div>
-<p><strong>Ohne <code>gh</code>.</strong> Lege auf github.com ein leeres Repository an und verbinde es mit deinem Ordner (statt <code>gh repo create</code>):</p>
+<p><strong>Without <code>gh</code>.</strong> Create an empty repository on github.com and connect it to your folder (instead of <code>gh repo create</code>):</p>
 <!-- play: skip -->
-<div class="highlight"><pre><span></span><code>git<span class="w"> </span>remote<span class="w"> </span>add<span class="w"> </span>origin<span class="w"> </span>git@github.com:&lt;dein-name&gt;/adressen-spring.git
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>remote<span class="w"> </span>add<span class="w"> </span>origin<span class="w"> </span>git@github.com:&lt;your-name&gt;/adressen-spring.git
 git<span class="w"> </span>push<span class="w"> </span>-u<span class="w"> </span>origin<span class="w"> </span>main
 </code></pre></div>
-<p>Danach läuft die Pipeline auf GitHub (Reiter «Actions»): der Job <code>tests</code> und der Job <code>browser-tests</code>. Die Datei gehört dir,
-auch <code>init --force</code> überschreibt sie nicht. Pisa hat sie noch nicht auf einem echten GitHub-Lauf geprüft; wird ein Job rot, ist
-das ein Befund für Pisa. Mehr dazu: User Guide, Abschnitt 4e (<code>pipeline</code>). <code>pisa play --fast</code> lässt diesen Schritt aus.</p>
-<h2 id="11-optional-mit-docker-und-der-echten-datenbank-ausprobieren">11. Optional: mit Docker und der echten Datenbank ausprobieren<a class="headerlink" href="#11-optional-mit-docker-und-der-echten-datenbank-ausprobieren" title="Permanent link">&para;</a></h2>
-<p>Auch das ist ein Zusatz. Bisher läuft alles auf H2 im Speicher. Das <code>Dockerfile</code> aus Schritt 3 liegt schon da; mit Docker kannst du die Anwendung
-als Image bauen und gegen ein <strong>echtes PostgreSQL</strong> laufen lassen, quasi wie später in der Cloud. Du brauchst es für nichts anderes.
-<code>pisa play</code> spielt diesen Schritt <strong>nie</strong> ab (alles <code>skip</code>, auch ohne <code>--fast</code>): probiere ihn von Hand aus. Voraussetzung: Docker läuft
-(<code>docker version</code>), die Ports 8080 und 5432 sind frei.</p>
-<p><strong>1. Nur das Image, mit Port.</strong> Das <code>Dockerfile</code> baut die Anwendung als Image. Ein Dockerfile veröffentlicht keinen Port von selbst (<code>EXPOSE</code> ist nur ein
-Hinweis), darum gehört <code>-p 8080:8080</code> in den Befehl, sonst erreichst du die Anwendung von aussen nicht (in IntelliJ: im Run-Konfig «Bind ports» setzen):</p>
+<p>After that the pipeline runs on GitHub (tab "Actions"): the job <code>tests</code> and the job <code>browser-tests</code>. The file is yours,
+even <code>init --force</code> does not overwrite it. Pisa has not yet checked it on a real GitHub run; if a job turns red, that
+is a finding for Pisa. More about it: User Guide, section 4e (<code>pipeline</code>). <code>pisa play --fast</code> leaves this step out.</p>
+<h2 id="11-optional-try-it-with-docker-and-the-real-database">11. Optional: try it with Docker and the real database<a class="headerlink" href="#11-optional-try-it-with-docker-and-the-real-database" title="Permanent link">&para;</a></h2>
+<p>This is an extra as well. So far everything runs on H2 in memory. The <code>Dockerfile</code> from step 3 is already there; with Docker you can build the application
+as an image and run it against a <strong>real PostgreSQL</strong>, much like later in the cloud. You need it for nothing else.
+<code>pisa play</code> <strong>never</strong> plays this step (everything <code>skip</code>, even without <code>--fast</code>): try it by hand. Requirement: Docker is running
+(<code>docker version</code>), ports 8080 and 5432 are free.</p>
+<p><strong>1. Only the image, with a port.</strong> The <code>Dockerfile</code> builds the application as an image. A Dockerfile does not publish a port by itself (<code>EXPOSE</code> is only a
+hint), so <code>-p 8080:8080</code> belongs in the command, otherwise you cannot reach the application from outside (in IntelliJ: set "Bind ports" in the run configuration):</p>
 <!-- play: skip -->
 <div class="highlight"><pre><span></span><code>docker<span class="w"> </span>build<span class="w"> </span>-t<span class="w"> </span>adressen-spring<span class="w"> </span>.
 docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>--name<span class="w"> </span>adressen-spring<span class="w"> </span>-p<span class="w"> </span><span class="m">8080</span>:8080<span class="w"> </span>adressen-spring
 </code></pre></div>
-<p>Du solltest sehen: die Anwendung auf http://localhost:8080/login.html (H2 im Container; Benutzer <code>admin/admin</code> und <code>user/user</code>, das gewählte Passwort ist mit dem Stoppen weg, weil H2 im Speicher liegt). Stoppen mit Ctrl-C.</p>
-<p><strong>2. Auf PostgreSQL umstellen.</strong> In <code>spec/architecture.adl</code> die Zeile <code>engine h2</code> durch <code>engine postgresql</code> ersetzen, die <code>.adl</code> neu anwenden und
-den Code neu erzeugen. Mit PostgreSQL schreibt Pisa die <code>compose.yml</code> mit der Anwendung (<code>app</code>) und der Datenbank (<code>db</code>) auch ohne die Zeile
-<code>compose</code> im Block <code>docker</code>.</p>
+<p>You should see: the application at http://localhost:8080/login.html (H2 in the container; users <code>admin/admin</code> and <code>user/user</code>, the chosen password is gone on stopping because H2 is in memory). Stop with Ctrl-C.</p>
+<p><strong>2. Switch to PostgreSQL.</strong> In <code>spec/architecture.adl</code> replace the line <code>engine h2</code> by <code>engine postgresql</code>, apply the <code>.adl</code> again and
+generate the code again. With PostgreSQL Pisa writes the <code>compose.yml</code> with the application (<code>app</code>) and the database (<code>db</code>) even without the line
+<code>compose</code> in the <code>docker</code> block.</p>
 <!-- play: skip -->
 <div class="highlight"><pre><span></span><code>sed<span class="w"> </span>-i.bak<span class="w"> </span><span class="s1">'s/engine h2/engine postgresql/'</span><span class="w"> </span>spec/architecture.adl<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>rm<span class="w"> </span>spec/architecture.adl.bak
 pisa<span class="w"> </span>init<span class="w"> </span>--target<span class="w"> </span>spring-boot<span class="w"> </span>--out<span class="w"> </span>.<span class="w"> </span>--group<span class="w"> </span>ch.example<span class="w"> </span>--artifact<span class="w"> </span>adressen-spring<span class="w"> </span>--adl<span class="w"> </span>spec/architecture.adl<span class="w"> </span>--force
 pisa<span class="w"> </span>generate<span class="w"> </span>--file<span class="w"> </span>spec/adressen-spring.dml<span class="w"> </span>--out<span class="w"> </span>.
 </code></pre></div>
-<p>Die alte <code>H2TcpServerConfig.java</code> (der H2-TCP-Server) bricht den Bau gegen PostgreSQL. <code>pisa init … --force</code> löscht sie selbst, wenn du sie nicht geändert hast (<code>Info: deleted, no longer used …</code>); hast du sie geändert, steht sie mit einer Zeile <code>Delete them with: rm …</code> in der Meldung, dann führe den Befehl aus.</p>
-<p><strong>3. Anwendung und Datenbank starten.</strong></p>
+<p>The old <code>H2TcpServerConfig.java</code> (the H2 TCP server) breaks the build against PostgreSQL. <code>pisa init … --force</code> deletes it itself if you have not changed it (<code>Info: deleted, no longer used …</code>); if you changed it, it appears in the message with a line <code>Delete them with: rm …</code>, then run the command.</p>
+<p><strong>3. Start the application and the database.</strong></p>
 <!-- play: skip -->
 <div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>--build
 </code></pre></div>
-<p>Du solltest sehen: Maven baut das Image (beim ersten Mal einige Minuten), dann <code>Started AdressenSpringApplication</code>. Die Anwendung läuft auf
-http://localhost:8080/login.html (Benutzer <code>admin/admin</code> und <code>user/user</code>; das gewählte Passwort liegt in der Tabelle <code>usr_password</code> von PostgreSQL und bleibt). Stoppen mit Ctrl-C, aufräumen mit
-<code>docker compose down</code> (mit <code>-v</code> auch die Daten).</p>
-<p><strong>4. Nur die Datenbank (zum Entwickeln).</strong> <code>docker compose up -d db</code> startet nur PostgreSQL, die Anwendung startest du wie gewohnt mit <code>mvn spring-boot:run</code>
-(sie nimmt die Datenbank aus <code>application.yml</code>):</p>
+<p>You should see: Maven builds the image (a few minutes the first time), then <code>Started AdressenSpringApplication</code>. The application runs at
+http://localhost:8080/login.html (users <code>admin/admin</code> and <code>user/user</code>; the chosen password is in the table <code>usr_password</code> of PostgreSQL and stays). Stop with Ctrl-C, clean up with
+<code>docker compose down</code> (with <code>-v</code> also the data).</p>
+<p><strong>4. Only the database (for developing).</strong> <code>docker compose up -d db</code> starts only PostgreSQL, you start the application as usual with <code>mvn spring-boot:run</code>
+(it takes the database from <code>application.yml</code>):</p>
 <!-- play: skip -->
 <div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d<span class="w"> </span>db
 mvn<span class="w"> </span>spring-boot:run
 </code></pre></div>
-<p><strong>5. Tests gegen ein echtes PostgreSQL (Testcontainers).</strong> Mit PostgreSQL erzeugt Pisa zu jeder Entität einen Repository-Test und einen Test, der die ganze
-Anwendung startet, beide gegen ein PostgreSQL in einem Container, den Testcontainers selbst startet und wieder löscht (eigener, freier Port; die
-<code>compose</code>-Datenbank muss nicht laufen). Sie laufen nur mit dem Maven-Profil <code>testcontainers</code> (JUnit-Tag <code>testcontainers</code>), <code>mvn test</code> allein lässt sie aus und braucht kein Docker:</p>
+<p><strong>5. Tests against a real PostgreSQL (Testcontainers).</strong> With PostgreSQL Pisa generates for every entity a repository test and a test that starts the whole
+application, both against a PostgreSQL in a container that Testcontainers starts and deletes itself (own free port; the
+<code>compose</code> database need not run). They run only with the Maven profile <code>testcontainers</code> (JUnit tag <code>testcontainers</code>), <code>mvn test</code> alone leaves them out and needs no Docker:</p>
 <!-- play: skip -->
 <div class="highlight"><pre><span></span><code>mvn<span class="w"> </span><span class="nb">test</span><span class="w"> </span>-Ptestcontainers
 </code></pre></div>
-<p>Du solltest sehen: zusätzlich zu den normalen Tests die Klassen <code>…RepositoryPostgresTest</code> und <code>…PostgresApplicationTest</code>, <code>BUILD SUCCESS</code>. Profile
-lassen sich kombinieren (<code>-Pui,testcontainers</code>). Die erzeugte CI-Pipeline (Schritt 10) führt bei PostgreSQL <code>mvn -B test -Ptestcontainers</code> aus.</p>
-<p><strong>Wenn es nicht klappt:</strong></p>
+<p>You should see: in addition to the normal tests the classes <code>…RepositoryPostgresTest</code> and <code>…PostgresApplicationTest</code>, <code>BUILD SUCCESS</code>. Profiles
+can be combined (<code>-Pui,testcontainers</code>). The generated CI pipeline (step 10) runs <code>mvn -B test -Ptestcontainers</code> with PostgreSQL.</p>
+<p><strong>If it does not work:</strong></p>
 <ul>
-<li><code>port is already allocated</code>: ein anderes PostgreSQL oder eine andere Anwendung belegt 5432 oder 8080. Lege in der <code>compose.yml</code> andere Ports fest
-  (<code>"5433:5432"</code>) oder setze <code>database.port</code> in <code>.pisa/architecture.plan.json</code> und wende die <code>.adl</code> neu an.</li>
-<li><code>docker compose</code> hängt bei <code>docker-credential-desktop</code>: der Credential-Helper von Docker Desktop antwortet nicht. Starte Docker Desktop neu oder nutze
-  eine <code>DOCKER_CONFIG</code> ohne <code>credsStore</code>.</li>
-<li>Testcontainers findet Docker nicht: Docker Desktop läuft nicht oder der Socket liegt woanders (<code>DOCKER_HOST</code>).</li>
+<li><code>port is already allocated</code>: another PostgreSQL or another application uses 5432 or 8080. Set other ports in the <code>compose.yml</code>
+  (<code>"5433:5432"</code>) or set <code>database.port</code> in <code>.pisa/architecture.plan.json</code> and apply the <code>.adl</code> again.</li>
+<li><code>docker compose</code> hangs at <code>docker-credential-desktop</code>: Docker Desktop's credential helper does not answer. Restart Docker Desktop or use
+  a <code>DOCKER_CONFIG</code> without <code>credsStore</code>.</li>
+<li>Testcontainers does not find Docker: Docker Desktop is not running or the socket is elsewhere (<code>DOCKER_HOST</code>).</li>
 </ul>
-<h2 id="12-optional-in-die-cloud-render">12. Optional: in die Cloud (Render)<a class="headerlink" href="#12-optional-in-die-cloud-render" title="Permanent link">&para;</a></h2>
-<p>Auch das ist ein Zusatz und braucht ein GitHub-Repository (Schritt 10) und ein Konto bei <a href="https://render.com">Render</a>. Render lässt das Docker-Image der Anwendung
-auf einem <strong>kostenlosen Web-Dienst</strong> laufen: er schläft nach 15 Minuten ohne Zugriffe (das Aufwachen dauert etwa eine Minute) und hat keinen dauerhaften
-Datenträger, <code>H2</code> und die gewählten Passwörter sind nach jedem Neustart weg. Die kostenlose PostgreSQL von Render läuft nach 30 Tagen ab: wenn du Schritt 11 gemacht hast,
-setze <code>engine postgresql</code> in <code>spec/architecture.adl</code> wieder auf <code>engine h2</code>. <code>pisa play</code> spielt den Schritt <strong>nie</strong> ab (alles <code>skip</code>).</p>
-<p><strong>1. Die Zeilen in die <code>.adl</code>.</strong> Der Block <code>pipeline</code> (Schritt 10) bekommt <code>release github</code> und <code>deploy render</code>; <code>deploy</code> braucht den Block <code>docker</code>, den du schon hast
-(Schritt 2). Hast du Schritt 10 übersprungen, schreibe den ganzen Block vor die letzte Klammer:</p>
+<h2 id="12-optional-into-the-cloud-render">12. Optional: into the cloud (Render)<a class="headerlink" href="#12-optional-into-the-cloud-render" title="Permanent link">&para;</a></h2>
+<p>This is an extra as well and needs a GitHub repository (step 10) and an account at <a href="https://render.com">Render</a>. Render runs the application's Docker image
+on a <strong>free web service</strong>: it sleeps after 15 minutes without requests (waking up takes about a minute) and has no persistent
+disk, <code>H2</code> and the chosen passwords are gone after every restart. Render's free PostgreSQL expires after 30 days: if you did step 11,
+set <code>engine postgresql</code> in <code>spec/architecture.adl</code> back to <code>engine h2</code>. <code>pisa play</code> <strong>never</strong> plays this step (everything <code>skip</code>).</p>
+<p><strong>1. The lines in the <code>.adl</code>.</strong> The <code>pipeline</code> block (step 10) gets <code>release github</code> and <code>deploy render</code>; <code>deploy</code> needs the <code>docker</code> block, which you already have
+(step 2). If you skipped step 10, write the whole block before the last bracket:</p>
 <div class="highlight"><pre><span></span><code>    pipeline {
         ci github
         release github
         deploy render
     }
 </code></pre></div>
-<p>Dann die <code>.adl</code> neu anwenden (<code>render.yml</code> und <code>.github/workflows/cd.yml</code> entstehen, einmal, danach gehören sie dir):</p>
+<p>Then apply the <code>.adl</code> again (<code>render.yml</code> and <code>.github/workflows/cd.yml</code> are created, once, after that they are yours):</p>
 <!-- play: skip -->
 <div class="highlight"><pre><span></span><code>pisa<span class="w"> </span>init<span class="w"> </span>--target<span class="w"> </span>spring-boot<span class="w"> </span>--out<span class="w"> </span>.<span class="w"> </span>--group<span class="w"> </span>ch.example<span class="w"> </span>--artifact<span class="w"> </span>adressen-spring<span class="w"> </span>--adl<span class="w"> </span>spec/architecture.adl<span class="w"> </span>--force
 </code></pre></div>
-<p>Du solltest sehen: <code>render.yml</code> und <code>.github/workflows/cd.yml</code> in der Liste und <code>Deploy to Render: the comments at the top of render.yml say how</code>.</p>
-<p><strong>2. Bei Render einrichten (im Browser).</strong> Schiebe das Projekt nach GitHub (Schritt 10). Auf dashboard.render.com <strong>New ▸ Blueprint</strong>, das Repository wählen und im Feld
-<strong>Blueprint Path</strong> <code>render.yml</code> eintragen (Render sucht standardmässig <code>render.yaml</code>). Danach im Dienst <strong>Settings ▸ Deploy Hook</strong> die URL kopieren und im GitHub-Repository
-unter <strong>Settings ▸ Secrets and variables ▸ Actions</strong> als Secret <code>RENDER_DEPLOY_HOOK_URL</code> speichern. Die URL ist geheim: nie in eine Datei schreiben.</p>
-<p><strong>3. Deployen.</strong> Es deployt nur der Deploy-Hook, also nur ein Tag <code>v*</code> (das Release-Workflow legt das Release an, <code>cd.yml</code> ruft den Hook):</p>
+<p>You should see: <code>render.yml</code> and <code>.github/workflows/cd.yml</code> in the list and <code>Deploy to Render: the comments at the top of render.yml say how</code>.</p>
+<p><strong>2. Set up at Render (in the browser).</strong> Push the project to GitHub (step 10). On dashboard.render.com <strong>New ▸ Blueprint</strong>, pick the repository and enter <code>render.yml</code> in the field
+<strong>Blueprint Path</strong> (Render looks for <code>render.yaml</code> by default). Then in the service <strong>Settings ▸ Deploy Hook</strong> copy the URL and save it in the GitHub repository
+under <strong>Settings ▸ Secrets and variables ▸ Actions</strong> as the secret <code>RENDER_DEPLOY_HOOK_URL</code>. The URL is secret: never write it into a file.</p>
+<p><strong>3. Deploy.</strong> Only the deploy hook deploys, so only a tag <code>v*</code> (the release workflow creates the release, <code>cd.yml</code> calls the hook):</p>
 <!-- play: skip -->
 <div class="highlight"><pre><span></span><code>git<span class="w"> </span>add<span class="w"> </span>-A<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">"Deploy to Render"</span>
 git<span class="w"> </span>tag<span class="w"> </span>v0.1.0
 git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>main<span class="w"> </span>v0.1.0
 </code></pre></div>
-<p>Du solltest sehen: im Repository unter <em>Actions</em> den Lauf <strong>Deploy</strong>, bei Render einen neuen Deploy und nach einigen Minuten die Anwendung unter der Adresse des Dienstes
-(<code>https://&lt;name&gt;.onrender.com/login.html</code>). Der erste Zugriff nach dem Schlaf dauert etwa eine Minute. Mehr dazu: User Guide, Abschnitt 4e («Cloud: Render»).
-Pisa hat das noch nicht auf einem echten Render-Konto geprüft: ob 512 MB für Spring reichen und ob der Dienst den <code>healthCheckPath</code> annimmt, ist ungeprüft.</p>
-<h2 id="was-du-jetzt-hast">Was du jetzt hast<a class="headerlink" href="#was-du-jetzt-hast" title="Permanent link">&para;</a></h2>
+<p>You should see: in the repository under <em>Actions</em> the run <strong>Deploy</strong>, at Render a new deploy and after a few minutes the application at the address of the service
+(<code>https://&lt;name&gt;.onrender.com/login.html</code>). The first access after sleeping takes about a minute. More about it: User Guide, section 4e ("Cloud: Render").
+Pisa has not yet checked this on a real Render account: whether 512 MB are enough for Spring and whether the service accepts the <code>healthCheckPath</code> is unchecked.</p>
+<h2 id="what-you-have-now">What you have now<a class="headerlink" href="#what-you-have-now" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code>adressen-spring/
   spec/            architecture.md, architecture.adl, domain-spec.md, adressen-spring.dml,
                    person.ui.md, company.ui.md, use-cases.uc.md, domain-model.puml/.md
-  .pisa/           recipe.json (Rezept), architecture.plan.json (Plan, aus der .adl abgeleitet)
-  src/             erzeugter Code und Tests (nie von Hand ändern, `generate` schreibt ihn neu)
-  doc/             User Guide und beide Tutorials
-  .github/workflows/ci.yml   die Pipeline (nur mit Schritt 10), .git (Repository, nur mit Schritt 10)
-  Dockerfile, .dockerignore  das Image (aus dem Block `docker`); compose.yml (nur mit Schritt 11)
-  render.yml                 der Blueprint für Render (nur mit Schritt 12)
-  pom.xml, README.md, project.spec.json, application.yml (Name der Anwendung), security.yml (Rollen und Benutzer)
+  .pisa/           recipe.json (the recipe), architecture.plan.json (the plan, derived from the .adl)
+  src/             generated code and tests (never change by hand, `generate` rewrites it)
+  doc/             user guide and both tutorials
+  .github/workflows/ci.yml   the pipeline (only with step 10), .git (repository, only with step 10)
+  Dockerfile, .dockerignore  the image (from the `docker` block); compose.yml (only with step 11)
+  render.yml                 the blueprint for Render (only with step 12)
+  pom.xml, README.md, project.spec.json, application.yml (name of the application), security.yml (roles and users)
 </code></pre></div>
-<p>Du schreibst Prosa und prüfst Vorschläge; <strong>die Specs</strong> (<code>.adl</code>, <code>.dml</code>, <code>.ui.md</code>, <code>.uc.md</code>) sind die Quelle
-der Wahrheit, der Code ist daraus ableitbar. Dieselben Specs ergeben mit <code>runtime hono</code> ein TypeScript-Projekt: siehe das
-<a href="../pisa-tutorial-hono-typescript/">Hono-TypeScript-Tutorial</a>.</p>
-<h2 id="wenn-etwas-nicht-klappt">Wenn etwas nicht klappt<a class="headerlink" href="#wenn-etwas-nicht-klappt" title="Permanent link">&para;</a></h2>
+<p>You write prose and check proposals; <strong>the specs</strong> (<code>.adl</code>, <code>.dml</code>, <code>.ui.md</code>, <code>.uc.md</code>) are the source
+of truth, the code is derivable from them. The same specs give a TypeScript project with <code>runtime hono</code>: see the
+<a href="../pisa-tutorial-hono-typescript/">Hono TypeScript tutorial</a>.</p>
+<h2 id="when-something-does-not-work">When something does not work<a class="headerlink" href="#when-something-does-not-work" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
 <tr>
-<th>Meldung</th>
-<th>Bedeutung</th>
+<th>Message</th>
+<th>Meaning</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>… is still the starting text</code></td>
-<td>Die Markerzeile <code>&lt;!-- pisa:starting-text --&gt;</code> steht noch in der Beschreibung.</td>
+<td>The marker line <code>&lt;!-- pisa:starting-text --&gt;</code> is still in the description.</td>
 </tr>
 <tr>
 <td><code>ended without an accepted …</code></td>
-<td>Das Modell hat nicht gültig über das Werkzeug geantwortet; Beschreibung präzisieren, wiederholen.</td>
+<td>The model did not answer validly through the tool; make the description more precise, repeat.</td>
 </tr>
 <tr>
 <td><code>The Salt mockup in spec/&lt;entity&gt;.ui.md can't be used: … missing "x"</code></td>
-<td>Ein Feld im <code>.dml</code> fehlt im Mockup (oder umgekehrt). Zeile <code>Label | "x"</code> ins Mockup einfügen, <code>generate</code> schreibt vorher nichts.</td>
+<td>A field in the <code>.dml</code> is missing in the mockup (or the other way round). Insert a line <code>Label | "x"</code> into the mockup, <code>generate</code> writes nothing beforehand.</td>
 </tr>
 <tr>
-<td><code>Package org.h2.tools ist nicht vorhanden</code> nach dem Wechsel auf PostgreSQL</td>
-<td>Die alte <code>src/main/java/…/config/H2TcpServerConfig.java</code> (vom H2-Betrieb) braucht H2. <code>init --force</code> löscht sie, wenn sie unverändert ist; sonst meldet es <code>Info: no longer used … changed by you</code> samt Zeile <code>Delete them with: rm …</code>. Befehl ausführen.</td>
+<td><code>Package org.h2.tools does not exist</code> after switching to PostgreSQL</td>
+<td>The old <code>src/main/java/…/config/H2TcpServerConfig.java</code> (from H2 operation) needs H2. <code>init --force</code> deletes it if it is unchanged; otherwise it reports <code>Info: no longer used … changed by you</code> with a line <code>Delete them with: rm …</code>. Run the command.</td>
 </tr>
 <tr>
-<td><code>Package lombok / org.mapstruct ist nicht vorhanden</code> nach dem Wechsel <code>layered</code> → <code>crud</code></td>
-<td><code>init --adl … --force</code> und <code>generate</code> löschen die unveränderten Dateien des alten Stils selbst; geänderte bleiben und stehen unter <code>Info: no longer used … changed by you</code> mit <code>rm</code>-Befehl: <code>src/main/java/…/dto</code>, <code>…/mapper</code>, <code>…/service</code> und <code>src/test/java/…/service</code>.</td>
+<td><code>Package lombok / org.mapstruct does not exist</code> after switching <code>layered</code> → <code>crud</code></td>
+<td><code>init --adl … --force</code> and <code>generate</code> delete the unchanged files of the old style themselves; changed ones stay and are listed under <code>Info: no longer used … changed by you</code> with an <code>rm</code> command: <code>src/main/java/…/dto</code>, <code>…/mapper</code>, <code>…/service</code> and <code>src/test/java/…/service</code>.</td>
 </tr>
 <tr>
-<td>Seite zeigt leere Buttons oder Überschriften</td>
-<td>Die Seite läuft nicht über den Server. <code>mvn spring-boot:run</code> starten und http://localhost:8080/ öffnen; Alpine.js setzt die Texte erst im Browser.</td>
+<td>Page shows empty buttons or headings</td>
+<td>The page is not served by the server. Start <code>mvn spring-boot:run</code> and open http://localhost:8080/; Alpine.js sets the texts only in the browser.</td>
 </tr>
 <tr>
 <td><code>Company doesn't allow "delete" (@operations(…)) but the test line says "delete"</code></td>
-<td>Ein Use Case verlangt eine Operation, die <code>@operations</code> der Entität sperrt. <code>delete</code> wieder erlauben, die <code>Test:</code>-Zeile ändern oder den Use Case streichen (Schritt 7a).</td>
+<td>A use case asks for an operation that <code>@operations</code> of the entity blocks. Allow <code>delete</code> again, change the <code>Test:</code> line or drop the use case (step 7a).</td>
 </tr>
 <tr>
-<td>Nach dem Streichen eines Use Cases schlägt dessen Browser-Test fehl</td>
-<td>Pisa löscht nie: den alten Test von Hand löschen (<code>test/ui/UC&lt;n&gt;.spec.ts</code> bzw. <code>…/ui/UC&lt;n&gt;UiTest.java</code>).</td>
+<td>After dropping a use case its browser test fails</td>
+<td>Pisa never deletes: delete the old test by hand (<code>test/ui/UC&lt;n&gt;.spec.ts</code> or <code>…/ui/UC&lt;n&gt;UiTest.java</code>).</td>
 </tr>
 <tr>
 <td><code>Info: the plan has authentication session, but there is no security.yml</code></td>
-<td><code>security.yml</code> fehlt. <code>pisa init … --adl … --force</code> schreibt sie neu.</td>
+<td><code>security.yml</code> is missing. <code>pisa init … --adl … --force</code> writes it again.</td>
 </tr>
 <tr>
-<td>Anmeldung funktioniert nach dem Einschalten nicht (Seiten offen)</td>
-<td><code>init … --force</code> vergessen: erst damit kommen <code>security.yml</code> und die Seiten, dann <code>generate</code> und Neustart.</td>
+<td>Login does not work after switching it on (pages open)</td>
+<td>You forgot <code>init … --force</code>: only with it <code>security.yml</code> and the pages come, then <code>generate</code> and a restart.</td>
 </tr>
 <tr>
 <td><code>No project.spec.json in .</code></td>
-<td><code>generate</code> braucht zuerst <code>pisa init</code> (Schritt 3).</td>
+<td><code>generate</code> needs <code>pisa init</code> first (step 3).</td>
 </tr>
 <tr>
 <td><code>… exists already</code></td>
-<td>Die Zieldatei gibt es; <code>--force</code> schlägt neu vor und überschreibt sie.</td>
+<td>The target file exists; <code>--force</code> proposes anew and overwrites it.</td>
 </tr>
 <tr>
-<td>Das Projekt kompiliert nicht nach einem Modellvorschlag</td>
-<td>Prüfe das <code>.dml</code>: etwa eine Beziehung auf einen <code>composed</code>-Bestandteil einer anderen Entität wird heute nicht abgelehnt (bekannte Lücke, <code>doc/state/findings.md</code>).</td>
+<td>The project does not compile after a model proposal</td>
+<td>Check the <code>.dml</code>: for instance a relation to a <code>composed</code> part of another entity is not rejected today (a known gap).</td>
 </tr>
 </tbody>
 </table>
@@ -1463,7 +1461,7 @@ der Wahrheit, der Code ist daraus ableitbar. Dieselben Specs ergeben mit <code>r
     
       
       
-      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.sections", "content.code.copy", "search.highlight"], "search": "../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "In Zwischenablage kopiert", "clipboard.copy": "In Zwischenablage kopieren", "search.result.more.one": "1 weiteres Suchergebnis auf dieser Seite", "search.result.more.other": "# weitere Suchergebnisse auf dieser Seite", "search.result.none": "Keine Suchergebnisse", "search.result.one": "1 Suchergebnis", "search.result.other": "# Suchergebnisse", "search.result.placeholder": "Suchbegriff eingeben", "search.result.term.missing": "Es fehlt", "select.version": "Version ausw\u00e4hlen"}, "version": null}</script>
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.sections", "content.code.copy", "search.highlight"], "search": "../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
     
     
       <script src="../assets/javascripts/bundle.c21346df.min.js"></script>
