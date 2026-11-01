@@ -31,6 +31,10 @@ Check:
 pisa --version
 ```
 
+## Documentation
+
+User guide and tutorials: <https://arcware-io.github.io/pisa/> (also in a project's `doc/` after `pisa init`).
+
 ## Try it
 
 ```
