@@ -1862,7 +1862,7 @@
 <h1 id="user-guide">User Guide<a class="headerlink" href="#user-guide" title="Permanent link">&para;</a></h1>
 <p>How to set up a project with Pisa and generate working code from specs (domain model, form description etc.).</p>
 <blockquote>
-<p><strong>Maintenance:</strong> This guide describes <code>pisa 0.13.0</code> (released as <code>v0.13.0</code>; with <code>enum</code>, <code>@table</code>, <code>@column</code>, <code>.adl</code>, <code>propose-architecture</code>, <code>propose-model</code>, the second target <code>hono-prisma</code> (TypeScript), <code>runtime</code> in the <code>.adl</code>, <code>@operations</code>, login with users and roles (<code>authentication session</code>, <code>pisa hash-password</code>), roles in the <code>.adl</code>, the display mode of the pages, <code>pisa play</code>, <code>pisa update-versions</code> and the <code>pipeline</code> and <code>scm</code> blocks of the <code>.adl</code>). It is updated with <strong>every</strong> change to commands, options, spec formats or generated behavior. If something is wrong: <code>pisa --help</code> is the source, this guide follows it.</p>
+<p><strong>Maintenance:</strong> This guide describes <code>pisa 0.14.0</code> (released as <code>v0.14.0</code>; with <code>enum</code>, <code>@table</code>, <code>@column</code>, <code>.adl</code>, <code>propose-architecture</code>, <code>propose-model</code>, the second target <code>hono-prisma</code> (TypeScript), <code>runtime</code> in the <code>.adl</code>, <code>@operations</code>, login with users and roles (<code>authentication session</code>, <code>pisa hash-password</code>), roles in the <code>.adl</code>, the display mode of the pages, <code>pisa play</code>, <code>pisa update-versions</code>, the <code>pipeline</code> and <code>scm</code> blocks of the <code>.adl</code>, <code>pisa story</code> and the spec-driven <code>pisa extend</code> with its five phases, the tree output of <code>--check</code>, <code>--check --full</code> and the HTML report). It is updated with <strong>every</strong> change to commands, options, spec formats or generated behavior. If something is wrong: <code>pisa --help</code> is the source, this guide follows it.</p>
 </blockquote>
 <p><strong>To try it out:</strong> <code>mkdir my-project &amp;&amp; cd my-project &amp;&amp; pisa init</code> creates <code>doc/</code> (this guide and both tutorials) and <code>spec/</code>; <code>pisa play</code> lists the tutorials, <code>pisa play &lt;name&gt;</code> plays one (<a href="#pisa-play"><code>pisa play</code></a>). The <a href="../pisa-tutorial-spring-java/">Spring Java tutorial</a> leads from a prose description to a running Java application in an hour (with the LLM proposals); the <a href="../pisa-tutorial-hono-typescript/">Hono TypeScript tutorial</a> builds the same application as a TypeScript project with Hono and Prisma.</p>
 <p>Contents: <a href="#installing-pisa">Installing Pisa</a> · <a href="#setting-up-editor-and-plantuml">Setting up editor and PlantUML</a> ·
@@ -1971,22 +1971,22 @@
 <td><a href="#4h-restricting-operations-operations">4h</a></td>
 </tr>
 <tr>
-<td><code>pisa story</code> (<strong>unreleased, after 0.13.0</strong>)</td>
+<td><code>pisa story</code> (<strong>since 0.14.0</strong>)</td>
 <td>user stories of your application with acceptance criteria, the same phases and files as the specs of Pisa itself: <code>stories/NNN-&lt;name&gt;/01-spec.md</code> … <code>05-check.md</code>; the acceptance tests run only locally, the CI checks the report</td>
 <td><a href="#pisa-story"><code>pisa story</code></a></td>
 </tr>
 <tr>
-<td><code>pisa extend --format</code> (<strong>unreleased, after 0.13.0</strong>)</td>
+<td><code>pisa extend --format</code> (<strong>since 0.14.0</strong>)</td>
 <td>brings the Markdown files of every feature (<code>01-spec.md</code> … <code>05-check.md</code>) into one shape with a deterministic formatter (aligned table columns, one blank line around a heading, dates as <code>YYYY-MM-DD HH:MM UTC</code>); every file <code>pisa extend</code> writes already goes through it</td>
 <td><a href="#pisa-extend"><code>pisa extend</code></a></td>
 </tr>
 <tr>
-<td><code>pisa extend --test</code> infers src paths from the frozen tests (<strong>unreleased, after 0.13.0</strong>)</td>
+<td><code>pisa extend --test</code> infers src paths from the frozen tests (<strong>since 0.14.0</strong>)</td>
 <td>after freezing, the relative imports of the frozen tests are read; a <code>src/</code> path they import that no plan task lists yet is added to the matching task line of <code>02-plan.md</code> (deterministic, no model), so <code>--implement</code> may write the new module. <code>--implement</code> now aborts the model session at once on the first rejected write</td>
 <td><a href="#pisa-extend"><code>pisa extend</code></a></td>
 </tr>
 <tr>
-<td><code>pisa extend --check</code> as a tree, <code>--full</code> over all features and an HTML report (<strong>unreleased, after 0.13.0</strong>)</td>
+<td><code>pisa extend --check</code> as a tree, <code>--full</code> over all features and an HTML report (<strong>since 0.14.0</strong>)</td>
 <td><code>--check</code> prints the feature and its checks (with the acceptance tests) as a tree and writes a self-contained <code>check-report.html</code>; <code>--check --full</code> checks every feature, runs the suites once and ends with a summary table and the line <code>N of M features converged</code> and the line <code>Acceptance tests: N ✅ green, M ❌ red (K in total)</code>, with one <code>check-report.html</code> in <code>specs/features/</code> (the CI runs this)</td>
 <td><a href="#pisa-extend"><code>pisa extend</code></a></td>
 </tr>
@@ -2042,7 +2042,7 @@ or, on Windows, <em>Settings → System → About → System type</em>.</p>
 <p><code>install.sh</code> detects system and CPU, downloads the matching file from the latest release, makes it
 executable, removes the quarantine on macOS, shows <code>pisa --version</code> and points out if the folder is not
 in the PATH. Default folder: <code>~/.local/bin</code>. Options <code>--version vX.Y.Z</code> and <code>--dir &lt;folder&gt;</code>:</p>
-<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-fsSL<span class="w"> </span>https://raw.githubusercontent.com/Arcware-io/pisa/main/install.sh<span class="w"> </span><span class="p">|</span><span class="w"> </span>sh<span class="w"> </span>-s<span class="w"> </span>--<span class="w"> </span>--version<span class="w"> </span>v0.13.0<span class="w"> </span>--dir<span class="w"> </span>~/.bin
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-fsSL<span class="w"> </span>https://raw.githubusercontent.com/Arcware-io/pisa/main/install.sh<span class="w"> </span><span class="p">|</span><span class="w"> </span>sh<span class="w"> </span>-s<span class="w"> </span>--<span class="w"> </span>--version<span class="w"> </span>v0.14.0<span class="w"> </span>--dir<span class="w"> </span>~/.bin
 </code></pre></div>
 <h3 id="windows-powershell">Windows (PowerShell)<a class="headerlink" href="#windows-powershell" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="nb">irm </span><span class="n">https</span><span class="p">://</span><span class="n">raw</span><span class="p">.</span><span class="n">githubusercontent</span><span class="p">.</span><span class="n">com</span><span class="p">/</span><span class="n">Arcware-io</span><span class="p">/</span><span class="n">pisa</span><span class="p">/</span><span class="n">main</span><span class="p">/</span><span class="n">install</span><span class="p">.</span><span class="n">ps1</span> <span class="n">-OutFile</span> <span class="n">install</span><span class="p">.</span><span class="n">ps1</span><span class="p">;</span> <span class="p">.\</span><span class="n">install</span><span class="p">.</span><span class="n">ps1</span>
@@ -3694,7 +3694,7 @@ anyway); paths outside the project are used as they are, with a warning.</p>
 </table>
 <hr />
 <h2 id="not-yet-possible">Not yet possible<a class="headerlink" href="#not-yet-possible" title="Permanent link">&para;</a></h2>
-<p>So that none of this is expected (as of <code>0.13.0</code>):</p>
+<p>So that none of this is expected (as of <code>0.14.0</code>):</p>
 <ul>
 <li>Lists of parts (<code>oneToMany … composed</code>).</li>
 <li>Schema migrations (Flyway): Hibernate manages the schema; switching the database H2 ↔ PostgreSQL goes through the architecture plan (section 4c).</li>
