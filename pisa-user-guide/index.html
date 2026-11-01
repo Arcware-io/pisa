@@ -864,6 +864,28 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#pisa-story" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pisa story
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pisa-extend" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pisa extend
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#only-for-the-old-target-prisma-hono-ink" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1675,6 +1697,28 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#pisa-story" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pisa story
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pisa-extend" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        pisa extend
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#only-for-the-old-target-prisma-hono-ink" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1925,6 +1969,26 @@
 <td>Report of orphaned use case tests (<strong>since 0.10.0</strong>)</td>
 <td><code>generate</code> names browser tests whose use case has disappeared from <code>spec/*.uc.md</code></td>
 <td><a href="#4h-restricting-operations-operations">4h</a></td>
+</tr>
+<tr>
+<td><code>pisa story</code> (<strong>unreleased, after 0.13.0</strong>)</td>
+<td>user stories of your application with acceptance criteria, the same phases and files as the specs of Pisa itself: <code>stories/NNN-&lt;name&gt;/01-spec.md</code> … <code>05-check.md</code>; the acceptance tests run only locally, the CI checks the report</td>
+<td><a href="#pisa-story"><code>pisa story</code></a></td>
+</tr>
+<tr>
+<td><code>pisa extend --format</code> (<strong>unreleased, after 0.13.0</strong>)</td>
+<td>brings the Markdown files of every feature (<code>01-spec.md</code> … <code>05-check.md</code>) into one shape with a deterministic formatter (aligned table columns, one blank line around a heading, dates as <code>YYYY-MM-DD HH:MM UTC</code>); every file <code>pisa extend</code> writes already goes through it</td>
+<td><a href="#pisa-extend"><code>pisa extend</code></a></td>
+</tr>
+<tr>
+<td><code>pisa extend --test</code> infers src paths from the frozen tests (<strong>unreleased, after 0.13.0</strong>)</td>
+<td>after freezing, the relative imports of the frozen tests are read; a <code>src/</code> path they import that no plan task lists yet is added to the matching task line of <code>02-plan.md</code> (deterministic, no model), so <code>--implement</code> may write the new module. <code>--implement</code> now aborts the model session at once on the first rejected write</td>
+<td><a href="#pisa-extend"><code>pisa extend</code></a></td>
+</tr>
+<tr>
+<td><code>pisa extend --check</code> as a tree, <code>--full</code> over all features and an HTML report (<strong>unreleased, after 0.13.0</strong>)</td>
+<td><code>--check</code> prints the feature and its checks (with the acceptance tests) as a tree and writes a self-contained <code>check-report.html</code>; <code>--check --full</code> checks every feature, runs the suites once and ends with a summary table and the line <code>N of M features converged</code> and the line <code>Acceptance tests: N ✅ green, M ❌ red (K in total)</code>, with one <code>check-report.html</code> in <code>specs/features/</code> (the CI runs this)</td>
+<td><a href="#pisa-extend"><code>pisa extend</code></a></td>
 </tr>
 </tbody>
 </table>
@@ -2866,6 +2930,7 @@ project files (Pisa writes the README only between its markers).</p>
   proposes one (<code>propose-layout</code>), which Pisa checks and <strong>writes into the same document as a mockup</strong>.
   There is no second model next to it.</li>
 </ul>
+<p>Pisa works <strong>spec-driven</strong>, in four phases after GitHub Spec Kit: <em>specify</em> (describe in prose, have a spec proposed and correct it), <em>plan</em> (the architecture plan, forms and use cases), <em>implement</em> (<code>generate</code>, deterministic) and <em>check</em> (the generated tests, <code>replay</code>). A change is another round of the same phases; the tutorials follow them step by step.</p>
 <p>The specs are the source of truth, the code is derivable:</p>
 <table>
 <thead>
@@ -3268,6 +3333,45 @@ file against the recorded hash. See <a href="#recipe-and-replay">Recipe and repl
 writes answers to stdout, so stdout stays empty otherwise. The log (start message, one line per
 tool call) goes to <strong>stderr</strong>; Ctrl-C ends the server. To register it e.g. in Claude Code:
 <code>claude mcp add pisa -- pisa mcp</code>.</p>
+<h3 id="pisa-story"><code>pisa story</code><a class="headerlink" href="#pisa-story" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>pisa<span class="w"> </span>story<span class="w"> </span>--specify<span class="w"> </span><span class="s2">"User can log in"</span><span class="w">      </span><span class="c1"># stories/001-user-login/01-spec.md</span>
+pisa<span class="w"> </span>story<span class="w"> </span>--plan<span class="w">                           </span><span class="c1"># 02-plan.md: one task per criterion</span>
+pisa<span class="w"> </span>story<span class="w"> </span>--test<span class="w">                           </span><span class="c1"># 03-test.md: freezes the acceptance tests</span>
+pisa<span class="w"> </span>story<span class="w"> </span>--implement<span class="w">                      </span><span class="c1"># 04-implement.md: assignment and open tasks</span>
+pisa<span class="w"> </span>story<span class="w"> </span>--check<span class="w">                          </span><span class="c1"># runs the acceptance tests, writes 05-check.md</span>
+</code></pre></div>
+<p>A user story of your application, worked off in five phases with one file per phase in <code>stories/NNN-&lt;name&gt;/</code>
+(the same files and the same boxes as <code>pisa extend</code>, which does this for Pisa itself).</p>
+<ul>
+<li><strong><code>01-spec.md</code></strong>: the acceptance criteria as a table (<code>| AC1 | … |</code>), written from the requester's point of view, in business language: when is the story done as he asked for it? <code>--specify</code> creates the table with two rows to fill in (it does not ask the model yet).</li>
+<li><strong>Acceptance tests</strong> carry the number of the criterion in their name, <code>acceptance("AC1: …")</code>, and live in <code>stories/NNN-&lt;name&gt;/tests/</code>. They run <strong>only</strong> when <code>PISA_ACCEPTANCE=1</code> is set: with <code>mvn test -Pac</code> (Spring, profile <code>ac</code>) or <code>npm run test:ac</code> (Hono), never in the normal build. Use case tests (<code>UC1: …</code>) stay separate and run in the normal build.</li>
+<li><strong><code>--test</code></strong> freezes the test files (SHA-256 in the table "Frozen files" of <code>03-test.md</code>) and warns about a criterion without a test.</li>
+<li><strong><code>--check</code></strong> runs the test of every criterion (Spring: <code>mvn test -Pac -Dtest=*ACn*</code>, so the class or method name contains the number; Hono: <code>npm run test:ac -- -t "ACn:"</code>) and writes <code>05-check.md</code>: ✅ for green, ❌ for red, ☐ for not run. Exit code 1 unless every criterion is green and no frozen test was changed.</li>
+<li><strong>CI:</strong> the CI does not run the acceptance tests. It only checks that every story with a <code>02-plan.md</code> has a <code>05-check.md</code> without ❌ and ☐ (<code>generateCiYml</code> in <code>src/story/story.ts</code> is the step to put into your workflow).</li>
+<li><strong><code>--story &lt;NNN&gt;</code></strong> selects the story (default: the first one that is not accepted yet); <strong><code>--project &lt;dir&gt;</code></strong> the folder of the application (default: the current directory).</li>
+</ul>
+<h3 id="pisa-extend"><code>pisa extend</code><a class="headerlink" href="#pisa-extend" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>pisa<span class="w"> </span>extend<span class="w"> </span>--list<span class="w">                          </span><span class="c1"># lists all features with their acceptance status</span>
+pisa<span class="w"> </span>extend<span class="w"> </span>--specify<span class="w"> </span><span class="s2">"pool settings"</span><span class="w">       </span><span class="c1"># specs/features/NNN-pool-settings/01-spec.md</span>
+pisa<span class="w"> </span>extend<span class="w"> </span>--plan<span class="w">                          </span><span class="c1"># 02-plan.md with tasks for the layers it touches</span>
+pisa<span class="w"> </span>extend<span class="w"> </span>--test<span class="w">                          </span><span class="c1"># the model writes acceptance tests, frozen in 03-test.md</span>
+pisa<span class="w"> </span>extend<span class="w"> </span>--implement<span class="w">                     </span><span class="c1"># 04-implement.md; a second call lets Pisa implement</span>
+pisa<span class="w"> </span>extend<span class="w"> </span>--check<span class="w">                         </span><span class="c1"># checks one feature, prints a tree, writes 05-check.md and check-report.html</span>
+pisa<span class="w"> </span>extend<span class="w"> </span>--check<span class="w"> </span>--full<span class="w">                  </span><span class="c1"># checks every feature, a summary table and one check-report.html</span>
+pisa<span class="w"> </span>extend<span class="w"> </span>--format<span class="w">                        </span><span class="c1"># tidies the Markdown of every feature</span>
+</code></pre></div>
+<p>Extends Pisa itself, spec-driven in five phases. <strong>Works in a checkout of Pisa, not in the installed binary.</strong> The files are in <code>specs/features/NNN-&lt;slug&gt;/</code>.</p>
+<ul>
+<li><strong><code>--list</code></strong>: shows all features as a table (<code>| Status | Feature | Title |</code>) with a green check mark for accepted and a red cross for not accepted (accepted only when the headline of <code>05-check.md</code> says it converged — a line <code>✅ **Converged**</code> — not merely when the word appears somewhere in a table or a sentence; otherwise not accepted). Needs no API key, creates no files.</li>
+<li><strong><code>--specify</code></strong>: the model writes <code>01-spec.md</code> (purpose, example, acceptance criteria, rules, layers).</li>
+<li><strong><code>--plan</code></strong>: <code>02-plan.md</code> with the tasks of the layers named in <code>01-spec.md</code>.</li>
+<li><strong><code>--test</code></strong>: the model writes acceptance tests (or <code>--adopt</code> takes over hand-written ones); Pisa checks they compile and fail, then freezes them in <code>03-test.md</code>. After freezing, the relative imports of the frozen tests are read: a <code>src/</code> path they import that no plan task lists yet is added, in backticks, to the matching task line of <code>02-plan.md</code> (deterministic, no model, <code>[pisa-cli]</code> tasks take <code>src/</code> paths; if none fits, the first task does). So a test that imports a not-yet-existing module (e.g. <code>../../../src/foo/widget</code>) makes <code>02-plan.md</code> name <code>projects/pisa/src/foo/widget.ts</code>, and <code>--implement</code> may write it. A package import (<code>bun:test</code>) is ignored; an import that resolves outside <code>projects/pisa/src/</code> is only reported as a warning; an import that climbs above the project root is an error.</li>
+<li><strong><code>--implement</code></strong>: first call writes <code>04-implement.md</code>; second call lets the model implement with checked tools. A write to a path that no plan task names is rejected and aborts the model session at once (fail fast). While it works the progress line stays short — <code>&lt;file&gt; · &lt;task&gt;</code> (the file being changed and the task, without its layer tag and its path list) — and a finished task stays on screen as one line <code>✔ &lt;task&gt; (&lt;n&gt; files)</code>. A call with nothing left to do (every task already ticked, the acceptance tests already green) says so (<code>Converged: nothing to implement …</code>) and writes no log table. The full texts stay in the files.</li>
+<li><strong><code>--check</code></strong>: runs the acceptance tests and <code>tsc</code> and prints the result as a <strong>tree</strong> — the headline <code>NNN | &lt;title&gt;</code> (the h1 of <code>01-spec.md</code>), then the checks indented below it in the order spec, tasks, acceptance, frozen, tsc, with every acceptance test (AC1, AC2, …) listed under the <code>acceptance</code> line with its short text and the time its test took; a passed check or test shows a green check mark, a failed one a red cross. Colour codes are written <strong>only</strong> on a terminal and not when <code>NO_COLOR</code> is set (in a pipe the marks stay readable). It writes the report <code>05-check.md</code> as before and, next to it in the feature folder, a self-contained <code>check-report.html</code> (no external scripts or styles; opens in a browser without a server; written twice from the same input it differs only in the date). "Converged" means accepted; anything failed gives exit code 1.</li>
+<li><strong><code>--check --full</code></strong>: checks <strong>every</strong> feature in <code>specs/features/</code> one after the other, printed live as a tree (the headline <code>NNN | &lt;title&gt;</code> when a feature starts, each acceptance test with a green check mark or a red cross and its time as soon as it has run, a closing line per feature), and runs the whole test suites of <code>pisa</code> and <code>dml-lang</code> <strong>once</strong> (not once per feature). It ends with a summary table — a row per feature with number, title, tasks done/total, acceptance green/total, <code>tsc</code> and Converged or Not converged — and the line <code>N of M features converged</code> and the line <code>Acceptance tests: N ✅ green, M ❌ red (K in total)</code>, and writes one <code>check-report.html</code> into <code>specs/features/</code> (the table with a green or red row per feature, each feature expandable with its checks and acceptance tests). <code>--full</code> cannot be combined with <code>--feature</code> (error, nothing is checked) and needs at least one feature. Exit code 1 if any feature is not converged or a suite fails. <code>--skip-tests</code> runs no process (the acceptance tests then show as not run). This is what the CI runs.</li>
+<li><strong><code>--format</code></strong>: runs every Markdown file of every feature (<code>01-spec.md</code> to <code>05-check.md</code>) through the deterministic formatter — table columns padded to their widest cell, the separator row a row of dashes, at most one blank line, one blank line around a heading, trailing spaces gone, dates written as <code>YYYY-MM-DD HH:MM UTC</code>, a final newline; fenced code blocks and the words of a cell are left untouched. It lists the files it changed, or says that all are formatted already on a second run. No model, no API key; <code>--feature &lt;NNN&gt;</code> limits it to one feature. Every file that <code>pisa extend</code> writes already goes through this formatter.</li>
+<li><strong><code>--feature &lt;NNN&gt;</code></strong> selects the feature by its number (<code>--feature 11</code>) or folder name (default without the option: the newest); the option always needs a value, and it cannot be combined with <code>--check --full</code>; <strong><code>--root &lt;AISE folder&gt;</code></strong> the checkout folder.</li>
+</ul>
 <h3 id="only-for-the-old-target-prisma-hono-ink">Only for the old target <code>prisma-hono-ink</code><a class="headerlink" href="#only-for-the-old-target-prisma-hono-ink" title="Permanent link">&para;</a></h3>
 <p><code>pisa render-layout --entity &lt;Name&gt; --out &lt;dir&gt;</code> and <code>generate --curate</code> exist only for
 <code>prisma-hono-ink</code>. For Spring: <code>propose-layout</code>, then <code>generate</code>.</p>
@@ -3602,6 +3706,7 @@ anyway); paths outside the project are used as they are, with a warning.</p>
 <li><code>docker</code>: one image per project, only Dockerfile and Compose; Testcontainers tests only with Spring and PostgreSQL (Hono: the tests run against the <code>compose</code> database, no Testcontainers); no image build in the CI file (<code>ci.yml</code>), no push to a registry, no multi-architecture images, no health check in the <code>Dockerfile</code> itself (only that of <code>db</code> in the <code>compose.yml</code>), no CD; port 8080 and <code>/data</code> are fixed.</li>
 <li><code>deploy</code>: only Render (free web service, releases only through the deploy hook); no Cloud Run, no database at Render, no domain of its own, no health check test after the deploy; not checked on a real account.</li>
 <li><code>pipeline</code> and <code>scm</code>: only GitHub (<code>ci github</code>, <code>release github</code>, <code>host github</code>), no other Git hosts (GitLab, Bitbucket, Codeberg); the workflows and templates are checked only to the extent that Pisa writes them and the files are valid YAML, not on a real GitHub run (tag, release, issue forms); no CD (deployment to the cloud); no command that creates the repository on GitHub (only the commands by hand in section 4e).</li>
+<li><code>pisa story</code>: <code>--specify</code> does not ask the model (the criteria are filled in by hand); the generated projects do not contain the profile <code>ac</code> / the script <code>test:ac</code> yet (add them by hand: the profile sets <code>PISA_ACCEPTANCE=1</code> for surefire, the script is <code>PISA_ACCEPTANCE=1 &lt;your test command&gt;</code>); the CI step is not part of the generated <code>ci.yml</code> yet; <code>--check</code> was tried with a stand-in for the test runner, not against a real Maven or npm run.</li>
 <li>Deleting orphaned files; sorting, searching and number formatting on the pages.</li>
 <li>The other side of a relation (<code>mappedBy</code>) cannot be set through the API.</li>
 <li>Tests: none for <code>composed</code> lists, no test of the effect of the layout (groups, rows) in the browser; the tests of the relations set only one row of the other side (no error cases).</li>
