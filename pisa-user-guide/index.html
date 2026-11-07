@@ -2010,6 +2010,11 @@
 <td><code>--list</code> shows all stories with ✅/❌; <code>--check</code> prints a tree with the duration of every acceptance criterion; <code>--check --full</code> runs every story, then a summary table, the line <code>N of M stories accepted</code> and the line <code>Acceptance criteria: G ✅ green, R ❌ red (T in total)</code>; <code>--story</code> needs a value and cannot be combined with <code>--full</code></td>
 <td><a href="#pisa-story"><code>pisa story</code></a></td>
 </tr>
+<tr>
+<td>Acceptance switch in generated projects (<strong>since 0.14.0</strong>)</td>
+<td><code>pisa generate</code> writes the Maven profile <code>ac</code> (Spring) and the npm script <code>test:ac</code> (Hono); acceptance tests (<code>@Acceptance</code> in Java, <code>acceptance("ACn: …", fn)</code> from <code>test/support/acceptance.ts</code> in TypeScript) run only with <code>PISA_ACCEPTANCE=1</code>, i.e. <code>mvn test -Pac</code> or <code>npm run test:ac</code>, and are skipped in <code>mvn test</code> and <code>npm test</code>; one criterion: <code>mvn test -Pac -Dtest=*AC2*</code> or <code>npm run test:ac -- --test-name-pattern "AC2:"</code></td>
+<td><a href="#pisa-story"><code>pisa story</code></a></td>
+</tr>
 </tbody>
 </table>
 <p>With login, every page shows a menu (☰) at the top right of the navigation with the signed-in user, "Change password" and "Sign out" (since 0.9.1). What is marked <strong>since 0.10.0</strong> is released with <code>v0.10.0</code>; <strong>since 0.11.0</strong> with <code>v0.11.0</code>; <strong>since 0.12.0</strong> with <code>v0.12.0</code>; <strong>since 0.13.0</strong> with <code>v0.13.0</code>.</p>
