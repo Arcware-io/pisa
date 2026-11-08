@@ -635,6 +635,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#13-accept-user-stories-optional" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Accept: user stories (optional)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#what-you-have-now" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -902,6 +913,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#13-accept-user-stories-optional" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Accept: user stories (optional)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#what-you-have-now" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -994,6 +1016,7 @@ tutorial follow four phases; each step title names its phase.</p>
 </tr>
 </tbody>
 </table>
+<p>The optional step 13 applies the same method to a <strong>user story</strong> of your application (<code>pisa story</code>: specify, plan, test, implement, check).</p>
 <p>A change is <strong>another round</strong> of the same phases: change the spec, adjust the plan, generate, check (step 8). The specs
 (<code>.adl</code>, <code>.dml</code>, <code>.ui.md</code>, <code>.uc.md</code>) are the source of truth; the code is derived from them.</p>
 <h2 id="0-requirements">0. Requirements<a class="headerlink" href="#0-requirements" title="Permanent link">&para;</a></h2>
@@ -1424,6 +1447,89 @@ git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </
 <p>You should see: in the repository under <em>Actions</em> the run <strong>Deploy</strong>, at Render a new deploy and after a few minutes the application at the address of the service
 (<code>https://&lt;name&gt;.onrender.com/login.html</code>). The first access after sleeping takes about a minute. More about it: User Guide, section 4e ("Cloud: Render").
 Pisa has not yet checked this on a real Render account: whether the service accepts the <code>healthCheckPath</code> is unchecked.</p>
+<h2 id="13-accept-user-stories-optional">13. Accept: user stories (optional)<a class="headerlink" href="#13-accept-user-stories-optional" title="Permanent link">&para;</a></h2>
+<p>This is an extra as well; <code>pisa play</code> <strong>never</strong> plays this step (everything <code>skip</code>). So far you checked the generated application with the tests Pisa writes. A <strong>user story</strong> is the other side: someone who asked for something says when it is done as he asked for it. <code>pisa story</code> works for a story of your application in the same five phases as the specs of Pisa itself (<code>pisa extend</code>), with one folder per story, <code>stories/NNN-&lt;name&gt;/</code>, and one file per phase: <code>01-spec.md</code> (the criteria), <code>02-plan.md</code>, <code>03-test.md</code> (the frozen acceptance tests), <code>04-implement.md</code>, <code>05-check.md</code>. <code>pisa story</code> asks no language model: it creates the files, freezes the tests and runs them.</p>
+<p>The acceptance tests of a story run <strong>only on demand</strong>: <code>npm test</code> does not look into <code>stories/</code>, <code>npm run test:ac</code> runs them (it sets <code>PISA_ACCEPTANCE=1</code>; the script is part of every generated project). You need the dependencies (<code>npm install</code>) as for <code>npm test</code>.</p>
+<p><strong>1. Specify.</strong> The story in your words; Pisa creates <code>01-spec.md</code> with a table of criteria:</p>
+<!-- play: skip -->
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>adressen-hono
+pisa<span class="w"> </span>story<span class="w"> </span>--specify<span class="w"> </span><span class="s2">"A clerk can archive a person"</span>
+</code></pre></div>
+<p>You should see <code>Written: …/stories/001-clerk-archive-person/01-spec.md</code>. Open the file and replace the two example rows by what the clerk expects, in his words (one row per criterion, <code>AC1</code>, <code>AC2</code>, …):</p>
+<div class="highlight"><pre><span></span><code>| ID | Criterion |
+|---|---|
+| AC1 | A clerk sets a person to Archived, and the person is still listed with that status |
+| AC2 | A clerk cannot give a person a status that does not exist; the person stays as it was |
+</code></pre></div>
+<p><strong>2. Plan.</strong> One task per criterion, in <code>02-plan.md</code>:</p>
+<!-- play: skip -->
+<div class="highlight"><pre><span></span><code>pisa<span class="w"> </span>story<span class="w"> </span>--plan
+</code></pre></div>
+<p><strong>3. Test.</strong> One acceptance test per criterion, in <code>stories/001-clerk-archive-person/tests/archive.test.ts</code>. Mark each with <code>acceptance("ACn: …", …)</code> from <code>test/support/acceptance.ts</code> (it skips the test unless <code>PISA_ACCEPTANCE=1</code>); the name starts with the ID of the criterion:</p>
+<div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nx">assert</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">"node:assert/strict"</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">afterEach</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">"node:test"</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">api</span><span class="p">,</span><span class="w"> </span><span class="nx">cleanDatabase</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">"../../../test/support.ts"</span><span class="p">;</span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">acceptance</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">"../../../test/support/acceptance.ts"</span><span class="p">;</span>
+
+<span class="nx">afterEach</span><span class="p">(</span><span class="nx">cleanDatabase</span><span class="p">);</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">person</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">firstName</span><span class="o">:</span><span class="w"> </span><span class="s2">"Anna"</span><span class="p">,</span><span class="w"> </span><span class="nx">lastName</span><span class="o">:</span><span class="w"> </span><span class="s2">"Muster"</span><span class="p">,</span><span class="w"> </span><span class="nx">status</span><span class="o">:</span><span class="w"> </span><span class="s2">"ACTIVE"</span><span class="p">,</span><span class="w"> </span><span class="nx">address</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">street</span><span class="o">:</span><span class="w"> </span><span class="s2">"Bahnhofstrasse 1"</span><span class="p">,</span><span class="w"> </span><span class="nx">zip</span><span class="o">:</span><span class="w"> </span><span class="s2">"8001"</span><span class="p">,</span><span class="w"> </span><span class="nx">city</span><span class="o">:</span><span class="w"> </span><span class="s2">"Zürich"</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">};</span>
+
+<span class="nx">acceptance</span><span class="p">(</span><span class="s2">"AC1: A clerk sets a person to Archived, and the person is still listed with that status"</span><span class="p">,</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">created</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">api</span><span class="p">(</span><span class="s2">"POST"</span><span class="p">,</span><span class="w"> </span><span class="s2">"/api/persons"</span><span class="p">,</span><span class="w"> </span><span class="nb">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">person</span><span class="p">));</span>
+<span class="w">  </span><span class="nx">assert</span><span class="p">.</span><span class="nx">equal</span><span class="p">(</span><span class="nx">created</span><span class="p">.</span><span class="nx">status</span><span class="p">,</span><span class="w"> </span><span class="mf">200</span><span class="p">,</span><span class="w"> </span><span class="nb">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">created</span><span class="p">.</span><span class="nx">json</span><span class="p">));</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">updated</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">api</span><span class="p">(</span><span class="s2">"PUT"</span><span class="p">,</span><span class="w"> </span><span class="sb">`/api/persons/</span><span class="si">${</span><span class="nx">created</span><span class="p">.</span><span class="nx">json</span><span class="p">.</span><span class="nx">id</span><span class="si">}</span><span class="sb">`</span><span class="p">,</span><span class="w"> </span><span class="nb">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span><span class="w"> </span><span class="p">...</span><span class="nx">person</span><span class="p">,</span><span class="w"> </span><span class="nx">status</span><span class="o">:</span><span class="w"> </span><span class="s2">"ARCHIVED"</span><span class="w"> </span><span class="p">}));</span>
+<span class="w">  </span><span class="nx">assert</span><span class="p">.</span><span class="nx">equal</span><span class="p">(</span><span class="nx">updated</span><span class="p">.</span><span class="nx">status</span><span class="p">,</span><span class="w"> </span><span class="mf">200</span><span class="p">,</span><span class="w"> </span><span class="nb">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">updated</span><span class="p">.</span><span class="nx">json</span><span class="p">));</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">list</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">api</span><span class="p">(</span><span class="s2">"GET"</span><span class="p">,</span><span class="w"> </span><span class="s2">"/api/persons"</span><span class="p">);</span>
+<span class="w">  </span><span class="nx">assert</span><span class="p">.</span><span class="nx">equal</span><span class="p">(</span><span class="nx">list</span><span class="p">.</span><span class="nx">json</span><span class="p">.</span><span class="nx">find</span><span class="p">((</span><span class="nx">p</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="w"> </span><span class="p">})</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="nx">p</span><span class="p">.</span><span class="nx">id</span><span class="w"> </span><span class="o">===</span><span class="w"> </span><span class="nx">created</span><span class="p">.</span><span class="nx">json</span><span class="p">.</span><span class="nx">id</span><span class="p">).</span><span class="nx">status</span><span class="p">,</span><span class="w"> </span><span class="s2">"ARCHIVED"</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="nx">acceptance</span><span class="p">(</span><span class="s2">"AC2: A clerk cannot give a person a status that does not exist; the person stays as it was"</span><span class="p">,</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="p">()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">created</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">api</span><span class="p">(</span><span class="s2">"POST"</span><span class="p">,</span><span class="w"> </span><span class="s2">"/api/persons"</span><span class="p">,</span><span class="w"> </span><span class="nb">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">person</span><span class="p">));</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">refused</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">api</span><span class="p">(</span><span class="s2">"PUT"</span><span class="p">,</span><span class="w"> </span><span class="sb">`/api/persons/</span><span class="si">${</span><span class="nx">created</span><span class="p">.</span><span class="nx">json</span><span class="p">.</span><span class="nx">id</span><span class="si">}</span><span class="sb">`</span><span class="p">,</span><span class="w"> </span><span class="nb">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">({</span><span class="w"> </span><span class="p">...</span><span class="nx">person</span><span class="p">,</span><span class="w"> </span><span class="nx">status</span><span class="o">:</span><span class="w"> </span><span class="s2">"GONE"</span><span class="w"> </span><span class="p">}));</span>
+<span class="w">  </span><span class="nx">assert</span><span class="p">.</span><span class="nx">equal</span><span class="p">(</span><span class="nx">refused</span><span class="p">.</span><span class="nx">status</span><span class="p">,</span><span class="w"> </span><span class="mf">400</span><span class="p">);</span>
+<span class="w">  </span><span class="kd">const</span><span class="w"> </span><span class="nx">read</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">api</span><span class="p">(</span><span class="s2">"GET"</span><span class="p">,</span><span class="w"> </span><span class="sb">`/api/persons/</span><span class="si">${</span><span class="nx">created</span><span class="p">.</span><span class="nx">json</span><span class="p">.</span><span class="nx">id</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+<span class="w">  </span><span class="nx">assert</span><span class="p">.</span><span class="nx">equal</span><span class="p">(</span><span class="nx">read</span><span class="p">.</span><span class="nx">json</span><span class="p">.</span><span class="nx">status</span><span class="p">,</span><span class="w"> </span><span class="s2">"ACTIVE"</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div>
+<p>Then freeze them:</p>
+<!-- play: skip -->
+<div class="highlight"><pre><span></span><code>pisa<span class="w"> </span>story<span class="w"> </span>--test
+</code></pre></div>
+<p><code>03-test.md</code> now lists the file with its SHA-256 under "Frozen files". From here on the test must not change: if it does, <code>--check</code> reports it. (Pisa's own <code>pisa extend --test</code> has a language model write the tests and requires them to fail first; <code>pisa story --test</code> takes the tests you wrote.)</p>
+<p><strong>4. Implement.</strong> <code>pisa story --implement</code> writes <code>04-implement.md</code> with the assignment and the open tasks. Here the application already does what the story asks (the generated API accepts every status of the enumeration and refuses others), so there is nothing left to implement; for a story that needs new behavior this is where you, or your coding assistant, work through the plan until the acceptance tests are green.</p>
+<!-- play: skip -->
+<div class="highlight"><pre><span></span><code>pisa<span class="w"> </span>story<span class="w"> </span>--implement
+</code></pre></div>
+<p><strong>5. Check.</strong> Pisa runs the acceptance tests, one criterion at a time (<code>npm run test:ac:story -- --test-name-pattern "AC1:"</code>), and writes <code>05-check.md</code>:</p>
+<!-- play: skip -->
+<div class="highlight"><pre><span></span><code>pisa<span class="w"> </span>story<span class="w"> </span>--check
+</code></pre></div>
+<p>You should see a tree with the duration of every criterion (a terminal shows coloured ☑ and ☒ instead of ✅ and ❌):</p>
+<div class="highlight"><pre><span></span><code>001 | A clerk can archive a person
+  ✅ frozen tests unchanged
+  acceptance
+    ✅ AC1: A clerk sets a person to Archived, and the person is still listed with that status · 2.1 s
+    ✅ AC2: A clerk cannot give a person a status that does not exist; the person stays as it was · 1.8 s
+</code></pre></div>
+<p>The exit code is 0 when every criterion is green, otherwise 1; <code>05-check.md</code> says <code>Converged</code> only then.</p>
+<p><strong>6. All stories at a glance.</strong> <code>--list</code> shows every story with its state, <code>--check --full</code> runs all of them and ends with a summary:</p>
+<!-- play: skip -->
+<div class="highlight"><pre><span></span><code>pisa<span class="w"> </span>story<span class="w"> </span>--list
+pisa<span class="w"> </span>story<span class="w"> </span>--check<span class="w"> </span>--full
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>| Status | Story | Title                        |
+| ------ | ----- | ---------------------------- |
+| ✅      | 001   | A clerk can archive a person |
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>| Story | Title                        | Result | Criteria |
+| ----- | ---------------------------- | ------ | -------- |
+| 001   | A clerk can archive a person | ✅      | 2/2      |
+
+1 of 1 stories accepted
+Acceptance criteria: 2 ✅ green, 0 ❌ red (2 in total)
+</code></pre></div>
+<p><code>--story &lt;NNN&gt;</code> picks one story; <code>--full</code> and <code>--story</code> cannot be combined.</p>
 <h2 id="what-you-have-now">What you have now<a class="headerlink" href="#what-you-have-now" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code>adressen-hono/
   spec/            architecture.md, architecture.adl, domain-spec.md, adressen-hono.dml,
@@ -1432,6 +1538,7 @@ Pisa has not yet checked this on a real Render account: whether the service acce
   prisma/          schema.prisma (written by generate)
   src/ public/ test/   generated code, pages and tests (never change by hand, `generate` rewrites them)
   doc/             user guide and both tutorials
+  stories/         the user stories (only with step 13): 001-…/01-spec.md … 05-check.md, tests/
   .github/workflows/ci.yml   the pipeline (only with step 10), .git (repository, only with step 10)
   Dockerfile, .dockerignore  the image (from the `docker` block); compose.yml (only with step 11)
   render.yml                 the blueprint for Render (only with step 12)
