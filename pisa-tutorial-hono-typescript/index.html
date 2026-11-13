@@ -975,7 +975,7 @@ downloads dependencies.</p>
 </blockquote>
 <p>Steps 2 and 4 call an LLM (two short calls); all other steps run without one. Without an LLM you write the
 two files yourself, as they are shown in the steps.
-At the end there are <strong>optional steps</strong> (10, CI with GitHub Actions; 11, Docker; 12, the cloud); <code>pisa play --fast</code> leaves them out.</p>
+At the end there are <strong>optional steps</strong> (10, CI with GitHub Actions; 11, Docker; 12, the cloud; 13, user stories); <code>pisa play --fast</code> leaves them out.</p>
 <h2 id="the-method-in-four-phases">The method in four phases<a class="headerlink" href="#the-method-in-four-phases" title="Permanent link">&para;</a></h2>
 <p>Pisa works spec-driven, in the manner of <a href="https://github.com/github/spec-kit">GitHub Spec Kit</a>: you describe first, the
 description becomes a checked spec, the code is generated from the specs, and tests check the result. The steps of this
@@ -1017,8 +1017,7 @@ tutorial follow four phases; each step title names its phase.</p>
 </tbody>
 </table>
 <p>The optional step 13 applies the same method to a <strong>user story</strong> of your application (<code>pisa story</code>: specify, plan, test, implement, check).</p>
-<p>A change is <strong>another round</strong> of the same phases: change the spec, adjust the plan, generate, check (step 8). The specs
-(<code>.adl</code>, <code>.dml</code>, <code>.ui.md</code>, <code>.uc.md</code>) are the source of truth; the code is derived from them.</p>
+<p>The specs are ordered in three levels. Steps 2 to 7 build the <strong>base</strong>: the architecture, the domain model, the forms and the use cases, in <code>spec/base/</code>. They are the source of truth; the code is derived from them. Everything that follows is a <strong>feature</strong> with <strong>stories</strong> in <code>spec/features/NNN-&lt;feature&gt;/stories/NNN-&lt;story&gt;/</code>: a change of the application starts as a story (step 8), and its acceptance is checked with <code>pisa story</code>. A change is <strong>another round</strong> of the same phases: change the spec, adjust the plan, generate, check (step 8).</p>
 <h2 id="0-requirements">0. Requirements<a class="headerlink" href="#0-requirements" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
@@ -1054,19 +1053,19 @@ tutorial follow four phases; each step title names its phase.</p>
 <div class="highlight"><pre><span></span><code>mkdir<span class="w"> </span>adressen-hono<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>adressen-hono
 pisa<span class="w"> </span>init
 </code></pre></div>
-<p>You should see: <code>Prepared .: doc/ (the user guide and both tutorials) and spec/.</code> and the hint which tutorial you can read.
+<p>You should see: <code>Prepared .: doc/ (the user guide and both tutorials) and spec/base/.</code> and the hint which tutorial you can read.
 <code>pisa init</code> without arguments creates <strong>no project</strong> yet, only what is the same for every kind of application: the folder <strong><code>doc/</code></strong> with the user guide and both
-tutorials (Spring Boot and Hono) and an empty folder <code>spec/</code>. Which kind of application you want (Java with Spring Boot or TypeScript with Hono) you decide
+tutorials (Spring Boot and Hono) and an empty folder <code>spec/base/</code> for the base specs (the stories come later, into <code>spec/features/</code>). Which kind of application you want (Java with Spring Boot or TypeScript with Hono) you decide
 now, from the tutorials and the description in step 2; a project is created only in step 3. All further commands run in this folder.</p>
 <h2 id="2-specify-describe-the-architecture-and-have-it-proposed">2. Specify: describe the architecture and have it proposed<a class="headerlink" href="#2-specify-describe-the-architecture-and-have-it-proposed" title="Permanent link">&para;</a></h2>
 <!-- play: llm -->
 <div class="highlight"><pre><span></span><code>pisa<span class="w"> </span>propose-architecture<span class="w"> </span>--out<span class="w"> </span>.
 </code></pre></div>
-<p>You should see: <code>Created spec/architecture.md with a starting text - describe the architecture there, …</code>.
-Open <code>spec/architecture.md</code>, <strong>delete the line <code>&lt;!-- pisa:starting-text --&gt;</code></strong> and replace the text with
+<p>You should see: <code>Created spec/base/architecture.md with a starting text - describe the architecture there, …</code>.
+Open <code>spec/base/architecture.md</code>, <strong>delete the line <code>&lt;!-- pisa:starting-text --&gt;</code></strong> and replace the text with
 something like this. <strong>Two places decide that it becomes TypeScript:</strong> the technology (TypeScript, Hono) and the
 embedded database (with TypeScript that is SQLite):</p>
-<!-- play: write spec/architecture.md -->
+<!-- play: write spec/base/architecture.md -->
 <div class="highlight"><pre><span></span><code><span class="gh"># Architecture</span>
 
 Management of people with their address and the companies they work for. It is a
@@ -1087,9 +1086,9 @@ prototype for a demo, the data does not have to survive a restart.
 <div class="highlight"><pre><span></span><code>pisa<span class="w"> </span>propose-architecture<span class="w"> </span>--out<span class="w"> </span>.
 </code></pre></div>
 <p>You should see: the streaming text of the model, at the end <code>Architecture proposal complete:
-spec/architecture.adl</code> and the line <code>Create the project from it: pisa init … --out . --adl …</code>.</p>
-<p>Open <code>spec/architecture.adl</code> and check it:</p>
-<!-- play: write spec/architecture.adl unless-llm -->
+spec/base/architecture.adl</code> and the line <code>Create the project from it: pisa init … --out . --adl …</code>.</p>
+<p>Open <code>spec/base/architecture.adl</code> and check it:</p>
+<!-- play: write spec/base/architecture.adl unless-llm -->
 <div class="highlight"><pre><span></span><code>architecture AdressenHono {
     container db : database { engine sqlite }
     container api : backend {
@@ -1120,9 +1119,9 @@ says), write it by hand into the <code>api</code> container. <code>engine sqlite
 <p><strong>If it does not work:</strong> "ended without an accepted architecture" means the model answered invalidly three times, or not at all through the tool; formulate the description more precisely and repeat. With an
 existing <code>.adl</code> the command does nothing, except with <code>--force</code>.</p>
 <h2 id="3-plan-create-the-project">3. Plan: create the project<a class="headerlink" href="#3-plan-create-the-project" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code>pisa<span class="w"> </span>init<span class="w"> </span>--out<span class="w"> </span>.<span class="w"> </span>--artifact<span class="w"> </span>adressen-hono<span class="w"> </span>--adl<span class="w"> </span>spec/architecture.adl
+<div class="highlight"><pre><span></span><code>pisa<span class="w"> </span>init<span class="w"> </span>--out<span class="w"> </span>.<span class="w"> </span>--artifact<span class="w"> </span>adressen-hono<span class="w"> </span>--adl<span class="w"> </span>spec/base/architecture.adl
 </code></pre></div>
-<p>You should see: <code>Architecture from spec/architecture.adl: style layered, database sqlite.</code> and the list of files
+<p>You should see: <code>Architecture from spec/base/architecture.adl: style layered, database sqlite.</code> and the list of files
 (<code>package.json</code>, <code>tsconfig.json</code>, <code>prisma.config.ts</code>, <code>src/db.ts</code>, <code>src/index.ts</code>, <code>application.yml</code>, …,
 <code>.pisa/architecture.plan.json</code>, <code>Dockerfile</code>, <code>.dockerignore</code>). New are also <code>spec/README.md</code> (a guide to the specs) and <code>README.md</code> with the recipe of the project.
 <code>doc/</code> from step 1 stays as it is. You do not need a <code>--target</code>: Pisa takes the target from <code>runtime hono</code>.</p>
@@ -1130,9 +1129,9 @@ existing <code>.adl</code> the command does nothing, except with <code>--force</
 <!-- play: llm -->
 <div class="highlight"><pre><span></span><code>pisa<span class="w"> </span>propose-model<span class="w"> </span>--out<span class="w"> </span>.
 </code></pre></div>
-<p>You should see: <code>Created spec/domain-spec.md with a starting text - describe the domain model there, …</code>.
-In <code>spec/domain-spec.md</code> delete the marker line again and write:</p>
-<!-- play: write spec/domain-spec.md -->
+<p>You should see: <code>Created spec/base/domain-spec.md with a starting text - describe the domain model there, …</code>.
+In <code>spec/base/domain-spec.md</code> delete the marker line again and write:</p>
+<!-- play: write spec/base/domain-spec.md -->
 <div class="highlight"><pre><span></span><code><span class="gh"># Domain model</span>
 
 A simple address book for a small office. It stores people with
@@ -1153,14 +1152,14 @@ Not wanted: history of the addresses, access rights.
 <!-- play: llm -->
 <div class="highlight"><pre><span></span><code>pisa<span class="w"> </span>propose-model<span class="w"> </span>--out<span class="w"> </span>.
 </code></pre></div>
-<p>You should see: <code>Model proposal complete: spec/adressen-hono.dml</code> (the file name is the project name) and the
-line <code>Check it, then: pisa generate --file spec/adressen-hono.dml --out .</code>.</p>
-<p><strong>Check <code>spec/adressen-hono.dml</code> closely</strong>, this is the most important step: Are all three entities there? Does <code>Person</code>
+<p>You should see: <code>Model proposal complete: spec/base/adressen-hono.dml</code> (the file name is the project name) and the
+line <code>Check it, then: pisa generate --file spec/base/adressen-hono.dml --out .</code>.</p>
+<p><strong>Check <code>spec/base/adressen-hono.dml</code> closely</strong>, this is the most important step: Are all three entities there? Does <code>Person</code>
 have a <code>status</code> as an <code>enum</code>, <code>Address</code> the rule for the postal code (<code>~ "[0-9]{4}"</code>), <code>address</code> on the person as
 <code>composed</code>, <code>employees</code> on the company as <code>mappedBy company</code>? Wishes that the language does not express (here:
 history, rights) stand as <code>// Not covered: …</code> above the first line. The model is a proposal, not the truth:
 change by hand what is not right; the plugin shows errors while you write. For comparison, this is what a fitting model looks like:</p>
-<!-- play: write spec/adressen-hono.dml unless-llm -->
+<!-- play: write spec/base/adressen-hono.dml unless-llm -->
 <div class="highlight"><pre><span></span><code>enum PersonStatus { ACTIVE ("Active"), BLOCKED ("Blocked"), ARCHIVED ("Archived") }
 
 type Plz = String ~ "[0-9]{4}"
@@ -1195,12 +1194,12 @@ entity Company {
 <h2 id="5-plan-derive-forms-and-use-cases-without-an-llm">5. Plan: derive forms and use cases (without an LLM)<a class="headerlink" href="#5-plan-derive-forms-and-use-cases-without-an-llm" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code>pisa<span class="w"> </span>propose-specs<span class="w"> </span>--out<span class="w"> </span>.
 </code></pre></div>
-<p>You should see: <code>Wrote spec/person.ui.md</code>, <code>Wrote spec/company.ui.md</code>, <code>Wrote spec/use-cases.uc.md</code>.
-You can adjust the forms (<code>.ui.md</code>, with a Salt mockup as the layout) and the use cases (one browser test each)
+<p>You should see: <code>Wrote spec/base/person.ui.md</code>, <code>Wrote spec/base/company.ui.md</code>, <code>Wrote spec/base/use-cases.uc.md</code>.
+The forms (<code>.ui.md</code>) hold a Salt mockup in a Bootstrap look (navigation bar, form box with the fields, sample table): <code>generate</code> reads only the form box, the rest is decoration. You can adjust the forms and the use cases (one browser test each)
 later; the command never overwrites existing files. With a login with roles it writes as the <strong>actor</strong> of every use case the role with the
 fewest rights that may do it (creating and deleting companies: <code>ADMIN</code>; changing companies and everything on people: <code>USER</code>), and <code>generate</code> lets the browser test run as that role.</p>
 <h2 id="6-implement-generate-code">6. Implement: generate code<a class="headerlink" href="#6-implement-generate-code" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code>pisa<span class="w"> </span>generate<span class="w"> </span>--file<span class="w"> </span>spec/adressen-hono.dml<span class="w"> </span>--out<span class="w"> </span>.
+<div class="highlight"><pre><span></span><code>pisa<span class="w"> </span>generate<span class="w"> </span>--file<span class="w"> </span>spec/base/adressen-hono.dml<span class="w"> </span>--out<span class="w"> </span>.
 </code></pre></div>
 <p>You should see: <code>Generated hono-prisma files for Person, Address, Company:</code> and the list of generated files
 (models, repositories, services, DTOs, routes, pages, tests) and at the end <code>Recorded step N in .pisa/recipe.json and README.md.</code></p>
@@ -1270,7 +1269,7 @@ npm<span class="w"> </span>run<span class="w"> </span>test:ui<span class="w">   
 temporary folder; your <code>adressen-hono.db</code> stays untouched. The layer test (<code>test/architecture.test.ts</code>) checks
 the imports in <code>src/</code>: route → service → repository, and only <code>src/db.ts</code> knows Prisma.</p>
 <h2 id="7a-optional-restrict-operations-operations">7a. Optional: restrict operations (<code>@operations</code>)<a class="headerlink" href="#7a-optional-restrict-operations-operations" title="Permanent link">&para;</a></h2>
-<p>Every entity allows <strong>all four operations</strong> by default (create, read, change, delete). Whoever wants to block something writes it into the model, with <code>@operations</code> before <code>entity</code>. Example: companies should be created, read and changed, but <strong>not deleted</strong>. Add to <code>spec/adressen-hono.dml</code>:</p>
+<p>Every entity allows <strong>all four operations</strong> by default (create, read, change, delete). Whoever wants to block something writes it into the model, with <code>@operations</code> before <code>entity</code>. Example: companies should be created, read and changed, but <strong>not deleted</strong>. Add to <code>spec/base/adressen-hono.dml</code>:</p>
 <div class="highlight"><pre><span></span><code>@operations(create, read, update)
 entity Company {
     …
@@ -1278,13 +1277,13 @@ entity Company {
 </code></pre></div>
 <p><code>read</code> must always be included (lists and selection fields need it). Without the line everything is allowed; Pisa never blocks anything by itself. Then:</p>
 <!-- play: skip -->
-<div class="highlight"><pre><span></span><code>pisa<span class="w"> </span>generate<span class="w"> </span>--file<span class="w"> </span>spec/adressen-hono.dml<span class="w"> </span>--out<span class="w"> </span>.
+<div class="highlight"><pre><span></span><code>pisa<span class="w"> </span>generate<span class="w"> </span>--file<span class="w"> </span>spec/base/adressen-hono.dml<span class="w"> </span>--out<span class="w"> </span>.
 </code></pre></div>
 <p>You should see: an <strong>abort</strong>, nothing is written:</p>
-<div class="highlight"><pre><span></span><code>UC6 (spec/use-cases.uc.md): Company doesn't allow "delete" (@operations(create, read, update)) but the test line says "delete"
+<div class="highlight"><pre><span></span><code>UC6 (spec/base/use-cases.uc.md): Company doesn't allow "delete" (@operations(create, read, update)) but the test line says "delete"
 Nothing was written. Allow the operation in @operations of the entity or give the role the right in `roles` of the .adl (then `pisa init … --force` and delete security.yml), or change the Test: line or the Actor:, or delete the use case.
 </code></pre></div>
-<p>This is intended: the use case "Delete company" (UC6) asks for something the company no longer allows, a contradiction between two specs. Three ways out: allow <code>delete</code> again, change the <code>Test:</code> line, or (here) drop the use case. In <code>spec/use-cases.uc.md</code> delete the section <code>## UC6 …</code> and in the PlantUML diagram the two lines with <code>UC6</code>, then run <code>pisa generate</code> again. Pisa never deletes files: the old browser test of the use case stays and would fail, delete it by hand (<code>generate</code> names it under <code>Info: browser tests of use cases that are no longer in spec/*.uc.md</code>): <code>test/ui/UC6.spec.ts</code>.</p>
+<p>This is intended: the use case "Delete company" (UC6) asks for something the company no longer allows, a contradiction between two specs. Three ways out: allow <code>delete</code> again, change the <code>Test:</code> line, or (here) drop the use case. In <code>spec/base/use-cases.uc.md</code> delete the section <code>## UC6 …</code> and in the PlantUML diagram the two lines with <code>UC6</code>, then run <code>pisa generate</code> again. Pisa never deletes files: the old browser test of the use case stays and would fail, delete it by hand (<code>generate</code> names it under <code>Info: browser tests of use cases that are no longer in spec/base/*.uc.md</code>): <code>test/ui/UC6.spec.ts</code>.</p>
 <p>Restart the application (<code>npm start</code>) and check:</p>
 <ul>
 <li>The "Companies" page has no delete button any more; creating and changing still work.</li>
@@ -1293,7 +1292,7 @@ Nothing was written. Allow the operation in @operations of the entity or give th
 </ul>
 <p>More about this (names, error messages, effect in both targets, interplay with roles): User Guide, section "Domain model (<code>.dml</code>)", <code>@operations</code>. Change the line to <code>@operations(create, read, update, delete)</code> or delete it if you want to lift the restriction again.</p>
 <h2 id="7b-rights-and-users">7b. Rights and users<a class="headerlink" href="#7b-rights-and-users" title="Permanent link">&para;</a></h2>
-<p>You already switched the login on with the line <code>authentication session</code> in the <code>.adl</code> (details: User Guide, section 4g). For it <code>init</code> wrote <code>security.yml</code> (roles and users), <code>login.html</code> and <code>change-password.html</code>, <code>generate</code> the login files (<code>src/lib/security.ts</code>, <code>test/api/security.test.ts</code>, <code>test/api/roles.test.ts</code>). The <code>.dml</code> and the mockups know no roles: they are not in the domain model. If you write the line only later, <code>init … --force</code> and <code>generate</code> are needed afterwards.</p>
+<p>You already switched the login on with the line <code>authentication session</code> in the <code>.adl</code> (details: User Guide, section "Adding login, users and roles"). For it <code>init</code> wrote <code>security.yml</code> (roles and users), <code>login.html</code> and <code>change-password.html</code>, <code>generate</code> the login files (<code>src/lib/security.ts</code>, <code>test/api/security.test.ts</code>, <code>test/api/roles.test.ts</code>). The <code>.dml</code> and the mockups know no roles: they are not in the domain model. If you write the line only later, <code>init … --force</code> and <code>generate</code> are needed afterwards.</p>
 <ul>
 <li>Sign in with <strong><code>admin</code> / <code>admin</code></strong> (if you have not yet): the "Change password" page appears, where you enter the new password <strong>twice</strong> (at least 8 characters, not the user name). After that <code>ADMIN</code> may do everything the model allows: not even he deletes companies if you did 7a (the rights of a role intersected with <code>@operations</code>). Who is signed in is shown in the hamburger menu (☰) at the top right, with "Change password" and "Sign out".</li>
 <li>Sign out and sign in as <strong><code>user</code> / <code>user</code></strong> (choose a new password again): <code>USER</code> may edit people fully, companies only read and change (block <code>roles</code>, see below). A write access through <code>curl</code> without login answers <strong>401</strong>; signed in but without the right, <strong>403</strong>.</li>
@@ -1310,17 +1309,17 @@ The tests and the use cases follow the <code>.adl</code>: <code>test/api/roles.t
 <p>Your own roles and users: enter them in <code>security.yml</code> (the hash comes from <code>pisa hash-password</code>, which asks for the password twice without echo) and restart the application; no <code>generate</code> is needed. <code>admin/admin</code> and <code>user/user</code> are publicly known, for development only.</p>
 <p><code>npm test</code> signs in in the generated tests as test users (they are in <code>test/security-test.yml</code>, not in your <code>security.yml</code>) and additionally checks 401, 403 and setting the password (<code>test/api/security.test.ts</code>).</p>
 <h2 id="8-the-next-round-carry-through-a-change">8. The next round: carry through a change<a class="headerlink" href="#8-the-next-round-carry-through-a-change" title="Permanent link">&para;</a></h2>
-<p>A change is another round of the phases: <strong>specify</strong> the change in the description or the spec, <strong>plan</strong> (the form must know the new field), <strong>implement</strong> (<code>generate</code>), <strong>check</strong> (the tests). Change the description, not the code. Two ways:</p>
+<p>A change is another round of the phases, and it is a <strong>story</strong>: write down in a sentence what the change must achieve (<code>pisa story --specify "A person can have a title"</code> creates a feature folder in <code>spec/features/</code> with the first story and a table of acceptance criteria; the full course is step 13). Then <strong>specify</strong> the change in the description or the spec, <strong>plan</strong> (the form must know the new field), <strong>implement</strong> (<code>generate</code>), <strong>check</strong> (the tests). Change the description, not the code. Two ways:</p>
 <ul>
-<li><strong>By hand in the model:</strong> add a field in <code>spec/adressen-hono.dml</code>, say <code>title: String(..40)?</code> on <code>Person</code>.
-  <strong>The form must know it too:</strong> <code>spec/person.ui.md</code> is a layout in which every field occurs exactly once;
-  add a row to the mockup, say <code>Title | "title"</code> below the last name. Then
-  <code>pisa generate --file spec/adressen-hono.dml --out .</code> and <code>npm test</code>. The code, the pages and the tests follow.
-  Without the mockup row <code>generate</code> aborts and writes nothing: <code>The Salt mockup in spec/person.ui.md can't be
-  used: … missing "title"</code>. (Alternatively delete <code>spec/person.ui.md</code> and run <code>pisa propose-specs --out .</code> again:
+<li><strong>By hand in the model:</strong> add a field in <code>spec/base/adressen-hono.dml</code>, say <code>title: String(..40)?</code> on <code>Person</code>.
+  <strong>The form must know it too:</strong> <code>spec/base/person.ui.md</code> is a layout in which every field occurs exactly once;
+  add a row to the form box of the mockup, say <code>&lt;b&gt;Title&lt;/b&gt; | "title"</code> (plain <code>Title | "title"</code> reads the same) below the last name. Then
+  <code>pisa generate --file spec/base/adressen-hono.dml --out .</code> and <code>npm test</code>. The code, the pages and the tests follow.
+  Without the mockup row <code>generate</code> aborts and writes nothing: <code>The Salt mockup in spec/base/person.ui.md can't be
+  used: … missing "title"</code>. (Alternatively delete <code>spec/base/person.ui.md</code> and run <code>pisa propose-specs --out .</code> again:
   the default mockup contains all fields.)</li>
 <li><strong>Have it proposed anew:</strong> change <code>domain-spec.md</code> and <code>pisa propose-model --out . --force</code> (overwrites
-  <code>spec/adressen-hono.dml</code>, so your manual changes there).</li>
+  <code>spec/base/adressen-hono.dml</code>, so your manual changes there).</li>
 </ul>
 <h2 id="9-check-reproduce">9. Check: reproduce<a class="headerlink" href="#9-check-reproduce" title="Permanent link">&para;</a></h2>
 <!-- play: slow -->
@@ -1330,20 +1329,20 @@ pisa<span class="w"> </span>replay<span class="w"> </span>--from<span class="w">
 <p>You should see: <code>… All N generated file(s) match the hashes recorded in the recipe.</code> Pisa runs the
 recorded steps (<code>init</code>, <code>generate</code>) again in a new folder and compares files with the
 checksums in the recipe (<code>adressen-hono/.pisa/recipe.json</code>). The LLM steps are not repeated: their result
-(<code>spec/architecture.adl</code>, <code>spec/adressen-hono.dml</code>) is copied from the source project.</p>
+(<code>spec/base/architecture.adl</code>, <code>spec/base/adressen-hono.dml</code>) is copied from the source project.</p>
 <h2 id="10-optional-build-and-test-on-every-push-ci">10. Optional: build and test on every push (CI)<a class="headerlink" href="#10-optional-build-and-test-on-every-push-ci" title="Permanent link">&para;</a></h2>
 <p>This is an extra; you need it for nothing else. If GitHub should build the project on every push and run the tests
-(GitHub Actions), add the <code>pipeline</code> block to <code>spec/architecture.adl</code> before the last bracket and apply the <code>.adl</code> again:</p>
+(GitHub Actions), add the <code>pipeline</code> block to <code>spec/base/architecture.adl</code> before the last bracket and apply the <code>.adl</code> again:</p>
 <div class="highlight"><pre><span></span><code>    pipeline {
         ci github
     }
 </code></pre></div>
-<p>The commands do both instead of you (replace the last line of the <code>.adl</code>, then <code>init --force</code>). Run the <strong>whole</strong> block: <code>pisa init … --force</code> alone changes nothing as long as the <code>pipeline</code> block is not in <code>spec/architecture.adl</code>, and without it Pisa creates neither a repository nor a commit.</p>
+<p>The commands do both instead of you (replace the last line of the <code>.adl</code>, then <code>init --force</code>). Run the <strong>whole</strong> block: <code>pisa init … --force</code> alone changes nothing as long as the <code>pipeline</code> block is not in <code>spec/base/architecture.adl</code>, and without it Pisa creates neither a repository nor a commit.</p>
 <!-- play: optional -->
 <div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>adressen-hono
-sed<span class="w"> </span>-i.bak<span class="w"> </span><span class="s1">'$ d'</span><span class="w"> </span>spec/architecture.adl<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>rm<span class="w"> </span>spec/architecture.adl.bak
-<span class="nb">printf</span><span class="w"> </span><span class="s1">'    pipeline {\n        ci github\n    }\n}\n'</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>spec/architecture.adl
-pisa<span class="w"> </span>init<span class="w"> </span>--out<span class="w"> </span>.<span class="w"> </span>--artifact<span class="w"> </span>adressen-hono<span class="w"> </span>--adl<span class="w"> </span>spec/architecture.adl<span class="w"> </span>--force
+sed<span class="w"> </span>-i.bak<span class="w"> </span><span class="s1">'$ d'</span><span class="w"> </span>spec/base/architecture.adl<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>rm<span class="w"> </span>spec/base/architecture.adl.bak
+<span class="nb">printf</span><span class="w"> </span><span class="s1">'    pipeline {\n        ci github\n    }\n}\n'</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>spec/base/architecture.adl
+pisa<span class="w"> </span>init<span class="w"> </span>--out<span class="w"> </span>.<span class="w"> </span>--artifact<span class="w"> </span>adressen-hono<span class="w"> </span>--adl<span class="w"> </span>spec/base/architecture.adl<span class="w"> </span>--force
 </code></pre></div>
 <p>You should see: the new file <code>.github/workflows/ci.yml</code> in the list and <code>Git repository created, first commit made (branch main …)</code>.
 Pisa creates the repository and makes the first commit (<code>Initial project (pisa init)</code>), local only; it does not know your GitHub account,
@@ -1355,7 +1354,7 @@ GitHub CLI <code>gh</code>, once <code>gh auth login</code>):</p>
 </code></pre></div>
 <p><strong>Pisa made no repository or no commit.</strong> These are the four cases:</p>
 <ul>
-<li>The <code>pipeline</code> block is missing in <code>spec/architecture.adl</code> (only the last line was run): <strong>neither repository nor commit</strong>.</li>
+<li>The <code>pipeline</code> block is missing in <code>spec/base/architecture.adl</code> (only the last line was run): <strong>neither repository nor commit</strong>.</li>
 <li><code>pisa play --fast</code> left out the whole step: <strong>neither repository nor commit</strong>.</li>
 <li>The folder is already in a Git repository: Pisa does not touch it, it makes <strong>no</strong> commit.</li>
 <li>Name and e-mail are missing in your Git configuration: the repository is there, but <strong>no commit</strong>.</li>
@@ -1374,7 +1373,7 @@ git<span class="w"> </span>push<span class="w"> </span>-u<span class="w"> </span
 </code></pre></div>
 <p>After that the pipeline runs on GitHub (tab "Actions"): the job <code>tests</code> and the job <code>browser-tests</code>. The file is yours,
 even <code>init --force</code> does not overwrite it. Pisa has not yet checked it on a real GitHub run; if a job turns red, that
-is a finding for Pisa. More about it: User Guide, section 4e (<code>pipeline</code>). <code>pisa play --fast</code> leaves this step out.</p>
+is a finding for Pisa. More about it: User Guide, section "GitHub CI and releases". <code>pisa play --fast</code> leaves this step out.</p>
 <h2 id="11-optional-try-it-with-docker-and-the-real-database">11. Optional: try it with Docker and the real database<a class="headerlink" href="#11-optional-try-it-with-docker-and-the-real-database" title="Permanent link">&para;</a></h2>
 <p>This is an extra as well. So far everything runs on SQLite in a file. The <code>Dockerfile</code> from step 3 is already there; with Docker you can build the
 application as an image and run it against a <strong>real PostgreSQL</strong>, much like later in the cloud. You need it for nothing else.
@@ -1387,13 +1386,13 @@ hint), so <code>-p 8080:8080</code> belongs in the command, otherwise you cannot
 docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>--name<span class="w"> </span>adressen-hono<span class="w"> </span>-p<span class="w"> </span><span class="m">8080</span>:8080<span class="w"> </span>-v<span class="w"> </span>adressen-hono-data:/data<span class="w"> </span>adressen-hono
 </code></pre></div>
 <p>You should see: the application at http://localhost:8080/login.html (SQLite in the container; users <code>admin/admin</code> and <code>user/user</code>, the chosen password is in the SQLite file in the volume <code>adressen-hono-data</code> and stays). Stop with Ctrl-C.</p>
-<p><strong>2. Switch to PostgreSQL.</strong> In <code>spec/architecture.adl</code> replace the line <code>engine sqlite</code> by <code>engine postgresql</code>, apply the <code>.adl</code> again and
+<p><strong>2. Switch to PostgreSQL.</strong> In <code>spec/base/architecture.adl</code> replace the line <code>engine sqlite</code> by <code>engine postgresql</code>, apply the <code>.adl</code> again and
 generate the code again (<code>generate</code> rewrites the Prisma schema). With PostgreSQL Pisa writes the <code>compose.yml</code> with the application (<code>app</code>) and
 the database (<code>db</code>) even without the line <code>compose</code> in the <code>docker</code> block.</p>
 <!-- play: skip -->
-<div class="highlight"><pre><span></span><code>sed<span class="w"> </span>-i.bak<span class="w"> </span><span class="s1">'s/engine sqlite/engine postgresql/'</span><span class="w"> </span>spec/architecture.adl<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>rm<span class="w"> </span>spec/architecture.adl.bak
-pisa<span class="w"> </span>init<span class="w"> </span>--out<span class="w"> </span>.<span class="w"> </span>--artifact<span class="w"> </span>adressen-hono<span class="w"> </span>--adl<span class="w"> </span>spec/architecture.adl<span class="w"> </span>--force
-pisa<span class="w"> </span>generate<span class="w"> </span>--file<span class="w"> </span>spec/adressen-hono.dml<span class="w"> </span>--out<span class="w"> </span>.
+<div class="highlight"><pre><span></span><code>sed<span class="w"> </span>-i.bak<span class="w"> </span><span class="s1">'s/engine sqlite/engine postgresql/'</span><span class="w"> </span>spec/base/architecture.adl<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>rm<span class="w"> </span>spec/base/architecture.adl.bak
+pisa<span class="w"> </span>init<span class="w"> </span>--out<span class="w"> </span>.<span class="w"> </span>--artifact<span class="w"> </span>adressen-hono<span class="w"> </span>--adl<span class="w"> </span>spec/base/architecture.adl<span class="w"> </span>--force
+pisa<span class="w"> </span>generate<span class="w"> </span>--file<span class="w"> </span>spec/base/adressen-hono.dml<span class="w"> </span>--out<span class="w"> </span>.
 </code></pre></div>
 <p><strong>3. Start the application and the database.</strong></p>
 <!-- play: skip -->
@@ -1421,7 +1420,7 @@ npm<span class="w"> </span><span class="nb">test</span>
 <p>This is an extra as well and needs a GitHub repository (step 10) and an account at <a href="https://render.com">Render</a>. Render runs the application's Docker image
 on a <strong>free web service</strong>: it sleeps after 15 minutes without requests (waking up takes about a minute) and has no persistent
 disk, <code>SQLite</code> and the chosen passwords are gone after every restart. Render's free PostgreSQL expires after 30 days: if you did step 11,
-set <code>engine postgresql</code> in <code>spec/architecture.adl</code> back to <code>engine sqlite</code>. <code>pisa play</code> <strong>never</strong> plays this step (everything <code>skip</code>).</p>
+set <code>engine postgresql</code> in <code>spec/base/architecture.adl</code> back to <code>engine sqlite</code>. <code>pisa play</code> <strong>never</strong> plays this step (everything <code>skip</code>).</p>
 <p><strong>1. The lines in the <code>.adl</code>.</strong> The <code>pipeline</code> block (step 10) gets <code>release github</code> and <code>deploy render</code>; <code>deploy</code> needs the <code>docker</code> block, which you already have
 (step 2). If you skipped step 10, write the whole block before the last bracket:</p>
 <div class="highlight"><pre><span></span><code>    pipeline {
@@ -1432,7 +1431,7 @@ set <code>engine postgresql</code> in <code>spec/architecture.adl</code> back to
 </code></pre></div>
 <p>Then apply the <code>.adl</code> again (<code>render.yml</code> and <code>.github/workflows/cd.yml</code> are created, once, after that they are yours):</p>
 <!-- play: skip -->
-<div class="highlight"><pre><span></span><code>pisa<span class="w"> </span>init<span class="w"> </span>--out<span class="w"> </span>.<span class="w"> </span>--artifact<span class="w"> </span>adressen-hono<span class="w"> </span>--adl<span class="w"> </span>spec/architecture.adl<span class="w"> </span>--force
+<div class="highlight"><pre><span></span><code>pisa<span class="w"> </span>init<span class="w"> </span>--out<span class="w"> </span>.<span class="w"> </span>--artifact<span class="w"> </span>adressen-hono<span class="w"> </span>--adl<span class="w"> </span>spec/base/architecture.adl<span class="w"> </span>--force
 </code></pre></div>
 <p>You should see: <code>render.yml</code> and <code>.github/workflows/cd.yml</code> in the list and <code>Deploy to Render: the comments at the top of render.yml say how</code>.</p>
 <p><strong>2. Set up at Render (in the browser).</strong> Push the project to GitHub (step 10). On dashboard.render.com <strong>New ▸ Blueprint</strong>, pick the repository and enter <code>render.yml</code> in the field
@@ -1445,17 +1444,17 @@ git<span class="w"> </span>tag<span class="w"> </span>v0.1.0
 git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>main<span class="w"> </span>v0.1.0
 </code></pre></div>
 <p>You should see: in the repository under <em>Actions</em> the run <strong>Deploy</strong>, at Render a new deploy and after a few minutes the application at the address of the service
-(<code>https://&lt;name&gt;.onrender.com/login.html</code>). The first access after sleeping takes about a minute. More about it: User Guide, section 4e ("Cloud: Render").
+(<code>https://&lt;name&gt;.onrender.com/login.html</code>). The first access after sleeping takes about a minute. More about it: User Guide, section "Deploying to Render".
 Pisa has not yet checked this on a real Render account: whether the service accepts the <code>healthCheckPath</code> is unchecked.</p>
 <h2 id="13-accept-user-stories-optional">13. Accept: user stories (optional)<a class="headerlink" href="#13-accept-user-stories-optional" title="Permanent link">&para;</a></h2>
-<p>This is an extra as well; <code>pisa play</code> <strong>never</strong> plays this step (everything <code>skip</code>). So far you checked the generated application with the tests Pisa writes. A <strong>user story</strong> is the other side: someone who asked for something says when it is done as he asked for it. <code>pisa story</code> works for a story of your application in the same five phases as the specs of Pisa itself (<code>pisa extend</code>), with one folder per story, <code>stories/NNN-&lt;name&gt;/</code>, and one file per phase: <code>01-spec.md</code> (the criteria), <code>02-plan.md</code>, <code>03-test.md</code> (the frozen acceptance tests), <code>04-implement.md</code>, <code>05-check.md</code>. <code>pisa story</code> asks no language model: it creates the files, freezes the tests and runs them.</p>
-<p>The acceptance tests of a story run <strong>only on demand</strong>: <code>npm test</code> does not look into <code>stories/</code>, <code>npm run test:ac</code> runs them (it sets <code>PISA_ACCEPTANCE=1</code>; the script is part of every generated project). You need the dependencies (<code>npm install</code>) as for <code>npm test</code>.</p>
+<p>This is an extra as well; <code>pisa play</code> <strong>never</strong> plays this step (everything <code>skip</code>). So far you checked the generated application with the tests Pisa writes. A <strong>user story</strong> is the other side: someone who asked for something says when it is done as he asked for it. <code>pisa story</code> works for a story of your application in the same five phases as the specs of Pisa itself (<code>pisa extend</code>), with one folder per story, <code>spec/features/NNN-&lt;feature&gt;/stories/NNN-&lt;story&gt;/</code> (a feature is a folder with <code>feature.md</code> and its stories, here one feature with one story), and one file per phase: <code>01-spec.md</code> (the criteria), <code>02-plan.md</code>, <code>03-test.md</code> (the frozen acceptance tests), <code>04-implement.md</code>, <code>05-check.md</code>. <code>pisa story</code> asks no language model: it creates the files, freezes the tests and runs them.</p>
+<p>The acceptance tests of a story run <strong>only on demand</strong>: <code>npm test</code> does not look into the folder <code>stories/</code> (the tests of the stories live there, outside <code>spec/</code>), <code>npm run test:ac</code> runs them (it sets <code>PISA_ACCEPTANCE=1</code>; the script is part of every generated project). You need the dependencies (<code>npm install</code>) as for <code>npm test</code>.</p>
 <p><strong>1. Specify.</strong> The story in your words; Pisa creates <code>01-spec.md</code> with a table of criteria:</p>
 <!-- play: skip -->
 <div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>adressen-hono
 pisa<span class="w"> </span>story<span class="w"> </span>--specify<span class="w"> </span><span class="s2">"A clerk can archive a person"</span>
 </code></pre></div>
-<p>You should see <code>Written: …/stories/001-clerk-archive-person/01-spec.md</code>. Open the file and replace the two example rows by what the clerk expects, in his words (one row per criterion, <code>AC1</code>, <code>AC2</code>, …):</p>
+<p>You should see <code>Written: …/spec/features/001-clerk-archive-person/stories/001-clerk-archive-person/01-spec.md</code> (and <code>feature.md</code> next to <code>stories/</code>). Open the file and replace the two example rows by what the clerk expects, in his words (one row per criterion, <code>AC1</code>, <code>AC2</code>, …):</p>
 <div class="highlight"><pre><span></span><code>| ID | Criterion |
 |---|---|
 | AC1 | A clerk sets a person to Archived, and the person is still listed with that status |
@@ -1506,7 +1505,7 @@ pisa<span class="w"> </span>story<span class="w"> </span>--specify<span class="w
 <div class="highlight"><pre><span></span><code>pisa<span class="w"> </span>story<span class="w"> </span>--check
 </code></pre></div>
 <p>You should see a tree with the duration of every criterion (a terminal shows coloured ☑ and ☒ instead of ✅ and ❌):</p>
-<div class="highlight"><pre><span></span><code>001 | A clerk can archive a person
+<div class="highlight"><pre><span></span><code>001/001 | A clerk can archive a person
   ✅ frozen tests unchanged
   acceptance
     ✅ AC1: A clerk sets a person to Archived, and the person is still listed with that status · 2.1 s
@@ -1518,27 +1517,28 @@ pisa<span class="w"> </span>story<span class="w"> </span>--specify<span class="w
 <div class="highlight"><pre><span></span><code>pisa<span class="w"> </span>story<span class="w"> </span>--list
 pisa<span class="w"> </span>story<span class="w"> </span>--check<span class="w"> </span>--full
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>| Status | Story | Title                        |
-| ------ | ----- | ---------------------------- |
-| ✅      | 001   | A clerk can archive a person |
+<div class="highlight"><pre><span></span><code>| Status | Story   | Title                        |
+| ------ | ------- | ---------------------------- |
+| ✅      | 001/001 | A clerk can archive a person |
 </code></pre></div>
-<div class="highlight"><pre><span></span><code>| Story | Title                        | Result | Criteria |
-| ----- | ---------------------------- | ------ | -------- |
-| 001   | A clerk can archive a person | ✅      | 2/2      |
+<div class="highlight"><pre><span></span><code>| Story   | Title                        | Result | Criteria |
+| ------- | ---------------------------- | ------ | -------- |
+| 001/001 | A clerk can archive a person | ✅      | 2/2      |
 
 1 of 1 stories accepted
 Acceptance criteria: 2 ✅ green, 0 ❌ red (2 in total)
 </code></pre></div>
-<p><code>--story &lt;NNN&gt;</code> picks one story; <code>--full</code> and <code>--story</code> cannot be combined.</p>
+<p><code>--feature &lt;NNN&gt; --story &lt;NNN&gt;</code> picks one story (<code>--story</code> alone is enough while the story number is unique); <code>pisa story --specify "…" --feature 1</code> adds a further story to feature 001; <code>--full</code> and <code>--story</code> cannot be combined.</p>
 <h2 id="what-you-have-now">What you have now<a class="headerlink" href="#what-you-have-now" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code>adressen-hono/
-  spec/            architecture.md, architecture.adl, domain-spec.md, adressen-hono.dml,
+  spec/base/       architecture.md, architecture.adl, domain-spec.md, adressen-hono.dml,
                    person.ui.md, company.ui.md, use-cases.uc.md, domain-model.puml/.md
   .pisa/           recipe.json (the recipe), architecture.plan.json (the plan, derived from the .adl)
   prisma/          schema.prisma (written by generate)
   src/ public/ test/   generated code, pages and tests (never change by hand, `generate` rewrites them)
   doc/             user guide and both tutorials
-  stories/         the user stories (only with step 13): 001-…/01-spec.md … 05-check.md, tests/
+  spec/features/   the user stories (only with step 13): NNN-&lt;feature&gt;/feature.md and stories/NNN-&lt;story&gt;/01-spec.md … 05-check.md
+  stories/         the acceptance tests of the stories (only with step 13): NNN-&lt;feature&gt;/tests/
   .github/workflows/ci.yml   the pipeline (only with step 10), .git (repository, only with step 10)
   Dockerfile, .dockerignore  the image (from the `docker` block); compose.yml (only with step 11)
   render.yml                 the blueprint for Render (only with step 12)
@@ -1568,7 +1568,7 @@ of truth, the code is derivable from them. The same specs give a Java project wi
 <td>The model did not answer validly through the tool; make the description more precise, repeat.</td>
 </tr>
 <tr>
-<td><code>The Salt mockup in spec/&lt;entity&gt;.ui.md can't be used: … missing "x"</code></td>
+<td><code>The Salt mockup in spec/base/&lt;entity&gt;.ui.md can't be used: … missing "x"</code></td>
 <td>A field in the <code>.dml</code> is missing in the mockup (or the other way round). Insert a line <code>Label \| "x"</code> into the mockup, <code>generate</code> writes nothing beforehand.</td>
 </tr>
 <tr>
@@ -1576,8 +1576,8 @@ of truth, the code is derivable from them. The same specs give a Java project wi
 <td>The model uses a relation that the TypeScript target cannot do. Adjust the model.</td>
 </tr>
 <tr>
-<td><code>spec/architecture.adl no longer matches the project: style: …</code></td>
-<td>The <code>.adl</code> was changed after <code>init</code>. <code>init --out . --artifact &lt;name&gt; --adl spec/architecture.adl --force</code>, then <code>generate</code>; <strong>give <code>--artifact</code> again</strong>, otherwise Pisa takes the name of the folder.</td>
+<td><code>spec/base/architecture.adl no longer matches the project: style: …</code></td>
+<td>The <code>.adl</code> was changed after <code>init</code>. <code>init --out . --artifact &lt;name&gt; --adl spec/base/architecture.adl --force</code>, then <code>generate</code>; <strong>give <code>--artifact</code> again</strong>, otherwise Pisa takes the name of the folder.</td>
 </tr>
 <tr>
 <td>Back from <code>layered</code> to <code>crud</code>: files in <code>src/service</code>, <code>src/dto</code>, <code>src/mapper</code> stay</td>

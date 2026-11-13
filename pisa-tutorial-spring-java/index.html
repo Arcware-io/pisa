@@ -607,6 +607,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#13-accept-user-stories-optional" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Accept: user stories (optional)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#what-you-have-now" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -902,6 +913,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#13-accept-user-stories-optional" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Accept: user stories (optional)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#what-you-have-now" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -953,7 +975,7 @@ first Maven run downloads dependencies.</p>
 </blockquote>
 <p>Steps 2 and 4 call an LLM (two short calls); all other steps run without one. Without an LLM you write the
 two files yourself, as they are shown in the steps.
-At the end there are <strong>optional steps</strong> (10, CI with GitHub Actions; 11, Docker; 12, the cloud); <code>pisa play --fast</code> leaves them out.</p>
+At the end there are <strong>optional steps</strong> (10, CI with GitHub Actions; 11, Docker; 12, the cloud; 13, user stories); <code>pisa play --fast</code> leaves them out.</p>
 <h2 id="the-method-in-four-phases">The method in four phases<a class="headerlink" href="#the-method-in-four-phases" title="Permanent link">&para;</a></h2>
 <p>Pisa works spec-driven, in the manner of <a href="https://github.com/github/spec-kit">GitHub Spec Kit</a>: you describe first, the
 description becomes a checked spec, the code is generated from the specs, and tests check the result. The steps of this
@@ -994,8 +1016,7 @@ tutorial follow four phases; each step title names its phase.</p>
 </tr>
 </tbody>
 </table>
-<p>A change is <strong>another round</strong> of the same phases: change the spec, adjust the plan, generate, check (step 8). The specs
-(<code>.adl</code>, <code>.dml</code>, <code>.ui.md</code>, <code>.uc.md</code>) are the source of truth; the code is derived from them.</p>
+<p>The specs are ordered in three levels. Steps 2 to 7 build the <strong>base</strong>: the architecture, the domain model, the forms and the use cases, in <code>spec/base/</code>. They are the source of truth; the code is derived from them. Everything that follows is a <strong>feature</strong> with <strong>stories</strong> in <code>spec/features/NNN-&lt;feature&gt;/stories/NNN-&lt;story&gt;/</code>: a change of the application starts as a story (step 8), and its acceptance is checked with <code>pisa story</code>. A change is <strong>another round</strong> of the same phases: change the spec, adjust the plan, generate, check (step 8).</p>
 <h2 id="0-requirements">0. Requirements<a class="headerlink" href="#0-requirements" title="Permanent link">&para;</a></h2>
 <table>
 <thead>
@@ -1027,18 +1048,18 @@ tutorial follow four phases; each step title names its phase.</p>
 <div class="highlight"><pre><span></span><code>mkdir<span class="w"> </span>adressen-spring<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>adressen-spring
 pisa<span class="w"> </span>init
 </code></pre></div>
-<p>You should see: <code>Prepared .: doc/ (the user guide and both tutorials) and spec/.</code> and the hint which tutorial you can read.
+<p>You should see: <code>Prepared .: doc/ (the user guide and both tutorials) and spec/base/.</code> and the hint which tutorial you can read.
 <code>pisa init</code> without arguments creates <strong>no project</strong> yet, only what is the same for every kind of application: the folder <strong><code>doc/</code></strong> with the user guide and both
-tutorials (Spring Boot and Hono) and an empty folder <code>spec/</code>. Which kind of application you want (Java with Spring Boot or TypeScript with Hono) you decide
+tutorials (Spring Boot and Hono) and an empty folder <code>spec/base/</code> for the base specs (the stories come later, into <code>spec/features/</code>). Which kind of application you want (Java with Spring Boot or TypeScript with Hono) you decide
 now, from the tutorials and the description in step 2; a project is created only in step 3. All further commands run in this folder.</p>
 <h2 id="2-specify-describe-the-architecture-and-have-it-proposed">2. Specify: describe the architecture and have it proposed<a class="headerlink" href="#2-specify-describe-the-architecture-and-have-it-proposed" title="Permanent link">&para;</a></h2>
 <!-- play: llm -->
 <div class="highlight"><pre><span></span><code>pisa<span class="w"> </span>propose-architecture<span class="w"> </span>--out<span class="w"> </span>.
 </code></pre></div>
-<p>You should see: <code>Created spec/architecture.md with a starting text - describe the architecture there, …</code>.
-Open <code>spec/architecture.md</code>, <strong>delete the line <code>&lt;!-- pisa:starting-text --&gt;</code></strong> and replace the text with
+<p>You should see: <code>Created spec/base/architecture.md with a starting text - describe the architecture there, …</code>.
+Open <code>spec/base/architecture.md</code>, <strong>delete the line <code>&lt;!-- pisa:starting-text --&gt;</code></strong> and replace the text with
 something like this:</p>
-<!-- play: write spec/architecture.md -->
+<!-- play: write spec/base/architecture.md -->
 <div class="highlight"><pre><span></span><code><span class="gh"># Architecture</span>
 
 Management of people with their address and the companies they work for. It is a
@@ -1060,9 +1081,9 @@ prototype for a demo, the data does not have to survive a restart.
 <div class="highlight"><pre><span></span><code>pisa<span class="w"> </span>propose-architecture<span class="w"> </span>--out<span class="w"> </span>.
 </code></pre></div>
 <p>You should see: the streaming text of the model, at the end <code>Architecture proposal complete:
-spec/architecture.adl</code> and the line <code>Create the project from it: pisa init --target spring-boot --out . --adl …</code>.</p>
-<p>Open <code>spec/architecture.adl</code> and check it:</p>
-<!-- play: write spec/architecture.adl unless-llm -->
+spec/base/architecture.adl</code> and the line <code>Create the project from it: pisa init --target spring-boot --out . --adl …</code>.</p>
+<p>Open <code>spec/base/architecture.adl</code> and check it:</p>
+<!-- play: write spec/base/architecture.adl unless-llm -->
 <div class="highlight"><pre><span></span><code>architecture AdressenSpring {
     container db : database { engine h2 }
     container api : backend {
@@ -1089,9 +1110,9 @@ If something is wrong, change the file by hand: it is yours from now on.</p>
 <p><strong>If it does not work:</strong> "ended without an accepted architecture" means the model answered invalidly three times, or not at all through the tool; formulate the description more precisely and repeat. With an
 existing <code>.adl</code> the command does nothing, except with <code>--force</code>.</p>
 <h2 id="3-plan-create-the-project">3. Plan: create the project<a class="headerlink" href="#3-plan-create-the-project" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code>pisa<span class="w"> </span>init<span class="w"> </span>--target<span class="w"> </span>spring-boot<span class="w"> </span>--out<span class="w"> </span>.<span class="w"> </span>--group<span class="w"> </span>ch.example<span class="w"> </span>--artifact<span class="w"> </span>adressen-spring<span class="w"> </span>--adl<span class="w"> </span>spec/architecture.adl
+<div class="highlight"><pre><span></span><code>pisa<span class="w"> </span>init<span class="w"> </span>--target<span class="w"> </span>spring-boot<span class="w"> </span>--out<span class="w"> </span>.<span class="w"> </span>--group<span class="w"> </span>ch.example<span class="w"> </span>--artifact<span class="w"> </span>adressen-spring<span class="w"> </span>--adl<span class="w"> </span>spec/base/architecture.adl
 </code></pre></div>
-<p>You should see: <code>Architecture from spec/architecture.adl: style layered, database h2, package
+<p>You should see: <code>Architecture from spec/base/architecture.adl: style layered, database h2, package
 ch.example.adressen.</code> and the list of files (<code>pom.xml</code>, <code>AdressenSpringApplication.java</code>, <code>application.yml</code>, …,
 <code>.pisa/architecture.plan.json</code>, <code>Dockerfile</code>, <code>.dockerignore</code>). New are also <code>spec/README.md</code> (a guide to the specs) and <code>README.md</code>
 with the recipe of the project. <code>doc/</code> from step 1 stays as it is.</p>
@@ -1099,9 +1120,9 @@ with the recipe of the project. <code>doc/</code> from step 1 stays as it is.</p
 <!-- play: llm -->
 <div class="highlight"><pre><span></span><code>pisa<span class="w"> </span>propose-model<span class="w"> </span>--out<span class="w"> </span>.
 </code></pre></div>
-<p>You should see: <code>Created spec/domain-spec.md with a starting text - describe the domain model there, …</code>.
-In <code>spec/domain-spec.md</code> delete the marker line again and write:</p>
-<!-- play: write spec/domain-spec.md -->
+<p>You should see: <code>Created spec/base/domain-spec.md with a starting text - describe the domain model there, …</code>.
+In <code>spec/base/domain-spec.md</code> delete the marker line again and write:</p>
+<!-- play: write spec/base/domain-spec.md -->
 <div class="highlight"><pre><span></span><code><span class="gh"># Domain model</span>
 
 A simple address book for a small office. It stores people with
@@ -1122,14 +1143,14 @@ Not wanted: history of the addresses, access rights.
 <!-- play: llm -->
 <div class="highlight"><pre><span></span><code>pisa<span class="w"> </span>propose-model<span class="w"> </span>--out<span class="w"> </span>.
 </code></pre></div>
-<p>You should see: <code>Model proposal complete: spec/adressen-spring.dml</code> (the file name is the project name) and the
-line <code>Check it, then: pisa generate --file spec/adressen-spring.dml --out .</code>.</p>
-<p><strong>Check <code>spec/adressen-spring.dml</code> closely</strong>, this is the most important step: Are all three entities there? Does <code>Person</code>
+<p>You should see: <code>Model proposal complete: spec/base/adressen-spring.dml</code> (the file name is the project name) and the
+line <code>Check it, then: pisa generate --file spec/base/adressen-spring.dml --out .</code>.</p>
+<p><strong>Check <code>spec/base/adressen-spring.dml</code> closely</strong>, this is the most important step: Are all three entities there? Does <code>Person</code>
 have a <code>status</code> as an <code>enum</code>, <code>Address</code> the rule for the postal code (<code>~ "[0-9]{4}"</code>), <code>address</code> on the person as
 <code>composed</code>, <code>employees</code> on the company as <code>mappedBy company</code>? Wishes that the language does not express (here:
 history, rights) stand as <code>// Not covered: …</code> above the first line. The model is a proposal, not the truth:
 change by hand what is not right; the plugin shows errors while you write. For comparison, this is what a fitting model looks like:</p>
-<!-- play: write spec/adressen-spring.dml unless-llm -->
+<!-- play: write spec/base/adressen-spring.dml unless-llm -->
 <div class="highlight"><pre><span></span><code>enum PersonStatus { ACTIVE ("Active"), BLOCKED ("Blocked"), ARCHIVED ("Archived") }
 
 type Plz = String ~ "[0-9]{4}"
@@ -1162,12 +1183,12 @@ entity Company {
 <h2 id="5-plan-derive-forms-and-use-cases-without-an-llm">5. Plan: derive forms and use cases (without an LLM)<a class="headerlink" href="#5-plan-derive-forms-and-use-cases-without-an-llm" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code>pisa<span class="w"> </span>propose-specs<span class="w"> </span>--out<span class="w"> </span>.
 </code></pre></div>
-<p>You should see: <code>Wrote spec/person.ui.md</code>, <code>Wrote spec/company.ui.md</code>, <code>Wrote spec/use-cases.uc.md</code>.
-You can adjust the forms (<code>.ui.md</code>, with a Salt mockup as the layout) and the use cases (one browser test each)
+<p>You should see: <code>Wrote spec/base/person.ui.md</code>, <code>Wrote spec/base/company.ui.md</code>, <code>Wrote spec/base/use-cases.uc.md</code>.
+The forms (<code>.ui.md</code>) hold a Salt mockup in a Bootstrap look (navigation bar, form box with the fields, sample table): <code>generate</code> reads only the form box, the rest is decoration. You can adjust the forms and the use cases (one browser test each)
 later; the command never overwrites existing files. With a login with roles it writes as the <strong>actor</strong> of every use case the role with the
 fewest rights that may do it (creating and deleting companies: <code>ADMIN</code>; changing companies and everything on people: <code>USER</code>), and <code>generate</code> lets the browser test run as that role.</p>
 <h2 id="6-implement-generate-code">6. Implement: generate code<a class="headerlink" href="#6-implement-generate-code" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code>pisa<span class="w"> </span>generate<span class="w"> </span>--file<span class="w"> </span>spec/adressen-spring.dml<span class="w"> </span>--out<span class="w"> </span>.
+<div class="highlight"><pre><span></span><code>pisa<span class="w"> </span>generate<span class="w"> </span>--file<span class="w"> </span>spec/base/adressen-spring.dml<span class="w"> </span>--out<span class="w"> </span>.
 </code></pre></div>
 <p>You should see: the list of generated files (entities, repositories, services, DTOs, controllers, pages,
 tests) and at the end <code>Recorded step N in .pisa/recipe.json and README.md.</code></p>
@@ -1208,7 +1229,7 @@ tests) and at the end <code>Recorded step N in .pisa/recipe.json and README.md.<
 <p>Open http://localhost:8080/ <strong>in the browser, through the running server</strong> (not the <code>.html</code> files from <code>src/main/resources/static</code> directly: Alpine.js and the scripts come from the server, in the file itself buttons and texts are empty): a menu with People and Companies. The heading of the start page is "AdressenSpring", the name from <code>architecture AdressenSpring {</code> in the <code>.adl</code>; it is <code>app.title</code> in <code>application.yml</code> (change it, restart the application). The application redirects to the login page: sign in with <code>admin</code> / <code>admin</code> and choose a new password on the "Change password" page (twice, at least 8 characters); who is signed in is shown in the hamburger menu (☰) at the top right. Roles and more users: step 7b. Create a company, then a person with an address
 and choose the company. A click on a row of the list shows the entry <strong>read-only</strong> (display mode); whoever may change it has "Edit" there. Try the rules: a postal code with 3 digits, the same e-mail twice, an
 empty last name; the field turns red and the server answers 400 with the message per field. You see the database
-at http://localhost:8080/h2-console (section 4d of the User Guide). End with <code>Ctrl+C</code>.</p>
+at http://localhost:8080/h2-console (User Guide, section "Looking inside the H2 database"). End with <code>Ctrl+C</code>.</p>
 <!-- play: tests -->
 <div class="highlight"><pre><span></span><code>mvn<span class="w"> </span><span class="nb">test</span><span class="w">            </span><span class="c1"># repository, controller, service, ArchUnit tests</span>
 </code></pre></div>
@@ -1218,7 +1239,7 @@ at http://localhost:8080/h2-console (section 4d of the User Guide). End with <co
 </code></pre></div>
 <p>You should see: <code>BUILD SUCCESS</code>. (In a trial run of this tutorial there were 60 tests without a failure, with <code>-Pui</code> 82.)</p>
 <h2 id="7a-optional-restrict-operations-operations">7a. Optional: restrict operations (<code>@operations</code>)<a class="headerlink" href="#7a-optional-restrict-operations-operations" title="Permanent link">&para;</a></h2>
-<p>Every entity allows <strong>all four operations</strong> by default (create, read, change, delete). Whoever wants to block something writes it into the model, with <code>@operations</code> before <code>entity</code>. Example: companies should be created, read and changed, but <strong>not deleted</strong>. Add to <code>spec/adressen-spring.dml</code>:</p>
+<p>Every entity allows <strong>all four operations</strong> by default (create, read, change, delete). Whoever wants to block something writes it into the model, with <code>@operations</code> before <code>entity</code>. Example: companies should be created, read and changed, but <strong>not deleted</strong>. Add to <code>spec/base/adressen-spring.dml</code>:</p>
 <div class="highlight"><pre><span></span><code>@operations(create, read, update)
 entity Company {
     …
@@ -1226,13 +1247,13 @@ entity Company {
 </code></pre></div>
 <p><code>read</code> must always be included (lists and selection fields need it). Without the line everything is allowed; Pisa never blocks anything by itself. Then:</p>
 <!-- play: skip -->
-<div class="highlight"><pre><span></span><code>pisa<span class="w"> </span>generate<span class="w"> </span>--file<span class="w"> </span>spec/adressen-spring.dml<span class="w"> </span>--out<span class="w"> </span>.
+<div class="highlight"><pre><span></span><code>pisa<span class="w"> </span>generate<span class="w"> </span>--file<span class="w"> </span>spec/base/adressen-spring.dml<span class="w"> </span>--out<span class="w"> </span>.
 </code></pre></div>
 <p>You should see: an <strong>abort</strong>, nothing is written:</p>
-<div class="highlight"><pre><span></span><code>UC6 (spec/use-cases.uc.md): Company doesn't allow "delete" (@operations(create, read, update)) but the test line says "delete"
+<div class="highlight"><pre><span></span><code>UC6 (spec/base/use-cases.uc.md): Company doesn't allow "delete" (@operations(create, read, update)) but the test line says "delete"
 Nothing was written. Allow the operation in @operations of the entity, or change the Test: line, or delete the use case.
 </code></pre></div>
-<p>This is intended: the use case "Delete company" (UC6) asks for something the company no longer allows, a contradiction between two specs. Three ways out: allow <code>delete</code> again, change the <code>Test:</code> line, or (here) drop the use case. In <code>spec/use-cases.uc.md</code> delete the section <code>## UC6 …</code> and in the PlantUML diagram the two lines with <code>UC6</code>, then run <code>pisa generate</code> again. Pisa never deletes files: the old browser test of the use case stays and would fail, delete it by hand (<code>generate</code> names it under <code>Info: browser tests of use cases that are no longer in spec/*.uc.md</code>): <code>src/test/java/ch/example/adressen/ui/UC6UiTest.java</code>.</p>
+<p>This is intended: the use case "Delete company" (UC6) asks for something the company no longer allows, a contradiction between two specs. Three ways out: allow <code>delete</code> again, change the <code>Test:</code> line, or (here) drop the use case. In <code>spec/base/use-cases.uc.md</code> delete the section <code>## UC6 …</code> and in the PlantUML diagram the two lines with <code>UC6</code>, then run <code>pisa generate</code> again. Pisa never deletes files: the old browser test of the use case stays and would fail, delete it by hand (<code>generate</code> names it under <code>Info: browser tests of use cases that are no longer in spec/base/*.uc.md</code>): <code>src/test/java/ch/example/adressen/ui/UC6UiTest.java</code>.</p>
 <p>Restart the application (<code>mvn spring-boot:run</code>) and check:</p>
 <ul>
 <li>The "Companies" page has no delete button any more; creating and changing still work.</li>
@@ -1241,7 +1262,7 @@ Nothing was written. Allow the operation in @operations of the entity, or change
 </ul>
 <p>More about this (names, error messages, effect in both targets, interplay with roles): User Guide, section "Domain model (<code>.dml</code>)", <code>@operations</code>. Change the line to <code>@operations(create, read, update, delete)</code> or delete it if you want to lift the restriction again.</p>
 <h2 id="7b-rights-and-users">7b. Rights and users<a class="headerlink" href="#7b-rights-and-users" title="Permanent link">&para;</a></h2>
-<p>You already switched the login on with the line <code>authentication session</code> in the <code>.adl</code> (details: User Guide, section 4g). For it <code>init</code> wrote <code>security.yml</code> (roles and users), <code>login.html</code> and <code>change-password.html</code>, <code>generate</code> the login files (<code>SecurityStore</code>, <code>SecurityConfig</code>, <code>EntityAccess</code>, <code>SecurityController</code>, <code>SecurityTest</code>). The <code>.dml</code> and the mockups know no roles: they are not in the domain model. If you write the line only later, <code>init … --force</code> and <code>generate</code> are needed afterwards.</p>
+<p>You already switched the login on with the line <code>authentication session</code> in the <code>.adl</code> (details: User Guide, section "Adding login, users and roles"). For it <code>init</code> wrote <code>security.yml</code> (roles and users), <code>login.html</code> and <code>change-password.html</code>, <code>generate</code> the login files (<code>SecurityStore</code>, <code>SecurityConfig</code>, <code>EntityAccess</code>, <code>SecurityController</code>, <code>SecurityTest</code>). The <code>.dml</code> and the mockups know no roles: they are not in the domain model. If you write the line only later, <code>init … --force</code> and <code>generate</code> are needed afterwards.</p>
 <ul>
 <li>Sign in with <strong><code>admin</code> / <code>admin</code></strong> (if you have not yet): the "Change password" page appears, where you enter the new password <strong>twice</strong> (at least 8 characters, not the user name). After that <code>ADMIN</code> may do everything the model allows: not even he deletes companies if you did 7a (the rights of a role intersected with <code>@operations</code>). Who is signed in is shown in the hamburger menu (☰) at the top right, with "Change password" and "Sign out".</li>
 <li>Sign out and sign in as <strong><code>user</code> / <code>user</code></strong> (choose a new password again): <code>USER</code> may edit people fully, companies only read and change (block <code>roles</code>, see below). A write access through <code>curl</code> without login answers <strong>401</strong>; signed in but without the right, <strong>403</strong>.</li>
@@ -1258,17 +1279,17 @@ The tests and the use cases follow the <code>.adl</code>: <code>RolesTest</code>
 <p>Your own roles and users: enter them in <code>security.yml</code> (the hash comes from <code>pisa hash-password</code>, which asks for the password twice without echo) and restart the application; no <code>generate</code> is needed. <code>admin/admin</code> and <code>user/user</code> are publicly known, for development only.</p>
 <p><code>mvn test</code> signs in in the generated tests as test users (they are in <code>src/test/resources/security-test.yml</code>, not in your <code>security.yml</code>) and additionally checks 401, 403 and setting the password.</p>
 <h2 id="8-the-next-round-carry-through-a-change">8. The next round: carry through a change<a class="headerlink" href="#8-the-next-round-carry-through-a-change" title="Permanent link">&para;</a></h2>
-<p>A change is another round of the phases: <strong>specify</strong> the change in the description or the spec, <strong>plan</strong> (the form must know the new field), <strong>implement</strong> (<code>generate</code>), <strong>check</strong> (the tests). Change the description, not the code. Two ways:</p>
+<p>A change is another round of the phases, and it is a <strong>story</strong>: write down in a sentence what the change must achieve (<code>pisa story --specify "A person can have a title"</code> creates a feature folder in <code>spec/features/</code> with the first story and a table of acceptance criteria; the full course is step 13 of the <a href="../pisa-tutorial-hono-typescript/">Hono tutorial</a>; the commands are the same). Then <strong>specify</strong> the change in the description or the spec, <strong>plan</strong> (the form must know the new field), <strong>implement</strong> (<code>generate</code>), <strong>check</strong> (the tests). Change the description, not the code. Two ways:</p>
 <ul>
-<li><strong>By hand in the model:</strong> add a field in <code>spec/adressen-spring.dml</code>, say <code>title: String(..40)?</code> on <code>Person</code>.
-  <strong>The form must know it too:</strong> <code>spec/person.ui.md</code> is a layout in which every field occurs exactly once;
-  add a row to the mockup, say <code>Title | "title"</code> below the last name. Then
-  <code>pisa generate --file spec/adressen-spring.dml --out .</code> and <code>mvn test</code>. The code, the pages and the tests follow.
-  Without the mockup row <code>generate</code> aborts and writes nothing: <code>The Salt mockup in spec/person.ui.md can't be
-  used: … missing "title"</code>. (Alternatively delete <code>spec/person.ui.md</code> and run <code>pisa propose-specs --out .</code> again:
+<li><strong>By hand in the model:</strong> add a field in <code>spec/base/adressen-spring.dml</code>, say <code>title: String(..40)?</code> on <code>Person</code>.
+  <strong>The form must know it too:</strong> <code>spec/base/person.ui.md</code> is a layout in which every field occurs exactly once;
+  add a row to the form box of the mockup, say <code>&lt;b&gt;Title&lt;/b&gt; | "title"</code> (plain <code>Title | "title"</code> reads the same) below the last name. Then
+  <code>pisa generate --file spec/base/adressen-spring.dml --out .</code> and <code>mvn test</code>. The code, the pages and the tests follow.
+  Without the mockup row <code>generate</code> aborts and writes nothing: <code>The Salt mockup in spec/base/person.ui.md can't be
+  used: … missing "title"</code>. (Alternatively delete <code>spec/base/person.ui.md</code> and run <code>pisa propose-specs --out .</code> again:
   the default mockup contains all fields.)</li>
 <li><strong>Have it proposed anew:</strong> change <code>domain-spec.md</code> and <code>pisa propose-model --out . --force</code> (overwrites
-  <code>spec/adressen-spring.dml</code>, so your manual changes there).</li>
+  <code>spec/base/adressen-spring.dml</code>, so your manual changes there).</li>
 </ul>
 <h2 id="9-check-reproduce">9. Check: reproduce<a class="headerlink" href="#9-check-reproduce" title="Permanent link">&para;</a></h2>
 <!-- play: slow -->
@@ -1278,20 +1299,20 @@ pisa<span class="w"> </span>replay<span class="w"> </span>--from<span class="w">
 <p>You should see: <code>… All N generated file(s) match the hashes recorded in the recipe.</code> Pisa runs the
 recorded steps (<code>init</code>, <code>generate</code>) again in a new folder and compares files with the
 checksums in the recipe (<code>adressen-spring/.pisa/recipe.json</code>). The LLM steps are not repeated: their result
-(<code>spec/architecture.adl</code>, <code>spec/adressen-spring.dml</code>) is copied from the source project.</p>
+(<code>spec/base/architecture.adl</code>, <code>spec/base/adressen-spring.dml</code>) is copied from the source project.</p>
 <h2 id="10-optional-build-and-test-on-every-push-ci">10. Optional: build and test on every push (CI)<a class="headerlink" href="#10-optional-build-and-test-on-every-push-ci" title="Permanent link">&para;</a></h2>
 <p>This is an extra; you need it for nothing else. If GitHub should build the project on every push and run the tests
-(GitHub Actions), add the <code>pipeline</code> block to <code>spec/architecture.adl</code> before the last bracket and apply the <code>.adl</code> again:</p>
+(GitHub Actions), add the <code>pipeline</code> block to <code>spec/base/architecture.adl</code> before the last bracket and apply the <code>.adl</code> again:</p>
 <div class="highlight"><pre><span></span><code>    pipeline {
         ci github
     }
 </code></pre></div>
-<p>The commands do both instead of you (replace the last line of the <code>.adl</code>, then <code>init --force</code>). Run the <strong>whole</strong> block: <code>pisa init … --force</code> alone changes nothing as long as the <code>pipeline</code> block is not in <code>spec/architecture.adl</code>, and without it Pisa creates neither a repository nor a commit.</p>
+<p>The commands do both instead of you (replace the last line of the <code>.adl</code>, then <code>init --force</code>). Run the <strong>whole</strong> block: <code>pisa init … --force</code> alone changes nothing as long as the <code>pipeline</code> block is not in <code>spec/base/architecture.adl</code>, and without it Pisa creates neither a repository nor a commit.</p>
 <!-- play: optional -->
 <div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>adressen-spring
-sed<span class="w"> </span>-i.bak<span class="w"> </span><span class="s1">'$ d'</span><span class="w"> </span>spec/architecture.adl<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>rm<span class="w"> </span>spec/architecture.adl.bak
-<span class="nb">printf</span><span class="w"> </span><span class="s1">'    pipeline {\n        ci github\n    }\n}\n'</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>spec/architecture.adl
-pisa<span class="w"> </span>init<span class="w"> </span>--target<span class="w"> </span>spring-boot<span class="w"> </span>--out<span class="w"> </span>.<span class="w"> </span>--group<span class="w"> </span>ch.example<span class="w"> </span>--artifact<span class="w"> </span>adressen-spring<span class="w"> </span>--adl<span class="w"> </span>spec/architecture.adl<span class="w"> </span>--force
+sed<span class="w"> </span>-i.bak<span class="w"> </span><span class="s1">'$ d'</span><span class="w"> </span>spec/base/architecture.adl<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>rm<span class="w"> </span>spec/base/architecture.adl.bak
+<span class="nb">printf</span><span class="w"> </span><span class="s1">'    pipeline {\n        ci github\n    }\n}\n'</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>spec/base/architecture.adl
+pisa<span class="w"> </span>init<span class="w"> </span>--target<span class="w"> </span>spring-boot<span class="w"> </span>--out<span class="w"> </span>.<span class="w"> </span>--group<span class="w"> </span>ch.example<span class="w"> </span>--artifact<span class="w"> </span>adressen-spring<span class="w"> </span>--adl<span class="w"> </span>spec/base/architecture.adl<span class="w"> </span>--force
 </code></pre></div>
 <p>You should see: the new file <code>.github/workflows/ci.yml</code> in the list and <code>Git repository created, first commit made (branch main …)</code>.
 Pisa creates the repository and makes the first commit (<code>Initial project (pisa init)</code>), local only; it does not know your GitHub account,
@@ -1303,7 +1324,7 @@ GitHub CLI <code>gh</code>, once <code>gh auth login</code>):</p>
 </code></pre></div>
 <p><strong>Pisa made no repository or no commit.</strong> These are the four cases:</p>
 <ul>
-<li>The <code>pipeline</code> block is missing in <code>spec/architecture.adl</code> (only the last line was run): <strong>neither repository nor commit</strong>.</li>
+<li>The <code>pipeline</code> block is missing in <code>spec/base/architecture.adl</code> (only the last line was run): <strong>neither repository nor commit</strong>.</li>
 <li><code>pisa play --fast</code> left out the whole step: <strong>neither repository nor commit</strong>.</li>
 <li>The folder is already in a Git repository: Pisa does not touch it, it makes <strong>no</strong> commit.</li>
 <li>Name and e-mail are missing in your Git configuration: the repository is there, but <strong>no commit</strong>.</li>
@@ -1322,7 +1343,7 @@ git<span class="w"> </span>push<span class="w"> </span>-u<span class="w"> </span
 </code></pre></div>
 <p>After that the pipeline runs on GitHub (tab "Actions"): the job <code>tests</code> and the job <code>browser-tests</code>. The file is yours,
 even <code>init --force</code> does not overwrite it. Pisa has not yet checked it on a real GitHub run; if a job turns red, that
-is a finding for Pisa. More about it: User Guide, section 4e (<code>pipeline</code>). <code>pisa play --fast</code> leaves this step out.</p>
+is a finding for Pisa. More about it: User Guide, section "GitHub CI and releases". <code>pisa play --fast</code> leaves this step out.</p>
 <h2 id="11-optional-try-it-with-docker-and-the-real-database">11. Optional: try it with Docker and the real database<a class="headerlink" href="#11-optional-try-it-with-docker-and-the-real-database" title="Permanent link">&para;</a></h2>
 <p>This is an extra as well. So far everything runs on H2 in memory. The <code>Dockerfile</code> from step 3 is already there; with Docker you can build the application
 as an image and run it against a <strong>real PostgreSQL</strong>, much like later in the cloud. You need it for nothing else.
@@ -1335,13 +1356,13 @@ hint), so <code>-p 8080:8080</code> belongs in the command, otherwise you cannot
 docker<span class="w"> </span>run<span class="w"> </span>--rm<span class="w"> </span>--name<span class="w"> </span>adressen-spring<span class="w"> </span>-p<span class="w"> </span><span class="m">8080</span>:8080<span class="w"> </span>adressen-spring
 </code></pre></div>
 <p>You should see: the application at http://localhost:8080/login.html (H2 in the container; users <code>admin/admin</code> and <code>user/user</code>, the chosen password is gone on stopping because H2 is in memory). Stop with Ctrl-C.</p>
-<p><strong>2. Switch to PostgreSQL.</strong> In <code>spec/architecture.adl</code> replace the line <code>engine h2</code> by <code>engine postgresql</code>, apply the <code>.adl</code> again and
+<p><strong>2. Switch to PostgreSQL.</strong> In <code>spec/base/architecture.adl</code> replace the line <code>engine h2</code> by <code>engine postgresql</code>, apply the <code>.adl</code> again and
 generate the code again. With PostgreSQL Pisa writes the <code>compose.yml</code> with the application (<code>app</code>) and the database (<code>db</code>) even without the line
 <code>compose</code> in the <code>docker</code> block.</p>
 <!-- play: skip -->
-<div class="highlight"><pre><span></span><code>sed<span class="w"> </span>-i.bak<span class="w"> </span><span class="s1">'s/engine h2/engine postgresql/'</span><span class="w"> </span>spec/architecture.adl<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>rm<span class="w"> </span>spec/architecture.adl.bak
-pisa<span class="w"> </span>init<span class="w"> </span>--target<span class="w"> </span>spring-boot<span class="w"> </span>--out<span class="w"> </span>.<span class="w"> </span>--group<span class="w"> </span>ch.example<span class="w"> </span>--artifact<span class="w"> </span>adressen-spring<span class="w"> </span>--adl<span class="w"> </span>spec/architecture.adl<span class="w"> </span>--force
-pisa<span class="w"> </span>generate<span class="w"> </span>--file<span class="w"> </span>spec/adressen-spring.dml<span class="w"> </span>--out<span class="w"> </span>.
+<div class="highlight"><pre><span></span><code>sed<span class="w"> </span>-i.bak<span class="w"> </span><span class="s1">'s/engine h2/engine postgresql/'</span><span class="w"> </span>spec/base/architecture.adl<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>rm<span class="w"> </span>spec/base/architecture.adl.bak
+pisa<span class="w"> </span>init<span class="w"> </span>--target<span class="w"> </span>spring-boot<span class="w"> </span>--out<span class="w"> </span>.<span class="w"> </span>--group<span class="w"> </span>ch.example<span class="w"> </span>--artifact<span class="w"> </span>adressen-spring<span class="w"> </span>--adl<span class="w"> </span>spec/base/architecture.adl<span class="w"> </span>--force
+pisa<span class="w"> </span>generate<span class="w"> </span>--file<span class="w"> </span>spec/base/adressen-spring.dml<span class="w"> </span>--out<span class="w"> </span>.
 </code></pre></div>
 <p>The old <code>H2TcpServerConfig.java</code> (the H2 TCP server) breaks the build against PostgreSQL. <code>pisa init … --force</code> deletes it itself if you have not changed it (<code>Info: deleted, no longer used …</code>); if you changed it, it appears in the message with a line <code>Delete them with: rm …</code>, then run the command.</p>
 <p><strong>3. Start the application and the database.</strong></p>
@@ -1377,7 +1398,7 @@ can be combined (<code>-Pui,testcontainers</code>). The generated CI pipeline (s
 <p>This is an extra as well and needs a GitHub repository (step 10) and an account at <a href="https://render.com">Render</a>. Render runs the application's Docker image
 on a <strong>free web service</strong>: it sleeps after 15 minutes without requests (waking up takes about a minute) and has no persistent
 disk, <code>H2</code> and the chosen passwords are gone after every restart. Render's free PostgreSQL expires after 30 days: if you did step 11,
-set <code>engine postgresql</code> in <code>spec/architecture.adl</code> back to <code>engine h2</code>. <code>pisa play</code> <strong>never</strong> plays this step (everything <code>skip</code>).</p>
+set <code>engine postgresql</code> in <code>spec/base/architecture.adl</code> back to <code>engine h2</code>. <code>pisa play</code> <strong>never</strong> plays this step (everything <code>skip</code>).</p>
 <p><strong>1. The lines in the <code>.adl</code>.</strong> The <code>pipeline</code> block (step 10) gets <code>release github</code> and <code>deploy render</code>; <code>deploy</code> needs the <code>docker</code> block, which you already have
 (step 2). If you skipped step 10, write the whole block before the last bracket:</p>
 <div class="highlight"><pre><span></span><code>    pipeline {
@@ -1388,7 +1409,7 @@ set <code>engine postgresql</code> in <code>spec/architecture.adl</code> back to
 </code></pre></div>
 <p>Then apply the <code>.adl</code> again (<code>render.yml</code> and <code>.github/workflows/cd.yml</code> are created, once, after that they are yours):</p>
 <!-- play: skip -->
-<div class="highlight"><pre><span></span><code>pisa<span class="w"> </span>init<span class="w"> </span>--target<span class="w"> </span>spring-boot<span class="w"> </span>--out<span class="w"> </span>.<span class="w"> </span>--group<span class="w"> </span>ch.example<span class="w"> </span>--artifact<span class="w"> </span>adressen-spring<span class="w"> </span>--adl<span class="w"> </span>spec/architecture.adl<span class="w"> </span>--force
+<div class="highlight"><pre><span></span><code>pisa<span class="w"> </span>init<span class="w"> </span>--target<span class="w"> </span>spring-boot<span class="w"> </span>--out<span class="w"> </span>.<span class="w"> </span>--group<span class="w"> </span>ch.example<span class="w"> </span>--artifact<span class="w"> </span>adressen-spring<span class="w"> </span>--adl<span class="w"> </span>spec/base/architecture.adl<span class="w"> </span>--force
 </code></pre></div>
 <p>You should see: <code>render.yml</code> and <code>.github/workflows/cd.yml</code> in the list and <code>Deploy to Render: the comments at the top of render.yml say how</code>.</p>
 <p><strong>2. Set up at Render (in the browser).</strong> Push the project to GitHub (step 10). On dashboard.render.com <strong>New ▸ Blueprint</strong>, pick the repository and enter <code>render.yml</code> in the field
@@ -1401,11 +1422,162 @@ git<span class="w"> </span>tag<span class="w"> </span>v0.1.0
 git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>main<span class="w"> </span>v0.1.0
 </code></pre></div>
 <p>You should see: in the repository under <em>Actions</em> the run <strong>Deploy</strong>, at Render a new deploy and after a few minutes the application at the address of the service
-(<code>https://&lt;name&gt;.onrender.com/login.html</code>). The first access after sleeping takes about a minute. More about it: User Guide, section 4e ("Cloud: Render").
+(<code>https://&lt;name&gt;.onrender.com/login.html</code>). The first access after sleeping takes about a minute. More about it: User Guide, section "Deploying to Render".
 Pisa has not yet checked this on a real Render account: whether 512 MB are enough for Spring and whether the service accepts the <code>healthCheckPath</code> is unchecked.</p>
+<h2 id="13-accept-user-stories-optional">13. Accept: user stories (optional)<a class="headerlink" href="#13-accept-user-stories-optional" title="Permanent link">&para;</a></h2>
+<p>This is an extra as well; <code>pisa play</code> <strong>never</strong> plays this step (everything <code>skip</code>). So far you checked the generated application with the tests Pisa writes. A <strong>user story</strong> is the other side: someone who asked for something says when it is done as he asked for it. <code>pisa story</code> works for a story of your application in the same five phases as the specs of Pisa itself (<code>pisa extend</code>), with one folder per story, <code>spec/features/NNN-&lt;feature&gt;/stories/NNN-&lt;story&gt;/</code> (a feature is a folder with <code>feature.md</code> and its stories, here one feature with one story), and one file per phase: <code>01-spec.md</code> (the criteria), <code>02-plan.md</code>, <code>03-test.md</code> (the frozen acceptance tests), <code>04-implement.md</code>, <code>05-check.md</code>. <code>pisa story</code> asks no language model: it creates the files, freezes the tests and runs them.</p>
+<p>The acceptance tests of a story run <strong>only on demand</strong>: <code>mvn test</code> does not compile the folder <code>stories/</code> (the tests of the stories live there, outside <code>src/</code> and <code>spec/</code>), <code>mvn test -Pac</code> does (the Maven profile <code>ac</code> adds <code>stories</code> as a test folder and sets <code>PISA_ACCEPTANCE=1</code>; it is part of every generated <code>pom.xml</code>, and a project from an earlier version gets it with <code>pisa init … --force</code>). Maven needs the dependencies as for <code>mvn test</code>.</p>
+<p><strong>1. Specify.</strong> The story in your words; Pisa creates <code>01-spec.md</code> with a table of criteria:</p>
+<!-- play: skip -->
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>adressen-spring
+pisa<span class="w"> </span>story<span class="w"> </span>--specify<span class="w"> </span><span class="s2">"A clerk can archive a person"</span>
+</code></pre></div>
+<p>You should see <code>Written: …/spec/features/001-clerk-archive-person/stories/001-clerk-archive-person/01-spec.md</code> (and <code>feature.md</code> next to <code>stories/</code>). Open the file and replace the two example rows by what the clerk expects, in his words (one row per criterion, <code>AC1</code>, <code>AC2</code>, …):</p>
+<div class="highlight"><pre><span></span><code>| ID | Criterion |
+|---|---|
+| AC1 | A clerk sets a person to Archived, and the person is still listed with that status |
+| AC2 | A clerk cannot give a person a status that does not exist; the person stays as it was |
+</code></pre></div>
+<p><strong>2. Plan.</strong> One task per criterion, in <code>02-plan.md</code>:</p>
+<!-- play: skip -->
+<div class="highlight"><pre><span></span><code>pisa<span class="w"> </span>story<span class="w"> </span>--plan
+</code></pre></div>
+<p><strong>3. Test.</strong> One acceptance test per criterion, in <code>stories/001-clerk-archive-person/tests/</code>. The folder does not have to match the Java package, but a test must lie in a package below <code>ch.example.adressen</code>, so that Spring finds the application class. Mark each test with <code>@Acceptance</code> (the annotation that <code>pisa init</code> wrote next to the application class; it skips the test unless <code>PISA_ACCEPTANCE=1</code>) and with the <strong>JUnit tag</strong> of its criterion, <code>@Tag("AC1")</code>: Pisa runs one criterion by its tag (<code>mvn test -Pac -Dgroups=AC1</code>), the class and method names are free:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// stories/001-clerk-archive-person/tests/ArchivePersonTest.java</span>
+<span class="kn">package</span><span class="w"> </span><span class="nn">ch.example.adressen.stories</span><span class="p">;</span>
+
+<span class="kn">import static</span><span class="w"> </span><span class="nn">org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf</span><span class="p">;</span>
+<span class="kn">import static</span><span class="w"> </span><span class="nn">org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.user</span><span class="p">;</span>
+<span class="kn">import static</span><span class="w"> </span><span class="nn">org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity</span><span class="p">;</span>
+<span class="kn">import static</span><span class="w"> </span><span class="nn">org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get</span><span class="p">;</span>
+<span class="kn">import static</span><span class="w"> </span><span class="nn">org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post</span><span class="p">;</span>
+<span class="kn">import static</span><span class="w"> </span><span class="nn">org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put</span><span class="p">;</span>
+<span class="kn">import static</span><span class="w"> </span><span class="nn">org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath</span><span class="p">;</span>
+<span class="kn">import static</span><span class="w"> </span><span class="nn">org.springframework.test.web.servlet.result.MockMvcResultMatchers.status</span><span class="p">;</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">ch.example.adressen.Acceptance</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">ch.example.adressen.repository.PersonRepository</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">com.jayway.jsonpath.JsonPath</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.AfterEach</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.BeforeEach</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.junit.jupiter.api.Tag</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.beans.factory.annotation.Autowired</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.boot.test.context.SpringBootTest</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.http.MediaType</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.test.web.servlet.MockMvc</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.test.web.servlet.setup.MockMvcBuilders</span><span class="p">;</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.context.WebApplicationContext</span><span class="p">;</span>
+
+<span class="cm">/** Acceptance tests of the story "A clerk can archive a person"; every test carries the tag of its criterion. */</span>
+<span class="nd">@SpringBootTest</span>
+<span class="kd">class</span> <span class="nc">ArchivePersonTest</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="n">PATH</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">"/api/persons"</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nd">@Autowired</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">WebApplicationContext</span><span class="w"> </span><span class="n">context</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nd">@Autowired</span>
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">PersonRepository</span><span class="w"> </span><span class="n">repository</span><span class="p">;</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">MockMvc</span><span class="w"> </span><span class="n">mockMvc</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nd">@BeforeEach</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">signIn</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">mockMvc</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">MockMvcBuilders</span><span class="p">.</span><span class="na">webAppContextSetup</span><span class="p">(</span><span class="n">context</span><span class="p">)</span>
+<span class="w">                </span><span class="p">.</span><span class="na">apply</span><span class="p">(</span><span class="n">springSecurity</span><span class="p">())</span>
+<span class="w">                </span><span class="p">.</span><span class="na">defaultRequest</span><span class="p">(</span><span class="n">get</span><span class="p">(</span><span class="s">"/"</span><span class="p">).</span><span class="na">with</span><span class="p">(</span><span class="n">user</span><span class="p">(</span><span class="s">"tester"</span><span class="p">).</span><span class="na">roles</span><span class="p">(</span><span class="s">"FULL"</span><span class="p">)).</span><span class="na">with</span><span class="p">(</span><span class="n">csrf</span><span class="p">()))</span>
+<span class="w">                </span><span class="p">.</span><span class="na">build</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@AfterEach</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">cleanUp</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">repository</span><span class="p">.</span><span class="na">deleteAll</span><span class="p">();</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">static</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">person</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">status</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="s">"{\"firstName\":\"Anna\",\"lastName\":\"Muster\",\"status\":\""</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">status</span>
+<span class="w">                </span><span class="o">+</span><span class="w"> </span><span class="s">"\",\"address\":{\"street\":\"Bahnhofstrasse 1\",\"zip\":\"8001\",\"city\":\"Zürich\"}}"</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">String</span><span class="w"> </span><span class="nf">createPerson</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">response</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">mockMvc</span><span class="p">.</span><span class="na">perform</span><span class="p">(</span><span class="n">post</span><span class="p">(</span><span class="n">PATH</span><span class="p">).</span><span class="na">contentType</span><span class="p">(</span><span class="n">MediaType</span><span class="p">.</span><span class="na">APPLICATION_JSON</span><span class="p">).</span><span class="na">content</span><span class="p">(</span><span class="n">person</span><span class="p">(</span><span class="s">"ACTIVE"</span><span class="p">)))</span>
+<span class="w">                </span><span class="p">.</span><span class="na">andExpect</span><span class="p">(</span><span class="n">status</span><span class="p">().</span><span class="na">isOk</span><span class="p">())</span>
+<span class="w">                </span><span class="p">.</span><span class="na">andReturn</span><span class="p">().</span><span class="na">getResponse</span><span class="p">().</span><span class="na">getContentAsString</span><span class="p">();</span>
+<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">String</span><span class="p">.</span><span class="na">valueOf</span><span class="p">((</span><span class="n">Object</span><span class="p">)</span><span class="w"> </span><span class="n">JsonPath</span><span class="p">.</span><span class="na">read</span><span class="p">(</span><span class="n">response</span><span class="p">,</span><span class="w"> </span><span class="s">"$.id"</span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Acceptance</span>
+<span class="w">    </span><span class="nd">@Tag</span><span class="p">(</span><span class="s">"AC1"</span><span class="p">)</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">aPersonSetToArchivedIsStillListedWithThatStatus</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">createPerson</span><span class="p">();</span>
+<span class="w">        </span><span class="n">mockMvc</span><span class="p">.</span><span class="na">perform</span><span class="p">(</span><span class="n">put</span><span class="p">(</span><span class="n">PATH</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">"/"</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">id</span><span class="p">).</span><span class="na">contentType</span><span class="p">(</span><span class="n">MediaType</span><span class="p">.</span><span class="na">APPLICATION_JSON</span><span class="p">).</span><span class="na">content</span><span class="p">(</span><span class="n">person</span><span class="p">(</span><span class="s">"ARCHIVED"</span><span class="p">)))</span>
+<span class="w">                </span><span class="p">.</span><span class="na">andExpect</span><span class="p">(</span><span class="n">status</span><span class="p">().</span><span class="na">isOk</span><span class="p">());</span>
+<span class="w">        </span><span class="n">mockMvc</span><span class="p">.</span><span class="na">perform</span><span class="p">(</span><span class="n">get</span><span class="p">(</span><span class="n">PATH</span><span class="p">))</span>
+<span class="w">                </span><span class="p">.</span><span class="na">andExpect</span><span class="p">(</span><span class="n">status</span><span class="p">().</span><span class="na">isOk</span><span class="p">())</span>
+<span class="w">                </span><span class="p">.</span><span class="na">andExpect</span><span class="p">(</span><span class="n">jsonPath</span><span class="p">(</span><span class="s">"$[0].status"</span><span class="p">).</span><span class="na">value</span><span class="p">(</span><span class="s">"ARCHIVED"</span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="nd">@Acceptance</span>
+<span class="w">    </span><span class="nd">@Tag</span><span class="p">(</span><span class="s">"AC2"</span><span class="p">)</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">aStatusThatDoesNotExistIsRefusedAndThePersonStaysAsItWas</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">createPerson</span><span class="p">();</span>
+<span class="w">        </span><span class="n">mockMvc</span><span class="p">.</span><span class="na">perform</span><span class="p">(</span><span class="n">put</span><span class="p">(</span><span class="n">PATH</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">"/"</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">id</span><span class="p">).</span><span class="na">contentType</span><span class="p">(</span><span class="n">MediaType</span><span class="p">.</span><span class="na">APPLICATION_JSON</span><span class="p">).</span><span class="na">content</span><span class="p">(</span><span class="n">person</span><span class="p">(</span><span class="s">"GONE"</span><span class="p">)))</span>
+<span class="w">                </span><span class="p">.</span><span class="na">andExpect</span><span class="p">(</span><span class="n">status</span><span class="p">().</span><span class="na">isBadRequest</span><span class="p">());</span>
+<span class="w">        </span><span class="n">mockMvc</span><span class="p">.</span><span class="na">perform</span><span class="p">(</span><span class="n">get</span><span class="p">(</span><span class="n">PATH</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">"/"</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">id</span><span class="p">))</span>
+<span class="w">                </span><span class="p">.</span><span class="na">andExpect</span><span class="p">(</span><span class="n">status</span><span class="p">().</span><span class="na">isOk</span><span class="p">())</span>
+<span class="w">                </span><span class="p">.</span><span class="na">andExpect</span><span class="p">(</span><span class="n">jsonPath</span><span class="p">(</span><span class="s">"$.status"</span><span class="p">).</span><span class="na">value</span><span class="p">(</span><span class="s">"ACTIVE"</span><span class="p">));</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Then freeze them:</p>
+<!-- play: skip -->
+<div class="highlight"><pre><span></span><code>pisa<span class="w"> </span>story<span class="w"> </span>--test
+</code></pre></div>
+<p><code>03-test.md</code> now lists the file with its SHA-256 under "Frozen files". From here on the test must not change: if it does, <code>--check</code> reports it (see step 5). A test file that you add later and that the table does not list is added to the table by <code>--check</code>, with a warning. (Pisa's own <code>pisa extend --test</code> has a language model write the tests and requires them to fail first; <code>pisa story --test</code> takes the tests you wrote.)</p>
+<p><strong>4. Implement.</strong> <code>pisa story --implement</code> writes <code>04-implement.md</code> with the assignment and the open tasks. Here the application already does what the story asks (the generated API accepts every status of the enumeration and refuses others), so there is nothing left to implement; for a story that needs new behavior this is where you, or your coding assistant, work through the plan until the acceptance tests are green.</p>
+<!-- play: skip -->
+<div class="highlight"><pre><span></span><code>pisa<span class="w"> </span>story<span class="w"> </span>--implement
+</code></pre></div>
+<p><strong>5. Check.</strong> Pisa first compares the frozen files with their recorded SHA-256, then runs the acceptance tests, one criterion at a time (<code>mvn test -Pac -Dgroups=AC1</code>; every run starts Maven, so it takes about half a minute per criterion), and writes <code>05-check.md</code>:</p>
+<!-- play: skip -->
+<div class="highlight"><pre><span></span><code>pisa<span class="w"> </span>story<span class="w"> </span>--check
+</code></pre></div>
+<p>You should see a tree with the duration of every criterion (a terminal shows coloured ☑ and ☒ instead of ✅ and ❌):</p>
+<div class="highlight"><pre><span></span><code>001/001 | A clerk can archive a person
+  ✅ frozen tests unchanged
+  acceptance
+    ✅ AC1: A clerk sets a person to Archived, and the person is still listed with that status · 26.2 s
+    ✅ AC2: A clerk cannot give a person a status that does not exist; the person stays as it was · 26.3 s
+</code></pre></div>
+<p>The exit code is 0 when every criterion is green and nothing frozen changed, otherwise 1; <code>05-check.md</code> says <code>Converged</code> only then. If you change a frozen test, the tree says so, even when the tests are green:</p>
+<div class="highlight"><pre><span></span><code>001/001 | A clerk can archive a person
+  ❌ frozen test changed: stories/001-clerk-archive-person/tests/ArchivePersonTest.java
+  acceptance
+    ✅ AC1: A clerk sets a person to Archived, and the person is still listed with that status · 26.5 s
+    ✅ AC2: A clerk cannot give a person a status that does not exist; the person stays as it was · 25.7 s
+</code></pre></div>
+<p>A frozen file that is missing is reported the same way (<code>frozen test missing: …</code>), and a <code>03-test.md</code> without the table "Frozen files" says <code>tests are not frozen yet, run pisa story --test</code>.</p>
+<p><strong>6. All stories at a glance.</strong> <code>--list</code> shows every story with its state, <code>--check --full</code> runs all of them and ends with a summary:</p>
+<!-- play: skip -->
+<div class="highlight"><pre><span></span><code>pisa<span class="w"> </span>story<span class="w"> </span>--list
+pisa<span class="w"> </span>story<span class="w"> </span>--check<span class="w"> </span>--full
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>| Status | Story   | Title                        |
+| ------ | ------- | ---------------------------- |
+| ✅      | 001/001 | A clerk can archive a person |
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>| Story   | Title                        | Result | Criteria |
+| ------- | ---------------------------- | ------ | -------- |
+| 001/001 | A clerk can archive a person | ✅      | 2/2      |
+
+1 of 1 stories accepted
+Acceptance criteria: 2 ✅ green, 0 ❌ red (2 in total)
+</code></pre></div>
+<p><code>--feature &lt;NNN&gt; --story &lt;NNN&gt;</code> picks one story (<code>--story</code> alone is enough while the story number is unique); <code>pisa story --specify "…" --feature 1</code> adds a further story to feature 001; <code>--full</code> and <code>--story</code> cannot be combined.</p>
 <h2 id="what-you-have-now">What you have now<a class="headerlink" href="#what-you-have-now" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code>adressen-spring/
-  spec/            architecture.md, architecture.adl, domain-spec.md, adressen-spring.dml,
+  spec/base/       architecture.md, architecture.adl, domain-spec.md, adressen-spring.dml,
                    person.ui.md, company.ui.md, use-cases.uc.md, domain-model.puml/.md
   .pisa/           recipe.json (the recipe), architecture.plan.json (the plan, derived from the .adl)
   src/             generated code and tests (never change by hand, `generate` rewrites it)
@@ -1436,7 +1608,7 @@ of truth, the code is derivable from them. The same specs give a TypeScript proj
 <td>The model did not answer validly through the tool; make the description more precise, repeat.</td>
 </tr>
 <tr>
-<td><code>The Salt mockup in spec/&lt;entity&gt;.ui.md can't be used: … missing "x"</code></td>
+<td><code>The Salt mockup in spec/base/&lt;entity&gt;.ui.md can't be used: … missing "x"</code></td>
 <td>A field in the <code>.dml</code> is missing in the mockup (or the other way round). Insert a line <code>Label | "x"</code> into the mockup, <code>generate</code> writes nothing beforehand.</td>
 </tr>
 <tr>
