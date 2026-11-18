@@ -805,6 +805,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#example-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example data
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#git-repository" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1894,6 +1905,17 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#example-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Example data
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#git-repository" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2950,6 +2972,10 @@ pisa<span class="w"> </span>story<span class="w"> </span>--check<span class="w">
         image "library"
         compose
     }
+    sampleData {                 // example data for development (only h2 or sqlite)
+        entries 8
+        locale "de-CH"
+    }
 }
 </code></pre></div>
 <p>Apply it when creating the project:</p>
@@ -3003,6 +3029,10 @@ pisa<span class="w"> </span>story<span class="w"> </span>--check<span class="w">
 <tr>
 <td><code>scm { … }</code></td>
 <td>GitHub pull request and issue templates</td>
+</tr>
+<tr>
+<td><code>sampleData { … }</code></td>
+<td>Realistic example data from the model in the running development system (<a href="#example-data">below</a>)</td>
 </tr>
 <tr>
 <td><code>frontend</code></td>
@@ -3110,6 +3140,55 @@ docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> 
 <li>Push a tag to deploy. Only the hook deploys, so only releases.</li>
 </ol>
 <p><strong>Free tier limits:</strong> the service sleeps after 15 minutes idle (about a minute to wake), has 750 instance hours a month and no persistent disk. H2 and SQLite data — including chosen passwords — are lost on every restart. Render's free PostgreSQL expires after 30 days, so <code>deploy render</code> with <code>engine postgresql</code> warns and creates no database: bring your own. <strong>Not checked:</strong> a real deploy.</p>
+<h3 id="example-data">Example data<a class="headerlink" href="#example-data" title="Permanent link">&para;</a></h3>
+<p>An empty application is hard to judge. Add a <code>sampleData</code> block and the generated project fills itself with realistic records when it starts, made from your model with a Faker library: <a href="https://www.datafaker.net/">datafaker</a> for Spring, <a href="https://fakerjs.dev/"><code>@faker-js/faker</code></a> for Hono.</p>
+<div class="highlight"><pre><span></span><code>sampleData {
+    source faker       // where the values come from; faker is the only source for now
+    entries 8          // records per entity, 1 to 10 (default 5)
+    locale "de-CH"     // language and region of the values (default "en")
+}
+</code></pre></div>
+<p>All three lines are optional, and an empty block <code>sampleData { }</code> means the defaults. The editor completes <code>source</code>, <code>entries</code> and all locales (<code>"de-CH"</code>, <code>"en-US"</code>, …). The block is only for the development databases <code>h2</code> and <code>sqlite</code>: with <code>engine postgresql</code> it is an error, because PostgreSQL is the lasting database. Without the block nothing is made.</p>
+<p><strong>What you get</strong></p>
+<ul>
+<li>At most <code>entries</code> records per entity (never more than 10), in the order the entities point to each other: the targets of a <code>manyToOne</code> first, so every record has a reference. A composed part is made with its owner.</li>
+<li>Values that fit the field. The model comes first: an <code>Email</code>, <code>Phone</code> or <code>Url</code>, a range such as <code>Int(0..150)</code>, a pattern, a length, <code>unique</code> (no doubles) and an <code>enum</code>. Then the field name: <code>firstName</code>, <code>lastName</code>, <code>street</code>, <code>city</code>, <code>zip</code>, <code>country</code>, <code>email</code>, <code>company</code>, <code>description</code> and the like get matching values, and <code>name</code> and <code>title</code> depend on the entity (the <code>name</code> of an <code>Author</code> is a person, of a <code>Company</code> a company). Other fields get a short phrase. A <code>Country</code> with a <code>code</code> and a <code>name</code> gets the country of the code.</li>
+<li>The same data on every start: the Faker library runs with a fixed seed. User names and passwords of the login are never made.</li>
+</ul>
+<p><strong>When it runs</strong></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Spring</th>
+<th>Hono</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Where</td>
+<td><code>SampleDataLoader</code> in the package <code>&lt;base&gt;.sampledata</code></td>
+<td><code>src/seed.ts</code></td>
+</tr>
+<tr>
+<td>On</td>
+<td><code>app.sample-data.enabled: true</code> in <code>application.yml</code></td>
+<td><code>SAMPLE_DATA</code> not <code>false</code> when <code>npm start</code> runs; <code>npm run seed</code> runs it alone</td>
+</tr>
+<tr>
+<td>Off</td>
+<td>The tests (<code>application.properties</code> in <code>src/test/resources</code>) and the Docker image (<code>APP_SAMPLE_DATA_ENABLED=false</code>)</td>
+<td>The tests (they don't start the server) and the Docker image (<code>SAMPLE_DATA=false</code>)</td>
+</tr>
+<tr>
+<td>Library</td>
+<td><code>net.datafaker:datafaker</code> (plan key <code>versions.datafaker</code>)</td>
+<td><code>@faker-js/faker</code> (plan key <code>versions.fakerJs</code>)</td>
+</tr>
+</tbody>
+</table>
+<p>The records are made only when the database is empty, so a SQLite file with data is left alone. To see the demo data in a container, set the variable to <code>true</code> in the <code>Dockerfile</code> (it is yours after the first write). Delete the block and run <code>init --force</code> and <code>generate</code>: the loader or the seed is then removed (or listed, if you changed it).</p>
+<p><strong>Checked</strong> (2026-11-18): a project from the address book model with <code>entries 5</code> and <code>locale "de-CH"</code>, for Spring with H2 (the tests pass, the application starts with 5 persons, their addresses and 5 countries) and for Hono with SQLite (<code>npm run typecheck</code>, <code>npm start</code>; the second start leaves the data alone). <strong>Not checked:</strong> the layered style and <code>unique</code> fields in a running project, PostgreSQL with Hono, the other locales (each Faker library knows its own set; where a region has no data, the language or English is used).</p>
 <h3 id="git-repository">Git repository<a class="headerlink" href="#git-repository" title="Permanent link">&para;</a></h3>
 <p>If your <code>.adl</code> has a <code>pipeline</code> or <code>scm</code> block, or you pass <code>--git</code>, <code>init</code> creates a local Git repo (branch <code>main</code>) with a first commit (<code>Initial project (pisa init)</code>). It never pushes anything. Name and email come from your Git configuration; if they're missing, or Git refuses the commit, <code>init</code> prints <code>git add -A</code> and <code>git commit -m "Initial project"</code> instead and doesn't fail. Inside an existing Git working tree nothing is created. To publish on GitHub:</p>
 <div class="highlight"><pre><span></span><code>git<span class="w"> </span>init<span class="w"> </span>-b<span class="w"> </span>main<span class="w">                      </span><span class="c1"># only if Pisa did not create a repository</span>
@@ -3161,6 +3240,10 @@ gh<span class="w"> </span>repo<span class="w"> </span>create<span class="w"> </s
 <tr>
 <td><code>authentication</code>, <code>roles</code></td>
 <td>Login settings, copied from the <code>.adl</code></td>
+</tr>
+<tr>
+<td><code>sampleData</code></td>
+<td><code>{ "source": "faker", "entries": 5, "locale": "en" }</code>, from the <code>sampleData</code> block (<a href="#example-data">details</a>); absent without the block</td>
 </tr>
 </tbody>
 </table>
@@ -3543,7 +3626,7 @@ pisa init [--target spring-boot|hono-prisma] --out &lt;dir&gt; [--group &lt;grou
 </tr>
 </tbody>
 </table>
-<p>The AI may answer only through a checked tool: style, <code>runtime</code> (<code>hono</code> only if the description mentions TypeScript or Node.js), login (<code>authentication session</code>, only if the description mentions login, users, passwords or roles), roles with their rights (only if it mentions them), database <code>h2</code> or <code>postgresql</code>, base package and versions. <strong>Versions "from memory" are rejected:</strong> the AI must look them up at Maven Central (stable only, no beta/RC), and the file names the date and source in its header. It doesn't propose users; <code>init</code> writes those as <code>security.yml</code>.</p>
+<p>The AI may answer only through a checked tool: style, <code>runtime</code> (<code>hono</code> only if the description mentions TypeScript or Node.js), login (<code>authentication session</code>, only if the description mentions login, users, passwords or roles), example data (<code>sampleData</code>, only if the description asks for example, test or demo data, and never with PostgreSQL), roles with their rights (only if it mentions them), database <code>h2</code> or <code>postgresql</code>, base package and versions. <strong>Versions "from memory" are rejected:</strong> the AI must look them up at Maven Central (stable only, no beta/RC), and the file names the date and source in its header. It doesn't propose users; <code>init</code> writes those as <code>security.yml</code>.</p>
 <p><strong>Tip:</strong> describe everything once in <code>spec/base/requirements.md</code>, then run <code>propose-architecture</code> followed by <code>propose-model</code>. Each takes only the part it needs. A filled-in <code>architecture.md</code> or <code>domain-spec.md</code> always takes precedence. An empty <code>requirements.md</code> counts as absent; Pisa never creates it. Review each result before moving on.</p>
 <h3 id="pisa-propose-layout">pisa propose-layout<a class="headerlink" href="#pisa-propose-layout" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code>pisa propose-layout --entity &lt;Name&gt; --out &lt;dir&gt;
@@ -4071,6 +4154,10 @@ pisa<span class="w"> </span>generate<span class="w"> </span>--file<span class="w
 <td>One image per project, only Dockerfile and Compose; no image builds in the CI file, no push to a registry, no multi-architecture images, no health check in the <code>Dockerfile</code> itself, no Testcontainers for TypeScript. Port 8080 and <code>/data</code> are fixed.</td>
 </tr>
 <tr>
+<td>Example data</td>
+<td>Sources other than a Faker library (values written by the language model, your own data files); example data with PostgreSQL; an application with no backend. Pisa makes the values from field names and rules, so <code>Author.name</code> is a person but a field called <code>x</code> gets a short phrase.</td>
+</tr>
+<tr>
 <td>Deployment</td>
 <td>Any host besides Render; a database at Render; custom domains; a health check test after the deploy. Not checked on a real account.</td>
 </tr>
@@ -4114,6 +4201,10 @@ pisa<span class="w"> </span>generate<span class="w"> </span>--file<span class="w
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>0.16.0</td>
+<td>Example data: the <code>sampleData { source faker  entries N  locale "…" }</code> block in the <code>.adl</code> makes realistic records from the model when the development system starts (Spring: datafaker, Hono: <code>@faker-js/faker</code>; at most 10 per entity, default 5; only with <code>h2</code> or <code>sqlite</code>; off in the tests and the Docker image); completion for <code>source</code>, <code>entries</code> and <code>locale</code> in the editor. New optional plan keys <code>sampleData</code>, <code>versions.datafaker</code> and <code>versions.fakerJs</code>. Spring acceptance runs use one Maven run per story and prefer <code>mvnd</code>; generated Spring projects contain the Maven Wrapper (<code>./mvnw</code>); <code>pisa play</code> lists skipped steps with the reason.</td>
+</tr>
 <tr>
 <td>0.15.0</td>
 <td><code>pisa extend --explain</code> and the optional column <code>Checks</code> in the Acceptance table (a plain sentence per row, shown in the check tree and the reports). Story tests on the Maven path: Spring acceptance tests live in <code>stories/&lt;story&gt;/tests/</code>, run with <code>mvn test -Pac</code> (build-helper adds <code>stories</code> as a test source) and are selected by JUnit tag (<code>@Tag("AC1")</code>, <code>-Dgroups=AC1</code>). <code>pisa story --check</code> verifies the frozen tests by SHA-256 hash (changed or missing file, missing table: red; unlisted file: warning). Spring tutorial section "Accept: user stories". New optional plan key <code>versions.buildHelper</code>. <code>pisa story --test</code> lets the language model write one acceptance test per criterion (JUnit with MockMvc for Spring, <code>acceptance("ACn: ...")</code> for Hono), runs them red (three attempts) and freezes them in <code>03-test.md</code>; <code>--adopt</code> freezes hand-written tests, <code>--force</code> writes them anew; not allowed in CI. Example: <code>pisa story --test --story 001</code>, then <code>pisa story --implement --story 001</code></td>
