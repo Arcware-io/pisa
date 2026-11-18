@@ -450,6 +450,78 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#setting-up-your-development-environment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Setting up your development environment
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Setting up your development environment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#java-maven-and-the-maven-daemon-with-sdkman-spring" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Java, Maven and the Maven Daemon with SDKMAN (Spring)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nodejs-with-nvm-typescript" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Node.js with nvm (TypeScript)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#docker-optional" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Docker (optional)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#intellij-idea-or-vs-code-for-the-generated-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        IntelliJ IDEA or VS Code for the generated project
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setting-up-a-language-model-optional" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Setting up a language model (optional)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#setting-up-your-editor-optional" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1074,6 +1146,17 @@
     <span class="md-ellipsis">
       
         Project settings (project.spec.json)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#acceptance-rows-and-the-column-checks-pisa-extend" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Acceptance rows and the column Checks (pisa extend)
       
     </span>
   </a>
@@ -1456,6 +1539,78 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#setting-up-your-development-environment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Setting up your development environment
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Setting up your development environment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#java-maven-and-the-maven-daemon-with-sdkman-spring" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Java, Maven and the Maven Daemon with SDKMAN (Spring)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nodejs-with-nvm-typescript" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Node.js with nvm (TypeScript)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#docker-optional" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Docker (optional)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#intellij-idea-or-vs-code-for-the-generated-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        IntelliJ IDEA or VS Code for the generated project
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#setting-up-a-language-model-optional" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Setting up a language model (optional)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#setting-up-your-editor-optional" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2086,6 +2241,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#acceptance-rows-and-the-column-checks-pisa-extend" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Acceptance rows and the column Checks (pisa extend)
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -2216,6 +2382,7 @@
 <li><strong>Looking something up?</strong> Jump to the <a href="#command-reference">Command reference</a>, the <a href="#spec-file-reference">Spec file reference</a> or <a href="#troubleshooting">Troubleshooting</a>.</li>
 </ul>
 <h2 id="how-pisa-works">How Pisa works<a class="headerlink" href="#how-pisa-works" title="Permanent link">&para;</a></h2>
+<p>In one sentence: Pisa is a spec-driven development tool with a generator at its core and a harness around its coding agent. The generator produces the code deterministically from your specs; the harness lets the language model act only through checked tools, with frozen tests and write protection.</p>
 <p>You write <strong>specs</strong> — small text files that describe <em>what</em> you want. Pisa turns them into <strong>code</strong>. The specs are the source of truth; the code can always be regenerated from them.</p>
 <p>Pisa splits the work in two:</p>
 <ul>
@@ -2281,7 +2448,7 @@
 <p><strong>Older projects:</strong> a project that has its spec files directly in <code>spec/</code> (no <code>spec/base/</code>) keeps working; Pisa reads and writes there. New projects start with <code>spec/base/</code>.</p>
 </blockquote>
 <h2 id="installing-pisa">Installing Pisa<a class="headerlink" href="#installing-pisa" title="Permanent link">&para;</a></h2>
-<p>Pisa is a single program with no dependencies — no Node, no Bun, nothing else to install. You can download it from the <a href="https://github.com/Arcware-io/pisa/releases">releases page</a> of the public repository <code>Arcware-io/pisa</code> without a GitHub account or the GitHub CLI. This guide is also available as a website: <a href="https://arcware-io.github.io/pisa/">https://arcware-io.github.io/pisa/</a>.</p>
+<p>Pisa is a single program with no dependencies — no Node, no Bun, nothing else to install (the generated project needs a JDK or Node.js: <a href="#setting-up-your-development-environment">Setting up your development environment</a>). You can download it from the <a href="https://github.com/Arcware-io/pisa/releases">releases page</a> of the public repository <code>Arcware-io/pisa</code> without a GitHub account or the GitHub CLI. This guide is also available as a website: <a href="https://arcware-io.github.io/pisa/">https://arcware-io.github.io/pisa/</a>.</p>
 <p><strong>Pick the right file for your machine:</strong></p>
 <table>
 <thead>
@@ -2358,6 +2525,57 @@ pisa<span class="w"> </span>--version
 </ul>
 <h3 id="updating">Updating<a class="headerlink" href="#updating" title="Permanent link">&para;</a></h3>
 <p>Run the install script again, or download the new file and replace the old one. <code>pisa --version</code> shows which version you're running.</p>
+<h2 id="setting-up-your-development-environment">Setting up your development environment<a class="headerlink" href="#setting-up-your-development-environment" title="Permanent link">&para;</a></h2>
+<p>Pisa itself needs nothing but its own file. The generated project needs a JDK (Spring) or Node.js (Hono), and a few tools make daily work with Pisa faster and more repeatable. None of this is required; take what you use.</p>
+<h3 id="java-maven-and-the-maven-daemon-with-sdkman-spring">Java, Maven and the Maven Daemon with SDKMAN (Spring)<a class="headerlink" href="#java-maven-and-the-maven-daemon-with-sdkman-spring" title="Permanent link">&para;</a></h3>
+<p><a href="https://sdkman.io">SDKMAN</a> installs and switches JDKs and build tools per user, without admin rights (macOS, Linux; on Windows use WSL or Scoop/Chocolatey):</p>
+<div class="highlight"><pre><span></span><code>curl<span class="w"> </span>-s<span class="w"> </span><span class="s2">"https://get.sdkman.io"</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>bash<span class="w">    </span><span class="c1"># then open a new terminal</span>
+sdk<span class="w"> </span>list<span class="w"> </span>java<span class="w">                              </span><span class="c1"># pick an identifier of a Temurin JDK 25, for example 25.0.4-tem</span>
+sdk<span class="w"> </span>install<span class="w"> </span>java<span class="w"> </span>&lt;identifier&gt;
+sdk<span class="w"> </span>install<span class="w"> </span>maven<span class="w">                          </span><span class="c1"># Maven; only needed if you do not use ./mvnw</span>
+sdk<span class="w"> </span>install<span class="w"> </span>mvnd<span class="w">                           </span><span class="c1"># the Maven Daemon, see below</span>
+java<span class="w"> </span>-version
+</code></pre></div>
+<ul>
+<li><strong><code>./mvnw</code>, the Maven Wrapper:</strong> a Spring project from <code>pisa init</code> contains <code>mvnw</code> (macOS, Linux) and <code>mvnw.cmd</code> (Windows). <code>./mvnw test</code> downloads the Maven version of the project on first use, so a machine with only a JDK builds the project. Docker and the generated <code>ci.yml</code> use it too. This guide and the tutorials write <code>./mvnw</code>; with an installed Maven, <code>mvn</code> does the same. On Windows (PowerShell, cmd) use <code>mvnw.cmd</code> instead of <code>./mvnw</code>.</li>
+<li><strong><code>mvnd</code>, the Maven Daemon:</strong> keeps a warm JVM between runs. The acceptance runs of <code>pisa story</code> (<code>--check</code>, <code>--implement</code>) are about 10 s faster per Maven run (16 s instead of 26 s measured on a small project). Pisa uses <code>mvnd</code> when it is on the <code>PATH</code>, else <code>./mvnw</code>, else <code>mvn</code>, and prints a warning to install <code>mvnd</code> when it is missing; it never installs anything itself. <code>PISA_MAVEN=mvnd</code>, <code>PISA_MAVEN=./mvnw</code> or <code>PISA_MAVEN=mvn</code> forces the choice. The daemon stays in memory after the run; <code>mvnd --stop</code> ends it. <strong>The wrapper can use the daemon as well,</strong> so that <code>./mvnw</code> runs <code>mvnd</code> without an installed one: <code>./mvnw -N wrapper:wrapper -Dtype=only-script -Dmvnd=&lt;version&gt;</code> (for example <code>1.0.6</code>) changes <code>.mvn/wrapper/maven-wrapper.properties</code> to download that <code>mvnd</code> (tried with 1.0.6 on macOS; the call also needs a network connection).</li>
+<li><strong>One JDK per project:</strong> <code>sdk env init</code> writes a <code>.sdkmanrc</code> with the versions in use, and <code>sdk env</code> switches to them when you enter the folder. Commit the file so that others get the same JDK.</li>
+</ul>
+<h3 id="nodejs-with-nvm-typescript">Node.js with nvm (TypeScript)<a class="headerlink" href="#nodejs-with-nvm-typescript" title="Permanent link">&para;</a></h3>
+<p>A Hono project needs Node.js 24 or newer and npm. With <a href="https://github.com/nvm-sh/nvm">nvm</a> (macOS, Linux; on Windows use <a href="https://github.com/coreybutler/nvm-windows">nvm-windows</a> or Scoop/Chocolatey) you install and switch versions per project:</p>
+<div class="highlight"><pre><span></span><code>nvm<span class="w"> </span>install<span class="w"> </span><span class="m">24</span>
+nvm<span class="w"> </span>use<span class="w"> </span><span class="m">24</span>
+node<span class="w"> </span>-v
+<span class="nb">echo</span><span class="w"> </span><span class="m">24</span><span class="w"> </span>&gt;<span class="w"> </span>.nvmrc<span class="w">      </span><span class="c1"># in the project: `nvm use` then picks this version</span>
+</code></pre></div>
+<p>Other version managers (fnm, mise, asdf) work the same way; Pisa only looks at the <code>node</code> and <code>npm</code> on the <code>PATH</code>.</p>
+<h3 id="docker-optional">Docker (optional)<a class="headerlink" href="#docker-optional" title="Permanent link">&para;</a></h3>
+<p>PostgreSQL for development (<code>docker compose up -d db</code>), the container tests and the generated image need Docker. Docker Desktop, Colima or Podman with the Docker socket work. Without a <code>docker</code> block in the <code>.adl</code> you need none of it.</p>
+<h3 id="intellij-idea-or-vs-code-for-the-generated-project">IntelliJ IDEA or VS Code for the generated project<a class="headerlink" href="#intellij-idea-or-vs-code-for-the-generated-project" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>IntelliJ IDEA (Spring):</strong> open the folder with <code>pom.xml</code>, accept "Load Maven project", and set the project SDK to the JDK from SDKMAN (<em>File → Project Structure → SDK</em>; SDKMAN JDKs lie under <code>~/.sdkman/candidates/java</code>). The run configuration of the application class starts the app; acceptance tests of a story run with the Maven profile <code>ac</code> (<code>./mvnw test -Pac -Dgroups=AC1</code>) or from the terminal with <code>pisa story --check</code>. Start IntelliJ from a terminal where <code>pisa</code> and <code>node</code> are found, or the IDE terminal does not see them.</li>
+<li><strong>IntelliJ IDEA (Hono):</strong> open the folder, set <em>Settings → Languages &amp; Frameworks → Node.js</em> to the Node from nvm, and run the npm scripts (<code>npm test</code>, <code>npm run typecheck</code>) from the <em>npm</em> tool window.</li>
+<li><strong>VS Code (Spring):</strong> the extension packs <em>Extension Pack for Java</em> and <em>Spring Boot Extension Pack</em> run and debug the application and the JUnit tests. Set <code>java.jdt.ls.java.home</code> if the JDK of SDKMAN is not found.</li>
+<li><strong>VS Code (Hono):</strong> TypeScript is built in; add the <em>Prisma</em> extension for <code>schema.prisma</code>. Run the scripts from the integrated terminal.</li>
+<li><strong>Both:</strong> install the Pisa plugin and PlantUML as described in the next sections, and keep a terminal open in the project folder: <code>pisa</code>, <code>./mvnw</code> or <code>npm</code> and <code>git</code> all run there.</li>
+</ul>
+<blockquote>
+<p><strong>Not tried by the author:</strong> only SDKMAN with the Maven Daemon (macOS) was run on a real machine. The other steps follow the documentation of the tools.</p>
+</blockquote>
+<h2 id="setting-up-a-language-model-optional">Setting up a language model (optional)<a class="headerlink" href="#setting-up-a-language-model-optional" title="Permanent link">&para;</a></h2>
+<p>Everything that generates code from your specs works without a model. Only the commands that ask a language model need one: the <code>propose-…</code> commands, <code>pisa story --specify|--plan|--test|--implement</code> and <code>pisa extend --specify|--test|--implement|--explain</code>. Pisa uses the <code>pi</code> coding agent, which resolves the provider and model you have configured locally; Pisa does not pin one. Two ways, both tried on a real machine:</p>
+<p><strong>Anthropic login.</strong> Authentication is a slash command in the interactive <code>pi</code> terminal UI: start <code>pi</code>, type <code>/login</code> and pick Anthropic. The credentials land in <code>~/.pi/agent/auth.json</code>, in one of two shapes that must not be mixed up (mixing them fails with a cryptic <code>invalid_state</code>):</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span><span class="w"> </span><span class="nt">"anthropic"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"oauth"</span><span class="p">,</span><span class="w"> </span><span class="nt">"access"</span><span class="p">:</span><span class="w"> </span><span class="s2">"..."</span><span class="p">,</span><span class="w"> </span><span class="nt">"refresh"</span><span class="p">:</span><span class="w"> </span><span class="s2">"..."</span><span class="p">,</span><span class="w"> </span><span class="nt">"expires"</span><span class="p">:</span><span class="w"> </span><span class="mi">1234567890</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span>
+<span class="p">{</span><span class="w"> </span><span class="nt">"anthropic"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nt">"type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"api_key"</span><span class="p">,</span><span class="w"> </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"sk-ant-..."</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="p">}</span>
+</code></pre></div>
+<p>The first is a Claude Pro/Max login (<code>/login</code>), the second an API key from the Anthropic Console. Problems met in practice:</p>
+<ul>
+<li><code>invalid_grant: Refresh token expired</code>: log in again with <code>/login</code>.</li>
+<li><code>anthropic-workspace-id is required...</code>: a personal key of a multi-workspace Console organisation is not accepted; use <code>/login</code> or a workspace-scoped key.</li>
+<li>A billing message ("Third-party apps now draw from your extra usage ..."): the account has no Extra Usage credit. This is account billing, not a Pisa error.</li>
+</ul>
+<p><strong>Reuse the credentials of Claude Code.</strong> The community extension <a href="https://github.com/pankajudhas81/pi-claude-auth"><code>pi-claude-auth</code></a> reads the tokens Claude Code has stored and copies them into <code>auth.json</code>, so no second login is needed (<code>pi install npm:@pankajudhas81/pi-claude-auth</code>; Claude Code must be installed and logged in). Its own README notes that Anthropic's terms limit subscription tokens to official clients: this is a workaround, not an Anthropic-sanctioned integration, and it may break. Mentioned for transparency, not as a recommendation.</p>
+<p>A local model through llama.cpp works as well (<code>/login llama.cpp</code> in <code>pi</code>), but inference on Apple Silicon was too slow for a comfortable loop. Not verified here: these steps with the compiled <code>pisa</code> binary instead of a source checkout.</p>
 <h2 id="setting-up-your-editor-optional">Setting up your editor (optional)<a class="headerlink" href="#setting-up-your-editor-optional" title="Permanent link">&para;</a></h2>
 <p>Pisa works fine without any of this. But two add-ons make writing specs much nicer:</p>
 <ol>
@@ -2415,15 +2633,15 @@ sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> <
 <h3 id="what-you-need">What you need<a class="headerlink" href="#what-you-need" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Pisa</strong> on your PATH (<code>pisa --version</code> should work).</li>
-<li><strong>JDK 25</strong> (17 and 21 also work with <code>--java</code>) and <strong>Maven</strong> (Windows: <code>choco install maven</code> or Scoop).</li>
+<li><strong>JDK 25</strong> (17 and 21 also work with <code>--java</code>) and <strong>Maven</strong> (Windows: <code>choco install maven</code> or Scoop). The project brings the Maven Wrapper <code>./mvnw</code>, so the JDK alone is enough to build it; how to install both: <a href="#setting-up-your-development-environment">Setting up your development environment</a>.</li>
 <li><em>Optional:</em> the editor plugins and PlantUML from the previous section.</li>
-<li>An AI model is needed <strong>only</strong> for the <code>propose-model</code>, <code>propose-architecture</code> and <code>propose-layout</code> commands. This quick start doesn't use them.</li>
+<li>An AI model is needed <strong>only</strong> for the <code>propose-model</code>, <code>propose-architecture</code> and <code>propose-layout</code> commands. This quick start doesn't use them. How to set one up: <a href="#setting-up-a-language-model-optional">Setting up a language model</a>.</li>
 </ul>
 <p>The commands below are written for Bash. In PowerShell, replace a trailing <code>\</code> with a backtick.</p>
 <h3 id="step-1-create-the-project">Step 1: Create the project<a class="headerlink" href="#step-1-create-the-project" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code>pisa<span class="w"> </span>init<span class="w"> </span>--target<span class="w"> </span>spring-boot<span class="w"> </span>--out<span class="w"> </span>./shop<span class="w"> </span>--group<span class="w"> </span>ch.example<span class="w"> </span>--artifact<span class="w"> </span>shop
 </code></pre></div>
-<p>This creates an empty Spring Boot project that already starts (<code>pom.xml</code>, application class, a test, <code>application.yml</code>, <code>README.md</code>). You also get:</p>
+<p>This creates an empty Spring Boot project that already starts (<code>pom.xml</code>, the Maven Wrapper <code>mvnw</code>, <code>mvnw.cmd</code> and <code>.mvn/wrapper/</code>, application class, a test, <code>application.yml</code>, <code>README.md</code>; with <code>./mvnw</code> you need no Maven installed; Dockerfile and <code>ci.yml</code> use it too). You also get:</p>
 <ul>
 <li><code>spec/base/</code> — where your spec files go, and <code>spec/README.md</code>, a cheat sheet (which files there are, a short <code>.dml</code> reference, a form and a use case example).</li>
 <li><code>doc/</code> — a copy of this guide and both tutorials, matching your Pisa version.</li>
@@ -2465,7 +2683,7 @@ pisa<span class="w"> </span>generate<span class="w"> </span>--file<span class="w
 <p>Everything under <code>src/</code> is rewritten on each <code>generate</code>. Don't edit those files by hand — change the specs instead, or <a href="#customizing-templates">customize the templates</a>.</p>
 </blockquote>
 <h3 id="step-4-run-it">Step 4: Run it<a class="headerlink" href="#step-4-run-it" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>mvn<span class="w"> </span>spring-boot:run
+<div class="highlight"><pre><span></span><code>./mvnw<span class="w"> </span>spring-boot:run
 </code></pre></div>
 <ul>
 <li>Web UI: http://localhost:8080/</li>
@@ -2565,7 +2783,7 @@ npm<span class="w"> </span>start<span class="w">                                
 </tr>
 <tr>
 <td>Tests</td>
-<td><code>mvn test</code>, browser tests <code>mvn test -Pui</code></td>
+<td><code>./mvnw test</code>, browser tests <code>./mvnw test -Pui</code></td>
 <td><code>npm test</code>, browser tests <code>npm run test:ui</code></td>
 </tr>
 <tr>
@@ -2692,14 +2910,14 @@ entity Company {
           01-spec.md … 05-check.md       one file per phase
 </code></pre></div>
 <p><code>pisa story</code> works through five phases, one file each:</p>
-<div class="highlight"><pre><span></span><code>pisa<span class="w"> </span>story<span class="w"> </span>--specify<span class="w"> </span><span class="s2">"User can log in"</span><span class="w">   </span><span class="c1"># 01-spec.md: a feature with its first story and a table of criteria</span>
+<div class="highlight"><pre><span></span><code>pisa<span class="w"> </span>story<span class="w"> </span>--specify<span class="w"> </span><span class="s2">"User can log in"</span><span class="w">   </span><span class="c1"># the model writes the story, chooses the feature, asks; 01-spec.md with the criteria</span>
 pisa<span class="w"> </span>story<span class="w"> </span>--plan<span class="w">                        </span><span class="c1"># 02-plan.md: one task per criterion</span>
 pisa<span class="w"> </span>story<span class="w"> </span>--test<span class="w">                        </span><span class="c1"># 03-test.md: freezes the acceptance tests</span>
 pisa<span class="w"> </span>story<span class="w"> </span>--implement<span class="w">                   </span><span class="c1"># 04-implement.md: assignment and open tasks</span>
 pisa<span class="w"> </span>story<span class="w"> </span>--check<span class="w">                       </span><span class="c1"># runs the acceptance tests, writes 05-check.md</span>
 </code></pre></div>
-<p>To add a story to an existing feature, name it: <code>pisa story --specify "…" --feature 001</code>. A step-by-step course with real output is step 13 of the <a href="https://arcware-io.github.io/pisa/pisa-tutorial-hono-typescript/">Hono tutorial</a>. The details of every option are in <a href="#pisa-story"><code>pisa story</code></a>.</p>
-<p>The acceptance tests of a story run <strong>only on demand</strong> — with <code>mvn test -Pac</code> (Spring) or <code>npm run test:ac</code> (Hono), never in the normal build. The CI only checks that every story with a plan has a report without failures.</p>
+<p>The model chooses the feature the story belongs to (the first story starts the first feature); to decide yourself, name it: <code>pisa story --specify "…" --feature 001</code>. A step-by-step course with real output is step 13 of the <a href="https://arcware-io.github.io/pisa/pisa-tutorial-hono-typescript/">Hono tutorial</a>. The details of every option are in <a href="#pisa-story"><code>pisa story</code></a>.</p>
+<p>The acceptance tests of a story run <strong>only on demand</strong> — with <code>./mvnw test -Pac</code> (Spring) or <code>npm run test:ac</code> (Hono), never in the normal build. The CI only checks that every story with a plan has a report without failures.</p>
 <h2 id="describing-your-architecture-adl">Describing your architecture (.adl)<a class="headerlink" href="#describing-your-architecture-adl" title="Permanent link">&para;</a></h2>
 <p>An <code>.adl</code> file describes everything about your app <em>except</em> the data: which language, which database, whether there's a login, and optional extras like Docker, GitHub CI and cloud deployment. It follows the C4 levels: <strong>containers</strong> (database, backend, frontend) and, in the backend, <strong>components</strong> (<code>crud</code> or <code>layered</code>). It's optional — without one, you get a Spring Boot app with an in-memory database.</p>
 <p>Here's a full example. Everything after <code>container web</code> is optional:</p>
@@ -2849,8 +3067,8 @@ docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> 
 <tbody>
 <tr>
 <td>Spring</td>
-<td><code>mvn -B test</code> (with PostgreSQL <code>-Ptestcontainers</code>)</td>
-<td>install the Playwright browser, then <code>mvn -B test -Pui</code></td>
+<td><code>./mvnw -B test</code> (with PostgreSQL <code>-Ptestcontainers</code>)</td>
+<td>install the Playwright browser, then <code>./mvnw -B test -Pui</code></td>
 </tr>
 <tr>
 <td>Hono</td>
@@ -2972,42 +3190,42 @@ gh<span class="w"> </span>repo<span class="w"> </span>create<span class="w"> </s
 <tr>
 <td>Database classes and repositories: save, read, delete, required field, <code>unique</code>, parts</td>
 <td><code>repository/&lt;Entity&gt;RepositoryTest</code></td>
-<td><code>mvn test</code></td>
+<td><code>./mvnw test</code></td>
 </tr>
 <tr>
 <td>REST API: create, read, update, delete, paging, 404, 400 (required field or rule), 409 (<code>unique</code>)</td>
 <td><code>controller/&lt;Entity&gt;ControllerTest</code></td>
-<td><code>mvn test</code></td>
+<td><code>./mvnw test</code></td>
 </tr>
 <tr>
 <td>Code structure (ArchUnit: layers, no cycles, naming rules)</td>
 <td><code>ArchitectureTest</code></td>
-<td><code>mvn test</code></td>
+<td><code>./mvnw test</code></td>
 </tr>
 <tr>
 <td>Each entity's web page</td>
 <td><code>ui/&lt;Entity&gt;PageUiTest</code></td>
-<td><code>mvn test -Pui</code></td>
+<td><code>./mvnw test -Pui</code></td>
 </tr>
 <tr>
 <td>Menu navigation</td>
 <td><code>ui/NavigationUiTest</code></td>
-<td><code>mvn test -Pui</code></td>
+<td><code>./mvnw test -Pui</code></td>
 </tr>
 <tr>
 <td>Each use case</td>
 <td><code>ui/UC&lt;n&gt;UiTest</code></td>
-<td><code>mvn test -Pui</code></td>
+<td><code>./mvnw test -Pui</code></td>
 </tr>
 <tr>
 <td>Repositories and the app against real PostgreSQL (PostgreSQL projects only)</td>
 <td><code>…PostgresTest</code>, <code>…PostgresApplicationTest</code></td>
-<td><code>mvn test -Ptestcontainers</code></td>
+<td><code>./mvnw test -Ptestcontainers</code></td>
 </tr>
 </tbody>
 </table>
-<p>Browser tests use <strong>Playwright for Java</strong>, find fields by their <code>name</code> attribute (so a layout from the mockup doesn't change the tests), and carry the JUnit tag <code>ui</code>, so <code>mvn test</code> skips them. The first Maven build loads Playwright once (about 200 MB), the first <code>-Pui</code> run adds a Chromium browser; after that it works offline. The tests with <strong>Testcontainers</strong> start a <code>postgres</code> container in Docker themselves and delete it afterwards, so they need Docker running; <code>-Pui,testcontainers</code> switches on both profiles, and the generated CI includes the profile. With H2 there are neither those tests nor the profile. TypeScript projects use <code>npm test</code> and <code>npm run test:ui</code>; against PostgreSQL, start <code>docker compose up -d db</code> first, then <code>npm test</code>.</p>
-<p>Acceptance tests of stories run only on demand: <code>mvn test -Pac</code> (Spring) or <code>npm run test:ac</code> (Hono). See <a href="#pisa-story"><code>pisa story</code></a>.</p>
+<p>Browser tests use <strong>Playwright for Java</strong>, find fields by their <code>name</code> attribute (so a layout from the mockup doesn't change the tests), and carry the JUnit tag <code>ui</code>, so <code>./mvnw test</code> skips them. The first Maven build loads Playwright once (about 200 MB), the first <code>-Pui</code> run adds a Chromium browser; after that it works offline. The tests with <strong>Testcontainers</strong> start a <code>postgres</code> container in Docker themselves and delete it afterwards, so they need Docker running; <code>-Pui,testcontainers</code> switches on both profiles, and the generated CI includes the profile. With H2 there are neither those tests nor the profile. TypeScript projects use <code>npm test</code> and <code>npm run test:ui</code>; against PostgreSQL, start <code>docker compose up -d db</code> first, then <code>npm test</code>.</p>
+<p>Acceptance tests of stories run only on demand: <code>./mvnw test -Pac</code> (Spring) or <code>npm run test:ac</code> (Hono). See <a href="#pisa-story"><code>pisa story</code></a>.</p>
 <h3 id="optional-tutorial-steps-you-can-do-by-hand">Optional tutorial steps you can do by hand<a class="headerlink" href="#optional-tutorial-steps-you-can-do-by-hand" title="Permanent link">&para;</a></h3>
 <p><code>pisa play</code> skips some tutorial steps. You can do them yourself at any time, in any existing project:</p>
 <table>
@@ -3036,12 +3254,12 @@ gh<span class="w"> </span>repo<span class="w"> </span>create<span class="w"> </s
 </tr>
 <tr>
 <td>Run only the database</td>
-<td><code>docker compose up -d db</code>, then <code>mvn spring-boot:run</code> or <code>npm start</code></td>
+<td><code>docker compose up -d db</code>, then <code>./mvnw spring-boot:run</code> or <code>npm start</code></td>
 <td>PostgreSQL needs a few seconds to be ready</td>
 </tr>
 <tr>
 <td>Test against real PostgreSQL</td>
-<td>Spring: <code>mvn test -Ptestcontainers</code>. TypeScript: <code>docker compose up -d db</code>, then <code>npm test</code> (<code>TEST_DATABASE_URL</code> sets another address).</td>
+<td>Spring: <code>./mvnw test -Ptestcontainers</code>. TypeScript: <code>docker compose up -d db</code>, then <code>npm test</code> (<code>TEST_DATABASE_URL</code> sets another address).</td>
 <td>Docker must be running (<code>DOCKER_HOST</code> if the socket is elsewhere)</td>
 </tr>
 </tbody>
@@ -3215,7 +3433,7 @@ pisa init [--target spring-boot|hono-prisma] --out &lt;dir&gt; [--group &lt;grou
 <h3 id="pisa-play">pisa play<a class="headerlink" href="#pisa-play" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code>pisa play &lt;spring-java | hono-typescript | file.md&gt; [--dir &lt;folder&gt;] [--llm] [--fast] [--yes] [--dry-run] [--from &lt;n&gt;] [--to &lt;n&gt;]
 </code></pre></div>
-<p>Runs a tutorial for you: executes its commands, writes the files it shows, starts the app and asks it for the login page, and reports each step with ✓ or ✗. Run <code>pisa play</code> with no name to list the tutorials. The bundled tutorials need no file, even with the installed binary.</p>
+<p>Runs a tutorial for you: executes its commands, writes the files it shows, starts the app and asks it for the login page, and reports each step with ✅ or ❌. A step that is not played (by hand, or left out by <code>--fast</code> or the missing <code>--llm</code>) is named in one line with <code>· skipped:</code> and the reason, so the numbers of the steps have no gaps. Run <code>pisa play</code> with no name to list the tutorials. The bundled tutorials need no file, even with the installed binary.</p>
 <table>
 <thead>
 <tr>
@@ -3230,11 +3448,11 @@ pisa init [--target spring-boot|hono-prisma] --out &lt;dir&gt; [--group &lt;grou
 </tr>
 <tr>
 <td><code>--llm</code></td>
-<td>Actually calls the AI model for the AI steps (<code>pi</code> must be set up)</td>
+<td>Actually calls the AI model for the AI steps (<code>pi</code> must be set up); a step that asks a question (<code>pisa story --specify</code>: <code>Write? [Y/n/f]</code>) is answered with Y</td>
 </tr>
 <tr>
 <td><code>--fast</code></td>
-<td>Skips tests, app startup, replay and optional steps. Takes a few seconds.</td>
+<td>Skips tests (also the acceptance check <code>pisa story --check</code> at the end of the stories), app startup, replay and optional steps. With <code>--llm</code> the model steps still run, including the acceptance tests inside <code>story --test</code> and <code>story --implement</code>; only the final checks are left out.</td>
 </tr>
 <tr>
 <td><code>--dry-run</code></td>
@@ -3400,15 +3618,17 @@ pisa init [--target spring-boot|hono-prisma] --out &lt;dir&gt; [--group &lt;grou
 <h3 id="pisa-story">pisa story<a class="headerlink" href="#pisa-story" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code>pisa story --specify "&lt;story&gt;" [--feature &lt;NNN&gt;] [--project &lt;dir&gt;]
 pisa story --plan|--test|--implement|--check [--feature &lt;NNN&gt;] [--story &lt;NNN&gt;] [--project &lt;dir&gt;]
+pisa story --implement [--allow &lt;path&gt;]... [--allow-overwrite] [--feature &lt;NNN&gt;] [--story &lt;NNN&gt;] [--project &lt;dir&gt;]
 pisa story --check --full [--project &lt;dir&gt;]
 pisa story --list [--project &lt;dir&gt;]
 </code></pre></div>
 <p>Works off a user story of your application in five phases, one file per phase, in <code>spec/features/NNN-&lt;feature&gt;/stories/NNN-&lt;story&gt;/</code> (the same phases and files as <code>pisa extend</code>, which does this for Pisa itself). A <strong>feature</strong> (<code>feature.md</code>: goal, scope, its stories) groups the stories of one theme. Your base specs stay in <code>spec/base/</code>.</p>
 <ul>
-<li><strong><code>--specify</code></strong> creates a new feature with its first story, <code>01-spec.md</code> with a table of acceptance criteria to fill in (it doesn't ask the model yet). With <code>--feature NNN</code> the story is added to that feature instead.</li>
+<li><strong><code>--specify "&lt;sentence&gt;"</code></strong> asks the language model (<code>pi</code> must be set up, as for <code>propose-model</code>) to write a story from your sentence: a description, acceptance criteria <code>AC1</code> … <code>ACn</code> (1 to 10, each one checkable by a test) and proposals for the next stories. It also chooses the feature the story belongs to, or starts the first one (<code>feature.md</code> gets its goal and scope). Pisa checks the answer (no placeholder, IDs in order, no <code>ß</code>, the language of your sentence; a wrong answer goes back, 3 attempts, then an error and nothing is written), prints what it understood and asks <code>Write? [Y/n/f]</code>: <code>Y</code> or Enter writes, <code>n</code> stops without writing, <code>f</code> asks for another feature number and chooses again. The model says when an existing story already covers your sentence (<code>Similar to: …</code> under <code>Understood as:</code>); then a second yes is needed (<code>Create a new story anyway? [y/N]</code>, default no). A word match between your sentence and the existing titles does the same. The proposed next stories are only text under <code>## Next stories (suggested)</code> in <code>feature.md</code>: a sentence that matches one of them turns it into the story. <code>--feature NNN</code> fixes the feature; the question stays. <strong>Not allowed in CI:</strong> with the environment variable <code>CI</code> set, it stops before it asks the model.</li>
 <li><strong><code>01-spec.md</code></strong> holds the criteria as a table (<code>| AC1 | … |</code>), written from the requester's point of view, in business language.</li>
-<li><strong>Acceptance tests</strong> carry the number of the criterion in their name, <code>acceptance("AC1: …")</code> (from <code>test/support/acceptance.ts</code> in TypeScript, <code>@Acceptance</code> in Java), and live in <code>stories/&lt;name&gt;/tests/</code> of the project (<code>&lt;name&gt;</code> is the feature, or <code>&lt;feature&gt;-&lt;story&gt;</code> for a further story). They run <strong>only</strong> with <code>PISA_ACCEPTANCE=1</code>: <code>mvn test -Pac</code> (Spring; the profile <code>ac</code> of the <code>pom.xml</code> adds <code>stories/</code> as a test folder with the build-helper plugin, so the folder need not match the Java package; a project from an earlier version gets it with <code>pisa init … --force</code>) or <code>npm run test:ac</code> (Hono), never in the normal build. In Spring every acceptance test carries the JUnit tag of its criterion next to <code>@Acceptance</code>: <code>@Tag("AC1")</code>; class and method names are free. Use case tests (<code>UC1: …</code>) stay separate and run in the normal build. One criterion: <code>mvn test -Pac -Dgroups=AC2</code> or <code>npm run test:ac:story -- --test-name-pattern "AC2:"</code>.</li>
-<li><strong><code>--test</code></strong> freezes the test files (SHA-256 in the table "Frozen files" of <code>03-test.md</code>) and warns about a criterion without a test.</li>
+<li><strong>Acceptance tests</strong> carry the number of the criterion in their name, <code>acceptance("AC1: …")</code> (from <code>test/support/acceptance.ts</code> in TypeScript, <code>@Acceptance</code> in Java), and live in <code>stories/&lt;name&gt;/tests/</code> of the project (<code>&lt;name&gt;</code> is the feature, or <code>&lt;feature&gt;-&lt;story&gt;</code> for a further story). They run <strong>only</strong> with <code>PISA_ACCEPTANCE=1</code>: <code>./mvnw test -Pac</code> (Spring; the profile <code>ac</code> of the <code>pom.xml</code> adds <code>stories/</code> as a test folder with the build-helper plugin, so the folder need not match the Java package; a project from an earlier version gets it with <code>pisa init … --force</code>) or <code>npm run test:ac</code> (Hono), never in the normal build. In Spring every acceptance test carries the JUnit tag of its criterion next to <code>@Acceptance</code>: <code>@Tag("AC1")</code>; class and method names are free. Use case tests (<code>UC1: …</code>) stay separate and run in the normal build. One criterion: <code>./mvnw test -Pac -Dgroups=AC2</code> or <code>ACCEPTANCE_PATTERN="AC2:" npm run test:ac:story</code>.</li>
+<li><strong><code>--test</code></strong> freezes the test files (SHA-256 in the table "Frozen files" of <code>03-test.md</code>) and warns about a criterion without a test. The language model writes only the bodies of the tests: Pisa writes the frame of the test file (package, imports and set-up copied from an existing MockMvc test of the project, one method per criterion with <code>@Acceptance</code> and <code>@Tag("ACn")</code> in Spring, <code>acceptance("ACn: …")</code> in Hono), so a forgotten tag or a wrong import line cannot occur; Pisa still checks that the tests compile and fail before the implementation (three attempts). A Spring project without an existing MockMvc test falls back to a model that writes the whole file.</li>
+<li><strong><code>--implement</code></strong>: the first call writes <code>04-implement.md</code> (the tasks of <code>02-plan.md</code> and the frozen tests; the model is not called). The second call (<code>04-implement.md</code> exists) lets the model implement the open tasks with the tools <code>read</code>, <code>write</code> (create or edit) and <code>finish task</code>; there is no shell and no network tool (<code>pi</code> must be set up). After each task Pisa runs the acceptance tests of the criterion (Spring: <code>./mvnw test -Pac -Dgroups=ACn -Dtest=&lt;test classes of the story&gt;</code>; Hono: <code>npm run test:ac:story</code>) and gives the red criteria and the end of the output back to the model. When all criteria are green it ends with <code>Converged</code> and runs <code>pisa story --check</code>, so <code>05-check.md</code> shows the criteria green. The limits for rounds and time are those of <code>pisa extend --implement</code>; when one is reached with red criteria the run stops and says so, and the log table in <code>04-implement.md</code> has task, files and result. A run that stops can be started again: it resumes at the first open task. Writes are limited to the paths a plan task names, the paths of <code>--allow &lt;path&gt;</code> (repeatable) and a default area: in Spring the base package under <code>src/main/java</code> and <code>src/main/resources</code>, in Hono <code>src/</code>. Never writable, even with <code>--allow</code>: the frozen tests and <code>spec/</code>; such a write is rejected and stops the run with the reason. <strong><code>--allow-overwrite</code></strong> frees all generated files at once (frozen tests, <code>spec/</code> and <code>stories/</code> stay protected); use it when the story changes behavior that the spec does not describe, for example an action in a list page. <strong>Generated files</strong> (the files listed in <code>.pisa/recipe.json</code>, for example <code>src/route/PersonRoutes.ts</code>) are writable only when <code>--allow</code> names exactly that path (no folder, no pattern); without it the write is rejected with <code>&lt;path&gt; is a generated file (.pisa/recipe.json); use --allow &lt;path&gt;</code>. New files the model writes are not part of the recipe, so <code>generate</code> and <code>replay</code> leave them unchanged. A run that wrote a generated file ends with a warning (the exit code stays 0): <code>warning: changed generated files: &lt;paths&gt;. pisa generate --force and pisa replay write them again; the change is lost.</code> The list comes from the files the model wrote (the log in <code>04-implement.md</code>), not from a comparison of hashes, so a file only reformatted by the build is not named. <strong>Not allowed in CI:</strong> with the environment variable <code>CI</code> set, it stops before the model is asked.</li>
 <li><strong>The frozen-hash check:</strong> <code>--check</code> first compares every file of that table with its SHA-256. A changed or missing file, or a <code>03-test.md</code> without the table, is red (named in the tree and in <code>05-check.md</code>) and gives exit code 1, however green the tests are. A test file in <code>tests/</code> that the table doesn't list is added to it, with a warning.</li>
 <li><strong><code>--check</code></strong> runs the test of every criterion and writes <code>05-check.md</code>: ✅ for green, ❌ for red, ☐ for not run. It prints a tree with the duration of every criterion. Exit code 1 unless every criterion is green and no frozen test was changed.</li>
 <li><strong><code>--check --full</code></strong> runs every story, then prints a summary table, the line <code>N of M stories accepted</code> and the line <code>Acceptance criteria: G ✅ green, R ❌ red (T in total)</code>. <strong><code>--list</code></strong> shows all stories with ✅ or ❌.</li>
@@ -3433,10 +3653,10 @@ pisa extend --format                        # tidies the Markdown of every featu
 <li><strong><code>--plan</code></strong> works in two steps, so you can review the plan before it reaches the board.</li>
 <li>Without <code>--board</code>, it first <strong>checks <code>01-spec.md</code></strong> and prints what it finds as warnings (never an error, and the plan is written in every case): a deterministic check (missing sections, no acceptance rows, unknown or missing layers, open questions under <code>## Open</code>) and a judgement by the language model whether Pisa can build the spec at all, measured against "Not yet possible" in this guide. A failed model call is one warning; <code>PISA_PLAN_CHECK=off</code> skips only the model check. Then it writes <code>02-plan.md</code> with the tasks of the layers named in the spec, and refuses to overwrite an existing plan. It touches no GitHub.</li>
 <li>With <code>--board &lt;owner&gt;/&lt;number&gt;</code> (needs <code>gh</code>, installed and logged in), it reads the existing <code>02-plan.md</code> and creates one GitHub issue per task, titled <code>Pisa#N: &lt;task&gt;</code> (N is the highest board ID plus one), linked as a real sub-issue of the story issue whose title ends with <code>(Feature NNN)</code>, with area <code>pisa</code> and status <code>Backlog</code> (<code>Done</code>, and closed, for a ticked task). A task that already is a sub-issue is skipped, so you can run it again. A missing story issue, or two of them, is an error before anything is created.</li>
-<li><strong><code>--test</code></strong>: the model writes acceptance tests (or <code>--adopt</code> takes over hand-written ones, without the model and the red check); Pisa checks that they compile and fail, then freezes them in <code>03-test.md</code>. After freezing, the relative imports of the frozen tests are read: a <code>src/</code> path they import that no plan task lists yet is added, in backticks, to the matching task line of <code>02-plan.md</code> (no model), so <code>--implement</code> may write it. An import that resolves outside <code>projects/pisa/src/</code> is only a warning; one that climbs above the project root is an error. <code>--test --adopt</code> notes existing imported files that no task lists. <code>--force</code> writes anew.</li>
-<li><strong><code>--implement</code></strong>: the first call writes <code>04-implement.md</code>; the second lets the model implement with checked tools. A write to a path that no plan task names is rejected and ends the run at once: <code>write rejected: &lt;path&gt; is not listed in any task of 02-plan.md.</code>, with the line <code>List it with: pisa extend --implement --feature &lt;NNN&gt; --allow &lt;path&gt;</code>. <code>--allow &lt;path&gt;</code> lists an extra path under <code>projects/pisa/src/</code> on the first <code>[pisa-cli]</code> task line (repeatable; a frozen test can't be allowed). The progress line stays short (<code>&lt;file&gt; · &lt;task&gt;</code>), a finished task stays as <code>✔ &lt;task&gt; (&lt;n&gt; files)</code>, and a call with nothing left to do says <code>Converged: nothing to implement …</code>.</li>
-<li><strong><code>--check</code></strong> runs the acceptance tests and <code>tsc</code> and prints a <strong>tree</strong>: the headline <code>NNN/MMM | &lt;title&gt;</code>, then the checks (spec, tasks, acceptance, frozen, tsc) with every acceptance test (AC1, AC2, …) and its duration; a passed check shows a green check mark, a failed one a red cross (colour only on a terminal, not with <code>NO_COLOR</code>). It writes <code>05-check.md</code> and, next to it, a self-contained <code>check-report.html</code>. "Converged" means accepted; anything failed gives exit code 1. <code>--skip-tests</code> runs no process at all, so use it only for a look.</li>
-<li><strong><code>--check --full</code></strong> checks <strong>every</strong> story one after the other, live, and runs the suites of <code>pisa</code> and <code>dml-lang</code> <strong>once</strong>. It ends with a summary table (a row per story: feature, story, title, tasks, acceptance, <code>tsc</code>, result), the line <code>N of M features converged</code>, the line <code>Acceptance tests: N ✅ green, M ❌ red (K in total)</code>, and one <code>check-report.html</code> in <code>specs/features/</code>. Exit code 1 if any story isn't converged or a suite fails. This is what the CI runs every night and before every release.</li>
+<li><strong><code>--test</code></strong>: the model writes acceptance tests (or <code>--adopt</code> takes over hand-written ones, without the model and the red check); If <code>02-plan.md</code> exists, the model gets the plan with its paths: a test may import only the paths of the plan or an existing file, otherwise it goes back to the model (three attempts, nothing is written if all fail); a file it reads from <code>doc/</code>, <code>docs/</code>, <code>projects/</code> or <code>specs/</code> that exists nowhere gives a warning only. Without a plan only a hint to run <code>--plan</code> first appears. Pisa checks that they compile and fail, then freezes them in <code>03-test.md</code>. After freezing, the relative imports of the frozen tests are read: a <code>src/</code> path they import that no plan task lists yet is added, in backticks, to the matching task line of <code>02-plan.md</code> (no model), so <code>--implement</code> may write it. An import that resolves outside <code>projects/pisa/src/</code> is only a warning; one that climbs above the project root is an error. <code>--test --adopt</code> notes existing imported files that no task lists. <code>--force</code> writes anew.</li>
+<li><strong><code>--implement</code></strong>: the first call writes <code>04-implement.md</code>; the second lets the model implement with checked tools. A write to a path that no plan task names is rejected and ends the run at once: <code>write rejected: &lt;path&gt; is not listed in any task of 02-plan.md.</code>, with the line <code>List it with: pisa extend --implement --feature &lt;NNN&gt; --allow &lt;path&gt;</code>. <code>--allow &lt;path&gt;</code> lists an extra path under <code>projects/pisa/src/</code> on the first <code>[pisa-cli]</code> task line (repeatable; a frozen test can't be allowed). The progress line stays short (<code>&lt;file&gt; · &lt;task&gt;</code>), a finished task stays as <code>✅ &lt;task&gt; (&lt;n&gt; files)</code>, and a call with nothing left to do says <code>Converged: nothing to implement …</code>.</li>
+<li><strong><code>--check</code></strong> runs the acceptance tests and <code>tsc</code> and prints a <strong>tree</strong>: the headline <code>NNN/MMM | &lt;title&gt;</code>, then the checks (spec, tasks, acceptance, frozen, tsc) with every acceptance test (AC1, AC2, …) and its duration; a passed check shows a green check mark, a failed one a red cross (colour only on a terminal, not with <code>NO_COLOR</code>). It writes <code>05-check.md</code> and, next to it, a self-contained <code>check-report.html</code>. "Converged" means accepted; anything failed gives exit code 1. <code>--skip-tests</code> runs no process at all, so use it only for a look. A story that is <strong>only specified</strong> (it has <code>01-spec.md</code> but no <code>02-plan.md</code>) is neither an error nor accepted: the tree shows the line <code>☐ only specified: no plan yet (pisa extend --plan)</code> and the <code>tsc</code> line, no <code>05-check.md</code> is written, the last line is <code>Specified, not planned yet</code> and the exit code is 0. A story with a plan but no converged <code>05-check.md</code> stays not accepted.</li>
+<li><strong><code>--check --full</code></strong> checks <strong>every</strong> story one after the other, live. <code>tsc</code> runs <strong>once</strong> before the first story and its result is shown as the <code>tsc</code> line of every checked story (a failing <code>tsc</code> blocks all of them); no suite runs, because the CI runs them. <code>--suites</code> adds the suites of <code>pisa</code> and <code>dml-lang</code>, run once after the stories; it is only valid with <code>--check --full</code> (otherwise an error, exit code 1). <code>--skip-tests</code> leaves out <code>tsc</code> and the suites. It ends with a summary table (a row per story: feature, story, title, tasks, acceptance, <code>tsc</code>, result), the line <code>N of M features converged</code> (with <code>, K only specified</code> when K stories have no plan yet; they are left out of M, of the exit code and of the acceptance totals, and the HTML report lists them in their own group <code>only specified</code>), the line <code>Acceptance tests: N ✅ green, M ❌ red (K in total)</code>, and one <code>check-report.html</code> in <code>specs/features/</code>. Exit code 1 if any story isn't converged, or, with <code>--suites</code>, a suite fails. This is what the CI runs every night and before every release.</li>
 <li><strong><code>--format</code></strong> runs every Markdown file of every feature through a deterministic formatter (aligned table columns, one blank line around a heading, trailing spaces gone, dates as <code>YYYY-MM-DD HH:MM UTC</code>, a final newline; code blocks are left alone) and lists the files it changed. No model, no API key. Every phase formats its Markdown first, so you rarely need it yourself.</li>
 </ul>
 <h3 id="legacy-commands">Legacy commands<a class="headerlink" href="#legacy-commands" title="Permanent link">&para;</a></h3>
@@ -3640,6 +3860,13 @@ entity Book {
 </ul>
 <h3 id="project-settings-projectspecjson">Project settings (<code>project.spec.json</code>)<a class="headerlink" href="#project-settings-projectspecjson" title="Permanent link">&para;</a></h3>
 <p>Contains <code>target</code>, <code>groupId</code>, <code>artifactId</code>, <code>basePackage</code>, <code>javaVersion</code> and <code>database</code> (today <code>h2</code>). <code>pisa init</code> writes it and later commands read and check it. You may edit it, but already-generated files (package names, <code>pom.xml</code>) won't update by themselves.</p>
+<h3 id="acceptance-rows-and-the-column-checks-pisa-extend">Acceptance rows and the column Checks (<code>pisa extend</code>)<a class="headerlink" href="#acceptance-rows-and-the-column-checks-pisa-extend" title="Permanent link">&para;</a></h3>
+<p>The Acceptance table of a <code>01-spec.md</code> of Pisa's own specs (<code>pisa extend</code>) has the columns <code>Input</code> and <code>Expected</code>, and optionally a third column <code>Checks</code>: one plain sentence per row that says what the row proves. Where there is one, the sentence is the label of the row in the <code>pisa extend --check</code> tree, in <code>05-check.md</code>, in <code>check-report.html</code> and in <code>03-test.md</code>; a row without one (empty cell, or a table of two columns) shows its input as before. A sentence has at most 160 characters and none of the characters <code>&lt;</code>, <code>&gt;</code>, <code>*</code>, <code>_</code>, <code>|</code>, <code>[</code>, <code>]</code>, <code>#</code>, <code>{</code>, <code>}</code> or the backtick.</p>
+<div class="highlight"><pre><span></span><code>| Input | Expected | Checks |
+|---|---|---|
+| Button [Create] next to [Cancel] | two plain-text buttons | Checks that the buttons Create and Cancel are read as plain texts. |
+</code></pre></div>
+<p><code>pisa extend --specify</code> requires the sentence for every row (an answer without it, or with markup, goes back to the model). <code>pisa extend --explain</code> adds the column to existing specs: the language model gets only the rows without a sentence, the answer is checked (three attempts), and only the Acceptance table of <code>01-spec.md</code> is rewritten. With <code>--feature 006 --story 001</code> only that story is processed. <code>--explain</code> is refused when <code>CI</code> is set.</p>
 <h2 id="customizing-templates">Customizing templates<a class="headerlink" href="#customizing-templates" title="Permanent link">&para;</a></h2>
 <p>Everything Pisa generates comes from Nunjucks templates. You can override any of them without rebuilding Pisa:</p>
 <div class="highlight"><pre><span></span><code>pisa<span class="w"> </span>eject-templates<span class="w"> </span>--target<span class="w"> </span>spring-boot<span class="w"> </span>--out<span class="w"> </span>./shop
@@ -3853,7 +4080,11 @@ pisa<span class="w"> </span>generate<span class="w"> </span>--file<span class="w
 </tr>
 <tr>
 <td><code>pisa story</code></td>
-<td><code>--specify</code> doesn't ask the model (you fill in the criteria), and <code>--implement</code> only writes the assignment. <code>--check</code> was run for real against npm (Hono) and Maven (Spring, 2026-11-13). The CI step is not part of the generated <code>ci.yml</code> yet.</td>
+<td><code>--test</code> and <code>--implement</code> with a model ran for real against a language model (Maven, Spring, 2026-11-14; Hono, 2026-11-17). <code>--test</code> prints a tree as the steps happen (✅ ok, ❌ sent back to the model, ☐ already green). The model cannot write outside the plan paths, <code>--allow</code> and the default area (base package in Spring, <code>src/</code> in Hono), never a frozen test or <code>spec/</code>. A generated file (a file of <code>.pisa/recipe.json</code>, for example <code>src/route/PersonRoutes.ts</code> or the pages <code>static/*.html</code>, <code>app.js</code>) is writable only with <code>--allow &lt;that exact path&gt;</code>; a run that wrote one ends with a warning: <code>pisa generate --force</code> and <code>pisa replay</code> write it again, and the change is lost. New files outside the recipe are left alone by both. The model needs the acceptance command of the project to run (no other build tool). <code>--test</code> is refused in CI (<code>--test --adopt</code> is not). In Spring a test that does not compile goes back to the model; a criterion that is green before the implementation goes back too, except on the last attempt: then the tests are accepted with the note that the generated application meets the criterion already. In Spring the run of one story adds <code>-Dtest=&lt;test classes of the story&gt;</code> (the files in <code>stories/&lt;story&gt;/tests/</code>) to <code>-Dgroups=ACn</code>, so stories with the same criterion numbers do not disturb each other. <code>--check</code> was run for real against npm (Hono) and Maven (Spring, 2026-11-13). Pisa runs Maven as <code>mvnd</code> (Maven Daemon, about 10 s faster per run) when it is on the <code>PATH</code>, otherwise as <code>./mvnw</code> (the Maven Wrapper of the project), otherwise as <code>mvn</code>; without <code>mvnd</code> it prints a warning to install it (it never installs anything itself); the environment variable <code>PISA_MAVEN=mvnd</code>, <code>PISA_MAVEN=./mvnw</code> or <code>PISA_MAVEN=mvn</code> forces the choice. The daemon stays in memory after the run. In Spring <code>--check</code> starts Maven once per story (<code>-Dgroups=AC1,AC2,...</code>) and reads the result of each criterion from the Surefire reports (test method <code>acN</code>); a criterion without such a method runs alone. The CI step is not part of the generated <code>ci.yml</code> yet.</td>
+</tr>
+<tr>
+<td>Reverse engineering</td>
+<td>Reading an existing application (source code, database schema, OpenAPI) and deriving <code>.dml</code>, <code>.adl</code> and stories from it. Today: describe it in prose (<code>requirements.md</code>) and run <code>propose-model</code>, <code>propose-architecture</code> and <code>propose-specs</code>; nothing checks that the result matches the existing code.</td>
 </tr>
 <tr>
 <td><code>update-versions</code></td>
@@ -3885,7 +4116,7 @@ pisa<span class="w"> </span>generate<span class="w"> </span>--file<span class="w
 <tbody>
 <tr>
 <td>0.15.0</td>
-<td>Story tests on the Maven path: Spring acceptance tests live in <code>stories/&lt;story&gt;/tests/</code>, run with <code>mvn test -Pac</code> (build-helper adds <code>stories</code> as a test source) and are selected by JUnit tag (<code>@Tag("AC1")</code>, <code>-Dgroups=AC1</code>). <code>pisa story --check</code> verifies the frozen tests by SHA-256 hash (changed or missing file, missing table: red; unlisted file: warning). Spring tutorial section "Accept: user stories". New optional plan key <code>versions.buildHelper</code></td>
+<td><code>pisa extend --explain</code> and the optional column <code>Checks</code> in the Acceptance table (a plain sentence per row, shown in the check tree and the reports). Story tests on the Maven path: Spring acceptance tests live in <code>stories/&lt;story&gt;/tests/</code>, run with <code>mvn test -Pac</code> (build-helper adds <code>stories</code> as a test source) and are selected by JUnit tag (<code>@Tag("AC1")</code>, <code>-Dgroups=AC1</code>). <code>pisa story --check</code> verifies the frozen tests by SHA-256 hash (changed or missing file, missing table: red; unlisted file: warning). Spring tutorial section "Accept: user stories". New optional plan key <code>versions.buildHelper</code>. <code>pisa story --test</code> lets the language model write one acceptance test per criterion (JUnit with MockMvc for Spring, <code>acceptance("ACn: ...")</code> for Hono), runs them red (three attempts) and freezes them in <code>03-test.md</code>; <code>--adopt</code> freezes hand-written tests, <code>--force</code> writes them anew; not allowed in CI. Example: <code>pisa story --test --story 001</code>, then <code>pisa story --implement --story 001</code></td>
 </tr>
 <tr>
 <td>0.14.0</td>
@@ -3944,7 +4175,11 @@ pisa<span class="w"> </span>generate<span class="w"> </span>--file<span class="w
 </tr>
 <tr>
 <td><code>&lt;!-- play: tests --&gt;</code></td>
-<td>Runs tests (<code>mvn test</code>, <code>npm test</code>); skipped with <code>--fast</code></td>
+<td>Runs tests (<code>./mvnw test</code>, <code>npm test</code>, <code>pisa story --check</code>); skipped with <code>--fast</code></td>
+</tr>
+<tr>
+<td><code>&lt;!-- play: llm tests --&gt;</code></td>
+<td><code>llm</code>, <code>slow</code>, <code>tests</code> and <code>optional</code> can be combined in one marker</td>
 </tr>
 <tr>
 <td><code>&lt;!-- play: slow --&gt;</code></td>
@@ -3970,6 +4205,7 @@ pisa<span class="w"> </span>generate<span class="w"> </span>--file<span class="w
 <li><strong>Verified:</strong> Docker builds and Compose for both targets (Oct 2026); PostgreSQL against a real <code>postgres:17</code> container; the Testcontainers profile (147 tests green, 25 of them against PostgreSQL, six entities, macOS with Docker Desktop); <code>update-versions</code> on real sample projects; the H2 console and TCP access; the sample projects <code>library-hono</code> and <code>library-spring</code> regenerate with the current Pisa and <code>pisa replay</code> matches their recipes.</li>
 <li><strong>Not yet verified:</strong> the install scripts and Homebrew formula (reviewed, not run); manual install on Linux and Windows; the generated GitHub workflows and issue forms on real GitHub; a real Render deployment; AI proposals with a real model (only one manual run each); <code>pisa play --llm</code> with the tutorials; some IDE menu paths.</li>
 </ul>
+<p>Copyright (c) 2026 Arcware GmbH - Serano Colameo</p>
 
 
 

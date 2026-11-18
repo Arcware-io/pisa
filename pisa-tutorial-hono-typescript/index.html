@@ -1011,7 +1011,7 @@ tutorial follow four phases; each step title names its phase.</p>
 <tr>
 <td><strong>Check</strong></td>
 <td>run the generated tests, try the application, reproduce the project</td>
-<td><code>mvn test</code> / <code>npm test</code>, <code>replay</code></td>
+<td><code>./mvnw test</code> / <code>npm test</code>, <code>replay</code></td>
 <td>7, 9</td>
 </tr>
 </tbody>
@@ -1033,7 +1033,7 @@ tutorial follow four phases; each step title names its phase.</p>
 </tr>
 <tr>
 <td>Node.js 24 or newer and npm</td>
-<td><code>node -v</code>, <code>npm -v</code>. Node.js runs TypeScript directly, there is no build step</td>
+<td><code>node -v</code>, <code>npm -v</code>. Node.js runs TypeScript directly, there is no build step. Install and switch versions with nvm: <code>nvm install 24</code>, <code>nvm use 24</code> (User Guide, "Setting up your development environment")</td>
 </tr>
 <tr>
 <td>LLM access for <code>pi</code></td>
@@ -1139,8 +1139,8 @@ their address and the companies they work for.
 
 <span class="k">-</span><span class="w"> </span><span class="gs">**Person:**</span> First name and last name are required (at most 80 characters each). The
   e-mail address is optional and may occur only once. Phone and
-  birthday are optional. Every person has a status: active, blocked
-  (displayed "Blocked") or archived.
+  birthday are optional. Every person has a status: <span class="sb">`ACTIVE`</span>, <span class="sb">`BLOCKED`</span> or <span class="sb">`ARCHIVED`</span>
+  (displayed "Active", "Blocked" and "Archived").
 <span class="k">-</span><span class="w"> </span><span class="gs">**Address:**</span> Street and city are required, the postal code consists of exactly
   4 digits. The address belongs firmly to one person (a part), it has
   no page of its own and is saved and deleted with the person.
@@ -1447,24 +1447,37 @@ git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </
 (<code>https://&lt;name&gt;.onrender.com/login.html</code>). The first access after sleeping takes about a minute. More about it: User Guide, section "Deploying to Render".
 Pisa has not yet checked this on a real Render account: whether the service accepts the <code>healthCheckPath</code> is unchecked.</p>
 <h2 id="13-accept-user-stories-optional">13. Accept: user stories (optional)<a class="headerlink" href="#13-accept-user-stories-optional" title="Permanent link">&para;</a></h2>
-<p>This is an extra as well; <code>pisa play</code> <strong>never</strong> plays this step (everything <code>skip</code>). So far you checked the generated application with the tests Pisa writes. A <strong>user story</strong> is the other side: someone who asked for something says when it is done as he asked for it. <code>pisa story</code> works for a story of your application in the same five phases as the specs of Pisa itself (<code>pisa extend</code>), with one folder per story, <code>spec/features/NNN-&lt;feature&gt;/stories/NNN-&lt;story&gt;/</code> (a feature is a folder with <code>feature.md</code> and its stories, here one feature with one story), and one file per phase: <code>01-spec.md</code> (the criteria), <code>02-plan.md</code>, <code>03-test.md</code> (the frozen acceptance tests), <code>04-implement.md</code>, <code>05-check.md</code>. <code>pisa story</code> asks no language model: it creates the files, freezes the tests and runs them.</p>
+<p>This is an extra as well; <code>pisa play --llm</code> plays only the first command (the language model writes the story and <code>pisa play</code> answers the question with Y), everything else is by hand (<code>skip</code>). So far you checked the generated application with the tests Pisa writes. A <strong>user story</strong> is the other side: someone who asked for something says when it is done as he asked for it. <code>pisa story</code> works for a story of your application in the same five phases as the specs of Pisa itself (<code>pisa extend</code>), with one folder per story, <code>spec/features/NNN-&lt;feature&gt;/stories/NNN-&lt;story&gt;/</code> (a feature is a folder with <code>feature.md</code> and its stories, here one feature with one story), and one file per phase: <code>01-spec.md</code> (the criteria), <code>02-plan.md</code>, <code>03-test.md</code> (the frozen acceptance tests), <code>04-implement.md</code>, <code>05-check.md</code>. Only <code>--specify</code> asks the language model, it writes the story from your sentence; <code>--plan</code>, <code>--test</code> and <code>--check</code> ask no model: they create the files, freeze the tests and run them. <code>pisa story</code> refuses to run when the environment variable <code>CI</code> is set (it asks a model and you), so it never runs in a pipeline.</p>
 <p>The acceptance tests of a story run <strong>only on demand</strong>: <code>npm test</code> does not look into the folder <code>stories/</code> (the tests of the stories live there, outside <code>spec/</code>), <code>npm run test:ac</code> runs them (it sets <code>PISA_ACCEPTANCE=1</code>; the script is part of every generated project). You need the dependencies (<code>npm install</code>) as for <code>npm test</code>.</p>
-<p><strong>1. Specify.</strong> The story in your words; Pisa creates <code>01-spec.md</code> with a table of criteria:</p>
-<!-- play: skip -->
+<p><strong>1. Specify.</strong> Write the story as one sentence, in your words. The language model writes the story from it (a description and acceptance criteria), chooses the feature it belongs to (in a project without features it starts the first one) and proposes the next stories. Pisa prints what it understood and asks before it writes:</p>
+<!-- play: llm -->
 <div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>adressen-hono
 pisa<span class="w"> </span>story<span class="w"> </span>--specify<span class="w"> </span><span class="s2">"A clerk can archive a person"</span>
 </code></pre></div>
-<p>You should see <code>Written: …/spec/features/001-clerk-archive-person/stories/001-clerk-archive-person/01-spec.md</code> (and <code>feature.md</code> next to <code>stories/</code>). Open the file and replace the two example rows by what the clerk expects, in his words (one row per criterion, <code>AC1</code>, <code>AC2</code>, …):</p>
+<p>You should see something like this (a real run; the words of the model differ from run to run):</p>
+<div class="highlight"><pre><span></span><code>Understood as:
+  Feature:   001-person-management (new)
+  Story:     001-archive-person: Archive a person
+  As a clerk, I want to archive a person so that they no longer appear among the active persons but their data is not lost.
+  AC1  A clerk can choose to archive a person from the person's page or the list.
+  AC2  After archiving, the person no longer appears in the list of active persons.
+  AC3  The clerk sees a confirmation message that the person was archived.
+  AC4  The data of an archived person is kept and not deleted.
+  AC5  A person who is already archived cannot be archived again; the clerk sees a message instead.
+  Next stories (written to feature.md, not created): View the list of archived persons; Restore an archived person; Create a person; Search persons by name
+Write? [Y/n/f]
+</code></pre></div>
+<p>Answer <code>Y</code> (or just Enter) to write, <code>n</code> to stop (nothing is written), <code>f</code> to name another feature. A story that is similar to an existing one needs a second yes. Pisa writes <code>spec/features/001-person-management/feature.md</code> (goal, scope, the stories and the proposed next stories) and <code>spec/features/001-person-management/stories/001-archive-person/01-spec.md</code> with the criteria as a table. Read them. The model wrote five criteria; the tests of this tutorial check two, and a criterion without a test is a red box in <code>--check</code>, so replace the table in <code>01-spec.md</code> by these two rows (and, in a real project, correct the criteria where the clerk would say it differently). The names of the folders come from the model: if yours differ from <code>001-person-management</code> (the feature, which also names the test folder) or <code>001-archive-person</code>, use your names in the next steps; <code>pisa story --list</code> shows them.</p>
 <div class="highlight"><pre><span></span><code>| ID | Criterion |
 |---|---|
 | AC1 | A clerk sets a person to Archived, and the person is still listed with that status |
 | AC2 | A clerk cannot give a person a status that does not exist; the person stays as it was |
 </code></pre></div>
 <p><strong>2. Plan.</strong> One task per criterion, in <code>02-plan.md</code>:</p>
-<!-- play: skip -->
+<!-- play: llm -->
 <div class="highlight"><pre><span></span><code>pisa<span class="w"> </span>story<span class="w"> </span>--plan
 </code></pre></div>
-<p><strong>3. Test.</strong> One acceptance test per criterion, in <code>stories/001-clerk-archive-person/tests/archive.test.ts</code>. Mark each with <code>acceptance("ACn: …", …)</code> from <code>test/support/acceptance.ts</code> (it skips the test unless <code>PISA_ACCEPTANCE=1</code>); the name starts with the ID of the criterion:</p>
+<p><strong>3. Test.</strong> One acceptance test per criterion, in <code>stories/001-person-management/tests/archive.test.ts</code>. Mark each with <code>acceptance("ACn: …", …)</code> from <code>test/support/acceptance.ts</code> (it skips the test unless <code>PISA_ACCEPTANCE=1</code>); the name starts with the ID of the criterion:</p>
 <div class="highlight"><pre><span></span><code><span class="k">import</span><span class="w"> </span><span class="nx">assert</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">"node:assert/strict"</span><span class="p">;</span>
 <span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">afterEach</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">"node:test"</span><span class="p">;</span>
 <span class="k">import</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">api</span><span class="p">,</span><span class="w"> </span><span class="nx">cleanDatabase</span><span class="w"> </span><span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s2">"../../../test/support.ts"</span><span class="p">;</span>
@@ -1491,21 +1504,44 @@ pisa<span class="w"> </span>story<span class="w"> </span>--specify<span class="w
 <span class="w">  </span><span class="nx">assert</span><span class="p">.</span><span class="nx">equal</span><span class="p">(</span><span class="nx">read</span><span class="p">.</span><span class="nx">json</span><span class="p">.</span><span class="nx">status</span><span class="p">,</span><span class="w"> </span><span class="s2">"ACTIVE"</span><span class="p">);</span>
 <span class="p">});</span>
 </code></pre></div>
-<p>Then freeze them:</p>
+<p>Then freeze them (<code>--adopt</code> takes the tests you wrote, no model, no red check):</p>
 <!-- play: skip -->
-<div class="highlight"><pre><span></span><code>pisa<span class="w"> </span>story<span class="w"> </span>--test
+<div class="highlight"><pre><span></span><code>pisa<span class="w"> </span>story<span class="w"> </span>--test<span class="w"> </span>--adopt
 </code></pre></div>
+<p>You do not have to write them yourself: <code>pisa story --test</code> writes the frame of the test file itself (imports, set-up, one method per criterion with its tag; the set-up is copied from an existing test of the project) and lets the language model write only the body of each test, from <code>01-spec.md</code> and <code>02-plan.md</code>. Pisa checks the file (plain file names, an <code>acceptance("ACn: …")</code> per criterion, no unknown criterion, every relative import points to a file that exists and exports what is imported), runs them and sends back every test that is green or does not compile (three attempts); the tests must fail before the implementation. <code>--force</code> writes them anew over existing ones; with <code>CI</code> set the command is refused. You should see something like:</p>
+<!-- play: llm -->
+<div class="highlight"><pre><span></span><code>pisa<span class="w"> </span>story<span class="w"> </span>--test<span class="w"> </span>--force
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>001/001 | Archive a person
+  ❌ attempt 1: AC2 is already green before the implementation -&gt; back to the model
+  ✅ attempt 2: the tests load, 2 of 2 are red
+    ✅ AC1: A clerk sets a person to Archived, and the person is still listed with that status · red
+    ✅ AC2: A clerk cannot give a person a status that does not exist; the person stays as it was · red
+  ✅ wrote stories/001-person-management/tests/archive.test.ts
+  ✅ froze 1 file(s) in 03-test.md
+  next: pisa story --implement
+</code></pre></div>
+<p>Pisa prints every step as soon as it is done, as a tree: ✅ is fine, ❌ sends the tests back to the model, ☐ marks a test that is green already (the last attempt accepts it with that mark). In this tutorial the application already does what the story asks, so the tests of the model may be green at once and be sent back; the tests you wrote above are the ones the next steps use.</p>
 <p><code>03-test.md</code> now lists the file with its SHA-256 under "Frozen files". From here on the test must not change: if it does, <code>--check</code> reports it. (Pisa's own <code>pisa extend --test</code> has a language model write the tests and requires them to fail first; <code>pisa story --test</code> takes the tests you wrote.)</p>
 <p><strong>4. Implement.</strong> <code>pisa story --implement</code> writes <code>04-implement.md</code> with the assignment and the open tasks. Here the application already does what the story asks (the generated API accepts every status of the enumeration and refuses others), so there is nothing left to implement; for a story that needs new behavior this is where you, or your coding assistant, work through the plan until the acceptance tests are green.</p>
-<!-- play: skip -->
+<!-- play: llm -->
 <div class="highlight"><pre><span></span><code>pisa<span class="w"> </span>story<span class="w"> </span>--implement
 </code></pre></div>
-<p><strong>5. Check.</strong> Pisa runs the acceptance tests, one criterion at a time (<code>npm run test:ac:story -- --test-name-pattern "AC1:"</code>), and writes <code>05-check.md</code>:</p>
-<!-- play: skip -->
+<p>A second call lets the language model do the work: it implements the open tasks one by one with checked tools (read, write, finish task; no shell, no network). After every task Pisa runs <code>npm run test:ac:story</code> and gives the red criteria and the end of the output back to the model, until all criteria are green or the limits of <code>pisa extend --implement</code> are reached. The model may write only the paths of the plan, paths you add with <code>--allow &lt;path&gt;</code> and <code>src/</code>; never the frozen tests or <code>spec/</code>. New files the model writes are not part of the recipe, so <code>generate</code> and <code>replay</code> leave them unchanged. A generated file (a file of <code>.pisa/recipe.json</code>, for example the route <code>src/route/PersonRoutes.ts</code>, which a story such as "Archive a person" may need to change) is rejected unless you allow it: exactly that path with <code>--allow src/route/PersonRoutes.ts</code>, or every generated file with <code>--allow-overwrite</code>, which this tutorial uses. A run that wrote it ends with <code>warning: changed generated files: src/route/PersonRoutes.ts. pisa generate --force and pisa replay write them again; the change is lost.</code> With <code>CI</code> set the command stops before the model is asked. You should see something like:</p>
+<!-- play: llm -->
+<div class="highlight"><pre><span></span><code>pisa<span class="w"> </span>story<span class="w"> </span>--implement<span class="w"> </span>--allow-overwrite
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>  ✅ AC1: acceptance test, then the implementation (A clerk sets a person to Archived, and the person is still listed with that status)
+  ✅ AC2: acceptance test, then the implementation (A clerk cannot give a person a status that does not exist; the person stays as it was)
+Converged: all criteria are green. 05-check.md written.
+</code></pre></div>
+<p>Here the tests are green already, so the model has little to do; for a story that needs new behavior it writes the code. Add a path with <code>pisa story --implement --allow src/pricing/discount.ts</code>.</p>
+<p><strong>5. Check.</strong> Pisa runs the acceptance tests, one criterion at a time (<code>ACCEPTANCE_PATTERN="AC1:" npm run test:ac:story</code>), and writes <code>05-check.md</code>:</p>
+<!-- play: llm tests -->
 <div class="highlight"><pre><span></span><code>pisa<span class="w"> </span>story<span class="w"> </span>--check
 </code></pre></div>
-<p>You should see a tree with the duration of every criterion (a terminal shows coloured ☑ and ☒ instead of ✅ and ❌):</p>
-<div class="highlight"><pre><span></span><code>001/001 | A clerk can archive a person
+<p>You should see a tree with the duration of every criterion (✅ for green, ❌ for red):</p>
+<div class="highlight"><pre><span></span><code>001/001 | Archive a person
   ✅ frozen tests unchanged
   acceptance
     ✅ AC1: A clerk sets a person to Archived, and the person is still listed with that status · 2.1 s
@@ -1513,17 +1549,17 @@ pisa<span class="w"> </span>story<span class="w"> </span>--specify<span class="w
 </code></pre></div>
 <p>The exit code is 0 when every criterion is green, otherwise 1; <code>05-check.md</code> says <code>Converged</code> only then.</p>
 <p><strong>6. All stories at a glance.</strong> <code>--list</code> shows every story with its state, <code>--check --full</code> runs all of them and ends with a summary:</p>
-<!-- play: skip -->
+<!-- play: llm tests -->
 <div class="highlight"><pre><span></span><code>pisa<span class="w"> </span>story<span class="w"> </span>--list
 pisa<span class="w"> </span>story<span class="w"> </span>--check<span class="w"> </span>--full
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>| Status | Story   | Title                        |
 | ------ | ------- | ---------------------------- |
-| ✅      | 001/001 | A clerk can archive a person |
+| ✅      | 001/001 | Archive a person             |
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>| Story   | Title                        | Result | Criteria |
 | ------- | ---------------------------- | ------ | -------- |
-| 001/001 | A clerk can archive a person | ✅      | 2/2      |
+| 001/001 | Archive a person             | ✅      | 2/2      |
 
 1 of 1 stories accepted
 Acceptance criteria: 2 ✅ green, 0 ❌ red (2 in total)
@@ -1629,6 +1665,7 @@ of truth, the code is derivable from them. The same specs give a Java project wi
 </tr>
 </tbody>
 </table>
+<p>Copyright (c) 2026 Arcware GmbH - Serano Colameo</p>
 
 
 

@@ -1011,7 +1011,7 @@ tutorial follow four phases; each step title names its phase.</p>
 <tr>
 <td><strong>Check</strong></td>
 <td>run the generated tests, try the application, reproduce the project</td>
-<td><code>mvn test</code> / <code>npm test</code>, <code>replay</code></td>
+<td><code>./mvnw test</code> / <code>npm test</code>, <code>replay</code></td>
 <td>7, 9</td>
 </tr>
 </tbody>
@@ -1032,7 +1032,11 @@ tutorial follow four phases; each step title names its phase.</p>
 </tr>
 <tr>
 <td>Java 25 and Maven</td>
-<td><code>java -version</code>, <code>mvn -v</code></td>
+<td><code>java -version</code>, <code>mvn -v</code>. A Spring project from <code>pisa init</code> also has the Maven Wrapper (<code>./mvnw -v</code>); the commands below use it, so the JDK alone is enough (on Windows: <code>mvnw.cmd</code>). Install Java and Maven with SDKMAN: <code>sdk install java &lt;identifier&gt;</code> (<code>sdk list java</code>), <code>sdk install maven</code> (User Guide, "Setting up your development environment")</td>
+</tr>
+<tr>
+<td>Optional: Maven Daemon</td>
+<td><code>mvnd --version</code>. <code>pisa story</code> uses <code>mvnd</code> when it is on the <code>PATH</code> (about 10 s faster per acceptance run) and warns when it is missing; install it with <code>sdk install mvnd</code> (<a href="https://github.com/apache/maven-mvnd">https://github.com/apache/maven-mvnd</a>)</td>
 </tr>
 <tr>
 <td>LLM access for <code>pi</code></td>
@@ -1130,8 +1134,8 @@ their address and the companies they work for.
 
 <span class="k">-</span><span class="w"> </span><span class="gs">**Person:**</span> First name and last name are required (at most 80 characters each). The
   e-mail address is optional and may occur only once. Phone and
-  birthday are optional. Every person has a status: active, blocked
-  (displayed "Blocked") or archived.
+  birthday are optional. Every person has a status: <span class="sb">`ACTIVE`</span>, <span class="sb">`BLOCKED`</span> or <span class="sb">`ARCHIVED`</span>
+  (displayed "Active", "Blocked" and "Archived").
 <span class="k">-</span><span class="w"> </span><span class="gs">**Address:**</span> Street and city are required, the postal code consists of exactly
   4 digits. The address belongs firmly to one person (a part), it has
   no page of its own and is saved and deleted with the person.
@@ -1224,18 +1228,18 @@ tests) and at the end <code>Recorded step N in .pisa/recipe.json and README.md.<
 </table>
 <h2 id="7-check-start-and-try-it-out">7. Check: start and try it out<a class="headerlink" href="#7-check-start-and-try-it-out" title="Permanent link">&para;</a></h2>
 <!-- play: server /login.html -->
-<div class="highlight"><pre><span></span><code>mvn<span class="w"> </span>spring-boot:run
+<div class="highlight"><pre><span></span><code>./mvnw<span class="w"> </span>spring-boot:run
 </code></pre></div>
 <p>Open http://localhost:8080/ <strong>in the browser, through the running server</strong> (not the <code>.html</code> files from <code>src/main/resources/static</code> directly: Alpine.js and the scripts come from the server, in the file itself buttons and texts are empty): a menu with People and Companies. The heading of the start page is "AdressenSpring", the name from <code>architecture AdressenSpring {</code> in the <code>.adl</code>; it is <code>app.title</code> in <code>application.yml</code> (change it, restart the application). The application redirects to the login page: sign in with <code>admin</code> / <code>admin</code> and choose a new password on the "Change password" page (twice, at least 8 characters); who is signed in is shown in the hamburger menu (☰) at the top right. Roles and more users: step 7b. Create a company, then a person with an address
 and choose the company. A click on a row of the list shows the entry <strong>read-only</strong> (display mode); whoever may change it has "Edit" there. Try the rules: a postal code with 3 digits, the same e-mail twice, an
 empty last name; the field turns red and the server answers 400 with the message per field. You see the database
 at http://localhost:8080/h2-console (User Guide, section "Looking inside the H2 database"). End with <code>Ctrl+C</code>.</p>
 <!-- play: tests -->
-<div class="highlight"><pre><span></span><code>mvn<span class="w"> </span><span class="nb">test</span><span class="w">            </span><span class="c1"># repository, controller, service, ArchUnit tests</span>
+<div class="highlight"><pre><span></span><code>./mvnw<span class="w"> </span><span class="nb">test</span><span class="w">            </span><span class="c1"># repository, controller, service, ArchUnit tests</span>
 </code></pre></div>
 <p>And additionally the browser tests (the first time they download Playwright, about 200 MB):</p>
 <!-- play: slow -->
-<div class="highlight"><pre><span></span><code>mvn<span class="w"> </span><span class="nb">test</span><span class="w"> </span>-Pui
+<div class="highlight"><pre><span></span><code>./mvnw<span class="w"> </span><span class="nb">test</span><span class="w"> </span>-Pui
 </code></pre></div>
 <p>You should see: <code>BUILD SUCCESS</code>. (In a trial run of this tutorial there were 60 tests without a failure, with <code>-Pui</code> 82.)</p>
 <h2 id="7a-optional-restrict-operations-operations">7a. Optional: restrict operations (<code>@operations</code>)<a class="headerlink" href="#7a-optional-restrict-operations-operations" title="Permanent link">&para;</a></h2>
@@ -1254,11 +1258,11 @@ entity Company {
 Nothing was written. Allow the operation in @operations of the entity, or change the Test: line, or delete the use case.
 </code></pre></div>
 <p>This is intended: the use case "Delete company" (UC6) asks for something the company no longer allows, a contradiction between two specs. Three ways out: allow <code>delete</code> again, change the <code>Test:</code> line, or (here) drop the use case. In <code>spec/base/use-cases.uc.md</code> delete the section <code>## UC6 …</code> and in the PlantUML diagram the two lines with <code>UC6</code>, then run <code>pisa generate</code> again. Pisa never deletes files: the old browser test of the use case stays and would fail, delete it by hand (<code>generate</code> names it under <code>Info: browser tests of use cases that are no longer in spec/base/*.uc.md</code>): <code>src/test/java/ch/example/adressen/ui/UC6UiTest.java</code>.</p>
-<p>Restart the application (<code>mvn spring-boot:run</code>) and check:</p>
+<p>Restart the application (<code>./mvnw spring-boot:run</code>) and check:</p>
 <ul>
 <li>The "Companies" page has no delete button any more; creating and changing still work.</li>
 <li>The interface blocks deleting as well: <code>curl -i -X DELETE http://localhost:8080/api/companies/1</code> answers <strong>405</strong> (Method Not Allowed) with an <code>Allow</code> header, the company stays (<code>GET</code> still gives 200). People can still be deleted.</li>
-<li><code>mvn test</code> checks this for you: the generated test <code>answers405ForADelete</code> expects 405, and the "delete" test of the company is dropped.</li>
+<li><code>./mvnw test</code> checks this for you: the generated test <code>answers405ForADelete</code> expects 405, and the "delete" test of the company is dropped.</li>
 </ul>
 <p>More about this (names, error messages, effect in both targets, interplay with roles): User Guide, section "Domain model (<code>.dml</code>)", <code>@operations</code>. Change the line to <code>@operations(create, read, update, delete)</code> or delete it if you want to lift the restriction again.</p>
 <h2 id="7b-rights-and-users">7b. Rights and users<a class="headerlink" href="#7b-rights-and-users" title="Permanent link">&para;</a></h2>
@@ -1277,14 +1281,14 @@ You can change the rights in two ways: by hand in <code>security.yml</code> (res
 The tests and the use cases follow the <code>.adl</code>: <code>RolesTest</code> checks for every role and every entity what is allowed (200 instead of 403) and what is not (403), and the use cases with <code>**Actor:** USER</code> or <code>ADMIN</code> (step 5) run in the browser as that role.</p>
 <p>About passwords: a user's start password is his name (<code>admin/admin</code>, <code>user/user</code>); there is no password in <code>security.yml</code>. The new password is never in plain text, the hash ends up in the table <code>usr_password</code> of the application's database; the application never changes <code>security.yml</code>. With H2 in memory the table is empty after every restart, then the start password and the forced change apply again; with PostgreSQL the password stays.</p>
 <p>Your own roles and users: enter them in <code>security.yml</code> (the hash comes from <code>pisa hash-password</code>, which asks for the password twice without echo) and restart the application; no <code>generate</code> is needed. <code>admin/admin</code> and <code>user/user</code> are publicly known, for development only.</p>
-<p><code>mvn test</code> signs in in the generated tests as test users (they are in <code>src/test/resources/security-test.yml</code>, not in your <code>security.yml</code>) and additionally checks 401, 403 and setting the password.</p>
+<p><code>./mvnw test</code> signs in in the generated tests as test users (they are in <code>src/test/resources/security-test.yml</code>, not in your <code>security.yml</code>) and additionally checks 401, 403 and setting the password.</p>
 <h2 id="8-the-next-round-carry-through-a-change">8. The next round: carry through a change<a class="headerlink" href="#8-the-next-round-carry-through-a-change" title="Permanent link">&para;</a></h2>
 <p>A change is another round of the phases, and it is a <strong>story</strong>: write down in a sentence what the change must achieve (<code>pisa story --specify "A person can have a title"</code> creates a feature folder in <code>spec/features/</code> with the first story and a table of acceptance criteria; the full course is step 13 of the <a href="../pisa-tutorial-hono-typescript/">Hono tutorial</a>; the commands are the same). Then <strong>specify</strong> the change in the description or the spec, <strong>plan</strong> (the form must know the new field), <strong>implement</strong> (<code>generate</code>), <strong>check</strong> (the tests). Change the description, not the code. Two ways:</p>
 <ul>
 <li><strong>By hand in the model:</strong> add a field in <code>spec/base/adressen-spring.dml</code>, say <code>title: String(..40)?</code> on <code>Person</code>.
   <strong>The form must know it too:</strong> <code>spec/base/person.ui.md</code> is a layout in which every field occurs exactly once;
   add a row to the form box of the mockup, say <code>&lt;b&gt;Title&lt;/b&gt; | "title"</code> (plain <code>Title | "title"</code> reads the same) below the last name. Then
-  <code>pisa generate --file spec/base/adressen-spring.dml --out .</code> and <code>mvn test</code>. The code, the pages and the tests follow.
+  <code>pisa generate --file spec/base/adressen-spring.dml --out .</code> and <code>./mvnw test</code>. The code, the pages and the tests follow.
   Without the mockup row <code>generate</code> aborts and writes nothing: <code>The Salt mockup in spec/base/person.ui.md can't be
   used: … missing "title"</code>. (Alternatively delete <code>spec/base/person.ui.md</code> and run <code>pisa propose-specs --out .</code> again:
   the default mockup contains all fields.)</li>
@@ -1372,20 +1376,20 @@ pisa<span class="w"> </span>generate<span class="w"> </span>--file<span class="w
 <p>You should see: Maven builds the image (a few minutes the first time), then <code>Started AdressenSpringApplication</code>. The application runs at
 http://localhost:8080/login.html (users <code>admin/admin</code> and <code>user/user</code>; the chosen password is in the table <code>usr_password</code> of PostgreSQL and stays). Stop with Ctrl-C, clean up with
 <code>docker compose down</code> (with <code>-v</code> also the data).</p>
-<p><strong>4. Only the database (for developing).</strong> <code>docker compose up -d db</code> starts only PostgreSQL, you start the application as usual with <code>mvn spring-boot:run</code>
+<p><strong>4. Only the database (for developing).</strong> <code>docker compose up -d db</code> starts only PostgreSQL, you start the application as usual with <code>./mvnw spring-boot:run</code>
 (it takes the database from <code>application.yml</code>):</p>
 <!-- play: skip -->
 <div class="highlight"><pre><span></span><code>docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> </span>-d<span class="w"> </span>db
-mvn<span class="w"> </span>spring-boot:run
+./mvnw<span class="w"> </span>spring-boot:run
 </code></pre></div>
 <p><strong>5. Tests against a real PostgreSQL (Testcontainers).</strong> With PostgreSQL Pisa generates for every entity a repository test and a test that starts the whole
 application, both against a PostgreSQL in a container that Testcontainers starts and deletes itself (own free port; the
-<code>compose</code> database need not run). They run only with the Maven profile <code>testcontainers</code> (JUnit tag <code>testcontainers</code>), <code>mvn test</code> alone leaves them out and needs no Docker:</p>
+<code>compose</code> database need not run). They run only with the Maven profile <code>testcontainers</code> (JUnit tag <code>testcontainers</code>), <code>./mvnw test</code> alone leaves them out and needs no Docker:</p>
 <!-- play: skip -->
-<div class="highlight"><pre><span></span><code>mvn<span class="w"> </span><span class="nb">test</span><span class="w"> </span>-Ptestcontainers
+<div class="highlight"><pre><span></span><code>./mvnw<span class="w"> </span><span class="nb">test</span><span class="w"> </span>-Ptestcontainers
 </code></pre></div>
 <p>You should see: in addition to the normal tests the classes <code>…RepositoryPostgresTest</code> and <code>…PostgresApplicationTest</code>, <code>BUILD SUCCESS</code>. Profiles
-can be combined (<code>-Pui,testcontainers</code>). The generated CI pipeline (step 10) runs <code>mvn -B test -Ptestcontainers</code> with PostgreSQL.</p>
+can be combined (<code>-Pui,testcontainers</code>). The generated CI pipeline (step 10) runs <code>./mvnw -B test -Ptestcontainers</code> with PostgreSQL.</p>
 <p><strong>If it does not work:</strong></p>
 <ul>
 <li><code>port is already allocated</code>: another PostgreSQL or another application uses 5432 or 8080. Set other ports in the <code>compose.yml</code>
@@ -1425,25 +1429,38 @@ git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </
 (<code>https://&lt;name&gt;.onrender.com/login.html</code>). The first access after sleeping takes about a minute. More about it: User Guide, section "Deploying to Render".
 Pisa has not yet checked this on a real Render account: whether 512 MB are enough for Spring and whether the service accepts the <code>healthCheckPath</code> is unchecked.</p>
 <h2 id="13-accept-user-stories-optional">13. Accept: user stories (optional)<a class="headerlink" href="#13-accept-user-stories-optional" title="Permanent link">&para;</a></h2>
-<p>This is an extra as well; <code>pisa play</code> <strong>never</strong> plays this step (everything <code>skip</code>). So far you checked the generated application with the tests Pisa writes. A <strong>user story</strong> is the other side: someone who asked for something says when it is done as he asked for it. <code>pisa story</code> works for a story of your application in the same five phases as the specs of Pisa itself (<code>pisa extend</code>), with one folder per story, <code>spec/features/NNN-&lt;feature&gt;/stories/NNN-&lt;story&gt;/</code> (a feature is a folder with <code>feature.md</code> and its stories, here one feature with one story), and one file per phase: <code>01-spec.md</code> (the criteria), <code>02-plan.md</code>, <code>03-test.md</code> (the frozen acceptance tests), <code>04-implement.md</code>, <code>05-check.md</code>. <code>pisa story</code> asks no language model: it creates the files, freezes the tests and runs them.</p>
-<p>The acceptance tests of a story run <strong>only on demand</strong>: <code>mvn test</code> does not compile the folder <code>stories/</code> (the tests of the stories live there, outside <code>src/</code> and <code>spec/</code>), <code>mvn test -Pac</code> does (the Maven profile <code>ac</code> adds <code>stories</code> as a test folder and sets <code>PISA_ACCEPTANCE=1</code>; it is part of every generated <code>pom.xml</code>, and a project from an earlier version gets it with <code>pisa init … --force</code>). Maven needs the dependencies as for <code>mvn test</code>.</p>
-<p><strong>1. Specify.</strong> The story in your words; Pisa creates <code>01-spec.md</code> with a table of criteria:</p>
-<!-- play: skip -->
+<p>This is an extra as well; <code>pisa play --llm</code> plays only the first command (the language model writes the story and <code>pisa play</code> answers the question with Y), everything else is by hand (<code>skip</code>). So far you checked the generated application with the tests Pisa writes. A <strong>user story</strong> is the other side: someone who asked for something says when it is done as he asked for it. <code>pisa story</code> works for a story of your application in the same five phases as the specs of Pisa itself (<code>pisa extend</code>), with one folder per story, <code>spec/features/NNN-&lt;feature&gt;/stories/NNN-&lt;story&gt;/</code> (a feature is a folder with <code>feature.md</code> and its stories, here one feature with one story), and one file per phase: <code>01-spec.md</code> (the criteria), <code>02-plan.md</code>, <code>03-test.md</code> (the frozen acceptance tests), <code>04-implement.md</code>, <code>05-check.md</code>. Only <code>--specify</code> asks the language model, it writes the story from your sentence; <code>--plan</code>, <code>--test</code> and <code>--check</code> ask no model: they create the files, freeze the tests and run them. <code>pisa story</code> refuses to run when the environment variable <code>CI</code> is set (it asks a model and you), so it never runs in a pipeline.</p>
+<p>The acceptance tests of a story run <strong>only on demand</strong>: <code>./mvnw test</code> does not compile the folder <code>stories/</code> (the tests of the stories live there, outside <code>src/</code> and <code>spec/</code>), <code>./mvnw test -Pac</code> does (the Maven profile <code>ac</code> adds <code>stories</code> as a test folder and sets <code>PISA_ACCEPTANCE=1</code>; it is part of every generated <code>pom.xml</code>, and a project from an earlier version gets it with <code>pisa init … --force</code>). Maven needs the dependencies as for <code>./mvnw test</code>.</p>
+<p><strong>1. Specify.</strong> Write the story as one sentence, in your words. The language model writes the story from it (a description and acceptance criteria), chooses the feature it belongs to (in a project without features it starts the first one) and proposes the next stories. Pisa prints what it understood and asks before it writes:</p>
+<!-- play: llm -->
 <div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>adressen-spring
 pisa<span class="w"> </span>story<span class="w"> </span>--specify<span class="w"> </span><span class="s2">"A clerk can archive a person"</span>
 </code></pre></div>
-<p>You should see <code>Written: …/spec/features/001-clerk-archive-person/stories/001-clerk-archive-person/01-spec.md</code> (and <code>feature.md</code> next to <code>stories/</code>). Open the file and replace the two example rows by what the clerk expects, in his words (one row per criterion, <code>AC1</code>, <code>AC2</code>, …):</p>
+<p>You should see something like this (a real run; the words of the model differ from run to run):</p>
+<div class="highlight"><pre><span></span><code>Understood as:
+  Feature:   001-person-management (new)
+  Story:     001-archive-person: Archive a person
+  As a clerk, I want to archive a person so that they no longer appear among the active persons but their data is not lost.
+  AC1  A clerk can choose to archive a person from the person's page or the list.
+  AC2  After archiving, the person no longer appears in the list of active persons.
+  AC3  The clerk sees a confirmation message that the person was archived.
+  AC4  The data of an archived person is kept and not deleted.
+  AC5  A person who is already archived cannot be archived again; the clerk sees a message instead.
+  Next stories (written to feature.md, not created): View the list of archived persons; Restore an archived person; Create a person; Search persons by name
+Write? [Y/n/f]
+</code></pre></div>
+<p>Answer <code>Y</code> (or just Enter) to write, <code>n</code> to stop (nothing is written), <code>f</code> to name another feature. A story that is similar to an existing one needs a second yes. Pisa writes <code>spec/features/001-person-management/feature.md</code> (goal, scope, the stories and the proposed next stories) and <code>spec/features/001-person-management/stories/001-archive-person/01-spec.md</code> with the criteria as a table. Read them. The model wrote five criteria; the tests of this tutorial check two, and a criterion without a test is a red box in <code>--check</code>, so replace the table in <code>01-spec.md</code> by these two rows (and, in a real project, correct the criteria where the clerk would say it differently). The names of the folders come from the model: if yours differ from <code>001-person-management</code> (the feature, which also names the test folder) or <code>001-archive-person</code>, use your names in the next steps; <code>pisa story --list</code> shows them.</p>
 <div class="highlight"><pre><span></span><code>| ID | Criterion |
 |---|---|
 | AC1 | A clerk sets a person to Archived, and the person is still listed with that status |
 | AC2 | A clerk cannot give a person a status that does not exist; the person stays as it was |
 </code></pre></div>
 <p><strong>2. Plan.</strong> One task per criterion, in <code>02-plan.md</code>:</p>
-<!-- play: skip -->
+<!-- play: llm -->
 <div class="highlight"><pre><span></span><code>pisa<span class="w"> </span>story<span class="w"> </span>--plan
 </code></pre></div>
-<p><strong>3. Test.</strong> One acceptance test per criterion, in <code>stories/001-clerk-archive-person/tests/</code>. The folder does not have to match the Java package, but a test must lie in a package below <code>ch.example.adressen</code>, so that Spring finds the application class. Mark each test with <code>@Acceptance</code> (the annotation that <code>pisa init</code> wrote next to the application class; it skips the test unless <code>PISA_ACCEPTANCE=1</code>) and with the <strong>JUnit tag</strong> of its criterion, <code>@Tag("AC1")</code>: Pisa runs one criterion by its tag (<code>mvn test -Pac -Dgroups=AC1</code>), the class and method names are free:</p>
-<div class="highlight"><pre><span></span><code><span class="c1">// stories/001-clerk-archive-person/tests/ArchivePersonTest.java</span>
+<p><strong>3. Test.</strong> One acceptance test per criterion, in <code>stories/001-person-management/tests/</code>. The folder does not have to match the Java package, but a test must lie in a package below <code>ch.example.adressen</code>, so that Spring finds the application class. Mark each test with <code>@Acceptance</code> (the annotation that <code>pisa init</code> wrote next to the application class; it skips the test unless <code>PISA_ACCEPTANCE=1</code>) and with the <strong>JUnit tag</strong> of its criterion, <code>@Tag("AC1")</code>: Pisa runs one criterion by its tag (<code>./mvnw test -Pac -Dgroups=AC1</code>), the class and method names are free:</p>
+<div class="highlight"><pre><span></span><code><span class="c1">// stories/001-person-management/tests/ArchivePersonTest.java</span>
 <span class="kn">package</span><span class="w"> </span><span class="nn">ch.example.adressen.stories</span><span class="p">;</span>
 
 <span class="kn">import static</span><span class="w"> </span><span class="nn">org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf</span><span class="p">;</span>
@@ -1468,7 +1485,7 @@ pisa<span class="w"> </span>story<span class="w"> </span>--specify<span class="w
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.test.web.servlet.setup.MockMvcBuilders</span><span class="p">;</span>
 <span class="kn">import</span><span class="w"> </span><span class="nn">org.springframework.web.context.WebApplicationContext</span><span class="p">;</span>
 
-<span class="cm">/** Acceptance tests of the story "A clerk can archive a person"; every test carries the tag of its criterion. */</span>
+<span class="cm">/** Acceptance tests of the story "Archive a person"; every test carries the tag of its criterion. */</span>
 <span class="nd">@SpringBootTest</span>
 <span class="kd">class</span> <span class="nc">ArchivePersonTest</span><span class="w"> </span><span class="p">{</span>
 
@@ -1530,46 +1547,69 @@ pisa<span class="w"> </span>story<span class="w"> </span>--specify<span class="w
 <span class="w">    </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
-<p>Then freeze them:</p>
+<p>Then freeze them (<code>--adopt</code> takes the tests you wrote, no model, no red check):</p>
 <!-- play: skip -->
-<div class="highlight"><pre><span></span><code>pisa<span class="w"> </span>story<span class="w"> </span>--test
+<div class="highlight"><pre><span></span><code>pisa<span class="w"> </span>story<span class="w"> </span>--test<span class="w"> </span>--adopt
 </code></pre></div>
+<p>You do not have to write them yourself: <code>pisa story --test</code> writes the frame of the test file itself (imports, set-up, one method per criterion with its tag; the set-up is copied from an existing test of the project) and lets the language model write only the body of each test, from <code>01-spec.md</code> and <code>02-plan.md</code>. Pisa checks the file (plain file names, a <code>@Tag("ACn")</code> per criterion, no unknown criterion, only classes that exist), runs them and sends back every test that is green or does not compile (three attempts); the tests must fail before the implementation. <code>--force</code> writes them anew over existing ones; with <code>CI</code> set the command is refused. You should see something like:</p>
+<!-- play: llm -->
+<div class="highlight"><pre><span></span><code>pisa<span class="w"> </span>story<span class="w"> </span>--test<span class="w"> </span>--force
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>001/001 | Archive a person
+  ❌ attempt 1: AC2 is already green before the implementation -&gt; back to the model
+  ✅ attempt 2: the tests compile, 2 of 2 are red
+    ✅ AC1: A clerk sets a person to Archived, and the person is still listed with that status · red
+    ✅ AC2: A clerk cannot give a person a status that does not exist; the person stays as it was · red
+  ✅ wrote stories/001-person-management/tests/ArchivePersonAcceptanceTest.java
+  ✅ froze 1 file(s) in 03-test.md
+  next: pisa story --implement
+</code></pre></div>
+<p>Pisa prints every step as soon as it is done, as a tree: ✅ is fine, ❌ sends the tests back to the model, ☐ marks a test that is green already (the last attempt accepts it with that mark). In this tutorial the application already does what the story asks, so the tests of the model may be green at once and be sent back; the tests you wrote above are the ones the next steps use.</p>
 <p><code>03-test.md</code> now lists the file with its SHA-256 under "Frozen files". From here on the test must not change: if it does, <code>--check</code> reports it (see step 5). A test file that you add later and that the table does not list is added to the table by <code>--check</code>, with a warning. (Pisa's own <code>pisa extend --test</code> has a language model write the tests and requires them to fail first; <code>pisa story --test</code> takes the tests you wrote.)</p>
-<p><strong>4. Implement.</strong> <code>pisa story --implement</code> writes <code>04-implement.md</code> with the assignment and the open tasks. Here the application already does what the story asks (the generated API accepts every status of the enumeration and refuses others), so there is nothing left to implement; for a story that needs new behavior this is where you, or your coding assistant, work through the plan until the acceptance tests are green.</p>
-<!-- play: skip -->
+<p><strong>4. Implement.</strong> <code>pisa story --implement</code> writes <code>04-implement.md</code> with the assignment and the open tasks. For a story that needs new behavior this is where the language model, you or your coding assistant work through the plan until the acceptance tests are green.</p>
+<!-- play: llm -->
 <div class="highlight"><pre><span></span><code>pisa<span class="w"> </span>story<span class="w"> </span>--implement
 </code></pre></div>
-<p><strong>5. Check.</strong> Pisa first compares the frozen files with their recorded SHA-256, then runs the acceptance tests, one criterion at a time (<code>mvn test -Pac -Dgroups=AC1</code>; every run starts Maven, so it takes about half a minute per criterion), and writes <code>05-check.md</code>:</p>
-<!-- play: skip -->
+<p>A second call lets the language model do the work: it implements the open tasks one by one with checked tools (read, write, finish task; no shell, no network). After every task Pisa runs <code>./mvnw test -Pac -Dgroups=ACn</code> and gives the red criteria and the end of the output back to the model, until all criteria are green or the limits of <code>pisa extend --implement</code> are reached. The model may write only the paths of the plan, paths you add with <code>--allow &lt;path&gt;</code> and the base package under <code>src/main/java</code> and <code>src/main/resources</code>; never the frozen tests, the files of <code>.pisa/recipe.json</code> or <code>spec/</code>. New files the model writes are not part of the recipe, so <code>generate</code> and <code>replay</code> leave them unchanged. A generated file (a file of <code>.pisa/recipe.json</code>, for example the list page <code>src/main/resources/static/persons.html</code> or <code>PersonDto.java</code>, which a story such as "Archive a person" may need to change) is rejected unless you allow exactly that path with <code>--allow</code> or all of them with <code>--allow-overwrite</code>; a run that wrote one ends with <code>warning: changed generated files: …</code>, because <code>generate --force</code> and <code>replay</code> write it again and the change is lost. With <code>CI</code> set the command stops before the model is asked. You should see something like:</p>
+<!-- play: llm -->
+<div class="highlight"><pre><span></span><code>pisa<span class="w"> </span>story<span class="w"> </span>--implement<span class="w"> </span>--allow-overwrite
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>  ✅ AC1: acceptance test, then the implementation (A clerk sets a person to Archived, and the person is still listed with that status)
+  ✅ AC2: acceptance test, then the implementation (A clerk cannot give a person a status that does not exist; the person stays as it was)
+Converged: all criteria are green. 05-check.md written.
+</code></pre></div>
+<p>The story needs the list page and the layers behind it (DTO, controller, service, mapper) to change. These are generated files, so <code>--allow-overwrite</code> frees them (without it every file needs its own <code>--allow &lt;path&gt;</code>). A story that only adds new classes needs no <code>--allow</code>; add a path of your own with <code>--allow src/main/java/ch/example/adressen/pricing/Discount.java</code>.</p>
+<p><strong>5. Check.</strong> Pisa first compares the frozen files with their recorded SHA-256, then runs the acceptance tests, one criterion at a time (<code>./mvnw test -Pac -Dgroups=AC1</code>; every run starts Maven, so it takes about half a minute per criterion), and writes <code>05-check.md</code>:</p>
+<!-- play: llm tests -->
 <div class="highlight"><pre><span></span><code>pisa<span class="w"> </span>story<span class="w"> </span>--check
 </code></pre></div>
-<p>You should see a tree with the duration of every criterion (a terminal shows coloured ☑ and ☒ instead of ✅ and ❌):</p>
-<div class="highlight"><pre><span></span><code>001/001 | A clerk can archive a person
+<p>You should see a tree with the duration of every criterion (✅ for green, ❌ for red):</p>
+<div class="highlight"><pre><span></span><code>001/001 | Archive a person
   ✅ frozen tests unchanged
   acceptance
     ✅ AC1: A clerk sets a person to Archived, and the person is still listed with that status · 26.2 s
     ✅ AC2: A clerk cannot give a person a status that does not exist; the person stays as it was · 26.3 s
 </code></pre></div>
 <p>The exit code is 0 when every criterion is green and nothing frozen changed, otherwise 1; <code>05-check.md</code> says <code>Converged</code> only then. If you change a frozen test, the tree says so, even when the tests are green:</p>
-<div class="highlight"><pre><span></span><code>001/001 | A clerk can archive a person
-  ❌ frozen test changed: stories/001-clerk-archive-person/tests/ArchivePersonTest.java
+<div class="highlight"><pre><span></span><code>001/001 | Archive a person
+  ❌ frozen test changed: stories/001-person-management/tests/ArchivePersonTest.java
   acceptance
     ✅ AC1: A clerk sets a person to Archived, and the person is still listed with that status · 26.5 s
     ✅ AC2: A clerk cannot give a person a status that does not exist; the person stays as it was · 25.7 s
 </code></pre></div>
 <p>A frozen file that is missing is reported the same way (<code>frozen test missing: …</code>), and a <code>03-test.md</code> without the table "Frozen files" says <code>tests are not frozen yet, run pisa story --test</code>.</p>
 <p><strong>6. All stories at a glance.</strong> <code>--list</code> shows every story with its state, <code>--check --full</code> runs all of them and ends with a summary:</p>
-<!-- play: skip -->
+<!-- play: llm tests -->
 <div class="highlight"><pre><span></span><code>pisa<span class="w"> </span>story<span class="w"> </span>--list
 pisa<span class="w"> </span>story<span class="w"> </span>--check<span class="w"> </span>--full
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>| Status | Story   | Title                        |
 | ------ | ------- | ---------------------------- |
-| ✅      | 001/001 | A clerk can archive a person |
+| ✅      | 001/001 | Archive a person             |
 </code></pre></div>
 <div class="highlight"><pre><span></span><code>| Story   | Title                        | Result | Criteria |
 | ------- | ---------------------------- | ------ | -------- |
-| 001/001 | A clerk can archive a person | ✅      | 2/2      |
+| 001/001 | Archive a person             | ✅      | 2/2      |
 
 1 of 1 stories accepted
 Acceptance criteria: 2 ✅ green, 0 ❌ red (2 in total)
@@ -1621,7 +1661,7 @@ of truth, the code is derivable from them. The same specs give a TypeScript proj
 </tr>
 <tr>
 <td>Page shows empty buttons or headings</td>
-<td>The page is not served by the server. Start <code>mvn spring-boot:run</code> and open http://localhost:8080/; Alpine.js sets the texts only in the browser.</td>
+<td>The page is not served by the server. Start <code>./mvnw spring-boot:run</code> and open http://localhost:8080/; Alpine.js sets the texts only in the browser.</td>
 </tr>
 <tr>
 <td><code>Company doesn't allow "delete" (@operations(…)) but the test line says "delete"</code></td>
@@ -1653,6 +1693,7 @@ of truth, the code is derivable from them. The same specs give a TypeScript proj
 </tr>
 </tbody>
 </table>
+<p>Copyright (c) 2026 Arcware GmbH - Serano Colameo</p>
 
 
 
