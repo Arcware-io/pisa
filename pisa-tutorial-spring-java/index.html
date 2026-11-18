@@ -1579,7 +1579,7 @@ Write? [Y/n/f]
 Converged: all criteria are green. 05-check.md written.
 </code></pre></div>
 <p>The story needs the list page and the layers behind it (DTO, controller, service, mapper) to change. These are generated files, so <code>--allow-overwrite</code> frees them (without it every file needs its own <code>--allow &lt;path&gt;</code>). A story that only adds new classes needs no <code>--allow</code>; add a path of your own with <code>--allow src/main/java/ch/example/adressen/pricing/Discount.java</code>.</p>
-<p><strong>5. Check.</strong> Pisa first compares the frozen files with their recorded SHA-256, then runs the acceptance tests, one criterion at a time (<code>./mvnw test -Pac -Dgroups=AC1</code>; every run starts Maven, so it takes about half a minute per criterion), and writes <code>05-check.md</code>:</p>
+<p><strong>5. Check.</strong> Pisa first compares the frozen files with their recorded SHA-256, then runs the acceptance tests of all criteria in one Maven run (<code>./mvnw test -Pac -Dgroups=AC1,AC2,...</code>; with <code>mvnd</code> installed a few seconds, with <code>./mvnw</code> or <code>mvn</code> about half a minute) and reads the result of each criterion from the Surefire reports, and writes <code>05-check.md</code>:</p>
 <!-- play: llm tests -->
 <div class="highlight"><pre><span></span><code>pisa<span class="w"> </span>story<span class="w"> </span>--check
 </code></pre></div>
