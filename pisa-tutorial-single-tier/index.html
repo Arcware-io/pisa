@@ -1,0 +1,1411 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Pisa is spec-driven: typed DSLs for domain model and architecture, forms and use cases as Markdown, and deterministic generation of software architectures and running applications. An LLM only proposes specs.">
+      
+      
+      
+        <link rel="canonical" href="https://arcware-io.github.io/pisa/pisa-tutorial-single-tier/">
+      
+      
+        <link rel="prev" href="../pisa-tutorial-hono-typescript/">
+      
+      
+        <link rel="next" href="../comparison/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.0">
+    
+    
+      
+        <title>Single tier (no server) - Pisa</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.57a0d79d.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.fb2fffe2.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  
+  <meta name="robots" content="noindex, nofollow">
+
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#tutorial-a-site-without-a-server-single-tier-alpinejs-json" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Pisa" class="md-header__button md-logo" aria-label="Pisa" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Pisa
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Single tier (no server)
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/Arcware-io/pisa" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Arcware-io/pisa
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Pisa" class="md-nav__button md-logo" aria-label="Pisa" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Pisa
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/Arcware-io/pisa" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Arcware-io/pisa
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Start
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pisa-user-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    User Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorials
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tutorials
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pisa-tutorial-spring-java/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spring Boot (Java)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pisa-tutorial-hono-typescript/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hono (TypeScript)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Single tier (no server)
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Single tier (no server)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-method-in-four-phases" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The method in four phases
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0. Requirements
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-create-a-folder-and-prepare-pisa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Create a folder and prepare Pisa
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-specify-describe-the-architecture-and-have-it-proposed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Specify: describe the architecture and have it proposed
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-plan-create-the-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Plan: create the project
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-specify-describe-the-domain-model-and-have-it-proposed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Specify: describe the domain model and have it proposed
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-plan-derive-the-forms-without-an-llm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Plan: derive the forms (without an LLM)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-implement-generate-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Implement: generate code
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-check-start-and-try-it-out" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Check: start and try it out
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-check-reproduce" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Check: reproduce
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-optional-a-zip-file-of-the-site" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Optional: a ZIP file of the site
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-optional-put-it-on-github-and-publish-the-site-github-pages" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Optional: put it on GitHub and publish the site (GitHub Pages)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-you-have-now" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What you have now
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#when-something-does-not-work" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        When something does not work
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../comparison/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Comparison
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#the-method-in-four-phases" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        The method in four phases
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0-requirements" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        0. Requirements
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-create-a-folder-and-prepare-pisa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Create a folder and prepare Pisa
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-specify-describe-the-architecture-and-have-it-proposed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Specify: describe the architecture and have it proposed
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-plan-create-the-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Plan: create the project
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-specify-describe-the-domain-model-and-have-it-proposed" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Specify: describe the domain model and have it proposed
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-plan-derive-the-forms-without-an-llm" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Plan: derive the forms (without an LLM)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-implement-generate-code" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Implement: generate code
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-check-start-and-try-it-out" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Check: start and try it out
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-check-reproduce" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Check: reproduce
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-optional-a-zip-file-of-the-site" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Optional: a ZIP file of the site
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-optional-put-it-on-github-and-publish-the-site-github-pages" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Optional: put it on GitHub and publish the site (GitHub Pages)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#what-you-have-now" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What you have now
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#when-something-does-not-work" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        When something does not work
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="tutorial-a-site-without-a-server-single-tier-alpinejs-json">Tutorial: a site without a server (single tier, Alpine.js, JSON)<a class="headerlink" href="#tutorial-a-site-without-a-server-single-tier-alpinejs-json" title="Permanent link">&para;</a></h1>
+<p>You build the same small <strong>address book</strong> (people with an address and a company) as in the two other tutorials, but as an application with
+<strong>only one tier</strong>: a web site of plain HTML and Alpine.js, with no backend and no database. Its data stays in the browser and can be saved
+to a file and loaded from it. The models stay the same; only the architecture description (<code>.adl</code>) is a smaller one. You write only prose; an LLM
+proposes the architecture and the domain model, Pisa checks the proposals and generates the site. After every step it says what you should see.</p>
+<blockquote>
+<p>As of <code>pisa 0.17.0</code>. Commands in detail: <a href="../pisa-user-guide/">User Guide</a>, section "A single-tier site (no server)". Duration: about half an hour;
+<code>npm install</code> (optional, for the browser tests and the ZIP) downloads dependencies.</p>
+</blockquote>
+<p>Steps 2 and 4 call an LLM (two short calls); all other steps run without one. Without an LLM you write the two files yourself, as they are shown in the steps.
+At the end there are <strong>optional steps</strong> (9, the ZIP file of the site; 10, GitHub and GitHub Pages); <code>pisa play --fast</code> leaves them out.</p>
+<h2 id="the-method-in-four-phases">The method in four phases<a class="headerlink" href="#the-method-in-four-phases" title="Permanent link">&para;</a></h2>
+<p>Pisa works spec-driven, in the manner of <a href="https://github.com/github/spec-kit">GitHub Spec Kit</a>: you describe first, the description becomes a checked spec,
+the code is generated from the specs, and tests check the result. It is the same method as in the <a href="../pisa-tutorial-spring-java/">Spring Java</a> and
+<a href="../pisa-tutorial-hono-typescript/">Hono TypeScript</a> tutorials; each step title names its phase.</p>
+<table>
+<thead>
+<tr>
+<th>Phase</th>
+<th>What you do</th>
+<th>Pisa</th>
+<th>Steps</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Specify</strong></td>
+<td>describe in prose what you want; have a spec proposed and correct it</td>
+<td><code>propose-architecture</code>, <code>propose-model</code> (an LLM proposes, Pisa checks the proposal before it writes anything)</td>
+<td>2, 4</td>
+</tr>
+<tr>
+<td><strong>Plan</strong></td>
+<td>turn the specs into a project plan and into pages</td>
+<td><code>init</code> (the architecture plan <code>.pisa/architecture.plan.json</code>), <code>propose-specs</code> (forms)</td>
+<td>3, 5</td>
+</tr>
+<tr>
+<td><strong>Implement</strong></td>
+<td>generate the code</td>
+<td><code>generate</code> (deterministic: the same specs give the same files, no LLM writes code)</td>
+<td>6</td>
+</tr>
+<tr>
+<td><strong>Check</strong></td>
+<td>run the generated tests, try the site, reproduce the project</td>
+<td><code>npm test</code>, <code>npm run test:ui</code>, <code>replay</code></td>
+<td>7, 8</td>
+</tr>
+</tbody>
+</table>
+<p><strong>What is different here.</strong> The architecture has <em>one container</em>: a frontend with <code>storage json</code>. There is no server, so there is nothing to log in to, no
+database to start and no image to build. The site is static files in <code>public/</code>; any web server serves them (steps 9 and 10 say what you can do with them: a ZIP file, or GitHub Pages). The models (<code>.dml</code>), the forms (<code>.ui.md</code>) and the rules are the same as for the other targets; that is the point: <strong>you change the <code>.adl</code>, the models stay.</strong></p>
+<h2 id="0-requirements">0. Requirements<a class="headerlink" href="#0-requirements" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>What</th>
+<th>Check</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pisa 0.17.0</td>
+<td><code>pisa --version</code> shows <code>pisa 0.17.0</code>. Otherwise install it: User Guide, section "Installing Pisa" (<code>curl</code>, PowerShell or <code>brew</code>, no login)</td>
+</tr>
+<tr>
+<td>Node.js 24 or newer and npm</td>
+<td><code>node -v</code>, <code>npm -v</code>. Node.js only serves the files and runs the tests, there is no build step. Install and switch versions with nvm: <code>nvm install 24</code>, <code>nvm use 24</code></td>
+</tr>
+<tr>
+<td>A web browser and internet</td>
+<td>The pages load Alpine.js, Bootstrap and (for the example data) Faker from a CDN (jsDelivr)</td>
+</tr>
+<tr>
+<td>LLM access for <code>pi</code></td>
+<td><code>pi</code> is set up with a model (see the <code>pi</code> documentation); needed only for steps 2 and 4</td>
+</tr>
+<tr>
+<td>Optional: Chromium for the browser tests</td>
+<td><code>npx playwright install chromium</code> (step 7)</td>
+</tr>
+<tr>
+<td>Optional: Pisa plugin</td>
+<td>IntelliJ or VS Code colors <code>.dml</code>/<code>.adl</code> and shows errors while you write (User Guide, "Setting up editor and PlantUML")</td>
+</tr>
+</tbody>
+</table>
+<h2 id="1-create-a-folder-and-prepare-pisa">1. Create a folder and prepare Pisa<a class="headerlink" href="#1-create-a-folder-and-prepare-pisa" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>mkdir<span class="w"> </span>adressen-singletier<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>adressen-singletier
+pisa<span class="w"> </span>init
+</code></pre></div>
+<p>You should see: <code>Prepared .: doc/ (the user guide and the tutorials) and spec/base/.</code> and the hint which tutorial you can read.
+<code>pisa init</code> without arguments creates <strong>no project</strong> yet, only what is the same for every kind of application: the folder <strong><code>doc/</code></strong> with the user guide and
+the tutorials and an empty folder <code>spec/base/</code> for the base specs. Which kind of application you want you decide in the description in step 2; a project is created only in step 3.
+All further commands run in this folder.</p>
+<h2 id="2-specify-describe-the-architecture-and-have-it-proposed">2. Specify: describe the architecture and have it proposed<a class="headerlink" href="#2-specify-describe-the-architecture-and-have-it-proposed" title="Permanent link">&para;</a></h2>
+<!-- play: llm -->
+<div class="highlight"><pre><span></span><code>pisa<span class="w"> </span>propose-architecture<span class="w"> </span>--out<span class="w"> </span>.
+</code></pre></div>
+<p>You should see: <code>Created spec/base/architecture.md with a starting text - describe the architecture there, …</code>.
+Open <code>spec/base/architecture.md</code>, <strong>delete the line <code>&lt;!-- pisa:starting-text --&gt;</code></strong> and replace the text with something like this. <strong>One place decides that it is a site
+without a server:</strong> the sentence that the data stays in the browser and in a file, and that there is no backend and no database.</p>
+<!-- play: write spec/base/architecture.md -->
+<div class="highlight"><pre><span></span><code><span class="gh"># Architecture</span>
+
+Management of people with their address and the companies they work for. It is a
+small tool for one person: a web site without a server, no backend and no database.
+The data stays in the browser and can be saved to a file and loaded from it.
+
+<span class="k">-</span><span class="w"> </span>Example data: For the demo the site starts with 5 realistic example records per entity, Swiss German names and places.
+<span class="k">-</span><span class="w"> </span>ZIP: I want a ZIP file of the finished site that I can put on any web server.
+<span class="k">-</span><span class="w"> </span>Login: none.
+</code></pre></div>
+<p>Then once more:</p>
+<!-- play: llm -->
+<div class="highlight"><pre><span></span><code>pisa<span class="w"> </span>propose-architecture<span class="w"> </span>--out<span class="w"> </span>.
+</code></pre></div>
+<p>You should see: the streaming text of the model, at the end <code>Architecture proposal complete:
+spec/base/architecture.adl</code> and the line <code>Create the project from it: pisa init … --out . --adl …</code>.</p>
+<p>Open <code>spec/base/architecture.adl</code> and check it:</p>
+<!-- play: write spec/base/architecture.adl unless-llm -->
+<div class="highlight"><pre><span></span><code>architecture AdressenSingletier {
+    container web : frontend {
+        technology alpine
+        storage json
+        package zip
+    }
+    sampleData { entries 5  locale "de-CH" }
+}
+</code></pre></div>
+<p>(The file is formatted over several lines; comments at the top name what the model could not cover.)
+If something is wrong, change the file by hand: it is yours from now on.</p>
+<p>The line <code>storage json</code> is what makes it a site without a server: the data is <strong>one JSON file</strong> that is kept in the browser, loaded and changed. Because it is one file, there is
+<strong>exactly one container</strong>: no backend, no database, no second frontend. Pisa rejects a <code>.adl</code> that has more (<code>storage json needs a single frontend container …</code>), and also
+<code>servedBy</code>, <code>docker</code> and <code>deploy render</code> with <code>storage json</code>: there is no server for them. The target (<code>alpine-json</code>) follows from <code>storage json</code>; you need no <code>--target</code>.</p>
+<p><code>package zip</code> (from the sentence "ZIP" in your description) makes <code>npm run package</code> write a ZIP file of the site (step 9). <code>sampleData { entries 5  locale "de-CH" }</code> (from the sentence
+"Example data") fills the site with realistic records on the first visit: 5 per entity, names and places for German (Switzerland), made from your model with a Faker library. <strong>If one of these
+is missing</strong> in your file, write it by hand into the file before the last bracket, or leave it out.</p>
+<p><strong>If it does not work:</strong> "ended without an accepted architecture" means the model answered invalidly three times, or not at all through the tool; formulate the description more precisely and repeat.
+With an existing <code>.adl</code> the command does nothing, except with <code>--force</code>.</p>
+<h2 id="3-plan-create-the-project">3. Plan: create the project<a class="headerlink" href="#3-plan-create-the-project" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>pisa<span class="w"> </span>init<span class="w"> </span>--out<span class="w"> </span>.<span class="w"> </span>--artifact<span class="w"> </span>adressen-singletier<span class="w"> </span>--adl<span class="w"> </span>spec/base/architecture.adl
+</code></pre></div>
+<p>You should see: <code>Architecture from spec/base/architecture.adl: …</code> and the list of files (<code>package.json</code>, <code>playwright.config.ts</code>, <code>scripts/serve.js</code>, <code>scripts/package.js</code>,
+<code>.pisa/architecture.plan.json</code>, …). New are also <code>spec/README.md</code> (a guide to the specs) and <code>README.md</code> with the recipe of the project. <code>doc/</code> from step 1 stays as it is.
+<code>scripts/serve.js</code> is a small web server for development only (<code>npm start</code>); the finished site needs none of it.</p>
+<p>(Short cut for later: <code>pisa init --target alpine-json --out . --artifact adressen-singletier</code> writes the smallest description itself: one frontend with <code>storage json</code> and <code>sampleData { }</code>.)</p>
+<h2 id="4-specify-describe-the-domain-model-and-have-it-proposed">4. Specify: describe the domain model and have it proposed<a class="headerlink" href="#4-specify-describe-the-domain-model-and-have-it-proposed" title="Permanent link">&para;</a></h2>
+<!-- play: llm -->
+<div class="highlight"><pre><span></span><code>pisa<span class="w"> </span>propose-model<span class="w"> </span>--out<span class="w"> </span>.
+</code></pre></div>
+<p>You should see: <code>Created spec/base/domain-spec.md with a starting text - describe the domain model there, …</code>.
+In <code>spec/base/domain-spec.md</code> delete the marker line again and write:</p>
+<!-- play: write spec/base/domain-spec.md -->
+<div class="highlight"><pre><span></span><code><span class="gh"># Domain model</span>
+
+A simple address book for a small office. It stores people with
+their address and the companies they work for.
+
+<span class="k">-</span><span class="w"> </span><span class="gs">**Person:**</span> First name and last name are required (at most 80 characters each). The
+  e-mail address is optional and may occur only once. Phone and
+  birthday are optional. Every person has a status: <span class="sb">`ACTIVE`</span>, <span class="sb">`BLOCKED`</span> or <span class="sb">`ARCHIVED`</span>
+  (displayed "Active", "Blocked" and "Archived").
+<span class="k">-</span><span class="w"> </span><span class="gs">**Address:**</span> Street and city are required, the postal code consists of exactly
+  4 digits. The address belongs firmly to one person (a part), it has
+  no page of its own and is saved and deleted with the person.
+<span class="k">-</span><span class="w"> </span><span class="gs">**Company:**</span> The name is required and unique. A company has many people,
+  a person works for at most one company.
+
+Not wanted: history of the addresses, access rights.
+</code></pre></div>
+<!-- play: llm -->
+<div class="highlight"><pre><span></span><code>pisa<span class="w"> </span>propose-model<span class="w"> </span>--out<span class="w"> </span>.
+</code></pre></div>
+<p>You should see: <code>Model proposal complete: spec/base/adressen-singletier.dml</code> (the file name is the project name) and the
+line <code>Check it, then: pisa generate --file spec/base/adressen-singletier.dml --out .</code>.</p>
+<p><strong>Check <code>spec/base/adressen-singletier.dml</code> closely</strong>, this is the most important step: Are all three entities there? Does <code>Person</code> have a <code>status</code> as an <code>enum</code>, <code>Address</code> the rule for the
+postal code (<code>~ "[0-9]{4}"</code>), <code>address</code> on the person as <code>composed</code>, <code>employees</code> on the company as <code>mappedBy company</code>? Wishes that the language does not express stand as <code>// Not covered: …</code>
+above the first line. The model is a proposal, not the truth: change by hand what is not right; the plugin shows errors while you write. For comparison, this is what a fitting model looks like:</p>
+<!-- play: write spec/base/adressen-singletier.dml unless-llm -->
+<div class="highlight"><pre><span></span><code>enum PersonStatus { ACTIVE ("Active"), BLOCKED ("Blocked"), ARCHIVED ("Archived") }
+
+type Plz = String ~ "[0-9]{4}"
+
+entity Person {
+    @id id: Long
+    firstName: String(1..80)
+    lastName: String(1..80)
+    email: Email? unique
+    phone: Phone?
+    birthday: Date?
+    status: PersonStatus
+    oneToOne address: Address composed
+    manyToOne company: Company
+}
+
+entity Address {
+    @id id: Long
+    street: String
+    zip: Plz
+    city: String
+}
+
+entity Company {
+    @id id: Long
+    name: String unique
+    oneToMany employees: Person mappedBy company
+}
+</code></pre></div>
+<p>The relations must be those the site can do (the same as for the Hono target): <code>manyToOne</code>, <code>oneToMany … mappedBy</code> and <code>oneToOne … composed</code>. <code>manyToMany</code>, <code>oneToMany</code> without <code>mappedBy</code> and
+<code>oneToOne</code> without <code>composed</code> are rejected by Pisa with <code>not supported by this target yet</code>.</p>
+<h2 id="5-plan-derive-the-forms-without-an-llm">5. Plan: derive the forms (without an LLM)<a class="headerlink" href="#5-plan-derive-the-forms-without-an-llm" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>pisa<span class="w"> </span>propose-specs<span class="w"> </span>--out<span class="w"> </span>.
+</code></pre></div>
+<p>You should see: <code>Wrote spec/base/person.ui.md</code>, <code>Wrote spec/base/company.ui.md</code>, <code>Wrote spec/base/use-cases.uc.md</code>.
+The forms (<code>.ui.md</code>) hold a Salt mockup in a Bootstrap look; <code>generate</code> reads only the form box, the rest is decoration. You can adjust the forms later; the command never overwrites existing files.
+The use cases (<code>.uc.md</code>) are written too, but this target makes <strong>no browser test from them yet</strong>; the browser tests of the site are one per page (step 7).</p>
+<h2 id="6-implement-generate-code">6. Implement: generate code<a class="headerlink" href="#6-implement-generate-code" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>pisa<span class="w"> </span>generate<span class="w"> </span>--file<span class="w"> </span>spec/base/adressen-singletier.dml<span class="w"> </span>--out<span class="w"> </span>.
+</code></pre></div>
+<p>You should see: <code>Generated alpine-json files for Person, Address, Company:</code> and the list of generated files and at the end <code>Recorded step N in .pisa/recipe.json and README.md.</code></p>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Content</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>public/index.html</code>, <code>public/persons.html</code>, <code>public/companies.html</code></td>
+<td>the pages: a start page and one page per entity with a list, a form, a display mode and the rules before saving (<code>Address</code> is a part of the person and has no page)</td>
+</tr>
+<tr>
+<td><code>public/app.js</code>, <code>public/app.css</code></td>
+<td>the script of every page (it also holds the menu with Save, Load and Reset) and the look</td>
+</tr>
+<tr>
+<td><code>public/schema.js</code></td>
+<td>the rules of your model (required values, lengths, ranges, patterns, <code>Email</code>, <code>unique</code>)</td>
+</tr>
+<tr>
+<td><code>public/store.js</code></td>
+<td>the <strong>in-browser store</strong>: it answers the requests of the pages the way the REST API of the other targets does, and keeps the data in the browser</td>
+</tr>
+<tr>
+<td><code>public/sample-data.js</code></td>
+<td>the example data (only with <code>sampleData</code>)</td>
+</tr>
+<tr>
+<td><code>test/architecture.test.js</code></td>
+<td>the architecture test: no file of <code>public/</code> may call a server (<code>fetch</code>, <code>XMLHttpRequest</code>, <code>WebSocket</code>, <code>EventSource</code>, <code>sendBeacon</code>)</td>
+</tr>
+<tr>
+<td><code>test/ui/*.spec.ts</code></td>
+<td>one browser test (Playwright) per page</td>
+</tr>
+</tbody>
+</table>
+<h2 id="7-check-start-and-try-it-out">7. Check: start and try it out<a class="headerlink" href="#7-check-start-and-try-it-out" title="Permanent link">&para;</a></h2>
+<p>Start the development server (it only serves the files of <code>public/</code>):</p>
+<!-- play: server /index.html -->
+<div class="highlight"><pre><span></span><code>npm<span class="w"> </span>start
+</code></pre></div>
+<p>You should see: <code>AdressenSingletier on http://localhost:8080/</code>.</p>
+<p>Open http://localhost:8080/ <strong>in the browser, through the running server</strong> (an ES module is loaded from the page, a <code>file://</code> address does not work). The start page has a menu with Persons and
+Companies. Open <strong>Persons</strong>: the list is not empty, it holds 5 example records (from <code>sampleData</code>; they are made on the <strong>first visit</strong> only, when the browser holds no data yet; Faker comes from the CDN, so you need internet).
+Create a company, then a person with an address and choose the company. A click on a row shows the entry <strong>read-only</strong> (display mode); there is "Edit". Try the rules: a postal code with 3 digits, the same e-mail twice, an
+empty last name; the field turns red and the page shows the message per field, the same messages as the REST API of the other targets.</p>
+<p>The hamburger button (☰) at the top right opens the <strong>data menu</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>Entry</th>
+<th>What it does</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Save data</strong></td>
+<td>writes all data to a JSON file (<code>adressen-singletier-data.json</code>, one list per entity)</td>
+</tr>
+<tr>
+<td><strong>Load data</strong></td>
+<td>replaces the data with the content of such a file; a file that is not valid (not JSON, an unknown entity, a broken rule, a reference to a row that is not there) is refused with a message and <strong>changes nothing</strong></td>
+</tr>
+<tr>
+<td><strong>Reset to example data</strong></td>
+<td>throws the data away and makes the example data again (only with <code>sampleData</code>)</td>
+</tr>
+</tbody>
+</table>
+<p>The data is also kept in the browser (<code>localStorage</code>, key <code>adressen-singletier:data</code>): reload the page and it is still there. It is kept <strong>per address</strong> (here <code>localhost:8080</code>) and per browser; another browser or
+another address starts anew. Save data is how you move it or keep a copy. End the server with <code>Ctrl+C</code>.</p>
+<!-- play: tests -->
+<div class="highlight"><pre><span></span><code>npm<span class="w"> </span><span class="nb">test</span><span class="w">                                          </span><span class="c1"># architecture test: no file calls a server</span>
+</code></pre></div>
+<p>You should see: <code>ℹ pass 2</code> and <code>ℹ fail 0</code>. And the browser tests (they need the dependencies and Chromium, installed once):</p>
+<!-- play: slow -->
+<div class="highlight"><pre><span></span><code>npm<span class="w"> </span>install
+npx<span class="w"> </span>playwright<span class="w"> </span>install<span class="w"> </span>chromium<span class="w">                   </span><span class="c1"># once</span>
+npm<span class="w"> </span>run<span class="w"> </span>test:ui<span class="w">                                   </span><span class="c1"># browser tests, one per page</span>
+</code></pre></div>
+<p>You should see: <code>5 passed</code>. They start the development server themselves, create, change and delete a row on every page and check the rules; they use a browser profile of their own, so the data of your browser stays untouched.</p>
+<h2 id="8-check-reproduce">8. Check: reproduce<a class="headerlink" href="#8-check-reproduce" title="Permanent link">&para;</a></h2>
+<!-- play: slow -->
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>..
+pisa<span class="w"> </span>replay<span class="w"> </span>--from<span class="w"> </span>adressen-singletier<span class="w"> </span>--out<span class="w"> </span>adressen-singletier-copy
+</code></pre></div>
+<p>You should see: <code>… All N generated file(s) match the hashes recorded in the recipe.</code> Pisa runs the recorded steps (<code>init</code>, <code>generate</code>) again in a new folder and compares the files with the checksums in the recipe
+(<code>adressen-singletier/.pisa/recipe.json</code>). The LLM steps are not repeated: their result (<code>spec/base/architecture.adl</code>, <code>spec/base/adressen-singletier.dml</code>) is copied from the source project. The example data are
+the same on every run (a fixed seed).</p>
+<h2 id="9-optional-a-zip-file-of-the-site">9. Optional: a ZIP file of the site<a class="headerlink" href="#9-optional-a-zip-file-of-the-site" title="Permanent link">&para;</a></h2>
+<!-- play: optional -->
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>adressen-singletier
+npm<span class="w"> </span>run<span class="w"> </span>package
+</code></pre></div>
+<p>You should see: <code>dist/adressen-singletier.zip</code> with the files of <code>public/</code> (and nothing else). Unpack it on any web server, or open the pages from any static hosting; they call no server. If you did not run <code>npm install</code> in step 7, do it first (the script uses the small library <code>fflate</code>).
+Without <code>package zip</code> in the <code>.adl</code> there is no script and no ZIP; add the line and run <code>pisa init … --force</code> and <code>pisa generate</code> again.</p>
+<h2 id="10-optional-put-it-on-github-and-publish-the-site-github-pages">10. Optional: put it on GitHub and publish the site (GitHub Pages)<a class="headerlink" href="#10-optional-put-it-on-github-and-publish-the-site-github-pages" title="Permanent link">&para;</a></h2>
+<p>This is an extra. The site is static files, so GitHub can publish it for free as a web page. Add three things to <code>spec/base/architecture.adl</code> before the last bracket: <code>scm</code> (where the repository lives), <code>pipeline</code> with
+<code>ci github</code> (the tests on every push), <code>release github</code> (a GitHub release with the ZIP file on a tag <code>v*</code>) and <strong><code>deploy pages</code></strong> (publishes the site on GitHub Pages, also on a tag <code>v*</code>). <code>deploy pages</code> is only possible with <code>storage json</code>
+(a backend would need a server, which GitHub Pages does not run) and needs no <code>docker</code> block:</p>
+<div class="highlight"><pre><span></span><code>    scm { host github }
+    pipeline {
+        ci github
+        release github
+        deploy pages
+    }
+</code></pre></div>
+<p>The commands do it instead of you (replace the last line of the <code>.adl</code>, then <code>init --force</code>). Run the <strong>whole</strong> block: <code>pisa init … --force</code> alone changes nothing as long as the blocks are not in <code>spec/base/architecture.adl</code>, and without them Pisa creates neither a repository nor a commit.</p>
+<!-- play: optional -->
+<div class="highlight"><pre><span></span><code><span class="nb">cd</span><span class="w"> </span>adressen-singletier
+sed<span class="w"> </span>-i.bak<span class="w"> </span><span class="s1">'$ d'</span><span class="w"> </span>spec/base/architecture.adl<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>rm<span class="w"> </span>spec/base/architecture.adl.bak
+<span class="nb">printf</span><span class="w"> </span><span class="s1">'    scm { host github }\n    pipeline {\n        ci github\n        release github\n        deploy pages\n    }\n}\n'</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>spec/base/architecture.adl
+pisa<span class="w"> </span>init<span class="w"> </span>--out<span class="w"> </span>.<span class="w"> </span>--artifact<span class="w"> </span>adressen-singletier<span class="w"> </span>--adl<span class="w"> </span>spec/base/architecture.adl<span class="w"> </span>--force
+</code></pre></div>
+<p>You should see: the new files <code>.github/workflows/ci.yml</code>, <code>release.yml</code> and <strong><code>pages.yml</code></strong> in the list and <code>Git repository created, first commit made (branch main …)</code>. Pisa creates the repository and makes the first commit
+(<code>Initial project (pisa init)</code>), local only; it does not know your GitHub account, you take care of that. <code>pages.yml</code> runs on a tag <code>v*</code> and by hand: it runs the tests (<code>npm test</code>, which also checks that the pages link with relative paths),
+then hands the folder <code>public/</code> to the official GitHub Pages actions. There are three cases for getting the project to GitHub, one paragraph each.</p>
+<p><strong>Normal case: Pisa made the commit.</strong> Create the repository on GitHub and upload it (needs the GitHub CLI <code>gh</code>, once <code>gh auth login</code>). <strong>Make it public:</strong> a free GitHub account publishes Pages only from a public repository (check GitHub's current rules for your plan):</p>
+<!-- play: skip -->
+<div class="highlight"><pre><span></span><code>gh<span class="w"> </span>repo<span class="w"> </span>create<span class="w"> </span>adressen-singletier<span class="w"> </span>--public<span class="w"> </span>--source<span class="w"> </span>.<span class="w"> </span>--push
+</code></pre></div>
+<p><strong>Pisa made no repository or no commit.</strong> The <code>scm</code>/<code>pipeline</code> blocks are missing in <code>spec/base/architecture.adl</code> (only the last line was run), <code>pisa play --fast</code> left the step out, the folder is already in a Git repository (Pisa does not touch it), or name and e-mail are missing in your Git
+configuration (repository, but no commit). <code>git status</code> shows it. Then you make the repository and the commit yourself and go on as in the normal case (<code>git init</code> does no harm if the repository is already there):</p>
+<!-- play: skip -->
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>init<span class="w"> </span>-b<span class="w"> </span>main
+git<span class="w"> </span>add<span class="w"> </span>-A
+git<span class="w"> </span>commit<span class="w"> </span>-m<span class="w"> </span><span class="s2">"Initial project"</span>
+</code></pre></div>
+<p><strong>Without <code>gh</code>.</strong> Create an empty <strong>public</strong> repository on github.com and connect it to your folder (instead of <code>gh repo create</code>):</p>
+<!-- play: skip -->
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>remote<span class="w"> </span>add<span class="w"> </span>origin<span class="w"> </span>git@github.com:&lt;your-name&gt;/adressen-singletier.git
+git<span class="w"> </span>push<span class="w"> </span>-u<span class="w"> </span>origin<span class="w"> </span>main
+</code></pre></div>
+<p>The push starts the CI on GitHub (tab "Actions": the jobs <code>tests</code> and <code>browser-tests</code>). Now set GitHub up for the site, <strong>once per repository and before the first tag</strong>. Two things are needed, and both are <code>gh</code> commands (they take the repository of the folder you are in); run them <strong>in this order</strong>:</p>
+<!-- play: skip -->
+<div class="highlight"><pre><span></span><code>gh<span class="w"> </span>api<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="s1">'repos/{owner}/{repo}/pages'</span><span class="w"> </span>-f<span class="w"> </span><span class="nv">build_type</span><span class="o">=</span>workflow
+gh<span class="w"> </span>api<span class="w"> </span>-X<span class="w"> </span>POST<span class="w"> </span><span class="s1">'repos/{owner}/{repo}/environments/github-pages/deployment-branch-policies'</span><span class="w"> </span>-f<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s1">'v*'</span><span class="w"> </span>-f<span class="w"> </span><span class="nv">type</span><span class="o">=</span>tag
+</code></pre></div>
+<p>The first command switches Pages on (source: GitHub Actions) and so creates the environment <code>github-pages</code>; the second allows the tags <code>v*</code> to deploy to it. GitHub allows only the branch <code>main</code> there by default, so without the second command the run for the tag is rejected
+(<code>Tag "v0.1.0" is not allowed to deploy to github-pages due to environment protection rules</code>). You should see: <code>"build_type":"workflow"</code> and then <code>"name":"v*"</code> and <code>"type":"tag"</code>. (<code>GitHub Pages is already enabled</code> means the first one was done before; that is fine.)
+Without <code>gh</code>, do both in the browser: <strong>Settings → Pages → Build and deployment → Source: GitHub Actions</strong>, then <strong>Settings → Environments → github-pages → Deployment branches and tags → Add deployment branch or tag rule → Tag: <code>v*</code></strong>.
+Without the first command the run of <code>pages.yml</code> fails in the step <code>configure-pages</code> (<code>Get Pages site failed</code>). Then publish with a tag:</p>
+<!-- play: skip -->
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>tag<span class="w"> </span>v0.1.0
+git<span class="w"> </span>push<span class="w"> </span>origin<span class="w"> </span>v0.1.0
+</code></pre></div>
+<p>The tag starts two workflows: <code>release.yml</code> (a GitHub release with <code>adressen-singletier.zip</code>) and <code>pages.yml</code> (the site). When <code>pages.yml</code> is green, the site is at <code>https://&lt;your-name&gt;.github.io/adressen-singletier/</code> (the address is also in the run, step <code>deploy</code>).
+Open it: the same pages as with <code>npm start</code>, with the example data on the first visit and the data menu. Save data and Load data work there because they run in your browser; the data stays in <strong>your</strong> browser, whoever opens the page has data of their own.
+You can also start the publishing by hand: tab "Actions", workflow "Pages", "Run workflow". The files <code>.github/workflows/*.yml</code> are yours, even <code>init --force</code> does not overwrite them. <strong>Pisa has not checked the workflows on a real GitHub run</strong>; they are checked as valid YAML. If a job turns red, that is a finding for Pisa. More:
+User Guide, sections "A single-tier site" and "GitHub CI and releases". <code>pisa play --fast</code> leaves this step out.</p>
+<h2 id="what-you-have-now">What you have now<a class="headerlink" href="#what-you-have-now" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>adressen-singletier/
+  spec/base/       architecture.md, architecture.adl, domain-spec.md, adressen-singletier.dml,
+                   person.ui.md, company.ui.md, use-cases.uc.md, domain-model.puml/.md
+  .pisa/           recipe.json (the recipe), architecture.plan.json (the plan, derived from the .adl)
+  public/ test/    generated pages, store and tests (never change by hand, `generate` rewrites them)
+  scripts/         serve.js (development server), package.js (the ZIP, only with `package zip`)
+  doc/             user guide and the tutorials
+  .github/workflows/  ci.yml, release.yml, pages.yml (only with step 10), .git (repository, only with step 10)
+  package.json, README.md, project.spec.json
+</code></pre></div>
+<p>You write prose and check proposals; <strong>the specs</strong> (<code>.adl</code>, <code>.dml</code>, <code>.ui.md</code>) are the source of truth, the code is derivable from them. The same model gives a Java project with <code>runtime spring</code>
+(<a href="../pisa-tutorial-spring-java/">Spring Java tutorial</a>) or a TypeScript project with <code>runtime hono</code> (<a href="../pisa-tutorial-hono-typescript/">Hono TypeScript tutorial</a>): <strong>only the <code>.adl</code> changes.</strong></p>
+<p><strong>Limits of the single-tier site (as of now):</strong> no login and no roles; the relations are those of the Hono target (no <code>manyToMany</code>, <code>oneToMany</code> without <code>mappedBy</code>, <code>oneToOne</code> without <code>composed</code>); the data of one
+browser address, not shared between people (Save and Load move it); no browser tests from the use cases; the pages load their libraries from a CDN (so they need internet, and the versions come from the plan:
+<code>versions { "alpinejs" "3.17.5" }</code> in the frontend container pins them, the libraries named as in a <code>package.json</code>). GitHub Pages needs a public repository (free account) and a switch you make once in the repository settings. A desktop app and the like are ideas, not part of Pisa yet.</p>
+<h2 id="when-something-does-not-work">When something does not work<a class="headerlink" href="#when-something-does-not-work" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Message</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>… is still the starting text</code></td>
+<td>The marker line <code>&lt;!-- pisa:starting-text --&gt;</code> is still in the description.</td>
+</tr>
+<tr>
+<td><code>ended without an accepted …</code></td>
+<td>The model did not answer validly through the tool; make the description more precise, repeat.</td>
+</tr>
+<tr>
+<td><code>storage json needs a single frontend container …</code></td>
+<td>The <code>.adl</code> has a backend, a database or a second container together with <code>storage json</code>. Remove them: a site with one tier has only the frontend.</td>
+</tr>
+<tr>
+<td><code>servedBy is not allowed together with storage json</code> / <code>'docker' is not possible with storage json</code></td>
+<td>A setting that needs a server. Remove it from the <code>.adl</code>.</td>
+</tr>
+<tr>
+<td><code>The Salt mockup in spec/base/&lt;entity&gt;.ui.md can't be used: … missing "x"</code></td>
+<td>A field in the <code>.dml</code> is missing in the mockup (or the other way round). Insert a line <code>Label \| "x"</code> into the mockup, <code>generate</code> writes nothing beforehand.</td>
+</tr>
+<tr>
+<td><code>not supported by this target yet (supported: manyToOne, oneToMany with mappedBy, oneToOne composed)</code></td>
+<td>The model uses a relation that the site cannot do. Adjust the model.</td>
+</tr>
+<tr>
+<td><code>spec/base/architecture.adl no longer matches the project: …</code></td>
+<td>The <code>.adl</code> was changed after <code>init</code>. <code>init --out . --artifact &lt;name&gt; --adl spec/base/architecture.adl --force</code>, then <code>generate</code>; <strong>give <code>--artifact</code> again</strong>, otherwise Pisa takes the name of the folder.</td>
+</tr>
+<tr>
+<td>The page is blank or the lists stay empty</td>
+<td>The page was opened from a file (<code>file://</code>) or the CDN is not reachable. Start <code>npm start</code> and open http://localhost:8080/; check the connection.</td>
+</tr>
+<tr>
+<td>No example data</td>
+<td>They are made only on the first visit, when the browser holds no data yet. Use the menu: <strong>Reset to example data</strong>. Without <code>sampleData</code> in the <code>.adl</code> there are none.</td>
+</tr>
+<tr>
+<td><code>npm run test:ui</code> says the browser is missing</td>
+<td>Install Chromium: <code>npx playwright install chromium</code>.</td>
+</tr>
+<tr>
+<td><code>npm run package</code> says it cannot find <code>fflate</code></td>
+<td>Run <code>npm install</code> first.</td>
+</tr>
+<tr>
+<td><code>pages.yml</code> fails in <code>configure-pages</code> ("Get Pages site failed" or similar)</td>
+<td>Pages is not switched on: <code>gh api -X POST 'repos/{owner}/{repo}/pages' -f build_type=workflow</code> (or Settings → Pages → Source: GitHub Actions). Then run the workflow again: <code>gh run rerun &lt;run-number&gt;</code> (or tab Actions, Re-run jobs).</td>
+</tr>
+<tr>
+<td><code>Tag "v0.1.0" is not allowed to deploy to github-pages due to environment protection rules</code></td>
+<td>The environment allows only the branch <code>main</code>: <code>gh api -X POST 'repos/{owner}/{repo}/environments/github-pages/deployment-branch-policies' -f name='v*' -f type=tag</code>, then <code>gh run rerun &lt;run-number&gt;</code> (the number is in <code>gh run list</code>).</td>
+</tr>
+<tr>
+<td>The Pages site shows 404 or no styles</td>
+<td>The first run is not done yet, or the address is wrong: it is <code>https://&lt;your-name&gt;.github.io/&lt;repository&gt;/</code>, with the name of the repository at the end.</td>
+</tr>
+<tr>
+<td>Pages cannot be switched on for a private repository</td>
+<td>A free account needs a public repository; make it public or check your plan.</td>
+</tr>
+<tr>
+<td><code>No project.spec.json in .</code></td>
+<td><code>generate</code> needs <code>pisa init</code> first (step 3).</td>
+</tr>
+<tr>
+<td><code>… exists already</code></td>
+<td>The target file exists; <code>--force</code> proposes anew and overwrites it.</td>
+</tr>
+<tr>
+<td>Port 8080 taken</td>
+<td><code>PORT=8090 npm start</code>.</td>
+</tr>
+</tbody>
+</table>
+<p>Copyright (c) 2026 Arcware GmbH - Serano Colameo</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.sections", "content.code.copy", "search.highlight"], "search": "../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.c21346df.min.js"></script>
+      
+    
+  </body>
+</html>

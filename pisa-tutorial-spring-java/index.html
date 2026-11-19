@@ -676,6 +676,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pisa-tutorial-single-tier/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Single tier (no server)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1462,7 +1490,7 @@ Write? [Y/n/f]
 <!-- play: llm -->
 <div class="highlight"><pre><span></span><code>pisa<span class="w"> </span>story<span class="w"> </span>--plan
 </code></pre></div>
-<p><strong>3. Test.</strong> One acceptance test per criterion, in <code>stories/001-person-management/tests/</code>. The folder does not have to match the Java package, but a test must lie in a package below <code>ch.example.adressen</code>, so that Spring finds the application class. Mark each test with <code>@Acceptance</code> (the annotation that <code>pisa init</code> wrote next to the application class; it skips the test unless <code>PISA_ACCEPTANCE=1</code>) and with the <strong>JUnit tag</strong> of its criterion, <code>@Tag("AC1")</code>: Pisa runs one criterion by its tag (<code>./mvnw test -Pac -Dgroups=AC1</code>), the class and method names are free:</p>
+<p><strong>3. Test.</strong> One acceptance test per criterion, in <code>stories/001-person-management/tests/</code>. <strong>The name of each test method starts with the number of its criterion (<code>ac1_…</code>, <code>ac2_…</code>):</strong> <code>pisa story --check</code> reads the result of a criterion from the Surefire report by that name (the <code>@Tag</code> selects the test in the Maven run). The folder does not have to match the Java package, but a test must lie in a package below <code>ch.example.adressen</code>, so that Spring finds the application class. Mark each test with <code>@Acceptance</code> (the annotation that <code>pisa init</code> wrote next to the application class; it skips the test unless <code>PISA_ACCEPTANCE=1</code>) and with the <strong>JUnit tag</strong> of its criterion, <code>@Tag("AC1")</code>: Pisa runs one criterion by its tag (<code>./mvnw test -Pac -Dgroups=AC1</code>), the class and method names are free:</p>
 <div class="highlight"><pre><span></span><code><span class="c1">// stories/001-person-management/tests/ArchivePersonTest.java</span>
 <span class="kn">package</span><span class="w"> </span><span class="nn">ch.example.adressen.stories</span><span class="p">;</span>
 
@@ -1529,7 +1557,7 @@ Write? [Y/n/f]
 
 <span class="w">    </span><span class="nd">@Acceptance</span>
 <span class="w">    </span><span class="nd">@Tag</span><span class="p">(</span><span class="s">"AC1"</span><span class="p">)</span>
-<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">aPersonSetToArchivedIsStillListedWithThatStatus</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">ac1_aPersonSetToArchivedIsStillListedWithThatStatus</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">createPerson</span><span class="p">();</span>
 <span class="w">        </span><span class="n">mockMvc</span><span class="p">.</span><span class="na">perform</span><span class="p">(</span><span class="n">put</span><span class="p">(</span><span class="n">PATH</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">"/"</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">id</span><span class="p">).</span><span class="na">contentType</span><span class="p">(</span><span class="n">MediaType</span><span class="p">.</span><span class="na">APPLICATION_JSON</span><span class="p">).</span><span class="na">content</span><span class="p">(</span><span class="n">person</span><span class="p">(</span><span class="s">"ARCHIVED"</span><span class="p">)))</span>
 <span class="w">                </span><span class="p">.</span><span class="na">andExpect</span><span class="p">(</span><span class="n">status</span><span class="p">().</span><span class="na">isOk</span><span class="p">());</span>
@@ -1540,7 +1568,7 @@ Write? [Y/n/f]
 
 <span class="w">    </span><span class="nd">@Acceptance</span>
 <span class="w">    </span><span class="nd">@Tag</span><span class="p">(</span><span class="s">"AC2"</span><span class="p">)</span>
-<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">aStatusThatDoesNotExistIsRefusedAndThePersonStaysAsItWas</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="nf">ac2_aStatusThatDoesNotExistIsRefusedAndThePersonStaysAsItWas</span><span class="p">()</span><span class="w"> </span><span class="kd">throws</span><span class="w"> </span><span class="n">Exception</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="n">String</span><span class="w"> </span><span class="n">id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">createPerson</span><span class="p">();</span>
 <span class="w">        </span><span class="n">mockMvc</span><span class="p">.</span><span class="na">perform</span><span class="p">(</span><span class="n">put</span><span class="p">(</span><span class="n">PATH</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">"/"</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">id</span><span class="p">).</span><span class="na">contentType</span><span class="p">(</span><span class="n">MediaType</span><span class="p">.</span><span class="na">APPLICATION_JSON</span><span class="p">).</span><span class="na">content</span><span class="p">(</span><span class="n">person</span><span class="p">(</span><span class="s">"GONE"</span><span class="p">)))</span>
 <span class="w">                </span><span class="p">.</span><span class="na">andExpect</span><span class="p">(</span><span class="n">status</span><span class="p">().</span><span class="na">isBadRequest</span><span class="p">());</span>

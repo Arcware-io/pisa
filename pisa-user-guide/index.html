@@ -758,6 +758,34 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="What each part does">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#library-names-in-versions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Library names in versions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-the-editor-offers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What the editor offers
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -809,6 +837,17 @@
     <span class="md-ellipsis">
       
         Example data
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a-single-tier-site-no-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A single-tier site (no server)
       
     </span>
   </a>
@@ -1389,6 +1428,34 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pisa-tutorial-single-tier/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Single tier (no server)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1858,6 +1925,34 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="What each part does">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#library-names-in-versions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Library names in versions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-the-editor-offers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What the editor offers
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
         
           <li class="md-nav__item">
@@ -1909,6 +2004,17 @@
     <span class="md-ellipsis">
       
         Example data
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a-single-tier-site-no-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A single-tier site (no server)
       
     </span>
   </a>
@@ -2399,7 +2505,7 @@
 <p><strong>Where to start:</strong></p>
 <ul>
 <li><strong>Brand new?</strong> Read <a href="#how-pisa-works">How Pisa works</a> (one minute), then <a href="#installing-pisa">Install</a> and follow the <a href="#quick-start">Quick start</a>.</li>
-<li><strong>Prefer a guided tour?</strong> Run <code>mkdir my-project &amp;&amp; cd my-project &amp;&amp; pisa init</code>, then <code>pisa play</code>. This lists two tutorials that build the same app step by step: the <a href="https://arcware-io.github.io/pisa/pisa-tutorial-spring-java/">Spring Boot (Java) tutorial</a> and the <a href="https://arcware-io.github.io/pisa/pisa-tutorial-hono-typescript/">Hono (TypeScript) tutorial</a>. Each takes about an hour.</li>
+<li><strong>Prefer a guided tour?</strong> Run <code>mkdir my-project &amp;&amp; cd my-project &amp;&amp; pisa init</code>, then <code>pisa play</code>. This lists three tutorials that build the same app step by step: the <a href="https://arcware-io.github.io/pisa/pisa-tutorial-spring-java/">Spring Boot (Java) tutorial</a>, the <a href="https://arcware-io.github.io/pisa/pisa-tutorial-hono-typescript/">Hono (TypeScript) tutorial</a> (each takes about an hour) and the <a href="https://arcware-io.github.io/pisa/pisa-tutorial-single-tier/">single-tier tutorial</a>, a site without a server (about half an hour).</li>
 <li><strong>Changing a running application?</strong> Read <a href="#changing-your-application-features-and-stories">Changing your application: features and stories</a>.</li>
 <li><strong>Looking something up?</strong> Jump to the <a href="#command-reference">Command reference</a>, the <a href="#spec-file-reference">Spec file reference</a> or <a href="#troubleshooting">Troubleshooting</a>.</li>
 </ul>
@@ -2666,7 +2772,7 @@ sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> <
 <p>This creates an empty Spring Boot project that already starts (<code>pom.xml</code>, the Maven Wrapper <code>mvnw</code>, <code>mvnw.cmd</code> and <code>.mvn/wrapper/</code>, application class, a test, <code>application.yml</code>, <code>README.md</code>; with <code>./mvnw</code> you need no Maven installed; Dockerfile and <code>ci.yml</code> use it too). You also get:</p>
 <ul>
 <li><code>spec/base/</code> — where your spec files go, and <code>spec/README.md</code>, a cheat sheet (which files there are, a short <code>.dml</code> reference, a form and a use case example).</li>
-<li><code>doc/</code> — a copy of this guide and both tutorials, matching your Pisa version.</li>
+<li><code>doc/</code> — a copy of this guide and the tutorials, matching your Pisa version.</li>
 <li><code>project.spec.json</code> — records the project type, so later commands don't need <code>--target</code> again:</li>
 </ul>
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
@@ -2953,7 +3059,7 @@ pisa<span class="w"> </span>story<span class="w"> </span>--check<span class="w">
         package ch.ffhs.cas.library
         uses main
         components layered       // crud | layered
-        versions { archunit "1.6.0" }
+        versions { "com.tngtech.archunit:archunit-junit5" "1.6.0" }   // the real name of a dependency, and its version, both in quotes
     }
     container web : frontend {
         servedBy api
@@ -2966,7 +3072,7 @@ pisa<span class="w"> </span>story<span class="w"> </span>--check<span class="w">
     pipeline {                   // GitHub workflows
         ci github
         release github
-        deploy render            // needs the docker block
+        deploy render            // needs the docker block; `deploy pages` instead: a single-tier site on GitHub Pages
     }
     docker {
         image "library"
@@ -3015,8 +3121,8 @@ pisa<span class="w"> </span>story<span class="w"> </span>--check<span class="w">
 <td>Java base package (<code>--package</code> must not contradict it)</td>
 </tr>
 <tr>
-<td><code>versions { … }</code></td>
-<td>Pin specific library versions; the others stay</td>
+<td><code>versions { "name" "x.y.z" … }</code></td>
+<td>Pin specific library versions; the others stay. A library is named as in a <code>pom.xml</code> or <code>package.json</code>, in quotes (<a href="#library-names-in-versions">names</a>)</td>
 </tr>
 <tr>
 <td><code>docker { … }</code></td>
@@ -3035,11 +3141,46 @@ pisa<span class="w"> </span>story<span class="w"> </span>--check<span class="w">
 <td>Realistic example data from the model in the running development system (<a href="#example-data">below</a>)</td>
 </tr>
 <tr>
-<td><code>frontend</code></td>
-<td>Documentation only — pages are always served by the backend</td>
+<td><code>servedBy api</code></td>
+<td>The frontend is delivered by the backend (documentation only: the pages are always served by the backend)</td>
+</tr>
+<tr>
+<td><code>storage json</code></td>
+<td>A site with <strong>no backend and no database</strong>: the data is one JSON file kept in the browser (<a href="#a-single-tier-site-no-server">below</a>)</td>
+</tr>
+<tr>
+<td><code>package zip</code></td>
+<td>With <code>storage json</code>: <code>npm run package</code> makes the site a ZIP file</td>
 </tr>
 </tbody>
 </table>
+<h4 id="library-names-in-versions">Library names in <code>versions</code><a class="headerlink" href="#library-names-in-versions" title="Permanent link">&para;</a></h4>
+<p>A library in <code>versions</code> is written by its real name, in quotes, followed by the version in quotes: the Maven <code>group:artifact</code> as in a <code>pom.xml</code>, the npm package as in a <code>package.json</code>, the Docker image as in a compose file. An unknown name is an error (the editor and Pisa say so, with the known names), and a library of another target is an error too. Pisa keeps its own keys in the plan (<code>versions.mapstruct</code>); the <code>.adl</code> is where the real names are.</p>
+<table>
+<thead>
+<tr>
+<th>Target</th>
+<th>The names (plan key in brackets)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Backend, <code>runtime spring</code> (the default)</td>
+<td><code>org.springframework.boot:spring-boot-starter-parent</code> (springBoot), <code>org.webjars.npm:alpinejs</code> (alpinejs), <code>org.webjars.npm:validator</code> (validator), <code>org.webjars.npm:bootstrap</code> (bootstrap), <code>com.microsoft.playwright:playwright</code> (playwright), <code>com.tngtech.archunit:archunit-junit5</code> (archunit), <code>com.diffplug.spotless:spotless-maven-plugin</code> (spotless), <code>com.palantir.javaformat:palantir-java-format</code> (palantir), <code>org.codehaus.mojo:build-helper-maven-plugin</code> (buildHelper), <code>commons-validator:commons-validator</code> (commonsValidator), <code>net.datafaker:datafaker</code> (datafaker), <code>org.mapstruct:mapstruct</code> (mapstruct), <code>org.projectlombok:lombok-mapstruct-binding</code> (lombokMapstructBinding), <code>postgres</code> (postgres, the Docker image)</td>
+</tr>
+<tr>
+<td>Backend, <code>runtime hono</code></td>
+<td><code>hono</code>, <code>@hono/node-server</code> (honoNodeServer), <code>prisma</code>, <code>alpinejs</code>, <code>validator</code>, <code>bootstrap</code>, <code>typescript</code>, <code>@types/node</code> (typesNode), <code>@types/validator</code> (typesValidator), <code>playwright</code>, <code>postgres</code>, <code>@faker-js/faker</code> (fakerJs), <code>bcryptjs</code>, <code>yaml</code></td>
+</tr>
+<tr>
+<td>Single-tier site (frontend with <code>storage json</code>)</td>
+<td><code>alpinejs</code>, <code>validator</code>, <code>bootstrap</code>, <code>playwright</code>, <code>fflate</code>, <code>@faker-js/faker</code> (fakerJs)</td>
+</tr>
+</tbody>
+</table>
+<p>A frontend has <code>versions</code> only as a single-tier site; the versions of a frontend that a backend serves are written in that backend. <code>pisa update-versions</code> and <code>propose-architecture</code> write the same real names.</p>
+<h4 id="what-the-editor-offers">What the editor offers<a class="headerlink" href="#what-the-editor-offers" title="Permanent link">&para;</a></h4>
+<p>While you write an <code>.adl</code>, the editor (the IntelliJ and VS Code plugins, which carry the language server of dml-lang) offers only what is valid at the cursor, so that a suggestion is never an error a moment later: a setting or block once; no <code>servedBy</code> next to <code>storage json</code>; <code>storage json</code> only as the only container; <code>package</code> and <code>versions</code> of a frontend only with <code>storage json</code>; <code>roles</code> only with <code>authentication</code>; <code>uses</code> only with a database in the architecture; a template of <code>scm</code> only after a <code>host</code>; <code>deploy</code> only where it is valid (<code>pages</code> for a single-tier site, <code>render</code> for a backend with a <code>docker</code> block); for <code>engine</code> the engines of the runtime of the backend that uses the database; after <code>servedBy</code> only backends and after <code>uses</code> only databases; the real library names of the container in <code>versions</code>. The plugins show this only after they are rebuilt and installed with the new language server.</p>
 <p>What the file doesn't name (packages, ports, users, console) stays as it is in the plan. The <code>pipeline</code>, <code>scm</code>, <code>docker</code>, <code>ci</code>, <code>release</code>, <code>host</code>, <code>image</code>, <code>compose</code> and similar words are keywords and no longer work as part of a package name (<code>package io.github.x</code> still does).</p>
 <p><strong>App name:</strong> the start page shows the name after <code>architecture</code> (here "Library") as its heading and as the browser tab title. It's stored as <code>app.title</code> in <code>application.yml</code>, which <code>init</code> writes once. To change it, edit it there and restart; no <code>generate</code> needed. Without an <code>.adl</code>, the artifact ID is used.</p>
 <h3 id="switching-from-h2-to-postgresql">Switching from H2 to PostgreSQL<a class="headerlink" href="#switching-from-h2-to-postgresql" title="Permanent link">&para;</a></h3>
@@ -3189,6 +3330,38 @@ docker<span class="w"> </span>compose<span class="w"> </span>up<span class="w"> 
 </table>
 <p>The records are made only when the database is empty, so a SQLite file with data is left alone. To see the demo data in a container, set the variable to <code>true</code> in the <code>Dockerfile</code> (it is yours after the first write). Delete the block and run <code>init --force</code> and <code>generate</code>: the loader or the seed is then removed (or listed, if you changed it).</p>
 <p><strong>Checked</strong> (2026-11-18): a project from the address book model with <code>entries 5</code> and <code>locale "de-CH"</code>, for Spring with H2 (the tests pass, the application starts with 5 persons, their addresses and 5 countries) and for Hono with SQLite (<code>npm run typecheck</code>, <code>npm start</code>; the second start leaves the data alone). <strong>Not checked:</strong> the layered style and <code>unique</code> fields in a running project, PostgreSQL with Hono, the other locales (each Faker library knows its own set; where a region has no data, the language or English is used).</p>
+<h3 id="a-single-tier-site-no-server">A single-tier site (no server)<a class="headerlink" href="#a-single-tier-site-no-server" title="Permanent link">&para;</a></h3>
+<p>The same model can run with one tier only: a web site of plain HTML and Alpine.js, with no backend and no database. Its data is one JSON file: kept in the browser, and saved and loaded as a file. Only the <code>.adl</code> changes; the <code>.dml</code> is the same one you would give Spring or Hono. A step-by-step course: the <a href="../pisa-tutorial-single-tier/">single-tier tutorial</a> (<code>pisa play single-tier</code>).</p>
+<div class="highlight"><pre><span></span><code>architecture Library {
+    container web : frontend {
+        technology alpine
+        storage json                     // the data is one JSON file
+        versions { "alpinejs" "3.17.5" }   // optional: versions of the libraries the pages load ("alpinejs", "bootstrap", "validator", "@faker-js/faker", "fflate", "playwright")
+        package zip                      // optional: npm run package makes dist/&lt;artifact&gt;.zip
+    }
+    sampleData { entries 5  locale "de-CH" }   // optional: example data on the first visit
+    scm { host github }                        // optional, as always
+    pipeline { ci github  release github  deploy pages }   // optional: deploy pages publishes the site on GitHub Pages
+}
+</code></pre></div>
+<div class="highlight"><pre><span></span><code>pisa<span class="w"> </span>init<span class="w"> </span>--out<span class="w"> </span>./library<span class="w"> </span>--artifact<span class="w"> </span>library<span class="w"> </span>--adl<span class="w"> </span>library.adl<span class="w">     </span><span class="c1"># the target alpine-json comes from `storage json`</span>
+<span class="c1"># or the smallest description, written for you (with `sampleData { locale "de-CH" }`, so the site starts with Swiss example data):</span>
+pisa<span class="w"> </span>init<span class="w"> </span>--target<span class="w"> </span>alpine-json<span class="w"> </span>--out<span class="w"> </span>./library<span class="w"> </span>--artifact<span class="w"> </span>library
+<span class="nb">cd</span><span class="w"> </span>library<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>pisa<span class="w"> </span>generate<span class="w"> </span>--file<span class="w"> </span>spec/base/library.dml<span class="w"> </span>--out<span class="w"> </span>.
+npm<span class="w"> </span>start<span class="w">                                                           </span><span class="c1"># http://localhost:8080</span>
+</code></pre></div>
+<p><strong>Rules.</strong> <code>storage json</code> means <em>exactly one container</em>: no backend, no database, no second frontend (one JSON file is the whole storage). <code>servedBy</code>, <code>docker</code> and <code>deploy render</code> are errors with it, because there is no server to deliver, to put in an image or to run (<code>deploy pages</code> is the one deploy that is possible, see below); a login and roles live in a backend, so they are not possible either. <code>scm</code>, <code>ci</code>, <code>release</code>, <code>sampleData</code> and <code>versions</code> work as before. <code>deploy pages</code> is <strong>only</strong> possible with <code>storage json</code> (and needs no <code>docker</code>); with a backend it is an error. The relations are the ones of the Hono target: <code>manyToOne</code>, <code>oneToOne … composed</code> and <code>oneToMany … mappedBy</code>.</p>
+<p><strong>What you get.</strong> Static files in <code>public/</code>: <code>index.html</code>, one page per entity (<code>persons.html</code>; a composed part has no page of its own), <code>app.js</code>, <code>app.css</code>, and <code>schema.js</code> (the rules of the model), <code>store.js</code> (the data) and, with <code>sampleData</code>, <code>sample-data.js</code>. The pages are the same Alpine.js pages as in the other targets. The libraries (Alpine.js, Bootstrap, validator.js, and <code>@faker-js/faker</code> for example data) come from the jsDelivr CDN, with the versions of the plan, so the site needs the network for them.</p>
+<p><strong>How the data is kept.</strong> <code>store.js</code> answers the requests of the pages the way the REST API of the other targets does (the same rules: required values, lengths, ranges, patterns, <code>Email</code> and <code>Url</code>, <code>unique</code>; an unknown row is a 404, an operation that <code>@operations</code> does not allow a 405, a row that another row still refers to a 409). Every change is saved in the browser (<code>localStorage</code>), so the data is still there after a reload. <strong>Save data</strong> in the menu (the hamburger button in the top bar) writes all data as a JSON file with one list per entity; <strong>Load data</strong> replaces the data with such a file, and a file that is not valid (not JSON, an unknown entity, a broken rule, a reference to a row that is not there) changes nothing. With <code>sampleData</code>, <strong>Reset to example data</strong> in the same menu throws the data away and makes the example data again; if the example data cannot be made (they need the CDN), the page says so. With <code>sampleData</code>, the first visit of a browser that holds no data gets the example data (a fixed seed, at most 10 records per entity).</p>
+<p><strong>Tests.</strong> <code>npm test</code> runs an architecture test: no file of <code>public/</code> may call a server (<code>fetch</code>, <code>XMLHttpRequest</code>, <code>WebSocket</code>, <code>EventSource</code>, <code>sendBeacon</code>). <code>npm run test:ui</code> runs one Playwright test per page: create, edit and delete through the form, and the row is still there after a reload (the first run needs <code>npx playwright install chromium</code>).</p>
+<p><strong>Checked</strong> (2026-11-19): the address book model with <code>sampleData</code>, <code>package zip</code> and <code>ci</code>/<code>release</code>: the generated architecture test, the Playwright tests in Chromium, Save data and Load data in a real browser (a broken file changes nothing), <code>npm run package</code> (a ZIP with the eight files of the site), and a store test in Node for every rule above. <strong>Not checked:</strong> a GitHub Actions run of the workflows, browsers other than Chromium, more data than <code>localStorage</code> takes (about 5 MB), the use cases (<code>.uc.md</code>; they make no test for this target yet).</p>
+<p><strong>GitHub Pages.</strong> <code>pipeline { release github  deploy pages }</code> (with <code>scm { host github }</code>) writes <code>.github/workflows/pages.yml</code>, once (then it is yours): on a tag <code>v*</code> and by hand (Actions, Pages, Run workflow) it runs <code>npm test</code> and hands the folder <code>public/</code> to the official GitHub Pages actions (<code>actions/configure-pages</code>, <code>upload-pages-artifact</code>, <code>deploy-pages</code>). The site is static files, so nothing is built. It is served below the name of the repository (<code>https://&lt;owner&gt;.github.io/&lt;repository&gt;/</code>), so every link and script of the pages is relative; the generated architecture test fails if a page has a link that starts with a slash. Save data and Load data work on the published page because they run in the browser; the data is in the browser of whoever opens the page (everybody has data of their own). What you do once:</p>
+<ol>
+<li>A <strong>public</strong> repository (a free GitHub account serves Pages only from a public one; check GitHub's current rules for your plan): <code>gh repo create &lt;name&gt; --public --source . --push</code>. When <code>pisa init</code> has made the repository it prints this command with <code>--public</code> for a plan with <code>deploy pages</code>, and the command for step 2.</li>
+<li>Set GitHub up, once and <strong>before the first tag</strong>, in the project folder and <strong>in this order</strong>: <code>gh api -X POST 'repos/{owner}/{repo}/pages' -f build_type=workflow</code> switches Pages on and creates the environment <code>github-pages</code>; <code>gh api -X POST 'repos/{owner}/{repo}/environments/github-pages/deployment-branch-policies' -f name='v*' -f type=tag</code> lets a tag <code>v*</code> deploy to it (GitHub allows only the branch <code>main</code> there by default, so a tag run is otherwise rejected with <code>Tag "v0.1.0" is not allowed to deploy to github-pages due to environment protection rules</code>). In the browser: <strong>Settings → Pages → Source: GitHub Actions</strong>, and <strong>Settings → Environments → github-pages → add the tag rule <code>v*</code></strong>. If the first run failed, fix the setting and run it again: <code>gh run rerun &lt;run-number&gt;</code>.</li>
+<li>Publish: <code>git tag v0.1.0 &amp;&amp; git push origin v0.1.0</code>. The tag also starts <code>release.yml</code> (the release with the ZIP file, with <code>package zip</code>).</li>
+</ol>
+<p>A pipeline with <code>deploy pages</code> but no <code>release</code> gets a warning (nothing makes the tag; start the workflow by hand). <strong>Checked on GitHub (2026-11-19):</strong> a public test repository, the two <code>gh api</code> commands above, the tag <code>v0.1.0</code>: the run <code>Pages</code> was green (tests, <code>configure-pages</code>, <code>upload-pages-artifact</code>, <code>deploy-pages</code>) and the site answered with 200 at <code>https://&lt;owner&gt;.github.io/&lt;repository&gt;/</code>. Also checked: the site below a sub-path in a browser (Chromium). The tutorial <a href="../pisa-tutorial-single-tier/">single tier</a>, step 10, walks through it.</p>
 <h3 id="git-repository">Git repository<a class="headerlink" href="#git-repository" title="Permanent link">&para;</a></h3>
 <p>If your <code>.adl</code> has a <code>pipeline</code> or <code>scm</code> block, or you pass <code>--git</code>, <code>init</code> creates a local Git repo (branch <code>main</code>) with a first commit (<code>Initial project (pisa init)</code>). It never pushes anything. Name and email come from your Git configuration; if they're missing, or Git refuses the commit, <code>init</code> prints <code>git add -A</code> and <code>git commit -m "Initial project"</code> instead and doesn't fail. Inside an existing Git working tree nothing is created. To publish on GitHub:</p>
 <div class="highlight"><pre><span></span><code>git<span class="w"> </span>init<span class="w"> </span>-b<span class="w"> </span>main<span class="w">                      </span><span class="c1"># only if Pisa did not create a repository</span>
@@ -3433,10 +3606,10 @@ gh<span class="w"> </span>repo<span class="w"> </span>create<span class="w"> </s
 </table>
 <h3 id="pisa-init">pisa init<a class="headerlink" href="#pisa-init" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code>pisa init [--out &lt;dir&gt;]
-pisa init [--target spring-boot|hono-prisma] --out &lt;dir&gt; [--group &lt;groupId&gt;] [--artifact &lt;artifactId&gt;]
+pisa init [--target spring-boot|hono-prisma|alpine-json] --out &lt;dir&gt; [--group &lt;groupId&gt;] [--artifact &lt;artifactId&gt;]
           [--package &lt;base.package&gt;] [--java 17|21|25] [--adl &lt;file.adl&gt;] [--templates &lt;dir&gt;] [--git] [--force]
 </code></pre></div>
-<p><strong>Without <code>--target</code> or <code>--adl</code></strong>, it creates only <code>doc/</code> (this guide and both tutorials) and an empty <code>spec/base/</code>. This is the starting point for the tutorials: there you decide whether to build Java or TypeScript.</p>
+<p><strong>Without <code>--target</code> or <code>--adl</code></strong>, it creates only <code>doc/</code> (this guide and the tutorials) and an empty <code>spec/base/</code>. This is the starting point for the tutorials: there you decide whether to build Java, TypeScript or a site without a server.</p>
 <p><strong>With <code>--target</code> or <code>--adl</code></strong>, it creates a runnable project and <code>project.spec.json</code>, and also copies <code>doc/</code> (existing files there stay unless you pass <code>--force</code>; the documents are not part of the recipe). Re-initializing an existing project with <code>--force</code> also rewrites <code>pom.xml</code> and the other bootstrap files.</p>
 <table>
 <thead>
@@ -3449,8 +3622,8 @@ pisa init [--target spring-boot|hono-prisma] --out &lt;dir&gt; [--group &lt;grou
 <tbody>
 <tr>
 <td><code>--target</code></td>
-<td><code>spring-boot</code> or <code>hono-prisma</code></td>
-<td>From the <code>.adl</code> (<code>runtime</code>), else <code>spring-boot</code></td>
+<td><code>spring-boot</code>, <code>hono-prisma</code> or <code>alpine-json</code> (a site without a server, <a href="#a-single-tier-site-no-server">below</a>)</td>
+<td>From the <code>.adl</code> (<code>storage json</code> or <code>runtime</code>), else <code>spring-boot</code></td>
 </tr>
 <tr>
 <td><code>--out</code></td>
@@ -3514,9 +3687,9 @@ pisa init [--target spring-boot|hono-prisma] --out &lt;dir&gt; [--group &lt;grou
 <li>It also writes the Maven profile <code>ac</code> (Spring) and the npm script <code>test:ac</code> (Hono) that run the acceptance tests of stories.</li>
 </ul>
 <h3 id="pisa-play">pisa play<a class="headerlink" href="#pisa-play" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>pisa play &lt;spring-java | hono-typescript | file.md&gt; [--dir &lt;folder&gt;] [--llm] [--fast] [--yes] [--dry-run] [--from &lt;n&gt;] [--to &lt;n&gt;]
+<div class="highlight"><pre><span></span><code>pisa play &lt;spring-java | hono-typescript | single-tier | file.md&gt; [--dir &lt;folder&gt;] [--llm] [--fast] [--yes] [--dry-run] [--from &lt;n&gt;] [--to &lt;n&gt;]
 </code></pre></div>
-<p>Runs a tutorial for you: executes its commands, writes the files it shows, starts the app and asks it for the login page, and reports each step with ✅ or ❌. A step that is not played (by hand, or left out by <code>--fast</code> or the missing <code>--llm</code>) is named in one line with <code>· skipped:</code> and the reason, so the numbers of the steps have no gaps. Run <code>pisa play</code> with no name to list the tutorials. The bundled tutorials need no file, even with the installed binary.</p>
+<p>Runs a tutorial for you: executes its commands, writes the files it shows, starts the app and asks it for its first page (the login page, or the start page of the single-tier site), and reports each step with ✅ or ❌. A step that is not played (by hand, or left out by <code>--fast</code> or the missing <code>--llm</code>) is named in one line with <code>· skipped:</code> and the reason, so the numbers of the steps have no gaps. Run <code>pisa play</code> with no name to list the tutorials. The bundled tutorials need no file, even with the installed binary. <code>pisa play single-tier</code> plays the <a href="../pisa-tutorial-single-tier/">single-tier tutorial</a>: the architecture with <code>storage json</code>, the generation, the architecture test, the browser tests, the replay and the ZIP file (<code>--fast</code> makes and generates the project only).</p>
 <table>
 <thead>
 <tr>
@@ -3626,7 +3799,7 @@ pisa init [--target spring-boot|hono-prisma] --out &lt;dir&gt; [--group &lt;grou
 </tr>
 </tbody>
 </table>
-<p>The AI may answer only through a checked tool: style, <code>runtime</code> (<code>hono</code> only if the description mentions TypeScript or Node.js), login (<code>authentication session</code>, only if the description mentions login, users, passwords or roles), example data (<code>sampleData</code>, only if the description asks for example, test or demo data, and never with PostgreSQL), roles with their rights (only if it mentions them), database <code>h2</code> or <code>postgresql</code>, base package and versions. <strong>Versions "from memory" are rejected:</strong> the AI must look them up at Maven Central (stable only, no beta/RC), and the file names the date and source in its header. It doesn't propose users; <code>init</code> writes those as <code>security.yml</code>.</p>
+<p>The AI may answer only through a checked tool: style, <code>runtime</code> (<code>hono</code> only if the description mentions TypeScript or Node.js), login (<code>authentication session</code>, only if the description mentions login, users, passwords or roles), a site without a server (<code>storage json</code>, only if the description asks for a site that runs in the browser, a static site or data kept in a file; then it gives no backend, database, login, <code>docker</code> or <code>deploy</code>, but may add <code>zip</code>, example data, CI and releases), example data (<code>sampleData</code>, only if the description asks for example, test or demo data, and never with PostgreSQL), roles with their rights (only if it mentions them), database <code>h2</code> or <code>postgresql</code>, base package and versions. <strong>Versions "from memory" are rejected:</strong> the AI must look them up at Maven Central (stable only, no beta/RC), and the file names the date and source in its header. It doesn't propose users; <code>init</code> writes those as <code>security.yml</code>.</p>
 <p><strong>Tip:</strong> describe everything once in <code>spec/base/requirements.md</code>, then run <code>propose-architecture</code> followed by <code>propose-model</code>. Each takes only the part it needs. A filled-in <code>architecture.md</code> or <code>domain-spec.md</code> always takes precedence. An empty <code>requirements.md</code> counts as absent; Pisa never creates it. Review each result before moving on.</p>
 <h3 id="pisa-propose-layout">pisa propose-layout<a class="headerlink" href="#pisa-propose-layout" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code>pisa propose-layout --entity &lt;Name&gt; --out &lt;dir&gt;
@@ -4135,11 +4308,15 @@ pisa<span class="w"> </span>generate<span class="w"> </span>--file<span class="w
 </tr>
 <tr>
 <td>AI proposals</td>
-<td>Going from requirements to architecture to model in <strong>one</strong> step (run the commands one after another). Both proposals read <code>requirements.md</code>, and forms and use cases can be derived without an AI (<code>propose-specs</code>). The proposals are tested automatically only against a fake model; with a real model there was one manual run each. <code>propose-architecture</code> proposing <code>runtime hono</code> or <code>authentication session</code> has never run with a real model.</td>
+<td>Going from requirements to architecture to model in <strong>one</strong> step (run the commands one after another). Both proposals read <code>requirements.md</code>, and forms and use cases can be derived without an AI (<code>propose-specs</code>). The proposals are tested automatically only against a fake model; with a real model there was one manual run each. <code>propose-architecture</code> proposing <code>runtime hono</code>, <code>authentication session</code> or <code>storage json</code> has never run with a real model.</td>
 </tr>
 <tr>
 <td>Architecture</td>
 <td>More than one backend or database, gateways, brokers, hexagonal style, assigning entities to backends. A changed <code>.adl</code> needs <code>init --adl … --force</code>.</td>
+</tr>
+<tr>
+<td>Single-tier site</td>
+<td><code>storage json</code> allows one container only. No login or roles, no <code>docker</code>, no <code>deploy render</code>; no <code>manyToMany</code>, <code>oneToMany</code> without <code>mappedBy</code> and <code>oneToOne</code> without <code>composed</code>; no tests from use cases (<code>.uc.md</code>); no UI components setting in the <code>.adl</code> (the pages come from the form specs). Later (not built): an Electron app and a desktop app.</td>
 </tr>
 <tr>
 <td>TypeScript target</td>
@@ -4155,7 +4332,7 @@ pisa<span class="w"> </span>generate<span class="w"> </span>--file<span class="w
 </tr>
 <tr>
 <td>Example data</td>
-<td>Sources other than a Faker library (values written by the language model, your own data files); example data with PostgreSQL; an application with no backend. Pisa makes the values from field names and rules, so <code>Author.name</code> is a person but a field called <code>x</code> gets a short phrase.</td>
+<td>Sources other than a Faker library (values written by the language model, your own data files); example data with PostgreSQL. Pisa makes the values from field names and rules, so <code>Author.name</code> is a person but a field called <code>x</code> gets a short phrase.</td>
 </tr>
 <tr>
 <td>Deployment</td>
@@ -4201,6 +4378,10 @@ pisa<span class="w"> </span>generate<span class="w"> </span>--file<span class="w
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>0.17.0</td>
+<td>Single-tier site: a frontend container with <code>storage json</code> (and optional <code>versions { … }</code> and <code>package zip</code>) makes the new target <code>alpine-json</code>, a web site of plain HTML and Alpine.js with no backend and no database: the data is one JSON file kept in the browser, a hamburger menu with <strong>Save data</strong>, <strong>Load data</strong> and <strong>Reset to example data</strong>, <strong><code>deploy pages</code></strong> (a workflow that publishes the site on GitHub Pages), example data on the first visit (<code>pisa init --target alpine-json</code> asks for Swiss data, <code>locale "de-CH"</code>), <code>npm run package</code> makes a ZIP of the site, an architecture test (nothing calls a server) and Playwright tests. <code>pisa init --target alpine-json</code>. New plan keys <code>database.engine "json"</code>, <code>frontend.zip</code> and <code>versions.fflate</code>; the editor completes <code>storage</code> and <code>json</code>; <code>propose-architecture</code> can propose it (also <code>deploy pages</code>); the tutorial <a href="../pisa-tutorial-single-tier/">single tier</a>, <code>pisa play single-tier</code>. The <code>.adl</code> editor offers only what is valid at the cursor, and <code>versions</code> takes the real names of the dependencies in quotes (<code>"org.mapstruct:mapstruct" "1.6.3"</code>, <code>"@faker-js/faker" "10.6.0"</code>); the short names of earlier builds (<code>mapstruct</code>, <code>fakerJs</code>) are a syntax error.</td>
+</tr>
 <tr>
 <td>0.16.0</td>
 <td>Example data: the <code>sampleData { source faker  entries N  locale "…" }</code> block in the <code>.adl</code> makes realistic records from the model when the development system starts (Spring: datafaker, Hono: <code>@faker-js/faker</code>; at most 10 per entity, default 5; only with <code>h2</code> or <code>sqlite</code>; off in the tests and the Docker image); completion for <code>source</code>, <code>entries</code> and <code>locale</code> in the editor. New optional plan keys <code>sampleData</code>, <code>versions.datafaker</code> and <code>versions.fakerJs</code>. Spring acceptance runs use one Maven run per story and prefer <code>mvnd</code>; generated Spring projects contain the Maven Wrapper (<code>./mvnw</code>); <code>pisa play</code> lists skipped steps with the reason.</td>
@@ -4294,7 +4475,7 @@ pisa<span class="w"> </span>generate<span class="w"> </span>--file<span class="w
 <h3 id="what-has-and-hasnt-been-tested">What has and hasn't been tested<a class="headerlink" href="#what-has-and-hasnt-been-tested" title="Permanent link">&para;</a></h3>
 <ul>
 <li><strong>Verified:</strong> Docker builds and Compose for both targets (Oct 2026); PostgreSQL against a real <code>postgres:17</code> container; the Testcontainers profile (147 tests green, 25 of them against PostgreSQL, six entities, macOS with Docker Desktop); <code>update-versions</code> on real sample projects; the H2 console and TCP access; the sample projects <code>library-hono</code> and <code>library-spring</code> regenerate with the current Pisa and <code>pisa replay</code> matches their recipes.</li>
-<li><strong>Not yet verified:</strong> the install scripts and Homebrew formula (reviewed, not run); manual install on Linux and Windows; the generated GitHub workflows and issue forms on real GitHub; a real Render deployment; AI proposals with a real model (only one manual run each); <code>pisa play --llm</code> with the tutorials; some IDE menu paths.</li>
+<li><strong>Not yet verified:</strong> the install scripts and Homebrew formula (reviewed, not run); manual install on Linux and Windows; the generated CI and release workflows and issue forms on real GitHub (the Pages workflow ran on GitHub on 2026-11-19); a real Render deployment; AI proposals with a real model (only one manual run each); <code>pisa play --llm</code> with the tutorials; some IDE menu paths.</li>
 </ul>
 <p>Copyright (c) 2026 Arcware GmbH - Serano Colameo</p>
 
