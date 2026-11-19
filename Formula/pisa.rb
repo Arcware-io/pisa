@@ -1,26 +1,26 @@
 class Pisa < Formula
   desc "Generates a running Spring Boot or Hono project from spec files"
   homepage "https://github.com/Arcware-io/pisa"
-  version "0.16.0"
+  version "0.17.0"
 
   on_macos do
     on_arm do
-      url "https://github.com/Arcware-io/pisa/releases/download/v0.16.0/pisa-darwin-arm64"
-      sha256 "e51266d5c1ed1bfce13e5bf308a70f173a321dc07270bbc7b212ad92207a1daa"
+      url "https://github.com/Arcware-io/pisa/releases/download/v0.17.0/pisa-darwin-arm64"
+      sha256 "44bf1defa9ebd73830b345f1efebff7905e29e72da1f199c79fa746fcb7ef551"
     end
     on_intel do
-      url "https://github.com/Arcware-io/pisa/releases/download/v0.16.0/pisa-darwin-x64"
-      sha256 "c141d770dfa97baf9bf9252ddd5a537c7746b0920990a00e145f6b93bbdeca9b"
+      url "https://github.com/Arcware-io/pisa/releases/download/v0.17.0/pisa-darwin-x64"
+      sha256 "b1436255509426a5f9c75863ae4d3e893647c0eaecce865f22decb9f128b9cd2"
     end
   end
   on_linux do
     on_arm do
-      url "https://github.com/Arcware-io/pisa/releases/download/v0.16.0/pisa-linux-arm64"
-      sha256 "bbf5fd2ac4abb03c8392c06a87efe049b4c08a3994d032d0690c1a1779697ce3"
+      url "https://github.com/Arcware-io/pisa/releases/download/v0.17.0/pisa-linux-arm64"
+      sha256 "970ed359a703d609514e0e2610862a74ad2062fdbfea454f48f2a22b8cfb00db"
     end
     on_intel do
-      url "https://github.com/Arcware-io/pisa/releases/download/v0.16.0/pisa-linux-x64"
-      sha256 "b925f768987f3063a6b323e95f148c2ffafdcd89d4591284dc8b383c59b6a30c"
+      url "https://github.com/Arcware-io/pisa/releases/download/v0.17.0/pisa-linux-x64"
+      sha256 "3e48374c85b44a7c67df2434dd21ead8c3145fa515b96e5f2897c92d15d9b0fa"
     end
   end
 
