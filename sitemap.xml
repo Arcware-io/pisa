@@ -2,26 +2,34 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://arcware-io.github.io/pisa/</loc>
-         <lastmod>2026-11-19</lastmod>
+         <lastmod>2026-11-20</lastmod>
     </url>
     <url>
          <loc>https://arcware-io.github.io/pisa/comparison/</loc>
-         <lastmod>2026-11-19</lastmod>
+         <lastmod>2026-11-20</lastmod>
+    </url>
+    <url>
+         <loc>https://arcware-io.github.io/pisa/pisa-faq/</loc>
+         <lastmod>2026-11-20</lastmod>
+    </url>
+    <url>
+         <loc>https://arcware-io.github.io/pisa/pisa-howto/</loc>
+         <lastmod>2026-11-20</lastmod>
     </url>
     <url>
          <loc>https://arcware-io.github.io/pisa/pisa-tutorial-hono-typescript/</loc>
-         <lastmod>2026-11-19</lastmod>
+         <lastmod>2026-11-20</lastmod>
     </url>
     <url>
          <loc>https://arcware-io.github.io/pisa/pisa-tutorial-single-tier/</loc>
-         <lastmod>2026-11-19</lastmod>
+         <lastmod>2026-11-20</lastmod>
     </url>
     <url>
          <loc>https://arcware-io.github.io/pisa/pisa-tutorial-spring-java/</loc>
-         <lastmod>2026-11-19</lastmod>
+         <lastmod>2026-11-20</lastmod>
     </url>
     <url>
          <loc>https://arcware-io.github.io/pisa/pisa-user-guide/</loc>
-         <lastmod>2026-11-19</lastmod>
+         <lastmod>2026-11-20</lastmod>
     </url>
 </urlset>

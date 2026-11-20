@@ -1,0 +1,2420 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Pisa is spec-driven: typed DSLs for domain model and architecture, forms and use cases as Markdown, and deterministic generation of software architectures and running applications. An LLM only proposes specs.">
+      
+      
+      
+        <link rel="canonical" href="https://arcware-io.github.io/pisa/pisa-howto/">
+      
+      
+        <link rel="prev" href="../pisa-user-guide/">
+      
+      
+        <link rel="next" href="../pisa-faq/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.0">
+    
+    
+      
+        <title>How-To - Pisa</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.57a0d79d.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.fb2fffe2.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  
+  <meta name="robots" content="noindex, nofollow">
+
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#pisa-how-to" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="Pisa" class="md-header__button md-logo" aria-label="Pisa" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Pisa
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              How-To
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m17.75 4.09-2.53 1.94.91 3.06-2.63-1.81-2.63 1.81.91-3.06-2.53-1.94L12.44 4l1.06-3 1.06 3zm3.5 6.91-1.64 1.25.59 1.98-1.7-1.17-1.7 1.17.59-1.98L15.75 11l2.06-.05L18.5 9l.69 1.95zm-2.28 4.95c.83-.08 1.72 1.1 1.19 1.85-.32.45-.66.87-1.08 1.27C15.17 23 8.84 23 4.94 19.07c-3.91-3.9-3.91-10.24 0-14.14.4-.4.82-.76 1.27-1.08.75-.53 1.93.36 1.85 1.19-.27 2.86.69 5.83 2.89 8.02a9.96 9.96 0 0 0 8.02 2.89m-1.64 2.02a12.08 12.08 0 0 1-7.8-3.47c-2.17-2.19-3.33-5-3.49-7.82-2.81 3.14-2.7 7.96.31 10.98 3.02 3.01 7.84 3.12 10.98.31"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 7a5 5 0 0 1 5 5 5 5 0 0 1-5 5 5 5 0 0 1-5-5 5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3 3 3 0 0 0 3 3 3 3 0 0 0 3-3 3 3 0 0 0-3-3m0-7 2.39 3.42C13.65 5.15 12.84 5 12 5s-1.65.15-2.39.42zM3.34 7l4.16-.35A7.2 7.2 0 0 0 5.94 8.5c-.44.74-.69 1.5-.83 2.29zm.02 10 1.76-3.77a7.131 7.131 0 0 0 2.38 4.14zM20.65 7l-1.77 3.79a7.02 7.02 0 0 0-2.38-4.15zm-.01 10-4.14.36c.59-.51 1.12-1.14 1.54-1.86.42-.73.69-1.5.83-2.29zM12 22l-2.41-3.44c.74.27 1.55.44 2.41.44.82 0 1.63-.17 2.37-.44z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/Arcware-io/pisa" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Arcware-io/pisa
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="Pisa" class="md-nav__button md-logo" aria-label="Pisa" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Pisa
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/Arcware-io/pisa" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    Arcware-io/pisa
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Start
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pisa-user-guide/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    User Guide
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How-To
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How-To
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#install-and-start" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Install and start
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Install and start">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-install-pisa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I install Pisa?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-update-pisa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I update Pisa?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-check-which-tools-i-am-missing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I check which tools I am missing?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-install-the-missing-jdk-or-nodejs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I install the missing JDK or Node.js?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-do-i-need-before-i-generate-and-run-a-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What do I need before I generate and run a project?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-get-a-running-application-in-ten-minutes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I get a running application in ten minutes?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-follow-a-guided-tour" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I follow a guided tour?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-set-up-my-editor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I set up my editor?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#describe-your-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Describe your data
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Describe your data">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-write-a-data-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I write a data model?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-make-a-field-optional-or-unique" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I make a field optional or unique?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-limit-a-value-range-length-pattern" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I limit a value (range, length, pattern)?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-add-a-fixed-list-of-values" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I add a fixed list of values?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-relate-two-entities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I relate two entities?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-stop-people-from-deleting-or-creating-or-updating-an-entity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I stop people from deleting (or creating, or updating) an entity?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-name-the-tables-and-columns-myself" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I name the tables and columns myself?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#forms-and-use-cases" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Forms and use cases
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Forms and use cases">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-change-how-a-form-looks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I change how a form looks?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-get-form-sketches-and-use-cases-without-writing-them" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I get form sketches and use cases without writing them?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-get-browser-tests-for-my-use-cases" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I get browser tests for my use cases?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#choose-the-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Choose the architecture
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Choose the architecture">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-build-in-typescript-instead-of-java" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I build in TypeScript instead of Java?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-change-the-architecture-of-an-existing-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I change the architecture of an existing project?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-switch-from-h2-to-postgresql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I switch from H2 to PostgreSQL?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-get-example-data-in-the-running-application" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I get example data in the running application?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-build-a-site-without-a-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I build a site without a server?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-publish-a-site-without-a-server-on-github-pages" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I publish a site without a server on GitHub Pages?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-make-my-own-templates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I make my own templates?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#login-users-and-roles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Login, users and roles
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Login, users and roles">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-turn-on-login" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I turn on login?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-sign-in-the-first-time" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I sign in the first time?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-add-a-user-or-a-role" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I add a user or a role?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-limit-a-role-to-some-operations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I limit a role to some operations?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-reset-a-forgotten-password" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I reset a forgotten password?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-turn-login-off-again" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I turn login off again?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#docker-ci-releases-and-deployment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Docker, CI, releases and deployment
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Docker, CI, releases and deployment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-get-a-dockerfile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I get a Dockerfile?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-run-the-tests-on-every-push" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I run the tests on every push?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-publish-a-release" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I publish a release?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-get-a-pull-request-template-and-issue-forms" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I get a pull request template and issue forms?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-put-my-project-into-a-git-repository" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I put my project into a Git repository?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-deploy-to-render" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I deploy to Render?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#use-a-language-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Use a language model
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Use a language model">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#do-i-need-a-language-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Do I need a language model?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-set-up-a-language-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I set up a language model?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-get-a-data-model-from-a-description" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I get a data model from a description?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-get-an-architecture-from-a-description" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I get an architecture from a description?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-if-a-proposal-fails" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What if a proposal fails?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#change-a-running-application" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Change a running application
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Change a running application">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-clear-the-open-points-of-a-spec" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I clear the open points of a spec?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-make-a-change-as-a-story" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I make a change as a story?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-see-which-stories-are-done" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I see which stories are done?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-run-the-acceptance-tests" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I run the acceptance tests?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-may-the-language-model-not-change-my-tests" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why may the language model not change my tests?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#keep-a-project-healthy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Keep a project healthy
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Keep a project healthy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-update-the-library-versions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I update the library versions?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-prove-a-project-can-be-rebuilt-from-its-specs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I prove a project can be rebuilt from its specs?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-should-i-commit-to-git" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What should I commit to Git?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-find-an-answer-in-the-documentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I find an answer in the documentation?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-find-out-what-a-command-can-do" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I find out what a command can do?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#work-with-other-tools" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Work with other tools
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Work with other tools">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-let-an-ai-agent-call-pisa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I let an AI agent call Pisa?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-preview-the-class-diagram-of-my-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I preview the class diagram of my model?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pisa-faq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FAQ
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Tutorials
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Tutorials
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pisa-tutorial-spring-java/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Spring Boot (Java)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pisa-tutorial-hono-typescript/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Hono (TypeScript)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pisa-tutorial-single-tier/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Single tier (no server)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../comparison/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Comparison
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#install-and-start" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Install and start
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Install and start">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-install-pisa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I install Pisa?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-update-pisa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I update Pisa?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-check-which-tools-i-am-missing" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I check which tools I am missing?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-install-the-missing-jdk-or-nodejs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I install the missing JDK or Node.js?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-do-i-need-before-i-generate-and-run-a-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What do I need before I generate and run a project?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-get-a-running-application-in-ten-minutes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I get a running application in ten minutes?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-follow-a-guided-tour" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I follow a guided tour?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-set-up-my-editor" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I set up my editor?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#describe-your-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Describe your data
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Describe your data">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-write-a-data-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I write a data model?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-make-a-field-optional-or-unique" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I make a field optional or unique?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-limit-a-value-range-length-pattern" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I limit a value (range, length, pattern)?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-add-a-fixed-list-of-values" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I add a fixed list of values?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-relate-two-entities" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I relate two entities?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-stop-people-from-deleting-or-creating-or-updating-an-entity" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I stop people from deleting (or creating, or updating) an entity?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-name-the-tables-and-columns-myself" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I name the tables and columns myself?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#forms-and-use-cases" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Forms and use cases
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Forms and use cases">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-change-how-a-form-looks" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I change how a form looks?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-get-form-sketches-and-use-cases-without-writing-them" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I get form sketches and use cases without writing them?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-get-browser-tests-for-my-use-cases" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I get browser tests for my use cases?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#choose-the-architecture" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Choose the architecture
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Choose the architecture">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-build-in-typescript-instead-of-java" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I build in TypeScript instead of Java?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-change-the-architecture-of-an-existing-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I change the architecture of an existing project?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-switch-from-h2-to-postgresql" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I switch from H2 to PostgreSQL?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-get-example-data-in-the-running-application" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I get example data in the running application?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-build-a-site-without-a-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I build a site without a server?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-publish-a-site-without-a-server-on-github-pages" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I publish a site without a server on GitHub Pages?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-make-my-own-templates" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I make my own templates?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#login-users-and-roles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Login, users and roles
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Login, users and roles">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-turn-on-login" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I turn on login?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-sign-in-the-first-time" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I sign in the first time?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-add-a-user-or-a-role" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I add a user or a role?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-limit-a-role-to-some-operations" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I limit a role to some operations?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-reset-a-forgotten-password" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I reset a forgotten password?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-turn-login-off-again" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I turn login off again?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#docker-ci-releases-and-deployment" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Docker, CI, releases and deployment
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Docker, CI, releases and deployment">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-get-a-dockerfile" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I get a Dockerfile?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-run-the-tests-on-every-push" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I run the tests on every push?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-publish-a-release" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I publish a release?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-get-a-pull-request-template-and-issue-forms" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I get a pull request template and issue forms?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-put-my-project-into-a-git-repository" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I put my project into a Git repository?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-deploy-to-render" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I deploy to Render?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#use-a-language-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Use a language model
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Use a language model">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#do-i-need-a-language-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Do I need a language model?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-set-up-a-language-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I set up a language model?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-get-a-data-model-from-a-description" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I get a data model from a description?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-get-an-architecture-from-a-description" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I get an architecture from a description?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-if-a-proposal-fails" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What if a proposal fails?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#change-a-running-application" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Change a running application
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Change a running application">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-clear-the-open-points-of-a-spec" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I clear the open points of a spec?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-make-a-change-as-a-story" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I make a change as a story?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-see-which-stories-are-done" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I see which stories are done?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-run-the-acceptance-tests" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I run the acceptance tests?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#why-may-the-language-model-not-change-my-tests" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Why may the language model not change my tests?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#keep-a-project-healthy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Keep a project healthy
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Keep a project healthy">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-update-the-library-versions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I update the library versions?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-prove-a-project-can-be-rebuilt-from-its-specs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I prove a project can be rebuilt from its specs?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#what-should-i-commit-to-git" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        What should I commit to Git?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-find-an-answer-in-the-documentation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I find an answer in the documentation?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-find-out-what-a-command-can-do" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I find out what a command can do?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#work-with-other-tools" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Work with other tools
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Work with other tools">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-let-an-ai-agent-call-pisa" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I let an AI agent call Pisa?
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#how-do-i-preview-the-class-diagram-of-my-model" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How do I preview the class diagram of my model?
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="pisa-how-to">Pisa How-To<a class="headerlink" href="#pisa-how-to" title="Permanent link">&para;</a></h1>
+<p>Short answers to "How do I ...?", each with the commands and a link to the part of the <a href="../pisa-user-guide/">User Guide</a> that explains it. Problems and error messages: <a href="../pisa-user-guide/#troubleshooting">Troubleshooting</a> and the <a href="../pisa-faq/">FAQ</a>. What does not exist yet: <a href="../pisa-user-guide/#not-yet-possible">Not yet possible</a>.</p>
+<p>If anything here disagrees with <code>pisa --help</code> or <code>pisa &lt;command&gt; --help</code>, trust the help output.</p>
+<p><strong>Contents</strong></p>
+<ul>
+<li><a href="#install-and-start">Install and start</a></li>
+<li><a href="#describe-your-data">Describe your data</a></li>
+<li><a href="#forms-and-use-cases">Forms and use cases</a></li>
+<li><a href="#choose-the-architecture">Choose the architecture</a></li>
+<li><a href="#login-users-and-roles">Login, users and roles</a></li>
+<li><a href="#docker-ci-releases-and-deployment">Docker, CI, releases and deployment</a></li>
+<li><a href="#use-a-language-model">Use a language model</a></li>
+<li><a href="#change-a-running-application">Change a running application</a></li>
+<li><a href="#keep-a-project-healthy">Keep a project healthy</a></li>
+<li><a href="#work-with-other-tools">Work with other tools</a></li>
+</ul>
+<h2 id="install-and-start">Install and start<a class="headerlink" href="#install-and-start" title="Permanent link">&para;</a></h2>
+<h3 id="how-do-i-install-pisa">How do I install Pisa?<a class="headerlink" href="#how-do-i-install-pisa" title="Permanent link">&para;</a></h3>
+<p>Run the install script, use Homebrew, or download the file for your system and put it on your PATH. Check with <code>pisa --version</code>. All ways and the file for each system: <a href="../pisa-user-guide/#installing-pisa">Installing Pisa</a>.</p>
+<h3 id="how-do-i-update-pisa">How do I update Pisa?<a class="headerlink" href="#how-do-i-update-pisa" title="Permanent link">&para;</a></h3>
+<p>Run the install script again, or download the new file and replace the old one. <code>pisa --version</code> shows which version you run. A project keeps the documents of the version that made it in <code>doc/</code>. See <a href="../pisa-user-guide/#updating">Updating</a>.</p>
+<h3 id="how-do-i-check-which-tools-i-am-missing">How do I check which tools I am missing?<a class="headerlink" href="#how-do-i-check-which-tools-i-am-missing" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>pisa<span class="w"> </span>setup<span class="w"> </span>--for<span class="w"> </span>hono-prisma<span class="w">     </span><span class="c1"># or spring-boot, alpine-json; inside a project: pisa setup</span>
+</code></pre></div>
+<p>Pisa runs the version commands of the tools and says which are there, which are missing or too old, and how to get them. Nothing is written or downloaded. See <a href="../pisa-user-guide/#pisa-setup">pisa setup</a>.</p>
+<h3 id="how-do-i-install-the-missing-jdk-or-nodejs">How do I install the missing JDK or Node.js?<a class="headerlink" href="#how-do-i-install-the-missing-jdk-or-nodejs" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>pisa<span class="w"> </span>setup<span class="w"> </span>--for<span class="w"> </span>spring-boot<span class="w"> </span>--install<span class="w">     </span><span class="c1"># or hono-prisma, alpine-json</span>
+</code></pre></div>
+<p>Pisa names the manager it found (SDKMAN, Homebrew or winget for the JDK; nvm, Homebrew or winget for Node.js), shows the exact command and asks before it runs it. <code>--dry-run</code> only shows it, <code>--yes</code> does not ask. Nothing else is installed. See <a href="../pisa-user-guide/#pisa-setup">pisa setup</a>.</p>
+<h3 id="what-do-i-need-before-i-generate-and-run-a-project">What do I need before I generate and run a project?<a class="headerlink" href="#what-do-i-need-before-i-generate-and-run-a-project" title="Permanent link">&para;</a></h3>
+<p>For Java (Spring Boot) a JDK (25 by default; 17 and 21 work with <code>--java</code>). The project brings the Maven Wrapper <code>./mvnw</code>, so no Maven is needed. For TypeScript (Hono) Node.js 24. Docker is optional. See <a href="../pisa-user-guide/#setting-up-your-development-environment">Setting up your development environment</a>.</p>
+<h3 id="how-do-i-get-a-running-application-in-ten-minutes">How do I get a running application in ten minutes?<a class="headerlink" href="#how-do-i-get-a-running-application-in-ten-minutes" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>pisa<span class="w"> </span>init<span class="w"> </span>--target<span class="w"> </span>spring-boot<span class="w"> </span>--out<span class="w"> </span>./shop<span class="w"> </span>--group<span class="w"> </span>ch.example<span class="w"> </span>--artifact<span class="w"> </span>shop
+<span class="c1"># write spec/base/shop.dml, then:</span>
+<span class="nb">cd</span><span class="w"> </span>shop
+pisa<span class="w"> </span>generate<span class="w"> </span>--file<span class="w"> </span>spec/base/shop.dml<span class="w"> </span>--out<span class="w"> </span>.
+./mvnw<span class="w"> </span>spring-boot:run<span class="w">          </span><span class="c1"># http://localhost:8080/</span>
+</code></pre></div>
+<p>Step by step with a model to copy: <a href="../pisa-user-guide/#quick-start">Quick start</a>.</p>
+<h3 id="how-do-i-follow-a-guided-tour">How do I follow a guided tour?<a class="headerlink" href="#how-do-i-follow-a-guided-tour" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>mkdir<span class="w"> </span>my-project<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="nb">cd</span><span class="w"> </span>my-project
+pisa<span class="w"> </span>init<span class="w">          </span><span class="c1"># only doc/ and an empty spec/base/</span>
+pisa<span class="w"> </span>play<span class="w">          </span><span class="c1"># lists the tutorials</span>
+</code></pre></div>
+<p>Three tutorials build the same address book: Spring Boot (Java), Hono (TypeScript) and a site without a server. <code>pisa play spring-java</code> runs one for you (<code>--dry-run</code> shows the steps, <code>--fast</code> skips tests and app start). See <a href="../pisa-user-guide/#pisa-play">pisa play</a>.</p>
+<h3 id="how-do-i-set-up-my-editor">How do I set up my editor?<a class="headerlink" href="#how-do-i-set-up-my-editor" title="Permanent link">&para;</a></h3>
+<p>Install the Pisa plugin for VS Code (a <code>.vsix</code> from the release) or IntelliJ IDEA (a <code>.zip</code> from the release). You get colours, live error checks, formatting and "go to definition" for <code>.dml</code> and <code>.adl</code> files. See <a href="../pisa-user-guide/#setting-up-your-editor-optional">Setting up your editor</a>.</p>
+<h2 id="describe-your-data">Describe your data<a class="headerlink" href="#describe-your-data" title="Permanent link">&para;</a></h2>
+<h3 id="how-do-i-write-a-data-model">How do I write a data model?<a class="headerlink" href="#how-do-i-write-a-data-model" title="Permanent link">&para;</a></h3>
+<p>Create a <code>.dml</code> file in <code>spec/base/</code> and run <code>pisa generate</code>:</p>
+<div class="highlight"><pre><span></span><code>entity Customer {
+    @id id: Long
+    name: String
+    email: String? unique
+    oneToMany purchases: Purchase mappedBy customer
+}
+</code></pre></div>
+<p>The syntax is in the <a href="../pisa-user-guide/#data-model-dml"><code>.dml</code> reference</a>. Several <code>.dml</code> files in <code>spec/base/</code> form one model.</p>
+<h3 id="how-do-i-make-a-field-optional-or-unique">How do I make a field optional or unique?<a class="headerlink" href="#how-do-i-make-a-field-optional-or-unique" title="Permanent link">&para;</a></h3>
+<p>Add <code>?</code> to the type for optional (fields are required by default). Add <code>unique</code> after the type to forbid duplicates: <code>email: Email? unique</code>.</p>
+<h3 id="how-do-i-limit-a-value-range-length-pattern">How do I limit a value (range, length, pattern)?<a class="headerlink" href="#how-do-i-limit-a-value-range-length-pattern" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>age: Int(0..150)            // range, bounds inclusive
+name: String(1..80)         // length
+zip: String ~ "[0-9]{4}"    // pattern; escape a backslash twice
+</code></pre></div>
+<p>The rules are checked in the browser, in the API (a <code>400</code> with the fields named) and in the generated tests.</p>
+<h3 id="how-do-i-add-a-fixed-list-of-values">How do I add a fixed list of values?<a class="headerlink" href="#how-do-i-add-a-fixed-list-of-values" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>enum Status { ACTIVE, SUSPENDED ("Blocked"), CLOSED }
+</code></pre></div>
+<p>Use it as a field type (<code>status: Status</code>). It becomes a dropdown. The text in parentheses is what the page shows.</p>
+<h3 id="how-do-i-relate-two-entities">How do I relate two entities?<a class="headerlink" href="#how-do-i-relate-two-entities" title="Permanent link">&para;</a></h3>
+<p>Use <code>manyToOne</code>, <code>oneToMany ... mappedBy</code>, <code>oneToOne</code> or <code>manyToMany</code>. The side with the database column owns the relation; the other side says <code>mappedBy &lt;field&gt;</code>. Add <code>composed</code> to make the target a part of the entity (saved, edited and deleted with its parent). TypeScript supports fewer relation forms: see <a href="../pisa-user-guide/#not-yet-possible">Not yet possible</a>.</p>
+<h3 id="how-do-i-stop-people-from-deleting-or-creating-or-updating-an-entity">How do I stop people from deleting (or creating, or updating) an entity?<a class="headerlink" href="#how-do-i-stop-people-from-deleting-or-creating-or-updating-an-entity" title="Permanent link">&para;</a></h3>
+<p>Put <code>@operations(create, read, update)</code> above the entity (<code>read</code> is required). The API answers <code>405</code> for a forbidden operation and the pages hide the button. Roles are intersected with it. See <a href="../pisa-user-guide/#restricting-what-can-be-done-with-an-entity">Restricting what can be done with an entity</a>. To allow everything again, remove the line and run <code>pisa generate</code>.</p>
+<h3 id="how-do-i-name-the-tables-and-columns-myself">How do I name the tables and columns myself?<a class="headerlink" href="#how-do-i-name-the-tables-and-columns-myself" title="Permanent link">&para;</a></h3>
+<p><code>@table("T_AUTHOR")</code> above the entity and <code>@column("C_NAME")</code> above a field. Use letters, digits and <code>_</code>, not starting with a digit.</p>
+<h2 id="forms-and-use-cases">Forms and use cases<a class="headerlink" href="#forms-and-use-cases" title="Permanent link">&para;</a></h2>
+<h3 id="how-do-i-change-how-a-form-looks">How do I change how a form looks?<a class="headerlink" href="#how-do-i-change-how-a-form-looks" title="Permanent link">&para;</a></h3>
+<p>Edit <code>spec/base/&lt;entity&gt;.ui.md</code>: the PlantUML Salt sketch in it is the layout. Run <code>pisa generate</code> again. If the sketch no longer matches the model, <code>generate</code> stops before it writes anything and names the line. See <a href="../pisa-user-guide/#form-layout-uimd">Form layout</a>.</p>
+<h3 id="how-do-i-get-form-sketches-and-use-cases-without-writing-them">How do I get form sketches and use cases without writing them?<a class="headerlink" href="#how-do-i-get-form-sketches-and-use-cases-without-writing-them" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>pisa<span class="w"> </span>propose-specs<span class="w"> </span>--out<span class="w"> </span>.<span class="w">      </span><span class="c1"># no AI: a .ui.md per entity and one .uc.md</span>
+</code></pre></div>
+<p>It only writes missing files. <code>pisa propose-layout --entity &lt;Name&gt; --out .</code> asks a language model for one entity's sketch instead.</p>
+<h3 id="how-do-i-get-browser-tests-for-my-use-cases">How do I get browser tests for my use cases?<a class="headerlink" href="#how-do-i-get-browser-tests-for-my-use-cases" title="Permanent link">&para;</a></h3>
+<p>Write the use case in a <code>spec/base/*.uc.md</code> with <code>Form:</code> and <code>Test:</code> lines (or let <code>propose-specs</code> draft them) and run <code>pisa generate</code>. Run them with <code>./mvnw test -Pui</code> (Spring) or <code>npm run test:ui</code> (Hono).</p>
+<h2 id="choose-the-architecture">Choose the architecture<a class="headerlink" href="#choose-the-architecture" title="Permanent link">&para;</a></h2>
+<h3 id="how-do-i-build-in-typescript-instead-of-java">How do I build in TypeScript instead of Java?<a class="headerlink" href="#how-do-i-build-in-typescript-instead-of-java" title="Permanent link">&para;</a></h3>
+<p>Write <code>runtime hono</code> in the backend container of your <code>.adl</code>, then:</p>
+<div class="highlight"><pre><span></span><code>pisa<span class="w"> </span>init<span class="w"> </span>--out<span class="w"> </span>./library-ts<span class="w"> </span>--adl<span class="w"> </span>library.adl
+<span class="nb">cd</span><span class="w"> </span>library-ts
+pisa<span class="w"> </span>generate<span class="w"> </span>--file<span class="w"> </span>spec/base/library.dml<span class="w"> </span>--out<span class="w"> </span>.
+npm<span class="w"> </span>install<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>npm<span class="w"> </span>start<span class="w">        </span><span class="c1"># http://localhost:8080/</span>
+</code></pre></div>
+<p>See <a href="../pisa-user-guide/#building-in-typescript-instead-of-java">Building in TypeScript instead of Java</a>.</p>
+<h3 id="how-do-i-change-the-architecture-of-an-existing-project">How do I change the architecture of an existing project?<a class="headerlink" href="#how-do-i-change-the-architecture-of-an-existing-project" title="Permanent link">&para;</a></h3>
+<p>Edit the <code>.adl</code>, then run <code>pisa init --adl spec/base/&lt;file&gt;.adl --force</code> and <code>pisa generate</code>. Without <code>--force</code> Pisa stops with a message that names the difference. What the <code>.adl</code> can say: <a href="../pisa-user-guide/#describing-your-architecture-adl">Describing your architecture</a>.</p>
+<h3 id="how-do-i-switch-from-h2-to-postgresql">How do I switch from H2 to PostgreSQL?<a class="headerlink" href="#how-do-i-switch-from-h2-to-postgresql" title="Permanent link">&para;</a></h3>
+<ol>
+<li>Set <code>engine postgresql</code> for the database in the <code>.adl</code>.</li>
+<li><code>pisa init ... --adl ... --force</code></li>
+<li><code>pisa generate ...</code></li>
+<li><code>docker compose up -d</code></li>
+</ol>
+<p>See <a href="../pisa-user-guide/#switching-from-h2-to-postgresql">Switching from H2 to PostgreSQL</a>.</p>
+<h3 id="how-do-i-get-example-data-in-the-running-application">How do I get example data in the running application?<a class="headerlink" href="#how-do-i-get-example-data-in-the-running-application" title="Permanent link">&para;</a></h3>
+<p>Add a <code>sampleData</code> block to the <code>.adl</code> (<code>source faker</code>, <code>entries 1..10</code>, <code>locale "de-CH"</code>), run <code>init --force</code> and <code>generate</code>. The records appear on the first start when the database is empty. Not with PostgreSQL. See <a href="../pisa-user-guide/#example-data">Example data</a>.</p>
+<h3 id="how-do-i-build-a-site-without-a-server">How do I build a site without a server?<a class="headerlink" href="#how-do-i-build-a-site-without-a-server" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>pisa<span class="w"> </span>init<span class="w"> </span>--target<span class="w"> </span>alpine-json<span class="w"> </span>--out<span class="w"> </span>./library<span class="w"> </span>--artifact<span class="w"> </span>library
+<span class="nb">cd</span><span class="w"> </span>library<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>pisa<span class="w"> </span>generate<span class="w"> </span>--file<span class="w"> </span>spec/base/library.dml<span class="w"> </span>--out<span class="w"> </span>.
+npm<span class="w"> </span>start<span class="w">                       </span><span class="c1"># http://localhost:8080</span>
+</code></pre></div>
+<p>The data is one JSON file kept in the browser; the page can save and load it. <code>package zip</code> makes a ZIP of the site (<code>npm run package</code>). See <a href="../pisa-user-guide/#a-single-tier-site-no-server">A single-tier site</a>.</p>
+<h3 id="how-do-i-publish-a-site-without-a-server-on-github-pages">How do I publish a site without a server on GitHub Pages?<a class="headerlink" href="#how-do-i-publish-a-site-without-a-server-on-github-pages" title="Permanent link">&para;</a></h3>
+<p>Put <code>pipeline { release github  deploy pages }</code> and <code>scm { host github }</code> in the <code>.adl</code>. A tag <code>v*</code> then runs <code>.github/workflows/pages.yml</code>. The one-time GitHub setup (a public repository, switching Pages on) is described under <a href="../pisa-user-guide/#a-single-tier-site-no-server">GitHub Pages</a>.</p>
+<h3 id="how-do-i-make-my-own-templates">How do I make my own templates?<a class="headerlink" href="#how-do-i-make-my-own-templates" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>pisa<span class="w"> </span>eject-templates<span class="w"> </span>--target<span class="w"> </span>spring-boot<span class="w"> </span>--out<span class="w"> </span>./shop
+<span class="c1"># edit .pisa/templates/spring-boot/..., then:</span>
+pisa<span class="w"> </span>generate<span class="w"> </span>--file<span class="w"> </span>spec/base/shop.dml<span class="w"> </span>--out<span class="w"> </span>./shop
+</code></pre></div>
+<p>Only the files you keep override the built-in ones. See <a href="../pisa-user-guide/#customizing-templates">Customizing templates</a>.</p>
+<h2 id="login-users-and-roles">Login, users and roles<a class="headerlink" href="#login-users-and-roles" title="Permanent link">&para;</a></h2>
+<h3 id="how-do-i-turn-on-login">How do I turn on login?<a class="headerlink" href="#how-do-i-turn-on-login" title="Permanent link">&para;</a></h3>
+<p>Add <code>authentication session</code> to the backend container (and optionally a <code>roles { ... }</code> block), then run <code>init --force</code> and <code>generate</code>. Pisa writes <code>security.yml</code>, a login page and a change-password page. See <a href="../pisa-user-guide/#adding-login-users-and-roles">Adding login, users and roles</a>.</p>
+<h3 id="how-do-i-sign-in-the-first-time">How do I sign in the first time?<a class="headerlink" href="#how-do-i-sign-in-the-first-time" title="Permanent link">&para;</a></h3>
+<p>Each starter user's password is the user name (<code>admin</code> / <code>admin</code>, <code>user</code> / <code>user</code>). You must choose a new password on the change-password page. These passwords are public: development only.</p>
+<h3 id="how-do-i-add-a-user-or-a-role">How do I add a user or a role?<a class="headerlink" href="#how-do-i-add-a-user-or-a-role" title="Permanent link">&para;</a></h3>
+<p>Edit <code>security.yml</code> and restart the application, no <code>generate</code> needed. For a starting password other than the user name run <code>pisa hash-password</code> and paste the hash into a <code>password:</code> field.</p>
+<h3 id="how-do-i-limit-a-role-to-some-operations">How do I limit a role to some operations?<a class="headerlink" href="#how-do-i-limit-a-role-to-some-operations" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>roles {
+    ADMIN
+    USER {
+        Company: read, update
+    }
+}
+</code></pre></div>
+<p>A role's rights are limited by the entity's <code>@operations</code>.</p>
+<h3 id="how-do-i-reset-a-forgotten-password">How do I reset a forgotten password?<a class="headerlink" href="#how-do-i-reset-a-forgotten-password" title="Permanent link">&para;</a></h3>
+<p>Delete the user's row from the table <code>usr_password</code>. With the in-memory H2 database the table empties on every restart anyway.</p>
+<h3 id="how-do-i-turn-login-off-again">How do I turn login off again?<a class="headerlink" href="#how-do-i-turn-login-off-again" title="Permanent link">&para;</a></h3>
+<p>Remove the line from the <code>.adl</code>, run <code>init --force</code>, then <code>generate</code>. Pisa deletes the login files it created, unless you changed them (then it prints the <code>rm</code> command). <code>security.yml</code> stays yours.</p>
+<h2 id="docker-ci-releases-and-deployment">Docker, CI, releases and deployment<a class="headerlink" href="#docker-ci-releases-and-deployment" title="Permanent link">&para;</a></h2>
+<h3 id="how-do-i-get-a-dockerfile">How do I get a Dockerfile?<a class="headerlink" href="#how-do-i-get-a-dockerfile" title="Permanent link">&para;</a></h3>
+<p>Add a <code>docker</code> block to the <code>.adl</code> (add <code>compose</code> for a <code>compose.yml</code>; with PostgreSQL you always get one). Then <code>docker compose up --build</code>. See <a href="../pisa-user-guide/#docker">Docker</a>.</p>
+<h3 id="how-do-i-run-the-tests-on-every-push">How do I run the tests on every push?<a class="headerlink" href="#how-do-i-run-the-tests-on-every-push" title="Permanent link">&para;</a></h3>
+<p>Put <code>pipeline { ci github }</code> in the <code>.adl</code>. Pisa writes <code>.github/workflows/ci.yml</code> with a job for the fast tests and one for the browser tests. See <a href="../pisa-user-guide/#github-ci-and-releases">GitHub CI and releases</a>.</p>
+<h3 id="how-do-i-publish-a-release">How do I publish a release?<a class="headerlink" href="#how-do-i-publish-a-release" title="Permanent link">&para;</a></h3>
+<p>Put <code>release github</code> in the <code>pipeline</code> block. Then <code>git tag v1.0.0 &amp;&amp; git push origin v1.0.0</code> runs the tests and creates a GitHub release with generated notes.</p>
+<h3 id="how-do-i-get-a-pull-request-template-and-issue-forms">How do I get a pull request template and issue forms?<a class="headerlink" href="#how-do-i-get-a-pull-request-template-and-issue-forms" title="Permanent link">&para;</a></h3>
+<p>Add <code>scm { host github }</code> (see the guide for the lines that go with it). GitHub is the only supported host.</p>
+<h3 id="how-do-i-put-my-project-into-a-git-repository">How do I put my project into a Git repository?<a class="headerlink" href="#how-do-i-put-my-project-into-a-git-repository" title="Permanent link">&para;</a></h3>
+<p>If the <code>.adl</code> has a <code>pipeline</code> or <code>scm</code> block, or you pass <code>--git</code>, <code>pisa init</code> creates a local repository with a first commit. It never pushes. Then <code>gh repo create &lt;name&gt; --private --source . --push</code> (needs <code>gh auth login</code>), or <code>git remote add origin ...</code> and <code>git push -u origin main</code>. See <a href="../pisa-user-guide/#git-repository">Git repository</a>.</p>
+<h3 id="how-do-i-deploy-to-render">How do I deploy to Render?<a class="headerlink" href="#how-do-i-deploy-to-render" title="Permanent link">&para;</a></h3>
+<p>Add <code>deploy render</code> to the <code>pipeline</code> (it needs the <code>docker</code> block), push to GitHub, create a Blueprint on Render with <code>render.yml</code>, save the deploy hook as the secret <code>RENDER_DEPLOY_HOOK_URL</code>, and push a tag. The free tier sleeps when idle and keeps no data on H2 or SQLite. See <a href="../pisa-user-guide/#deploying-to-render">Deploying to Render</a>.</p>
+<h2 id="use-a-language-model">Use a language model<a class="headerlink" href="#use-a-language-model" title="Permanent link">&para;</a></h2>
+<h3 id="do-i-need-a-language-model">Do I need a language model?<a class="headerlink" href="#do-i-need-a-language-model" title="Permanent link">&para;</a></h3>
+<p>Only for the commands that ask one: the <code>propose-...</code> commands (not <code>propose-specs</code>), <code>pisa story --specify|--plan|--test|--implement</code>, and <code>pisa extend</code>. Everything that generates code works without one. See <a href="../pisa-user-guide/#setting-up-a-language-model-optional">Setting up a language model</a>.</p>
+<h3 id="how-do-i-set-up-a-language-model">How do I set up a language model?<a class="headerlink" href="#how-do-i-set-up-a-language-model" title="Permanent link">&para;</a></h3>
+<p>Pisa uses the <code>pi</code> coding agent. Start <code>pi</code>, type <code>/login</code> and pick a provider (Anthropic, for example), or use an API key. Your own <code>pi</code> prompts, <code>AGENTS.md</code>, skills and extensions have no effect on Pisa's steps.</p>
+<h3 id="how-do-i-get-a-data-model-from-a-description">How do I get a data model from a description?<a class="headerlink" href="#how-do-i-get-a-data-model-from-a-description" title="Permanent link">&para;</a></h3>
+<p>Write what you want in <code>spec/base/domain-spec.md</code> (or one <code>spec/base/requirements.md</code> for everything), then:</p>
+<div class="highlight"><pre><span></span><code>pisa<span class="w"> </span>propose-model<span class="w"> </span>--out<span class="w"> </span>.
+</code></pre></div>
+<p>Pisa checks the answer with the same validator as the editor and writes <code>spec/base/&lt;name&gt;.dml</code>. Read it before you generate. It never overwrites an existing file unless you pass <code>--force</code>.</p>
+<h3 id="how-do-i-get-an-architecture-from-a-description">How do I get an architecture from a description?<a class="headerlink" href="#how-do-i-get-an-architecture-from-a-description" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>pisa<span class="w"> </span>propose-architecture<span class="w"> </span>--out<span class="w"> </span>.<span class="w">       </span><span class="c1"># reads spec/base/architecture.md or requirements.md</span>
+pisa<span class="w"> </span>init<span class="w"> </span>--adl<span class="w"> </span>spec/base/architecture.adl<span class="w"> </span>--out<span class="w"> </span>.
+</code></pre></div>
+<h3 id="what-if-a-proposal-fails">What if a proposal fails?<a class="headerlink" href="#what-if-a-proposal-fails" title="Permanent link">&para;</a></h3>
+<p>After three failed attempts the command exits with code 1 and writes nothing. Run it again, or write the file yourself.</p>
+<h2 id="change-a-running-application">Change a running application<a class="headerlink" href="#change-a-running-application" title="Permanent link">&para;</a></h2>
+<h3 id="how-do-i-clear-the-open-points-of-a-spec">How do I clear the open points of a spec?<a class="headerlink" href="#how-do-i-clear-the-open-points-of-a-spec" title="Permanent link">&para;</a></h3>
+<p>When you run <code>pisa extend --specify "&lt;wish&gt;"</code> or <code>pisa story --specify "&lt;sentence&gt;"</code> at a terminal and the model leaves open points, Pisa asks them one by one, proposes an answer from its documentation where it is sure (Enter takes it), has the model work the answers in, and writes the spec after your Enter. Then it asks <code>Continue with --plan? [Y/n]</code>. <code>--no-ask</code> skips the dialog and leaves the points under <code>## Open</code>. See <a href="../pisa-user-guide/#pisa-story">pisa story</a>.</p>
+<h3 id="how-do-i-make-a-change-as-a-story">How do I make a change as a story?<a class="headerlink" href="#how-do-i-make-a-change-as-a-story" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>pisa<span class="w"> </span>story<span class="w"> </span>--specify<span class="w"> </span><span class="s2">"User can log in"</span><span class="w">   </span><span class="c1"># a story with acceptance criteria AC1..ACn</span>
+pisa<span class="w"> </span>story<span class="w"> </span>--plan<span class="w">                        </span><span class="c1"># 02-plan.md</span>
+pisa<span class="w"> </span>story<span class="w"> </span>--test<span class="w">                        </span><span class="c1"># 03-test.md: freezes the acceptance tests</span>
+pisa<span class="w"> </span>story<span class="w"> </span>--implement<span class="w">                   </span><span class="c1"># run it twice: assignment, then implementation</span>
+pisa<span class="w"> </span>story<span class="w"> </span>--check<span class="w">                       </span><span class="c1"># runs the tests, writes 05-check.md</span>
+</code></pre></div>
+<p>Name the feature yourself with <code>--feature 001</code>. See <a href="../pisa-user-guide/#changing-your-application-features-and-stories">Changing your application</a>.</p>
+<h3 id="how-do-i-see-which-stories-are-done">How do I see which stories are done?<a class="headerlink" href="#how-do-i-see-which-stories-are-done" title="Permanent link">&para;</a></h3>
+<p><code>pisa story --list</code> shows all stories with a check mark or a cross. <code>pisa story --check --full</code> runs every story and prints a summary.</p>
+<h3 id="how-do-i-run-the-acceptance-tests">How do I run the acceptance tests?<a class="headerlink" href="#how-do-i-run-the-acceptance-tests" title="Permanent link">&para;</a></h3>
+<p>Only on demand: <code>./mvnw test -Pac</code> (Spring) or <code>npm run test:ac</code> (Hono). The normal build does not run them. The CI only checks that every story with a plan has a report without failures.</p>
+<h3 id="why-may-the-language-model-not-change-my-tests">Why may the language model not change my tests?<a class="headerlink" href="#why-may-the-language-model-not-change-my-tests" title="Permanent link">&para;</a></h3>
+<p><code>pisa story --test</code> freezes the test files with a SHA-256 hash. <code>--check</code> compares the hashes; a changed or missing file is red however green the tests are.</p>
+<h2 id="keep-a-project-healthy">Keep a project healthy<a class="headerlink" href="#keep-a-project-healthy" title="Permanent link">&para;</a></h2>
+<h3 id="how-do-i-update-the-library-versions">How do I update the library versions?<a class="headerlink" href="#how-do-i-update-the-library-versions" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>pisa<span class="w"> </span>update-versions<span class="w"> </span>--out<span class="w"> </span>.<span class="w"> </span>--check<span class="w"> </span>build
+</code></pre></div>
+<p>Pisa finds the newest stable versions, tries them on a copy and writes the ones that pass into the <code>versions</code> block of the <code>.adl</code>. Versions stay fixed until you run it again. Needs a network. See <a href="../pisa-user-guide/#pisa-update-versions">pisa update-versions</a>.</p>
+<h3 id="how-do-i-prove-a-project-can-be-rebuilt-from-its-specs">How do I prove a project can be rebuilt from its specs?<a class="headerlink" href="#how-do-i-prove-a-project-can-be-rebuilt-from-its-specs" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>pisa<span class="w"> </span>replay<span class="w"> </span>--from<span class="w"> </span>./shop<span class="w"> </span>--out<span class="w"> </span>./shop-copy
+</code></pre></div>
+<p>It ends with <code>All N generated file(s) match the hashes recorded in the recipe.</code> See <a href="../pisa-user-guide/#recipe-and-replay">Recipe and replay</a>.</p>
+<h3 id="what-should-i-commit-to-git">What should I commit to Git?<a class="headerlink" href="#what-should-i-commit-to-git" title="Permanent link">&para;</a></h3>
+<p><code>spec/</code>, <code>.pisa/</code>, <code>project.spec.json</code> and <code>README.md</code>. Not <code>target/</code>.</p>
+<h3 id="how-do-i-find-an-answer-in-the-documentation">How do I find an answer in the documentation?<a class="headerlink" href="#how-do-i-find-an-answer-in-the-documentation" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>pisa<span class="w"> </span>ask<span class="w"> </span><span class="s2">"how do I turn on login?"</span><span class="w">      </span><span class="c1"># the best passages with their source</span>
+pisa<span class="w"> </span>ask<span class="w"> </span>--next<span class="w">                          </span><span class="c1"># what to do next in this folder</span>
+</code></pre></div>
+<p>Pisa looks the question up in this documentation (no model, nothing written) and says how sure it is: <code>high</code>, <code>medium</code> or <code>low</code>. A German question works for the common words. See <a href="../pisa-user-guide/#pisa-ask">pisa ask</a>.</p>
+<h3 id="how-do-i-find-out-what-a-command-can-do">How do I find out what a command can do?<a class="headerlink" href="#how-do-i-find-out-what-a-command-can-do" title="Permanent link">&para;</a></h3>
+<p><code>pisa --help</code> for the overview, <code>pisa &lt;command&gt; --help</code> (or <code>pisa help &lt;command&gt;</code>) for one command. Help runs nothing.</p>
+<h2 id="work-with-other-tools">Work with other tools<a class="headerlink" href="#work-with-other-tools" title="Permanent link">&para;</a></h2>
+<h3 id="how-do-i-let-an-ai-agent-call-pisa">How do I let an AI agent call Pisa?<a class="headerlink" href="#how-do-i-let-an-ai-agent-call-pisa" title="Permanent link">&para;</a></h3>
+<div class="highlight"><pre><span></span><code>claude<span class="w"> </span>mcp<span class="w"> </span>add<span class="w"> </span>pisa<span class="w"> </span>--<span class="w"> </span>pisa<span class="w"> </span>mcp
+</code></pre></div>
+<p><code>pisa mcp</code> starts an MCP server (stdio) with four tools: <code>generate</code>, <code>parse_domain_model</code>, and the read-only <code>lookup_docs</code> (answers a question from this documentation, with sources) and <code>project_status</code> (what to do next in a project folder). By hand it looks idle: that is normal. See <a href="../pisa-user-guide/#pisa-mcp">pisa mcp</a>.</p>
+<h3 id="how-do-i-preview-the-class-diagram-of-my-model">How do I preview the class diagram of my model?<a class="headerlink" href="#how-do-i-preview-the-class-diagram-of-my-model" title="Permanent link">&para;</a></h3>
+<p>Install PlantUML and Graphviz (see <a href="../pisa-user-guide/#installing-plantuml-and-graphviz-on-your-machine">Installing PlantUML and Graphviz</a>), and use the Pisa plugin: every time you save a <code>.dml</code> file it draws a class diagram.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.sections", "content.code.copy", "search.highlight"], "search": "../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.c21346df.min.js"></script>
+      
+    
+  </body>
+</html>

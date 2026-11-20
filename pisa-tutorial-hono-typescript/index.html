@@ -314,6 +314,60 @@
       
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../pisa-howto/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How-To
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pisa-faq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FAQ
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
     
   
   
@@ -332,10 +386,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
         
           
-          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
             
   
   
@@ -353,8 +407,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_3">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -998,7 +1052,7 @@
 prose; an LLM proposes the architecture and the domain model, Pisa checks the proposals and generates a
 working TypeScript project (Node.js, Hono, Prisma) from them. After every step it says what you should see.</p>
 <blockquote>
-<p>As of <code>pisa 0.13.0</code>. Commands in detail: <a href="../pisa-user-guide/">User Guide</a>. Duration: about an hour, <code>npm install</code>
+<p>As of <code>pisa 0.18.0</code>. Commands in detail: <a href="../pisa-user-guide/">User Guide</a>. Duration: about an hour, <code>npm install</code>
 downloads dependencies.</p>
 </blockquote>
 <p>Steps 2 and 4 call an LLM (two short calls); all other steps run without one. Without an LLM you write the
@@ -1056,12 +1110,12 @@ tutorial follow four phases; each step title names its phase.</p>
 </thead>
 <tbody>
 <tr>
-<td>Pisa 0.13.0</td>
-<td><code>pisa --version</code> shows <code>pisa 0.13.0</code>. Otherwise install it: User Guide, section "Installing Pisa" (<code>curl</code>, PowerShell or <code>brew</code>, no login)</td>
+<td>Pisa 0.18.0</td>
+<td><code>pisa --version</code> shows <code>pisa 0.18.0</code>. Otherwise install it: User Guide, section "Installing Pisa" (<code>curl</code>, PowerShell or <code>brew</code>, no login)</td>
 </tr>
 <tr>
 <td>Node.js 24 or newer and npm</td>
-<td><code>node -v</code>, <code>npm -v</code>. Node.js runs TypeScript directly, there is no build step. Install and switch versions with nvm: <code>nvm install 24</code>, <code>nvm use 24</code> (User Guide, "Setting up your development environment")</td>
+<td><code>node -v</code>, <code>npm -v</code>. Node.js runs TypeScript directly, there is no build step. Install and switch versions with nvm: <code>nvm install 24</code>, <code>nvm use 24</code> (User Guide, "Setting up your development environment") Check what you have with <code>pisa setup --for hono-prisma</code>; <code>pisa setup --for hono-prisma --install</code> installs a missing Node.js with nvm, Homebrew or winget, after asking (User Guide, <code>pisa setup</code>).</td>
 </tr>
 <tr>
 <td>LLM access for <code>pi</code></td>
@@ -1499,6 +1553,8 @@ pisa<span class="w"> </span>story<span class="w"> </span>--specify<span class="w
 Write? [Y/n/f]
 </code></pre></div>
 <p>Answer <code>Y</code> (or just Enter) to write, <code>n</code> to stop (nothing is written), <code>f</code> to name another feature. A story that is similar to an existing one needs a second yes. Pisa writes <code>spec/features/001-person-management/feature.md</code> (goal, scope, the stories and the proposed next stories) and <code>spec/features/001-person-management/stories/001-archive-person/01-spec.md</code> with the criteria as a table. Read them. The model wrote five criteria; the tests of this tutorial check two, and a criterion without a test is a red box in <code>--check</code>, so replace the table in <code>01-spec.md</code> by these two rows (and, in a real project, correct the criteria where the clerk would say it differently). The names of the folders come from the model: if yours differ from <code>001-person-management</code> (the feature, which also names the test folder) or <code>001-archive-person</code>, use your names in the next steps; <code>pisa story --list</code> shows them.</p>
+<p><strong>Open points.</strong> If the model lists what your sentence leaves open, Pisa does not write at once but asks (<code>2 open points, I ask them now</code>): one question each, at most five. Where its own documentation answers a point with high confidence, Pisa shows the passage and <code>Enter</code> takes it as your answer; any text replaces it, and <code>Enter</code> without a proposal leaves the point open. The model then works your answers in, Pisa says <code>All open points are clarified.</code> and asks once <code>More questions or remarks? Text = work in, Enter = continue.</code> (a question gets a short answer, <code>Answer: …</code>). <code>Enter</code> writes the story (this replaces <code>Write? [Y/n/f]</code>) and Pisa asks <code>Continue with --plan? [Y/n]</code>; yes runs <code>pisa story --plan</code>. The messages are in the language of your sentence (English, German or French), and <code>--no-ask</code> switches the dialog off. <code>pisa play</code> has no terminal, so it never starts the dialog.</p>
+<p>After every phase Pisa prints a line <code>Next: …</code> with the command that follows, with the flags of the story.</p>
 <div class="highlight"><pre><span></span><code>| ID | Criterion |
 |---|---|
 | AC1 | A clerk sets a person to Archived, and the person is still listed with that status |

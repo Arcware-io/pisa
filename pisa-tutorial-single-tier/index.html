@@ -314,6 +314,60 @@
       
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../pisa-howto/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    How-To
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../pisa-faq/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    FAQ
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
     
   
   
@@ -332,10 +386,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
         
           
-          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="">
+          <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="">
             
   
   
@@ -353,8 +407,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_3">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
             
   
@@ -889,7 +943,7 @@
 to a file and loaded from it. The models stay the same; only the architecture description (<code>.adl</code>) is a smaller one. You write only prose; an LLM
 proposes the architecture and the domain model, Pisa checks the proposals and generates the site. After every step it says what you should see.</p>
 <blockquote>
-<p>As of <code>pisa 0.17.0</code>. Commands in detail: <a href="../pisa-user-guide/">User Guide</a>, section "A single-tier site (no server)". Duration: about half an hour;
+<p>As of <code>pisa 0.18.0</code>. Commands in detail: <a href="../pisa-user-guide/">User Guide</a>, section "A single-tier site (no server)". Duration: about half an hour;
 <code>npm install</code> (optional, for the browser tests and the ZIP) downloads dependencies.</p>
 </blockquote>
 <p>Steps 2 and 4 call an LLM (two short calls); all other steps run without one. Without an LLM you write the two files yourself, as they are shown in the steps.
@@ -946,12 +1000,12 @@ database to start and no image to build. The site is static files in <code>publi
 </thead>
 <tbody>
 <tr>
-<td>Pisa 0.17.0</td>
-<td><code>pisa --version</code> shows <code>pisa 0.17.0</code>. Otherwise install it: User Guide, section "Installing Pisa" (<code>curl</code>, PowerShell or <code>brew</code>, no login)</td>
+<td>Pisa 0.18.0</td>
+<td><code>pisa --version</code> shows <code>pisa 0.18.0</code>. Otherwise install it: User Guide, section "Installing Pisa" (<code>curl</code>, PowerShell or <code>brew</code>, no login)</td>
 </tr>
 <tr>
 <td>Node.js 24 or newer and npm</td>
-<td><code>node -v</code>, <code>npm -v</code>. Node.js only serves the files and runs the tests, there is no build step. Install and switch versions with nvm: <code>nvm install 24</code>, <code>nvm use 24</code></td>
+<td><code>node -v</code>, <code>npm -v</code>. Node.js only serves the files and runs the tests, there is no build step. Install and switch versions with nvm: <code>nvm install 24</code>, <code>nvm use 24</code> Check what you have with <code>pisa setup --for alpine-json</code>; <code>pisa setup --for alpine-json --install</code> installs a missing Node.js with nvm, Homebrew or winget, after asking (User Guide, <code>pisa setup</code>).</td>
 </tr>
 <tr>
 <td>A web browser and internet</td>
